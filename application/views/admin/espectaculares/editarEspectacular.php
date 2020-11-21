@@ -1,7 +1,5 @@
 
 <?php
-var_dump($espectaculares);
-
  foreach($espectaculares as $espectacular){
     }?>
 
@@ -123,22 +121,22 @@ var_dump($espectaculares);
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="ancho"> Ancho(m): </label>
-                        <input type="text" class="form-control" value="<?= $espectacular['ancho']?>" id="ancho" name="ancho"  step="any" onblur="CalculaPrecio();">
+                        <input type="text" class="form-control" value="<?= $espectacular['ancho']?>" id="ancho" name="ancho" onblur="CalculaPrecio();">
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="alto"> Alto(m): </label>
-                        <input type="text" class="form-control" value="<?= $espectacular['alto']?>" id="alto" name="alto"  step="any" onblur="CalculaPrecio();">
+                        <input type="text" class="form-control" value="<?= $espectacular['alto']?>" id="alto" name="alto" onblur="CalculaPrecio();">
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="material"> Material: </label>
-                            <select class="form-control" id="material" name="material"  onchange="CalculaPrecio();">
-                                <option value="<?= $espectacular['id_material']?>"><?= $espectacular['material'] .' '. $espectacular['precio_material']?> </option>
+                            <select class="form-control" id="material" name="material" value="<?= $espectacular['id_material']?>" onchange="CalculaPrecio();">
+                                <option value="<?=$espectacular['id_material'] .','. $espectacular['precio_material']?>"><?= $espectacular['material'] ." $". $espectacular['precio_material']?></option>
                                 <?php foreach($materiales as $material):?>
                                 <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
                                  <?php endforeach ?>       
@@ -149,7 +147,7 @@ var_dump($espectaculares);
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="precio"> Precio: </label>
-                        <input type="text" class="form-control" value="<?= $espectacular['monto']?>" id="precio" name="precio"  step="any" readonly>
+                        <input type="text" class="form-control" value="<?= $espectacular['precio']?>" id="precio" name="precio" readonly>
                     </div>
                 </div>
 
@@ -160,6 +158,7 @@ var_dump($espectaculares);
                         <option value="<?= $espectacular['status']?>"><?= $espectacular['status']?> </option>
                             <option value="Disponible">Disponible</option>
                             <option value="Ocupado">Ocupado</option>
+                            <option value="Apartado">Apartado</option>
                             <option value="Reparacion">Reparacion</option>
                             <option value="Bloqueado">Bloqueado</option>
                         </select>
@@ -224,7 +223,7 @@ var_dump($espectaculares);
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="telefono"> Teléfono: </label>
-                        <input type="tel" class="form-control" value="<?= $espectacular['telefono']?>" id="telefono" name="telefono" value="">
+                        <input type="text" class="form-control" value="<?= $espectacular['telefono']?>" id="telefono" name="telefono" value="">
                     </div>
                 </div>
 
@@ -280,9 +279,9 @@ var_dump($espectaculares);
                         </select>
                     </div>
                 </div>
-                <input type="text" name="id" class="d-none" value="<?=$espectacular['id']?> ">
-                <input type="text" name="id_prop" class="d-none" value="<?=$espectacular['id_prop']?> ">
-                <input type="text" name="id_medio" class="d-none" value="<?=$espectacular['id_medio']?> ">
+                <input type="text" name="id_medio" class="d-none" value="<?=$espectacular['id']?>">
+                <input type="text" name="id_prop" class="d-none" value="<?=$espectacular['id_prop']?>">
+                <input type="text" name="espectacular_id" class="d-none" value="<?=$espectacular['espectacular_id']?> ">
 
 
                 <div class="col-md-12 d-flex justify-content-end my-4">
@@ -295,24 +294,3 @@ var_dump($espectaculares);
 
 <script>espectacularesit.classList.add("selected");</script>
 <script src="<?=base_url('assets/js/espectaculares.js') ?>"></script>
-
-
-<script>
-   
-$("#editarespectacular").submit(function(e){
-    e.preventDefault();
-    var formdata = new FormData($("#editarespectacular")[0]);
-          $.ajax({
-              url:'<?=base_url("admin/espectaculares/guardarCambiosEspectacular")?>',
-              type: $("#editarespectacular").attr("method"),  
-              data: formdata,
-              cache: false,
-              contentType: false,
-              processData: false,
-              success: function(response){
-               console.log(response)
-              }
-          })
-    })
-
-</script>

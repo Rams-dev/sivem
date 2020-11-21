@@ -39,5 +39,10 @@
     <link rel="stylesheet" href="<?= base_url('assets/AlertifyJS/build/css/themes/default.min.css')?>">
     <script src="<?= base_url('assets/AlertifyJS/build/alertify.min.js')?>"></script>
 
+
+    <!-------------------------------------------------------- F O N T A W E S O M E ------------------------------------------- -->
+
+    <script src="https://kit.fontawesome.com/03e7806b0f.js" crossorigin="anonymous"></script>
+
 </head>
 <body>

@@ -28,7 +28,6 @@ class Espectaculares extends CI_Controller {
 	public function agregarEspectacular()
 	{
 		if($this->session->userdata('is_logged')){
-		$data['status'] = $this->Models->obtenerStatus();
 		$data['tipos_pago'] = $this->Models->obtenerTiposdePago();
 		$data['periodos_pago'] = $this->Models->obtenerPeriodosDePago();
 		$data['estados'] = $this->Models->obtenerEstados();
@@ -84,7 +83,6 @@ class Espectaculares extends CI_Controller {
 			if($this->upload->do_upload('imagen1')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
-				$this->upload->do_upload('imagen1');
 				$imagen1 = $data['upload_data']['file_name'];
 			}else{
 				echo json_encode("no se subio la imagen1");
@@ -95,7 +93,6 @@ class Espectaculares extends CI_Controller {
 			if($this->upload->do_upload('imagen2')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
-				$this->upload->do_upload('imagen2');
 				$imagen2 = $data['upload_data']['file_name'];
 
 			}else{
@@ -106,7 +103,6 @@ class Espectaculares extends CI_Controller {
 			if($this->upload->do_upload('imagen3')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
-				$this->upload->do_upload('imagen3');
 				$imagen3 = $data['upload_data']['file_name'];
 
 			}else{
@@ -127,7 +123,6 @@ class Espectaculares extends CI_Controller {
 				if(!$idProp = $this->PropietariosModel->agregarPropietarioEspectacular($nombreprop,$celular,$telefono)){
 					echo json_encode(array('error', 'Fallo al agregar el espectacular'));
 				}else{
-				var_dump($idProp);
 					
 					if(!$sql = $this->EspectacularesModel->agregarEspectacular( 
 						$id_medio,
@@ -172,19 +167,30 @@ class Espectaculares extends CI_Controller {
 
 	 function eliminarEspectacular(){
 	 	if($this->session->userdata('is_logged')){
-			 $idEspectacular = $this->input->post();
-			 
-			 $espectacular = $this->EspectacularesModel->obtenerEspectaculares($idEspectacular['id']);
+			 $idMedio = $this->input->post();
+			 $espectacular = $this->EspectacularesModel->obtenerEspectacularesPorIdMedio($idMedio['id']);
+			  foreach($espectacular as $esp){
+			 	 unlink("assets/images/espectaculares/". $esp['vista_corta']);
+			 	 unlink("assets/images/espectaculares/". $esp['vista_media']);
+			 	 unlink("assets/images/espectaculares/". $esp['vista_larga']);
+				}
+				if(!$eP = $this->PropietariosModel->eliminarPropietario($esp["id_propietario"])){
+					 echo json_encode(array('error', 'lo siento no se pudo eliminar el especatular, intentalo mas tarde'));
+					 exit;
+				}
 
-			 foreach($espectacular as $esp){
-				 unlink("assets/images/espectaculares/". $esp['vista_larga']);
-			 }
-
-			 if(!$datos = $this->EspectacularesModel->eliminarEspectacular($idEspectacular['id'])){
-			 	 echo json_encode(array('error', 'lo siento no se pudde eliminar el especatular, intentalo mas tarde'));
-			  }else{
-				  echo json_encode(array('success', 'Espectacular eliminado'));
-			  }
+				//echo json_encode('ok');
+					if(!$datos = $this->EspectacularesModel->eliminarEspectacular($idMedio['id'])){
+						echo json_encode(array('error', 'lo siento no se pudo eliminar el especatular, intentalo mas tarde'));
+						exit;
+					}else{
+					if(!$EM = $this->MediosModel->eliminarMedio($idMedio['id'])){
+						echo json_encode(array('error', 'lo siento no se pudo eliminar el especatular, intentalo mas tarde'));
+					}else{
+						echo json_encode(array('success', 'Espectacular eliminado'));
+					}
+					}
+				
 
 	 	}else{
 	 		redirect('login');
@@ -194,7 +200,6 @@ class Espectaculares extends CI_Controller {
 	 function editarEspectacular($id){
 		 if($this->session->userdata('is_logged')){
 			$data['espectaculares'] = $this->EspectacularesModel->obtenerEspectacularesPorId($id);
-			$data['status'] = $this->Models->obtenerStatus();
 			$data['tipos_pago'] = $this->Models->obtenerTiposdePago();
 			$data['periodos_pago'] = $this->Models->obtenerPeriodosDePago();
 			$data['estados'] = $this->Models->obtenerEstados();
@@ -211,8 +216,8 @@ class Espectaculares extends CI_Controller {
 
 	function guardarCambiosEspectacular(){
 		if($this->session->userdata('is_logged')){
-			
-		 	$id = $this->input->post('id');
+
+		 	$id_espectacular = $this->input->post('espectacular_id');
 		 	$ncontrol = $this->input->post('numcontrol');
 		 	$cimpreso = $this->input->post('costoimpreso');
 		 	$instalacion = $this->input->post('instalacion');
@@ -226,8 +231,8 @@ class Espectaculares extends CI_Controller {
 		 	$latitud = floatval($this->input->post('latitud'));
 		 	$longitud = floatval($this->input->post('longitud'));
 		 	$referencias = $this->input->post('referencias');
-		 	$ancho = $this->input->post('ancho');
-		 	$alto = $this->input->post('alto');
+		 	$ancho = floatval($this->input->post('ancho'));
+		 	$alto = floatval($this->input->post('alto'));
 		 	$dataMaterial = explode(',',$this->input->post('material'));
 		 	$material = $dataMaterial[0];
 		 	$observaciones = $this->input->post('observaciones');
@@ -239,10 +244,9 @@ class Espectaculares extends CI_Controller {
 		 	$tipopago = $this->input->post('tipopago');
 			$periodopago = $this->input->post('periodopago');
 
-
 			// $formData =$this->input->post();
-			// echo json_encode($formData);
-			// exit;
+			//   echo json_encode($dataMaterial);
+			//    exit;
     	    $config['upload_path'] = "./assets/images/espectaculares";
 		    $config['allowed_types'] = "*";       	
 		    $this->load->library('upload', $config);
@@ -250,60 +254,79 @@ class Espectaculares extends CI_Controller {
 		    if($this->upload->do_upload('imagen1')) {
 		 	   $data['uploadSuccess'] = $this->upload->data();
 			   $data = array('upload_data' => $this->upload->data());
-		 	   $this->upload->do_upload('imagen1');
 		 	   $imagen1 = $data['upload_data']['file_name'];
 		    }else{
-		 	   echo json_encode("no se subio la imagen1");
-
+				$imagen1  ='';
 		    }
 			   
 
 		    if($this->upload->do_upload('imagen2')) {
 		 	   $data['uploadSuccess'] = $this->upload->data();
 		 	   $data = array('upload_data' => $this->upload->data());
-		 	   $this->upload->do_upload('imagen2');
 		 	   $imagen2 = $data['upload_data']['file_name'];
-
 		    }else{
-		 	   echo json_encode("no se subio la imagen2");
+				$imagen2 ="";
 
 		    }
 
 		    if($this->upload->do_upload('imagen3')) {
 		 	   $data['uploadSuccess'] = $this->upload->data();
 		 	   $data = array('upload_data' => $this->upload->data());
-		 	   $this->upload->do_upload('imagen3');
 		 	   $imagen3 = $data['upload_data']['file_name'];
 
 		    }else{
-
-		 	   echo json_encode("no se subio la imagen3");
+				$imagen3 ="";
 			}
+
+			$espectaculardata = $this->EspectacularesModel->obtenerEspectaculares($id_espectacular);
+
+
+			foreach($espectaculardata as $datosDeEspectaculares){
+				if($imagen1 != ''){
+					if(file_exists(base_url("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta']))){
+						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta']);
+					}
+				 }
+				 if($imagen2 != ''){
+					if(file_exists(base_url("assets/images/espectaculares/". $datosDeEspectaculares['vista_media']))){
+						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_media']);
+					}
+				 }
+				 if($imagen3 != ''){
+					if(file_exists(base_url("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta']))){
+						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_larga']);
+					}
+				 }
+			}
+
+
+
 			
 			/*----------------- datos de medio------------ */
 			$medio_id = $this->input->post('id_medio');
 			$precio = $this->input->post('precio');
 			$status = $this->input->post('status');
 
-			if(!$edMedio = $this->MediosModel->guardarCambiosMedio($medio_id,$precio,$status)){
-				echo json_encode(array('error'=>' no se pudeo editar el medio'));
-				exit;
-			}
 
+			 if(!$edMedio = $this->MediosModel->guardarCambiosMedio($medio_id,$precio,$status)){
+			 	echo json_encode(array('error'=>' no se pudeo editar el medio'));
+				// echo json_encode(array($medio_id,$precio,$status));
+			 	// exit;
+			 }
+			
 		   /* datos del propietario */
-			$id_prop = $this->input->post('id_prop');
+		   $id_prop = $this->input->post('id_prop');
 		   $nombreprop = $this->input->post('nombreprop');
 		   $celular = intval(join('', explode('-',$this->input->post('celular'))));
 		   $telefono = intval(join('', explode('-',$this->input->post('telefono'))));
-
-
+				// echo json_encode(array($id_prop,$nombreprop,$celular,$telefono));
+				//  exit;
 		   if(!$edProp = $this->PropietariosModel->editarPropietarioEspectacular($id_prop, $nombreprop,$celular,$telefono)){
 			   echo json_encode(array('error', 'Fallo al agregar el espectacular'));
 		   }
-		
 
 			if(!$sql = $this->EspectacularesModel->editarEspectacular( 
-				$id,
+				$id_espectacular,
 				$ncontrol,
 				$cimpreso,
 				$instalacion,
@@ -325,6 +348,7 @@ class Espectaculares extends CI_Controller {
 				$medio_id,
 				$iniciocontrato,
 				$fincontrato,
+				$monto,
 				$folio,
 				$tipopago,
 				$periodopago,
@@ -333,10 +357,20 @@ class Espectaculares extends CI_Controller {
 				$imagen3)){
 				   echo json_encode(array('error' => 'No se edito el espectacular, intenta mas tarde'));	
 		   }else{
-					echo json_encode(array('success' => 'Espectacular editado'));
+					 echo json_encode(array('success' => 'Espectacular editado'));
+					//echo json_encode($sql);
 		   }
 		}else{
 			redirect('login');
 		}
+	}
+
+	function obtenerImagenesEspectacularPorId($id){
+		if($imagenesData = $this->EspectacularesModel->obtenerEspectacularesPorIdMedio($id)){
+			echo json_encode($imagenesData);
+		}else{
+			json_encode("error");
+		}
+
 	}
 }

@@ -54,6 +54,7 @@ class Clientes extends CI_Controller {
             $telefono = join('',explode('-', $this->input->post('telefono')));
             $correo = $this->input->post('correo');
 
+
             if(!$query = $this->ClientesModel->agregarCliente($rz,$rfc,$domicilio,$colonia,$poblacion, $estado, $cp, $nombre,$puesto, $telefono, $correo)){
                 echo json_encode(array("error"=>"Error, intenetalo mas tarde"));
             }else{
@@ -93,6 +94,10 @@ class Clientes extends CI_Controller {
              $telefono = join('',explode('-', $this->input->post('telefono')));
              $correo = $this->input->post('correo');
              $id = $this->input->post('id');
+             
+            // $formdata=$this->input->post(); 
+            // echo json_encode($formdata);
+            // exit;
 
              if(!$query = $this->ClientesModel->editarCliente($rz,$rfc,$domicilio,$colonia,$poblacion, $estado, $cp, $nombre,$puesto, $telefono, $correo,$id)){
                  echo json_encode(array("error"=>"Error, intenetalo mas tarde"));

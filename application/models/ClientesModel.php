@@ -9,7 +9,7 @@ class ClientesModel extends CI_model{
     
     
 	public function obtenerClientes(){
-        $this->db->select('clientes.id, clientes.nombre, rfc, domicilio,colonia, poblacion, estados.nombre as estado,cp,nombre_encargado, puesto, telefono,correo');
+        $this->db->select('clientes.id, clientes.nombre, rfc, domicilio,colonia, poblacion, estados.id as id_estado, estados.nombre as estado,cp,nombre_encargado, puesto, telefono,correo');
          $this->db->from('clientes');
          $this->db->join('estados', 'estados.id = clientes.id_estado');
          $sql= $this->db->get();
@@ -17,7 +17,7 @@ class ClientesModel extends CI_model{
     }
 
     public function obtenerClientesPorId($id){
-        $this->db->select('clientes.id, clientes.nombre, rfc, domicilio,colonia, poblacion, estados.nombre as estado,cp,nombre_encargado, puesto, telefono,correo');
+        $this->db->select('clientes.id, clientes.nombre, rfc, domicilio,colonia, poblacion,estados.id as id_estado, estados.nombre as estado,cp,nombre_encargado, puesto, telefono,correo');
          $this->db->from('clientes');
          $this->db->join('estados', 'estados.id = clientes.id_estado');
          $this->db->where('clientes.id',$id);
@@ -49,7 +49,7 @@ class ClientesModel extends CI_model{
 
     }
 
-    function editarCliente($id,$rz,$rfc,$domicilio,$colonia,$poblacion, $estado, $cp, $nombre,$puesto, $telefono, $correo){
+    function editarCliente($rz,$rfc,$domicilio,$colonia,$poblacion, $estado, $cp, $nombre,$puesto, $telefono, $correo,$id){
         $data = array(
             'nombre' => $rz,
             'rfc' => $rfc,
@@ -63,8 +63,8 @@ class ClientesModel extends CI_model{
             'telefono' => $telefono,
             'correo' => $correo
         );
-
-        $sql = $this->db->update('clientes', $data, array('id' => $id));
+        $this->db->where('id', $id);
+        $sql = $this->db->update('clientes', $data);
         
         if($sql){
             return true;

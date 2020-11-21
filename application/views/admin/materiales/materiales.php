@@ -11,7 +11,7 @@
         <button class="btn btn-warning btn" data-toggle="modal" data-target="#agregarMaterial" type="button">+ Nuevo Material +</button>
     </div>
 </div>
-<div class="" id="espectacularesContainer">
+<div class="table-responsive-md" id="espectacularesContainer">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -19,8 +19,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Precio</th>
             <th scope="col">Observaciones</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -30,8 +29,8 @@
                     <td><?=$material['material']?></td>
                     <td><?=$material['precio']?></td>
                     <td><?=$material['observaciones']?></td>
-                    <td><button class="btn btn-warning" onclick="editarMaterial(<?= $material['id']?>)" >editar</button></td>
-                    <td><button class="btn btn-danger" onclick="eliminarMaterial(<?= $material['id']?>)" >eliminar</button></td>
+                    <td><button class="btn btn-warning" onclick="editarMaterial(<?= $material['id']?>)" >editar</button>
+                    <button class="btn btn-danger" onclick="eliminarMaterial(<?= $material['id']?>)" >eliminar</button></td>
                 </tr>
             <?php endforeach?>
         </tbody>
@@ -83,5 +82,6 @@
     </div>
   </div>
 </div>
+<script>materialesit.classList.add("selected");</script>
 
 <script src="<?= base_url('assets/js/materiales.js')?>"></script>

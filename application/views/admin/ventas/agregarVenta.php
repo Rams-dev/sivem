@@ -8,7 +8,7 @@
             <div class="col-md-6">
                     <div class="form-group">
                             <label for="cliente">Cliente</label>
-                            <select name="cliente" id="cliente" class="form-control">
+                            <select name="cliente" id="cliente" class="form-control" required>
                             <option value="">Selecciona un cliente</option>
                             <?php foreach($clientes as $cliente):?>
                             <option value="<?=$cliente['id']?>"><?=$cliente['nombre'] . ' - '. $cliente['nombre_encargado']?></option>
@@ -61,6 +61,22 @@
                             </select>
                     </div>
             </div>
+            
+            <div class="col-md-2">
+                    <div class="form-group">
+                            <label for="descuento">Descuento</label>
+                            <select name="descuento" id="descuento" class="form-control">
+                                    <option value="no" selected>No</option>
+                                    <option value="si" >Si</option>
+                            </select>
+                    </div>
+            </div>
+            <div class="col-md-2 d-none" id="descuentoinput">
+                    <div class="form-group">
+                        <label for="descuentoCantidad">Cantidad %</label>
+                        <input type="text" class="form-control" maxlength= 3  name="descuentoCantidad" id="descuentoCantidad" placeholder="%">
+                </div>
+            </div>
 
             <div class="col-md-12">
                     <div class="form-group">
@@ -80,6 +96,8 @@
                             <select name="medio" id="medio" class="form-control">
                                     <option value="">Seleccione un medio</option>
                             </select>
+                            <div id="error" class="invalid-feedback"">
+                            </div>
                     </div>
             </div>
         </div>
@@ -97,13 +115,24 @@
         </tbody>
 
         <tr class="d-none" id="iva">
-                <th colspan="3">Iva</th>
-                <th scope="row">16 %</th>
-         </tr>
-        <tr>
-            <th colspan="3" >Total</th>
-            <th scope="row" id="preciototal">0</th>
+            <td colspan="3">Iva</td>
+            <td> %16 </td>
         </tr>
+         
+        <tr >
+            <td colspan="3" >Total</td>
+            <td id="preciototal">$ 0</td>
+        </tr>
+        <tr>
+            <td colspan="3" >Descuento</td>
+            <td id="desc" class="text-danger">$ 0</td>
+        </tr>
+
+        <tr>
+            <td colspan="3" >precio final</td>
+            <td id="precioConDescuento" class="text-success">$ 0</td>
+        </tr>
+        
         </table>
         <input type="hidden" name="monto" id="monto">
 
@@ -117,6 +146,7 @@
 
 
 <script src="<?=base_url('assets/js/ventas.js')?>"></script>
+<script>ventasit.classList.add("selected");</script>
 
 
 

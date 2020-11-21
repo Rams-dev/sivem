@@ -85,38 +85,15 @@
         <button type="submit" class="btn btn-dark">Guardar</button>
     </div>
 </form>
+<script>clientesit.classList.add("selected");</script>
 
+<script src="<?= base_url('assets/js/clientes.js')?>"></script>
 
-<script>
-
-$('#agregarCliente').submit(function(e){
-    e.preventDefault()
-    let formData = new FormData($("#agregarCliente")[0]);
-
-    $.ajax({
-        url:'guardarCliente',
-        type:'post',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-
-
-    })
-    .done(function(response){
-        console.log(response)
-        $("#agregarCliente")[0].reset();
-    })
-    .fail(function(e){
-        console.log(e)
-    })
-})
-
-
+<!-- <script>
 $(document).ready(function(){
     $('#telefono').mask('000-000-00-00');
     $('#codigoPostal').mask('00000');
     $('#rfc').mask('AAAA000000AAAA');
 })
 
-</script>
+</script> -->

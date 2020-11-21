@@ -1,5 +1,5 @@
 <h1 class=" text-center">Espectaculares</h1>
-<?php var_dump($espectaculares)?>
+<!-- <?php var_dump($espectaculares)?> -->
 <hr>
 <div class="d-flex justify-content-between my-4">
     <div class="d-flex">
@@ -11,19 +11,19 @@
         <a class="btn btn-warning btn" href="<?php echo base_url('admin/espectaculares/agregarEspectacular')?>" role="button">+ Nuevo Espectacular +</a>
     </div>
 </div>
-<div class="" id="espectacularesContainer">
+<div class="table-responsive-md" id="espectacularesContainer">
 <table class="table" id="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">No control</th>
-      <th scope="col">Estado</th>
-      <th scope="col">Municipio</th>
-      <th scope="col">localidad</th>
-      <th scope="col">precio</th>
-      <th>ver</th>
-      <th>editar</th>
-      <th>eliminar</th>
+      <th>#</th>
+      <th>No control</th>
+      <th>Estado</th>
+      <th>Municipio</th>
+      <th>localidad</th>
+      <th>Precio</th>
+      <th>Status</th>
+      <th>Opciones</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -34,13 +34,14 @@
     <tr>
       <th><?= $index?></th>
       <th><?= $espectacular['nocontrol']?></th>
-      <td><?= $espectacular['nombre']?></td>
+      <td><?= $espectacular['nombre_estado']?></td>
       <td><?= $espectacular['municipio']?></td>
       <td><?= $espectacular['localidad']?></td>
-      <td><?= $espectacular['monto']?></td>
-      <td><button class="btn btn-info"  data-toggle="modal" data-target="#imagenes">ver</button></td>
-      <td><a href="<?= base_url('admin/espectaculares/editarEspectacular/'.$espectacular['id'])?>" class="btn btn-warning">editar</button></td>
-      <td><button value="<?=$espectacular['id']?>" class="btn btn-danger eliminar" >eliminar</button></td>
+      <td><?= $espectacular['precio']?></td>
+      <td><?= $espectacular['status']?></td>
+      <td><button class="btn btn-info btn-sm" onclick="imagesEspecatulares(<?=$espectacular['id']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>
+      <a href="<?= base_url('admin/espectaculares/editarEspectacular/'.$espectacular['id'])?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
+      <button class="btn btn-danger btn-sm" onclick="eliminarEspectacular(<?=$espectacular['id']?>)" ><i class="fas fa-trash"></i></button></td>
     </tr>
     <?php
     $index++;
@@ -60,9 +61,9 @@
       </div>
       <div class="">
         <div class="owl-carousel">
-          <div><img src="<?= base_url('assets/images/espectaculares/'.$espectacular['vista_corta'])?>" alt=""></div>
-          <div><img src="<?= base_url('assets/images/espectaculares/'.$espectacular['vista_media'])?>" alt=""></div>
-          <div><img src="<?= base_url('assets/images/espectaculares/'.$espectacular['vista_larga'])?>" alt=""></div>
+          <div><img id="img1" class="img-responsive" alt=""></div>
+          <div><img id="img2" class="img-responsive" alt=""></div>
+          <div><img id="img3" class="img-responsive" alt=""></div>
         </div>
         
       </div>
@@ -71,6 +72,7 @@
 </div>
 </div>
 <script src="<?= base_url('assets/js/espectaculares.js')?>"></script>
+<script>espectacularesit.classList.add("selected");</script>
 
 <script>
 $(document).ready(function(){
@@ -102,4 +104,22 @@ $('.owl-carousel').owlCarousel({
         }
     }
 })
+
+function imagesEspecatulares(id){
+  $.get('espectaculares/obtenerImagenesEspectacularPorId/'+id, function(response){
+    console.log(response);
+    if(response == ''){
+    }else{
+      let resp = JSON.parse(response);
+         resp.map(res =>{
+           $("#img1").attr('src',`<?= base_url()?>assets/images/espectaculares/${res.vista_corta}`);
+           $("#img2").attr('src',`<?= base_url()?>assets/images/espectaculares/${res.vista_media}`);
+           $("#img3").attr('src',`<?= base_url()?>assets/images/espectaculares/${res.vista_larga}`);
+         })
+    }
+  })
+}
+
+$('#monto').mask('000000');
+
 </script>

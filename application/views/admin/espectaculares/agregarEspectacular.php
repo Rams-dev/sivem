@@ -154,6 +154,7 @@
                             <option value="">Sel. Status</option>
                             <option value="Disponible">Disponible</option>
                             <option value="Ocupado">Ocupado</option>
+                            <option value="Apartado">Apartado</option>
                             <option value="Reparacion">Reparacion</option>
                             <option value="Bloqueado">Bloqueado</option>
                             

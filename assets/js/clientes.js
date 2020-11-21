@@ -1,3 +1,37 @@
+
+$('#agregarCliente').submit(function(e){
+    e.preventDefault()
+    let formData = new FormData($("#agregarCliente")[0]);
+
+    $.ajax({
+        url:'guardarCliente',
+        type:'post',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+
+
+    })
+    .done(function(response){
+        console.log(response)
+        let res =  JSON.parse(response);
+        if(res.success){
+            alertify.success(res.success)
+        }
+        if(res.error){
+            alertify.error(res.error)
+        }
+        $("#agregarCliente")[0].reset();
+    })
+    .fail(function(e){
+        console.log(e)
+    })
+})
+
+
+
+
 $('#editarCliente').submit(function(e){
     e.preventDefault()
     let formData = new FormData($("#editarCliente")[0]);
@@ -12,7 +46,15 @@ $('#editarCliente').submit(function(e){
     })
     .done(function(response){
         console.log(response)
-        // $("#agregarCliente")[0].reset();
+        let res = JSON.parse(response);
+        if(res.success){
+            // $("#editarCliente")[0].reset();
+            alertify.success(res.success)
+        }
+        if(res.error){
+            alertify.error(res.error);
+        }
+        
     })
     .fail(function(e){
         console.log(e)

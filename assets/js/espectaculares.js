@@ -1,6 +1,15 @@
 
 const estadoSelect =  document.getElementById('estadoselect');
 
+
+$('#estadoselect').change(function(e){
+    $("#municipioselect option[value!='']").remove();
+
+    e.preventDefault();
+    datos="";
+
+})
+
 estadoSelect.addEventListener('change', function(e){
     e .preventDefault()
     let estado = this.value.split(',');
@@ -42,9 +51,23 @@ function agregarMunicipiosSelect(municipios){
           cache: false,
           contentType: false,
           processData: false,
-          success: function(response){
-              console.log(response)
-          }
+      })
+      .done(function(response){
+        console.log(response)
+        let res = JSON.parse(response)
+         if(res.success){
+             alertify.success(res.success)
+         }
+         if(res.error){
+           alertify.error(error)
+       }
+         $('#guardarespectacular')[0].reset();
+
+      })
+      .fail(function(err){
+        alertify.error(err)
+
+
       })
   })
 
@@ -95,29 +118,55 @@ let material = document.getElementById('material').value;
     console.log(costoimpresion)
 }
 
+/*-------------------------------------- E D I T A R   E S P E C T A C U L A R -----------------------------------------------------*/
 
+$("#editarespectacular").submit(function(e){
+    e.preventDefault();
+    var formdata = new FormData($("#editarespectacular")[0]);
+          $.ajax({
+              url:'../guardarCambiosEspectacular',
+              type: $("#editarespectacular").attr("method"),  
+              data: formdata,
+              cache: false,
+              contentType: false,
+              processData: false,
+              })
+              .done(function(response){
+                  let res = JSON.parse(response);
+                  if(res.success){
+                      alertify.success(res.success);
+                  }
+                  if(res.error){
+                    alertify.error(res.error);
+                  }
+              })
+              .fail(function(err){
+                  alertify.error(err);
+              })
+    })
 
 /*---------------- E L I M I N A R   E S P E C T A C U L A R------------------------ */
 
-    $(".eliminar").click(function(e){
-        e.preventDefault()
-        console.log("hola")
-        console.log(this.val())
-    //   $.ajax({
-    //     url: 'espectaculares/eliminarEspectacular',
-    //     dataType: 'json',
-    //     data: {id:id},
-    //     type:"post",
-    //   })
-    //   .done(function(response){
-    //     console.log(response)
-    //     window.location.reload();
-    //   })
-    //   .fail(function(err){
-    //     console.log("error")
-    //   })
-    })
-  
+function eliminarEspectacular(id){
+   console.log(id);
+       $.ajax({
+        url: 'espectaculares/eliminarEspectacular',
+         dataType: 'json',
+         data: {id:id},
+         type:"post",
+       })
+       .done(function(response){
+         console.log(response)
+         window.location.reload();
+       })
+      .fail(function(err){
+         console.log("error")
+       })
+
+}
+
+
+
 
 /*-------------------------------  jquery mask--------------------------------- */
 
@@ -128,7 +177,6 @@ $(document).ready(function(){
     $('#numero').mask('00000');
     $('#telefono').mask('000-000-00-00');
     $('#celular').mask('000-000-00-00');
-    $('#monto').mask('000000');
 })
 
 

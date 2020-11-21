@@ -10,8 +10,8 @@
             <a class="btn btn-warning btn" href="<?= base_url('admin/clientes/agregarcliente')?>" role="button">+ Nuevo Cliente +</a>
         </div>
     </div>
-    <div class="" id="clientesContainer">
-    <table class="table" id="table">
+    <div class="table-responsive-lg" id="clientesContainer">
+    <table class="table table-responsive" id="table">
     <thead class="thead-dark">
         <tr>
         <th>#</th>
@@ -57,5 +57,6 @@
     </table>
     </div>
     <script src="<?= base_url('assets/js/clientes.js')?>"></script>
+    <script>clientesit.classList.add("selected");</script>
 
        

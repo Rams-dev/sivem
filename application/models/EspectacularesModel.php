@@ -31,6 +31,7 @@ class EspectacularesModel extends CI_model{
         fecha_inicio,
         fecha_termino,
         monto,
+        medios.precio as precio,
         medios.id as id_medio,
         folio,
         id_tipo_pago,
@@ -55,37 +56,6 @@ class EspectacularesModel extends CI_model{
         $sql = $this->db->get();
         
 		return $sql->result_array();
-    }
-
-    // public function obtenerMediosDisponibles($medio){
-    //     if($medio == '1'){
-    //         $this->db->select("*");
-    //         $this->db->from('status');
-    //         $this->db->join('espectaculares', 'status.id = espectaculares.id_status');
-    //         $this->db->where('status.id',$medio);
-    //         $sql = $this->db->get();
-    //     }elseif($medio == '2'){
-    //         $this->db->select("*");
-    //         $this->db->from('status');
-    //         $this->db->join('vallas', 'status.id = vallas.id_status');
-    //         $this->db->where('status.id',$medio);
-    //         $sql = $this->db->get();
-    //     }elseif($medio == '3'){
-    //         $this->db->select("*");
-    //         $this->db->from('status');
-    //         $this->db->join('vallas_moviles', 'status.id = vallas_moviles.id_status');
-    //         $this->db->where('status.id',$medio);
-    //         $sql = $this->db->get();
-    //     }
-    //     if($sql){
-    //         return $sql->result_array();
-    //     }else{
-    //         return false; 
-    //     }
-    // }
-
-    function cambiarStatusMedios($id_medio){
-
     }
 
     
@@ -130,7 +100,7 @@ class EspectacularesModel extends CI_model{
         $this->db->join('materiales', 'materiales.id = espectaculares.id_material','left');
         $this->db->select('estados.nombre as nombre_estado');
         $this->db->join('estados', 'estados.id = espectaculares.id_estado','left');
-        $this->db->select('medios.monto as monto, medios.id as id_medio');
+        $this->db->select('medios.precio as precio, medios.id as id_medio');
         $this->db->join('medios', 'medios.id = espectaculares.id_medio','left');
         $this->db->where('medios.id', $id);
         $sql= $this->db->get();
@@ -193,7 +163,8 @@ class EspectacularesModel extends CI_model{
         'fecha_termino' => $fincontrato,
         'folio' => $folio,
         'id_tipo_pago' => $tipopago,
-        'id_periodo_pago' => $periodopago
+        'id_periodo_pago' => $periodopago,
+        'monto' => $periodopago
         );
 
         $sql = $this->db->insert('espectaculares',$data);
@@ -205,7 +176,7 @@ class EspectacularesModel extends CI_model{
     }
 
     function eliminarEspectacular($id){
-        $sql = $this->db->delete('espectaculares', array('id' => $id));
+        $sql = $this->db->delete('espectaculares', array('id_medio' => $id));
         if($sql){
             return true;
         }else{
@@ -236,42 +207,57 @@ class EspectacularesModel extends CI_model{
         $id_medio,
         $iniciocontrato,
         $fincontrato,
+        $monto,
         $folio,
         $tipopago,
         $periodopago,
         $imagen1,
         $imagen2,
         $imagen3){
-        
+
         $data = array(
-        'nocontrol' => $ncontrol,
-        'costo_impresion' => $cimpreso,
-        'costo_instalacion' => $instalacion,
-        'calle' => $calle,
-        'numero' => $numero,
-        'colonia' => $colonia,
-        'localidad' => $localidad,
-        'municipio' => $municipio,
-        'id_estado' => $estado,
-        'latitud' => $latitud,
-        'longitud' => $longitud,
-        'referencias' => $referencias,
-        'ancho' => $ancho,
-        'alto' => $alto,
-        'id_material' => $material,
-        'observaciones' => $observaciones,
-        'acabados' => $acabados,
-        'vista_corta' => $imagen1,
-        'vista_media' => $imagen2,
-        'vista_larga' => $imagen3,
-        'id_propietario' => $id_prop,
-        'id_medio' => $id_medio,
-        'fecha_inicio' => $iniciocontrato,
-        'fecha_termino' => $fincontrato,
-        'folio' => $folio,
-        'id_tipo_pago' => $tipopago,
-        'id_periodo_pago' => $periodopago
+            'nocontrol' => $ncontrol,
+            'costo_impresion' => $cimpreso,
+            'costo_instalacion' => $instalacion,
+            'calle' => $calle,
+            'numero' => $numero,
+            'colonia' => $colonia,
+            'localidad' => $localidad,
+            'municipio' => $municipio,
+            'id_estado' => $estado,
+            'latitud' => $latitud,
+            'longitud' => $longitud,
+            'referencias' => $referencias,
+            'ancho' => $ancho,
+            'alto' => $alto,
+            'id_material' => $material,
+            'observaciones' => $observaciones,
+            'acabados' => $acabados,
+            'id_propietario' => $id_prop,
+            'id_medio' => $id_medio,
+            'fecha_inicio' => $iniciocontrato,
+            'fecha_termino' => $fincontrato,
+            'folio' => $folio,
+            'id_tipo_pago' => $tipopago,
+            'id_periodo_pago' => $periodopago,
+            'monto' =>$monto
         );
+
+     
+        if($imagen1 != ""){
+            $data += [ "vista_corta" => $imagen1];
+        }
+        if($imagen2 != ""){
+            $data += [ "vista_media" => $imagen2];
+
+        }
+        if($imagen3 != ""){
+            $data += ['vista_larga' => $imagen3];
+
+        }
+        
+        
+       
         $this->db->where('id', $id);
         $sql = $this->db->update('espectaculares', $data);
         if($sql){
@@ -280,6 +266,17 @@ class EspectacularesModel extends CI_model{
             return false;
         }
     }
+
+    function obtenerEspectacularesPorIdMedio($id_medio){
+        $sql = $this->db->get_where('espectaculares',array('id_medio' => $id_medio));
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+    }
+
+    
 
   
 }

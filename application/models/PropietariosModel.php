@@ -7,9 +7,22 @@ class PropietariosModel extends CI_model
 		$this->load->database();
 	}
 
-	public function obternerIdUsuario($s, $celular, $telefono){
-		$sql = $this->db->get('status');
-		return $sql->result_array();
+	public function obtenerPropietarios(){
+		$sql = $this->db->get("propietarios");
+		if($sql){
+			return $sql->result_array();
+		}else{
+			return false;
+		}
+	}
+
+	public function obtenerPropietarioPorId($id){
+		$sql = $this->db->get_where("propietarios", array("id" => $id));
+		if($sql){
+			return $sql->result_array();
+		}else{
+			return false;
+		}
 	}
 
 	public function agregarPropietarioEspectacular($nombre,$celular,$telefono){
@@ -24,7 +37,7 @@ class PropietariosModel extends CI_model
 		}
 	}
 	
-	public function editarPropietarioEspectacular($id, $nom, $tel, $cel){
+	public function editarPropietarioEspectacular($id, $nom, $cel, $tel){
 		$data = array(
 			'nombre' => $nom,
 			'telefono' => $tel,
@@ -38,5 +51,14 @@ class PropietariosModel extends CI_model
 			return false;
 		}
 			
+	}
+
+	function eliminarPropietario($id){
+		$sql = $this->db->delete('propietarios', array('id' => $id));
+		if($sql){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

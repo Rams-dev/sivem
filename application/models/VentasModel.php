@@ -7,29 +7,42 @@ class VentasModel extends CI_model
 		$this->load->database();
 	}
 
-	public function esemero($s, $celular, $telefono){
-		$sql = $this->db->get('status');
-		return $sql->result_array();
-	}
-
-	public function agregarPropietarioEspectacular($nombre,$celular,$telefono){
-		$datos = array('nombre' => $nombre,
-						'telefono' => $telefono,
-						'celular' => $celular,);	
-        $sql = $this->db->insert('propietarios',$datos);
+	function obtenerVentas(){
+		$this->db->select("*");
+		$this->db->from("ventas");
+		$this->db->join("venta_medios", "ventas.id_venta = venta_medios.id_venta");
+		$this->db->select("usuarios.id as id_vendedor, usuarios.nombre as vendedor, usuarios.apellidos as apellidos_vendedor");
+		$this->db->join("usuarios", "ventas.id_vendedor = usuarios.id");
+		$this->db->join("espectaculares", "venta_medios.id_medio = espectaculares.id_medio");
+		$this->db->join("estados", "espectaculares.id_estado = estados.id");
+		$this->db->select("clientes.id as cliente_id, clientes.nombre as comprador, clientes.nombre_encargado, clientes.correo as correo_comprador, clientes.telefono");
+		$this->db->join("clientes", "ventas.id_comprador = clientes.id");
+		$sql = $this->db->get();
 		if($sql){
-            $this->db->select('id');
-            $idQuery = $this->db->get_where('propietarios', array('celular' => $celular),1);
-			return $idQuery->result_array();
-		}else
-		return false;
+			return $sql->result_array();
+		}else{
+			return false;
+		}
 	}
 
-	public function agregarVenta($id_cliente,$monto,$fecha_venta,$factura){
+	public function obtenerVentasPorIdMedio($id_medio){
+		$sql =$this->db->get_where("venta_medios",array("id_medio" =>$id_medio));	
+		if($sql){
+			return $sql->result_array();
+		}else{
+			return false;
+		}
+
+	}
+
+	public function agregarVenta($id_cliente,$monto,$descuentoPocentaje, $descuentoPrecio, $precio_final,$fecha_venta,$factura){
 		$data= array(
 			'id_vendedor' => $this->session->userdata('id'),
 			'id_comprador' => $id_cliente,
 			'monto' => $monto,
+			'descuento_porcentaje' => $descuentoPocentaje,
+			'descuento' => $descuentoPrecio,
+			'monto_total' => $precio_final,
 			'fecha_venta' => $fecha_venta,
 			'factura' => $factura,
 		);
@@ -40,7 +53,6 @@ class VentasModel extends CI_model
 		}else{
 			return false;
 		}
-
 	}
 
 	public function agregarVentaMedio($idVenta, $medio,$noPagos,$tipoPago,$fechaInicio,$fechaTermino,$tipoArte){
@@ -61,6 +73,8 @@ class VentasModel extends CI_model
 			return false;
 		}
 	}
+
+
 	public function eliminarVenta($idVenta){
 		$sql = $this->db->delete('ventas',array('id' => $idVenta));
 		if($sql){

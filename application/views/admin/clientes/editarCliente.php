@@ -1,3 +1,4 @@
+
 <h1 class="text-center" style="color:#ba0d0d;">Editar Cliente</h1>
 <hr>
 <form action="<?= base_url("admin/clientes/guardarClienteEditado")?>" method="post" id="editarCliente" name="editarCliente">
@@ -39,6 +40,7 @@
             <div class="form-group">
                 <label for="estado">Estado</label>
                 <select name="estado" id="estado" class="form-control" value="<?= $cliente['estado']?>">
+                    <option value="<?=$cliente['id_estado']?>"><?= $cliente['estado']?></option>
                     <?php foreach($estados as $estado):?>
                         <option value="<?=$estado['id']?>"><?= $estado['nombre']?></option>
                     <?php endforeach?>
@@ -88,3 +90,4 @@
     <?php endforeach ?>
 </form>
 <script src="<?= base_url('assets/js/clientes.js')?>"></script>
+<script>clientesit.classList.add("selected");</script>

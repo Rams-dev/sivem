@@ -7,7 +7,7 @@
                 <div class="d-flex justify-content-end align-items-center mt-2">
                     <b class="my-auto mr-1 menuTitle">MENU</b>
                     <a id="menu">
-                     <img src="Recursos/Imagenes/icoMenu.png"  width="35" alt="menu">
+                    <i class="fas fa-bars"></i>
                     </a>
                 </div>
             </div>
@@ -19,24 +19,24 @@
                 </a>
                 <hr class="bg-white d-none">
                 <a href="<?php echo base_url('admin/dashboard') ?>" id="indexit" class="">Dashboard</a>
-                <a href="/clientes" id="clientesit" class="">Clientes</a>
-                <a href="/catalogos" id="catalogosit" class="">Catálogos</a>
-                <a href="/empleados" id="empleadosit" class="">Empleados</a>
-                <a href="<?= base_url('admin/clientes')?>"id="empresasit" class="">Empresas</a>
-                <a href="<?= base_url('admin/materiales')?>" id="materialesit" class="">Materiales</a>
+                <a href="<?= base_url('admin/clientes')?>" id="clientesit" class="">Clientes</a>
+                <a href="<?= base_url('admin/catalogos')?>" id="catalogosit" class="">Catálogos</a>
+                <!-- <a href="/empleados" id="empleadosit" class="">Empleados</a> -->
+                <!-- <a href="#"id="empleadosit" class="">Empleados</a> -->
+                <!-- <a href="<?= base_url('admin/materiales')?>" id="materialesit" class="">Materiales</a> -->
                 <a href="<?= base_url('admin/espectaculares')?>" id="espectacularesit" class="">Espectaculares</a>
                 <a href="<?= base_url('admin/ventas')?>" id="ventasit" class="">Ventas</a>
-                <a href="/vallas" id="vallasit" class="">Vallas</a>
-                <a href="/vallasmoviles" id="vallasmovilesit" class="">Vallas Moviles</a>
+                <a href="<?= base_url("admin/vallas_fijas")?>" id="vallasit" class="">Vallas fijas</a>
+                <!-- <a href="/vallasmoviles" id="vallasmovilesit" class="">Vallas Moviles</a> -->
 
                 <div class="mt-auto">
-                    <a href="#" class="useron">{{.Usuario.Nombre2}}</a>
+                    <a href="#" class="useron"><?= $this->session->userdata("nombre")?></a>
                     <a href="<?= base_url('login/logout')?>" class="username">Cerrar Sesión</a>
                 </div>
             
             </div>
         </div>
-        <div class="col-lg-10 col-md-10 rouded-lg">
+        <div class="col-lg-10 col-md-10">
         <!-- <nav class="navbar navbar-dark navbar-lg bg-dark">
                 <a class="navbar-brand" href="#">
                     <img src="<?php echo base_url('assets/images/logosis.svg')?>" width="100" height="30" class="d-inline-block align-top" alt="" loading="lazy">
