@@ -1,15 +1,15 @@
 <h1 class=" text-center">Vallas</h1>
                 <hr>
+                <?php var_dump($vallas_fijas);?>
         <div class="d-flex justify-content-between my-4">
             <div class="d-flex">
                 <input type="text" class="form-control mr-2" id="buscadorValla" name="buscadorValla" value=""  placeholder="Buscar Valla">
-                <a class="btn btn-info " href="Javascript:BuscaValla();" role="button">Buscar</a>&nbsp;
+                <a class="btn btn-info search" href="Javascript:BuscaValla();" role="button"><i class="fas fa-search"></i> <p> Buscar </p></a>&nbsp;
             </div>
             <div class="d-flex">
-                <a class="btn btn-warning btn" href="<?= base_url("admin/vallas_fijas/agregarVallaFija")?>" role="button">+ Nueva Valla +</a>
+                <a class="btn btn-warning add" href="<?= base_url("admin/vallas_fijas/agregarVallaFija")?>" role="button"><i class="fas fa-plus"></i> <p>+ Nueva Valla +</p></a>
             </div>
         </div>
-        <div class="" id="clientesContainer">
         <div class="table-responsive-md" id="espectacularesContainer">
         <table class="table" id="table">
         <thead class="thead-dark">
@@ -25,27 +25,27 @@
             
             </tr>
         </thead>
-        <!-- <tbody>
+         <tbody>
             
             <?php 
             $index = 1;
-            foreach($espectaculares as $espectacular):?>
+            foreach($vallas_fijas as $valla):?>
             <tr>
             <th><?= $index?></th>
-            <th><?= $espectacular['nocontrol']?></th>
-            <td><?= $espectacular['nombre_estado']?></td>
-            <td><?= $espectacular['municipio']?></td>
-            <td><?= $espectacular['localidad']?></td>
-            <td><?= $espectacular['precio']?></td>
-            <td><?= $espectacular['status']?></td>
-            <td><button class="btn btn-info btn-sm" onclick="imagesEspecatulares(<?=$espectacular['id']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>
-            <a href="<?= base_url('admin/espectaculares/editarEspectacular/'.$espectacular['id'])?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
-            <button class="btn btn-danger btn-sm" onclick="eliminarEspectacular(<?=$espectacular['id']?>)" ><i class="fas fa-trash"></i></button></td>
+            <th><?= $valla['nocontrol']?></th>
+            <td><?= $valla['nombre']?></td>
+            <td><?= $valla['municipio']?></td>
+            <td><?= $valla['localidad']?></td>
+            <td><?= $valla['precio']?></td>
+            <td><?= $valla['status']?></td>
+            <td><button class="btn btn-info btn-sm" onclick="imagesEspecatulares(<?=$valla['id_medio']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>
+            <a href="<?= base_url('admin/vallas_fijas/editarValla_fija/'.$valla['id_medio'])?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
+            <button class="btn btn-danger btn-sm" onclick="eliminarValla_fija(<?=$valla['id_medio']?>)" ><i class="fas fa-trash"></i></button></td>
             </tr>
             <?php
             $index++;
             endforeach?>
-        </tbody> -->
+        </tbody> 
         </table>
         </div>
 
@@ -55,7 +55,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Fotografías del espectacular <?=$espectacular['nocontrol']?></h5>
+        <h5 class="modal-title" id="exampleModalLabel">Fotografías de la valla <?=$valla['nocontrol']?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -72,13 +72,11 @@
   </div>
 </div>
 </div>
-<script src="<?= base_url('assets/js/espectaculares.js')?>"></script>
-<script>vallasesit.classList.add("selected");</script>
+<script src="<?= base_url('assets/js/vallas_fijas.js')?>"></script>
+<script>vallasit.classList.add("selected");</script>
 
 <script>
-$(document).ready(function(){
-  $("#table").DataTable()
-})
+
 
 $('.owl-carousel').owlCarousel({
     loop:true,
@@ -107,15 +105,16 @@ $('.owl-carousel').owlCarousel({
 })
 
 function imagesEspecatulares(id){
-  $.get('espectaculares/obtenerImagenesEspectacularPorId/'+id, function(response){
+  console.log(id);
+  $.get('vallas_fijas/obtenerImagenesVallasFijasPorId/'+id, function(response){
     console.log(response);
     if(response == ''){
     }else{
       let resp = JSON.parse(response);
          resp.map(res =>{
-           $("#img1").attr('src',`<?= base_url()?>assets/images/espectaculares/${res.vista_corta}`);
-           $("#img2").attr('src',`<?= base_url()?>assets/images/espectaculares/${res.vista_media}`);
-           $("#img3").attr('src',`<?= base_url()?>assets/images/espectaculares/${res.vista_larga}`);
+           $("#img1").attr('src',`<?= base_url()?>assets/images/vallas_fijas/${res.vista_corta}`);
+           $("#img2").attr('src',`<?= base_url()?>assets/images/vallas_fijas/${res.vista_media}`);
+           $("#img3").attr('src',`<?= base_url()?>assets/images/vallas_fijas/${res.vista_larga}`);
          })
     }
   })

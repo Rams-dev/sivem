@@ -9,13 +9,14 @@ class Catalogos extends CI_Controller {
 		$this->load->model('MediosModel');
 		$this->load->model('ClientesModel');
 		$this->load->model('EspectacularesModel');
+		$this->load->model('Vallas_fijasModel');
 
 	}
 	public function index()
 	{
 
 		if($this->session->userdata('is_logged')){
-		$data['medios'] = $this->MediosModel->obtenerMedios();
+		// $data['medios'] = $this->MediosModel->obtenerMedios();
 		$data['estados'] = $this->Models->obtenerEstados();
 		$this->load->view('admin/templates/__head');
 		$this->load->view('admin/templates/__nav');
@@ -27,7 +28,10 @@ class Catalogos extends CI_Controller {
 	}
 
 	public function obtenerDatosDeCatalogos(){
-		$datos = $this->MediosModel->obtenerMedios();
+		// $datos = $this->MediosModel->obtenerMedios();
+		$espectaculares = $this->EspectacularesModel->obtenerEspectaculares();
+		$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
+		$datos = array_merge($espectaculares,$vallas_fijas);
 		echo json_encode($datos);
 	}   
 
@@ -48,11 +52,17 @@ class Catalogos extends CI_Controller {
 
 		
 			if($id_estado == "" && $status == "" && $tipo_medio == "" ){
-				$datos = $this->MediosModel->obtenerMedios();
-			}else{
+				$espectaculares = $this->EspectacularesModel->obtenerEspectaculares();
+				$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
+				// var_dump($vallas_fijas);
+				$datos = array_merge($espectaculares,$vallas_fijas);
+			}
+			else{
 				if(!$datos = $this->MediosModel->getMediosHttp($id_estado,$status,$tipo_medio)){
 					echo json_encode("error");
 					exit;
+				}else{
+				
 				}
 
 			}
@@ -73,9 +83,17 @@ class Catalogos extends CI_Controller {
 		$medio = $this->input->post("tipomedio");
 		
 		if($estado == "" && $status == "" && $medio == ""){
-			$data["medios"] = $this->MediosModel->obtenerMedios();
+			$espectaculares = $this->EspectacularesModel->obtenerEspectaculares();
+				$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
+				// var_dump($vallas_fijas);
+				$data["medios"] = array_merge($espectaculares,$vallas_fijas);
 		}else{
-			$data["medios"] = $this->MediosModel->getMediosHttp($estado,$status,$medio);
+			if(!$datos = $this->MediosModel->getMediosHttp($estado,$status,$medio)){
+				echo json_encode("error");
+				exit;
+			}else{
+				$data['medios'] = $datos;			
+			}
 		}
 			// echo json_encode($data);
         $html=$this->load->view('admin/catalogos/catalogoespectacularesPDF',$data);

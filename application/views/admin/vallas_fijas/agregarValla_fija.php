@@ -10,7 +10,7 @@
                     <div class="col-lg-2 col-md-2">
                         <div class="form-group">
                             <label for="numcontrol"> No Control: </label>
-                            <input type="text" class="form-control" id="numcontrol" name="numcontrol" value=""  onchange="VerificarEspectacularDuplicado(this.value);">
+                            <input type="text" class="form-control" id="numcontrol" name="numcontrol" value=""  onchange="VerificarEspectacularDuplicado(this.value);" required>
                         </div>
                     </div>
 
@@ -18,28 +18,28 @@
                     <div class="col-lg-4 col-md-4" id="calle">
                         <div class="form-group">
                             <label for="calle" > Calle:</label>
-                            <input type="text" class="form-control" id="calle" name="calle" value=""  step="any">
+                            <input type="text" class="form-control" id="calle" name="calle" value=""  step="any" required>
                         </div>
                     </div>
                     
-                    <div class="col-lg-2 col-md-4" id="numero">
+                    <div class="col-lg-2 col-md-4" id="numeroDiv">
                         <div class="form-group">
                             <label for="numero" > Numero:</label>
-                            <input type="number" class="form-control" id="numero" name="numero" value=""  step="any">
+                            <input type="number" class="form-control" id="numero" name="numero" value=""  step="any" required>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4" id="colonia">
                         <div class="from-group">
                             <label for="colonia" > Colonia:</label>
-                            <input type="text" class="form-control" id="colonia" name="colonia" value=""  step="any">
+                            <input type="text" class="form-control" id="colonia" name="colonia" value=""  step="any" required>
                         </div>
                     </div>
                     
                     <div class="col-lg-4 col-md-4" id="localidad">
                         <div class="form-group">
                             <label for="localidad" >Localidad:</label>
-                            <input type="text" class="form-control" id="localidad" name="localidad" value=""  step="any">
+                            <input type="text" class="form-control" id="localidad" name="localidad" value=""  step="any" required>
                         </div>
                     </div>
 
@@ -67,21 +67,21 @@
                     <div class="col-lg-4 col-md-4" id="latitud">
                         <div class="form-group">
                             <label for="latitud" >Latitud:</label>
-                            <input type="text" class="form-control" id="latitud" name="latitud" value=""  step="any">
+                            <input type="text" class="form-control" id="latitud" name="latitud" value=""  step="any" required>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4" id="longitud">
                         <div class="form-group">
                             <label for="longitud" >Longitud:</label>
-                            <input type="text" class="form-control" id="longitud" name="longitud" value=""  step="any">
+                            <input type="text" class="form-control" id="longitud" name="longitud" value=""  step="any" required>
                         </div>
                     </div>
 
                     <div class="col-lg-12 col-md-12" id="referencias">
                         <div class="form-group">
                             <label for="referencias" >Referencias:</label>
-                            <input type="text" class="form-control" id="referencias" name="referencias" value=""  step="any">
+                            <input type="text" class="form-control" id="referencias" name="referencias" value=""  step="any" required>
                         </div>
                     </div>
 
@@ -93,21 +93,21 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="ancho" > Ancho(m): </label>
-                                <input type="number" class="form-control" id="ancho" name="ancho" value=""  step="any">
+                                <input type="number" class="form-control" id="ancho" name="ancho" value=""  step="any" required>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="alto" > Alto(m): </label>
-                                <input type="number" class="form-control" id="alto" name="alto" value=""  step="any">
+                                <input type="number" class="form-control" id="alto" name="alto" value=""  step="any" required>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4">
                         <div class="form group">
                             <label for="material" > Material: </label>
-                                    <input type="text" id="material" name="material" class="form-control" value="vinil" placeholder = "vinil - 65$"  readonly>
+                                    <input type="text" id="material" name="material" class="form-control" value="vinil" placeholder = "vinil - 65$"  readonly required>
                                 </select>
                         </div>
                     </div>
@@ -115,21 +115,21 @@
                     <div class="col-lg-4 col-md-4"> 
                         <div class="form-group">
                             <label for="costodeimpresion" > Costo de impresion: </label>
-                                <input type="text" class="form-control" id="costodeimpresion" name="costodeimpresion" value=""  step="any" readonly>
+                                <input type="text" class="form-control" id="costodeimpresion" name="costodeimpresion" value=""  step="any" readonly required>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="costodeinstalacion" > Costo de instalacion: </label>
-                                <input type="text" class="form-control" id="costodeinstalacion" name="costodeinstalacion" value=""  step="any" readonly>
+                                <input type="text" class="form-control" id="costodeinstalacion" name="costodeinstalacion" value=""  step="any" readonly required>
                         </div>
                     </div>
                     
                     <div class="col-sm-2 col-md-2">
                         <div class="form-group">
                             <label for="precio" > Precio: </label>
-                            <input type="text" class="form-control" id="precio" name="precio"  step="any" readonly>
+                            <input type="text" class="form-control" id="precio" name="precio"  step="any" readonly required>
                         </div>
                     </div>
 
@@ -163,14 +163,14 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="imagen1" > Vista Corta : </label>
-                                <input type="file" class="dropify" data-allowed-file-extensions="jpg jpeg"
+                                <input type="file" class="dropify" data-allowed-file-extensions="jpg jpeg required"
                                     id="imagen1" name="imagen1"  />
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="imagen1" > Vista Media : </label>
-                                <input type="file" class="dropify" data-allowed-file-extensions="jpg jpeg"
+                                <input type="file" class="dropify" data-allowed-file-extensions="jpg jpeg required"
                                     id="imagen2" name="imagen2"  />
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="imagen1" > Vista Larga : </label>
-                                <input type="file" class="dropify" data-allowed-file-extensions="jpg jpeg"
+                                <input type="file" class="dropify" data-allowed-file-extensions="jpg jpeg required"
                                     id="imagen3" name="imagen3"  />
                         </div>
                     </div>
@@ -212,41 +212,41 @@
                     <div class="col-sm-4" id="nombre">
                         <div class="form-group ">
                             <label for="nombreprop" > Nombre:</label>
-                            <input type="text" class="form-control" id="nombreprop" name="nombreprop" value="" >
+                            <input type="text" class="form-control" id="nombreprop" name="nombreprop" value=""  required>
                         </div>
                     </div>
 
-                    <div class="col-lg-3" id="celular">
+                    <div class="col-lg-3" id="celularDiv">
                         <div class="form-group">
                             <label for="celular" > Celular: </label>
-                            <input type="text" class="form-control" id="celular" name="celular" value="" >
+                            <input type="text" class="form-control" id="celular" name="celular" value=""  required>
                         </div>
                     </div>
 
-                    <div class="col-lg-3" id="telefono">
+                    <div class="col-lg-3" id="telefonoDiv">
                         <div class="form-group">
                             <label for="telefono" > Teléfono: </label>
-                            <input type="text" class="form-control" id="telefono" name="telefono" value="" >
+                            <input type="text" class="form-control" id="telefono" name="telefono" value=""  required>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="monto" > Monto: </label>
-                            <input type="text" class="form-control" id="monto" name="monto" value="" >
+                            <input type="text" class="form-control" id="monto" name="monto" value=""  required>
                         </div>
                     </div>
 
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="iniciocontrato" > Inicio:</label>
-                            <input type="date" class="form-control" id="iniciocontrato" name="iniciocontrato" value="" >
+                            <input type="date" class="form-control" id="iniciocontrato" name="iniciocontrato" value=""  required>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="fincontrato" > Fin: </label>
-                                <input type="date" class="form-control" id="fincontrato" name="fincontrato" value="" >
+                                <input type="date" class="form-control" id="fincontrato" name="fincontrato" value=""  required>
                         </div>
                     </div>
 
@@ -278,14 +278,14 @@
                     <!--<div class="col-lg-2">
                         <div class="form-group">
                             <label for="folio" > Folio: </label>
-                            <input type="text" class="form-control" id="folio" name="folio" value="" >
+                            <input type="text" class="form-control" id="folio" name="folio" value=""  required>
                         </div>
                     </div>-->
 <!-- 
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="monto" c>Contrato: </label>
-                            <input type="file" id="monto" name="monto" value=""  step="any">
+                            <input type="file" id="monto" name="monto" value=""  step="any" required>
                         </div>
                     </div>  -->
                     
@@ -299,12 +299,8 @@
 <div id="answer">
 
 </div>
-<script>vallasit.classList.add("selected");</script>
-<script src="<?= base_url("assets/js/vallas_fijas.js")?>"></script>	
-<script>
-// $(document).ready(function(){
-//     $("#celular").mask('000-000-00-00');
-//     $("#telefono").mask('000-000-00-00');
 
-// })
+
+<script>vallasit.classList.add("selected");
 </script>
+<script src="<?= base_url("assets/js/vallas_fijas.js")?>"></script>	

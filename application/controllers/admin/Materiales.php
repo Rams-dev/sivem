@@ -30,13 +30,25 @@ class Materiales extends CI_Controller {
 			$observacion = $this->input->post('observacionmaterial');
 
 			if(!$datos = $this->MaterialesModel->agregarMaterial($nombre,$precio,$observacion)){
-				echo json_encode("error");
+				echo json_encode(array("error" => "Error al insertar los datos"));
 			}else{
-				echo json_encode("Material agregago correctamente");
+				echo json_encode(array("success" =>"Material agregago correctamente"));
 			}
 			
 		}else{
 			redirect('login');
+		}
+	}
+
+	public function obtenerMaterialPorId($id){
+		if($this->session->userdata('is_logged')){
+			if($data = $this->MaterialesModel->obtenerMaterialPorId($id)){
+				echo json_encode($data);
+			}else{
+				echo json_encode(array("error" => "Ocurrio un error"));
+			}
+		}else{
+			redirect("login");
 		}
 	}
 
@@ -60,12 +72,12 @@ class Materiales extends CI_Controller {
 	{
 		if($this->session->userdata('is_logged')){
 			$id = $this->input->post();
-			echo json_encode($id);
-			// if(!$datos = $this->MaterialesModel->agregarMaterial($nombre,$precio,$observacion)){
-			// 	echo json_encode("error");
-			// }else{
-			// 	echo json_encode("Material agregago correctamente");
-			// }
+			// echo json_encode($id);
+			if(!$datos = $this->MaterialesModel->eliminarMaterial($id['id'])){
+				echo json_encode(array("error" => "Error al eliminar el material"));
+			}else{
+			 	echo json_encode(array("success" => "Material Eliminado correctamente"));
+			}
 			
 		}else{
 			redirect('login');

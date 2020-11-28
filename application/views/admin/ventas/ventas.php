@@ -6,10 +6,10 @@
     <div class="d-flex">
         <input type="text" class="form-control mr-2" id="buscadorVentas" name="buscadorVentas" value=""
             placeholder="Busca Venta">
-        <a class="btn btn-info " href="" role="button">Buscar</a>&nbsp;
+        <a class="btn btn-info search" href="" role="button"><i class="fas fa-search"></i><p> Buscar</p></a>&nbsp;
     </div>
     <div class="d-flex">
-        <a class="btn btn-warning btn" href="<?php echo base_url('admin/ventas/agregarVenta')?>" role="button">+ Nueva Venta +</a>
+        <a class="btn btn-warning add" href="<?php echo base_url('admin/ventas/agregarVenta')?>" role="button"> <i class="fas fa-plus"></i><p> + Nueva Venta + </p></a>
     </div>
 </div>
 <div class="table-responsive" id="espectacularesContainer">

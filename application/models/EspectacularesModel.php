@@ -11,6 +11,7 @@ class EspectacularesModel extends CI_model{
 	public function obtenerEspectaculares(){
         $this->db->select('medios.id, espectaculares.id as espectacular_id,nocontrol, costo_impresion,costo_instalacion, calle,
         numero,
+        tipo_medio,
         colonia,
         localidad,
         municipio,
@@ -41,18 +42,18 @@ class EspectacularesModel extends CI_model{
         propietarios.telefono,
         propietarios.celular,
         periodo_pago.periodo as periodo,
+        estados.nombre as nombre_estado,
         ');
         $this->db->from('espectaculares');
-        $this->db->join('propietarios', 'propietarios.id = espectaculares.id_propietario','left');
-        $this->db->join('periodo_pago', 'periodo_pago.id = espectaculares.id_periodo_pago','left');
+        $this->db->join('propietarios', 'propietarios.id = espectaculares.id_propietario','inner');
+        $this->db->join('periodo_pago', 'periodo_pago.id = espectaculares.id_periodo_pago','inner');
         $this->db->select('tipos_pago.nombre as tipo_de_pago');
-        $this->db->join('tipos_pago', 'tipos_pago.id = espectaculares.id_tipo_pago','left');
+        $this->db->join('tipos_pago', 'tipos_pago.id = espectaculares.id_tipo_pago','inner');
         $this->db->select('material, materiales.precio as precio_material');
-        $this->db->join('materiales', 'materiales.id = espectaculares.id_material','left');
-        $this->db->select('estados.nombre as nombre_estado');
-        $this->db->join('estados', 'estados.id = espectaculares.id_estado','left');
+        $this->db->join('materiales', 'materiales.id = espectaculares.id_material','inner');
+        $this->db->join('estados', 'estados.id = espectaculares.id_estado','inner');
         //$this->db->select('medios.monto as monto medios.id as id_medio');
-        $this->db->join('medios', 'medios.id = espectaculares.id_medio','left');
+        $this->db->join('medios', 'medios.id = espectaculares.id_medio','inner');
         $sql = $this->db->get();
         
 		return $sql->result_array();

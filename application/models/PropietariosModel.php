@@ -25,7 +25,7 @@ class PropietariosModel extends CI_model
 		}
 	}
 
-	public function agregarPropietarioEspectacular($nombre,$celular,$telefono){
+	public function agregarPropietario($nombre,$celular,$telefono){
 		$datos = array('nombre' => $nombre,
 						'telefono' => $telefono,
 						'celular' => $celular,);	
@@ -37,7 +37,7 @@ class PropietariosModel extends CI_model
 		}
 	}
 	
-	public function editarPropietarioEspectacular($id, $nom, $cel, $tel){
+	public function editarPropietario($id, $nom, $cel, $tel){
 		$data = array(
 			'nombre' => $nom,
 			'telefono' => $tel,

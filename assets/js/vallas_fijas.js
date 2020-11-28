@@ -9,8 +9,8 @@
     const estado = document.querySelector("#estado");
     const municipio = document.querySelector("#municipio");
     const nombre = document.querySelector("#nombre");
-    const telefono = document.querySelector("#telefono");
-    const celular = document.querySelector("#celular");
+    const telefono = document.querySelector("#telefonoDiv");
+    const celular = document.querySelector("#celularDiv");
 
     // selectUbicacion.addEventListener("change",function(e){
     //     e.preventDefault()
@@ -35,9 +35,9 @@
     //         municipio.classList.remove("d-none")
     //     }
     // })
-    const propietario = document.querySelector("#propietario");
+    // const propietario = document.querySelector("#propietario");
 
-    propietario.addEventListener("change", function(e){
+    window.propietario.addEventListener("change", function(e){
         e.preventDefault()
         if(this.value == "registrado"){
             window.propietariosReg.classList.add("d-block");
@@ -170,6 +170,16 @@ $("#guardarVallaFija").submit(function(e){
     })
     .done(function(response){
         console.log(response)
+        let res = JSON.parse(response);
+        if(res.success){
+            alertify.success(res.success);
+            $("#guardarVallaFija")[0].reset();
+            
+        }
+        
+        if(res.error){
+            alertify.error(res.error);
+        }
     })
     .fail(function(err){
         console.log(err)
@@ -179,6 +189,76 @@ $("#guardarVallaFija").submit(function(e){
     })
 })
 
+/*----------------------------------> E L I M I N A R   V A  L L A S   F I J A S <----------------------------------- */
+
+
+function eliminarValla_fija(id){
+    console.log(id)
+    $.ajax({
+        url: 'vallas_fijas/eliminarVallaFija',
+        type: 'post',
+        data: {id:id},
+    })
+    .done(function(response){
+        let res = JSON.parse(response);
+        console.log(res)
+        if(res.success){
+            alertify.success(res.success);
+        }
+        if(res.error){
+            alertify.error(res.error);
+        }
+    })
+    .fail(function(err){
+        console.log(err)
+        alertify.error("error intenta mas tarde");
+    })
+    .always(function(ok){
+        window.location.reload();
+
+    })
+}
+
+
 
 /*-----------   M A S K     ----------------------------------------- */
+
+$(document).ready(function(){
+    $('#numero').mask('00000');
+
+    $('#celular').mask('000-000-00-00');
+   $("#telefono").mask('000-000-00-00');
+
+ })
+
+/*----------------------------------> E D I T A R   V A  L L A    F I J A  <----------------------------------- */
+
+
+$("#editarVallaFija").submit(function(e){
+    e.preventDefault();
+    let formData = new FormData($("#editarVallaFija")[0])
+    $.ajax({
+        url:"../guardarVallaFijaEditada",
+        type:"post",
+        data: formData,
+        contentType:false,
+        cache:false,
+        processData:false,
+    })
+    .done(function(response){
+        let res= JSON.parse(response);
+        if(res.success){
+            alertify.success(res.success)
+        }
+        if(res.error){
+            alertify.error(res.error)
+        }
+        console.log(res)
+
+    })
+    .fail(function(err){
+        console.log("error");
+        alertify.error("Error al enviar los datos");
+    })
+})
 

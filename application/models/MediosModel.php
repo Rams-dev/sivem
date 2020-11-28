@@ -35,18 +35,18 @@ class MediosModel extends CI_model
         }
     }
 
-    public function obtenerMedios(){
-        $this->db->select('*');
-        $this->db->from('medios');
-        $this->db->join('espectaculares', 'espectaculares.id_medio = medios.id');
-        $this->db->join('estados', 'espectaculares.id_estado = estados.id');
-        $sql = $this->db->get();
-        if($sql){
-            return $sql->result_array();
-        }else{
-            return false;
-        }
-    }
+    // public function obtenerMedios(){
+    //     $this->db->select('*');
+    //     $this->db->from('medios');
+    //     $this->db->join('espectaculares', 'espectaculares.id_medio = medios.id');
+    //     $this->db->join('estados', 'espectaculares.id_estado = estados.id');
+    //     $sql = $this->db->get();
+    //     if($sql){
+    //         return $sql->result_array();
+    //     }else{
+    //         return false;
+    //     }
+    // }
 
     public function getMediosHttp($id_estado ="",$status ="",$tipo_medio=""){
 
@@ -56,27 +56,24 @@ class MediosModel extends CI_model
         $this->db->from('medios');
         if($tipo_medio !=""){
             $this->db->join($tipo_medio,'medios.id = '.$tipo_medio.'.id_medio', "inner");
+            $this->db->select("estados.nombre as nombre_estado");
+            $this->db->join("estados", "estados.id = ".$tipo_medio.".id_estado", "inner");
+            if($id_estado != "" || $id_estado != null){
+                $this->db->where($tipo_medio.'.id_estado', $id_estado);
+            }
         }else{
-            $this->db->join('espectaculares','medios.id = espectaculares.id_medio', "inner");
-            // $this->db->join($tipo_medio,'medios.id = '.$tipo_medio.'.id_medio');
-            // $this->db->join($tipo_medio,'medios.id = '.$tipo_medio.'.id_medio');
+            //  $this->db->join("espectaculares","medios.id = espectaculares.id_medio","outer");
+            //  $this->db->join("vallas_fijas","medios.id = vallas_fijas.id_medio","outer");
+            return false;
+            exit;
         }
           if($status != '' || $status != null){
             $this->db->where('medios.status', $status);
           }
-         if($id_estado != "" || $id_estado != null){
-             if($tipo_medio != ""){
-                $this->db->join("estados", "estados.id = ".$tipo_medio.".id_estado", "inner");
-                $this->db->where($tipo_medio.'.id_estado', $id_estado);
-             }else{
-                $this->db->join("estados","estados.id = espectaculares.id_estado", "inner");
-                 $this->db->where('espectaculares.id_estado', $id_estado);
-             }
-        }
         $sql = $this->db->get();
         if($sql){
             return $sql->result_array();
-        } else{
+        }else{
             return false;
         }
 
@@ -176,7 +173,7 @@ class MediosModel extends CI_model
 
     function eliminarMedio($id_medio){
         $sql = $this->db->delete('medios',array('id' => $id_medio));
-        if($this->db->simple_query($sql)){
+        if($sql){
             return true;
         }else{
             return false;

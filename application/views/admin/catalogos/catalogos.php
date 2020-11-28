@@ -18,14 +18,14 @@
                 <select name="tipoMedio" id="tipoMedio" class="form-control">
                     <option value="">Todos</option>
                     <option value="espectaculares">Espectacular</option>
-                    <option value="Valla_fija">Vallas fijas</option>
+                    <option value="Vallas_fijas">Vallas fijas</option>
                     <option value="Vallas_moviles">Vallas moviles</option>
                 </select>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="form-group">
+            <div class="form-group d-none"  id="divEstado">
                 <label for="estado">Estado</label>
                 <select name="estado" id="estado" class="form-control">
                     <option value="">Todos</option>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="form-group">
+            <div class="form-group d-none" id="divStatus">
                 <label for="status">Disponiblilidad</label>
                 <select name="status" id="status" class="form-control">
                     <option value="">Todos</option>
@@ -72,7 +72,7 @@
               <th scope="row"></th>
               <td><?=$medio['nocontrol']?></td>
               <td><?=$medio['tipo_medio']?></td>
-              <td><?=$medio['calle'] .', '.$medio['municipio']. ", " .$medio['nombre'] ?></td>
+              <td><?=$medio['calle'] .', '.$medio['municipio']. ", " .$medio['nombre_estado'] ?></td>
               <td><?= "$ ".$medio['monto']?></td>
               <td><?=$medio['status']?></td>
             </tr>
@@ -156,7 +156,7 @@ function rellenarTabla(data){
                     <td>1</td>
                     <td>${data[i]["nocontrol"]}</td>
                     <td>${data[i]["tipo_medio"]}</td>
-                    <td>${data[i]["calle"]} ${data[i]["municipio"]} ${data[i]["nombre"]}</td>
+                    <td>${data[i]["calle"]} ${data[i]["municipio"]} ${data[i]["nombre_estado"]}</td>
                     <td>$ ${data[i]["precio"]}</td>
                     <td>${data[i]["status"]}</td>
                 </tr>
@@ -168,6 +168,7 @@ function rellenarTabla(data){
 
 $("#btnObtenerCalatogos").click(function(e){
     e. preventDefault()
+    console.log(filtros);
     $.ajax({
         url:"catalogos/catalogoPdf",
         type: "post",
@@ -175,13 +176,26 @@ $("#btnObtenerCalatogos").click(function(e){
     })
     .done(function(response){
         // let res = JSON.parse(response);
-        // console.log(res)
+         console.log(res)
         console.log("ok")
 
     })
     .fail(function(err){
         console.log(err)
     })
+})
+
+
+$("#tipoMedio").change(function(e){
+    e.preventDefault()
+    if(this.value != ""){
+        $("#divEstado").removeClass("d-none")
+        $("#divStatus").removeClass("d-none")
+    }else{
+        $("#divEstado").addClass("d-none")
+        $("#divStatus").addClass("d-none")
+
+    }
 })
 
 </script>

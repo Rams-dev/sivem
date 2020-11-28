@@ -5,10 +5,10 @@
     <div class="d-flex">
         <input type="text" class="form-control mr-2" id="buscadorespactacular" name="buscadorespactacular" value=""
             placeholder="Busca espectacular">
-        <a class="btn btn-info " href="Javascript:BuscaEspectacular();" role="button">Buscar</a>&nbsp;
+        <a class="btn btn-info search" href="Javascript:BuscaEspectacular();" role="button"><i class="fas fa-search"></i><p> Buscar</p></a>&nbsp;
     </div>
     <div class="d-flex">
-        <a class="btn btn-warning btn" href="<?php echo base_url('admin/espectaculares/agregarEspectacular')?>" role="button">+ Nuevo Espectacular +</a>
+        <a class="btn btn-warning add" href="<?php echo base_url('admin/espectaculares/agregarEspectacular')?>" role="button"><i class="fas fa-plus"></i> <p>+ Nuevo Espectacular +</p></a>
     </div>
 </div>
 <div class="table-responsive-md" id="espectacularesContainer">
@@ -59,15 +59,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="">
         <div class="owl-carousel">
-          <div><img id="img1" class="img-responsive" alt=""></div>
-          <div><img id="img2" class="img-responsive" alt=""></div>
-          <div><img id="img3" class="img-responsive" alt=""></div>
+            <div><img id="img1" class="img-carousel" alt=""></div>
+            <div><img id="img2" class="img-carousel" alt=""></div>
+            <div><img id="img3" class="img-carousel" alt=""></div>
         </div>
-        
       </div>
-    </div>
   </div>
 </div>
 </div>
@@ -75,9 +72,7 @@
 <script>espectacularesit.classList.add("selected");</script>
 
 <script>
-$(document).ready(function(){
-  $("#table").DataTable()
-})
+
 
 $('.owl-carousel').owlCarousel({
     loop:true,

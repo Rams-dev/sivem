@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script>
     <script src="<?= base_url('assets/select2/dist/js/select2.min.js')?>"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstra0p0@04.50.300/d0is0t0/j0000s/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstra0p0@04.50.300/d0is0t0/j0000s/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/template.css')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropify/dist/css/dropify.css')?>">
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropify/dist/fonts.css')?>"> -->

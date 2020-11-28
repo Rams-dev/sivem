@@ -57,12 +57,11 @@ function agregarMunicipiosSelect(municipios){
         let res = JSON.parse(response)
          if(res.success){
              alertify.success(res.success)
+             $('#guardarespectacular')[0].reset();
          }
          if(res.error){
            alertify.error(error)
-       }
-         $('#guardarespectacular')[0].reset();
-
+         }
       })
       .fail(function(err){
         alertify.error(err)
@@ -117,6 +116,7 @@ let material = document.getElementById('material').value;
     precio.value= costototal
     console.log(costoimpresion)
 }
+
 
 /*-------------------------------------- E D I T A R   E S P E C T A C U L A R -----------------------------------------------------*/
 

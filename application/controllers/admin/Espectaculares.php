@@ -120,7 +120,7 @@ class Espectaculares extends CI_Controller {
 				echo json_encode(array('error' => 'no se pudo registrar el medio.'));
 				exit;
 			}else{	
-				if(!$idProp = $this->PropietariosModel->agregarPropietarioEspectacular($nombreprop,$celular,$telefono)){
+				if(!$idProp = $this->PropietariosModel->agregarPropietario($nombreprop,$celular,$telefono)){
 					echo json_encode(array('error', 'Fallo al agregar el espectacular'));
 				}else{
 					
@@ -283,17 +283,19 @@ class Espectaculares extends CI_Controller {
 
 			foreach($espectaculardata as $datosDeEspectaculares){
 				if($imagen1 != ''){
-					if(file_exists(base_url("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta']))){
+					if(file_exists("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta'])){
 						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta']);
 					}
 				 }
 				 if($imagen2 != ''){
-					if(file_exists(base_url("assets/images/espectaculares/". $datosDeEspectaculares['vista_media']))){
+					if(file_exists("assets/images/espectaculares/". $datosDeEspectaculares['vista_media'])){
+
 						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_media']);
 					}
 				 }
 				 if($imagen3 != ''){
-					if(file_exists(base_url("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta']))){
+					if(file_exists("assets/images/espectaculares/". $datosDeEspectaculares['vista_larga'])){
+
 						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_larga']);
 					}
 				 }
@@ -321,7 +323,7 @@ class Espectaculares extends CI_Controller {
 		   $telefono = intval(join('', explode('-',$this->input->post('telefono'))));
 				// echo json_encode(array($id_prop,$nombreprop,$celular,$telefono));
 				//  exit;
-		   if(!$edProp = $this->PropietariosModel->editarPropietarioEspectacular($id_prop, $nombreprop,$celular,$telefono)){
+		   if(!$edProp = $this->PropietariosModel->editarPropietario($id_prop, $nombreprop,$celular,$telefono)){
 			   echo json_encode(array('error', 'Fallo al agregar el espectacular'));
 		   }
 
