@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <script>
         const data = window.location.pathname;
-        const title = data.substr(1);
-        window.document.title = title.toUpperCase()+" | SIVEM";
+        let i = data.lastIndexOf("/");
+        let f = data.length;
+        let title = data.substring(i+1,f).toUpperCase();
+
+        window.document.title = title + " | SIVEM";
+        // console.log(title)
     </script>
+     <meta name="robots" content="noindex"/>
+     <meta name="robots" content="nofollow"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espectaculares | SIVEM</title>
+    <link rel="icon" href="<?= base_url("assets/images/logosis.png")?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= base_url('assets/select2/dist/css/select2.min.css')?>">
     <!-- jQuery and JS bundle w/ Popper.js -->

@@ -35,6 +35,15 @@
                 </select>
             </div>
         </div>
+
+        <div class="col-md-3">
+            <div class="form-group d-none"  id="divMunicipio">
+                <label for="municipio">Municipio</label>
+                <input type="text" id="municipio" name="municipio" class="form-control">
+               
+            </div>
+        </div>
+
         <div class="col-md-3">
             <div class="form-group d-none" id="divStatus">
                 <label for="status">Disponiblilidad</label>
@@ -46,9 +55,9 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-3 mt-4">
-            <div class="form-group">
-                <button type="submit"  formtarget="_blank" class="btn btn-info">Imprimir catalogo</button>
+        <div class="col-md-12">
+            <div class="d-flex col-md-3 justify-content-end ml-auto mt-4">
+                    <button type="submit"  formtarget="_blank" class="btn btn-info">Imprimir catalogo</button>
             </div>
         </div>
         </form>
@@ -104,9 +113,17 @@
         filtros.status = this.value;
         getData()
     })
+    $("#municipio").keyup(function(){
+        filtros.municipio = this.value;
+        getData();
+    })
 
 
     $('#tipoMedio').change(function(){
+        $("#estado").val("")
+        $("#status").val("")
+        filtros.status = "";
+        filtros.estado = "";
         filtros.tipomedio = this.value;
         getData()
     })
@@ -190,9 +207,11 @@ $("#tipoMedio").change(function(e){
     e.preventDefault()
     if(this.value != ""){
         $("#divEstado").removeClass("d-none")
+        $("#divMunicipio").removeClass("d-none")
         $("#divStatus").removeClass("d-none")
     }else{
         $("#divEstado").addClass("d-none")
+        $("#divMunicipio").addClass("d-none")
         $("#divStatus").addClass("d-none")
 
     }

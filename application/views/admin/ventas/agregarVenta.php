@@ -5,7 +5,7 @@
     <form method="POST" enctype="multipart/form-data" action="<?= base_url('admin/ventas/guardarVenta')?>" name="guardarventa"
         id="guardarventa">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                     <div class="form-group">
                             <label for="cliente">Cliente</label>
                             <select name="cliente" id="cliente" class="form-control" required>
@@ -16,12 +16,12 @@
                             </select>
                     </div>
             </div>
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
                     <div class="form-group">
                             <label for="tipoDeArte">Tipo de arte</label>
                             <input type="text" class="form-control" name="tipoDeArte" id="tipoDeArte">
                     </div>
-            </div>
+            </div> -->
             <div class="col-md-5">
             <div class="form-group">
                     <label for="fechaInicio">Fecha de inicio</label>
@@ -96,7 +96,7 @@
                             <select name="medio" id="medio" class="form-control">
                                     <option value="">Seleccione un medio</option>
                             </select>
-                            <div id="error" class="invalid-feedback"">
+                            <div id="error" class="invalid-feedback">
                             </div>
                     </div>
             </div>

@@ -90,8 +90,19 @@ class Ventas extends CI_Controller {
 
     function obtenerMedioPorId($id_medio){
         if($this->session->userdata('is_logged')){
-                $medio = $this->MediosModel->obtenerMediosPorId($id_medio);
+            $infoMedios =  $this->MediosModel->obtenerDatosMedioporId($id_medio);
+            if($infoMedios){
+            foreach($infoMedios as $info){
+                $medio = $this->MediosModel->obtenerMediosPorId($id_medio,$info['tipo_medio']);
+            }
+            if($medio){
                 echo json_encode($medio);
+            }
+            }else{
+                echo json_encode("No hay registros");
+
+            }
+             
         }else{
             redirect('login');
         }

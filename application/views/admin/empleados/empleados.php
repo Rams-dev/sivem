@@ -1,56 +1,58 @@
 <h1 class=" text-center">Empleados</h1>
-        <hr>
+<hr>
+
 <div class="d-flex justify-content-between my-4">
     <div class="d-flex">
-        <input type="text" class="form-control mr-2" id="buscadorcliente" name="buscadorcliente" value=""  placeholder="Busca empleado">
-        <a class="btn btn-info search " role="button"><i class="fas fa-search"></i><p> Buscar</p></a>&nbsp;
+        <input type="text" class="form-control mr-2 my-auto" id="buscadorcliente" name="buscadorcliente" value=""  placeholder="Busca empleado">
+        <a class="btn btn-info search d-inline" role="button"><i class="fas fa-search"></i><p> Buscar</p></a>&nbsp;
     </div>
-    <div class="d-flex">
+    <div class="d-inline">
         <a class="btn btn-warning add" role="button" data-toggle="modal" data-target="#modalAgregar"><i class="fas fa-plus"></i><p> + Nuevo Empleado +</p></a>
     </div>
 </div>
 <div class="table-responsive-md" id="espectacularesContainer">
-<table class="table" id="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>#</th>
-      <th>nombre</th>
-      <th>apellidos</th>
-      <th>sexo</th>
-      <th>correo</th>
-      <th>telefono</th>
-      <th>puesto</th>
-      <th>contraseña</th>
-      <th>tipo</th>
-      <th>Acceso</th>
-      <th>opciones</th>
-      
-    </tr>
-  </thead>
-  <tbody id="tableBody">
-      
-       <?php 
-      $index = 1;
-      foreach($empleados as $empleado):?>
-    <tr>
-      <th><?= $index?></th>
-      <th><?= $empleado['nombre']?></th>
-      <td><?= $empleado['apellidos']?></td>
-      <td><?= $empleado['sexo']?></td>
-      <td><?= $empleado['correo']?></td>
-      <td><?= $empleado['telefono']?></td>
-      <td><?= $empleado['puesto']?></td>
-      <td><?= $empleado['contrasena']?></td>
-      <td><?= $empleado['tipo'] == "1" ? "Administrador" : "Vendedor" ?></td>
-      <td><?= $empleado['acceso']  ?></td>
-      <td><button class="btn btn-warning btn-sm" role="button" data-toggle="modal" data-target="#modalEditar" onclick="EditarEmpleado(<?=$empleado['id']?>)" ><i class="fas fa-edit"></i></button>
-      <button class="btn btn-danger btn-sm"  onclick="eliminarEmpleado(<?=$empleado['id']?>)" ><i class="fas fa-trash"></i></button></td>
-    </tr>
-    <?php
-    $index++;
-    endforeach?> 
-  </tbody>
-</table>
+    <table class="table" id="table">
+    <thead class="thead-dark">
+        <tr>
+        <th>#</th>
+        <th>nombre</th>
+        <th>apellidos</th>
+        <th>sexo</th>
+        <th>correo</th>
+        <th>telefono</th>
+        <th>puesto</th>
+        <th>contraseña</th>
+        <th>tipo</th>
+        <th>Acceso</th>
+        <th>opciones</th>
+        
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        
+        <?php 
+        $index = 1;
+        foreach($empleados as $empleado):?>
+        <tr>
+        <th><?= $index?></th>
+        <th><?= $empleado['nombre']?></th>
+        <td><?= $empleado['apellidos']?></td>
+        <td><?= $empleado['sexo']?></td>
+        <td><?= $empleado['correo']?></td>
+        <td><?= $empleado['telefono']?></td>
+        <td><?= $empleado['puesto']?></td>
+        <td><?= $empleado['contrasena']?></td>
+        <td><?= $empleado['tipo'] == "1" ? "Administrador" : "Vendedor" ?></td>
+        <td><?= $empleado['acceso']  ?></td>
+        <td><button class="btn btn-warning btn-sm" role="button" data-toggle="modal" data-target="#modalEditar" onclick="EditarEmpleado(<?=$empleado['id']?>)" ><i class="fas fa-edit"></i></button>
+        <button class="btn btn-danger btn-sm"  onclick="eliminarEmpleado(<?=$empleado['id']?>)" ><i class="fas fa-trash"></i></button></td>
+        </tr>
+        <?php
+        $index++;
+        endforeach?> 
+    </tbody>
+    </table>
+</div>
 
 
 
@@ -277,5 +279,5 @@
     </div>
   </div>
 </div>
-
+<script>empleadosit.classList.add("selected");</script>
 <script src="<?= base_url('assets/js/empleados.js')?>"></script>

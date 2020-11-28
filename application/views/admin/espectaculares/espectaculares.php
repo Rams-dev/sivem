@@ -48,6 +48,7 @@
     endforeach?>
   </tbody>
 </table>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="imagenes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

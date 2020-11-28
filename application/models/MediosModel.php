@@ -48,7 +48,7 @@ class MediosModel extends CI_model
     //     }
     // }
 
-    public function getMediosHttp($id_estado ="",$status ="",$tipo_medio=""){
+    public function getMediosHttp($id_estado ="",$municipio ="",$status ="",$tipo_medio=""){
 
         // return array($id_estado,$status,$tipo_medio);
         // exit;
@@ -61,12 +61,17 @@ class MediosModel extends CI_model
             if($id_estado != "" || $id_estado != null){
                 $this->db->where($tipo_medio.'.id_estado', $id_estado);
             }
+            if($municipio != "" || $municipio != null){
+                $this->db->like($tipo_medio.'.municipio', $municipio,'both');
+            }
+         
         }else{
             //  $this->db->join("espectaculares","medios.id = espectaculares.id_medio","outer");
             //  $this->db->join("vallas_fijas","medios.id = vallas_fijas.id_medio","outer");
             return false;
             exit;
         }
+       
           if($status != '' || $status != null){
             $this->db->where('medios.status', $status);
           }
@@ -83,9 +88,9 @@ class MediosModel extends CI_model
         if($id_medio == '1'){
             $medio = 'espectaculares';
         }elseif($id_medio == '2'){
-            $medio = 'Vallas fijas';
+            $medio = 'vallas_fijas';
         }elseif($id_medio == '3'){
-            $medio = 'Vallas moviles';
+            $medio = 'vallas_moviles';
         }
         $this->db->select('*');
         $this->db->from($medio);
@@ -104,9 +109,9 @@ class MediosModel extends CI_model
         if($id_medio == '1'){
             $medio = 'espectaculares';
         }elseif($id_medio == '2'){
-            $medio = 'Vallas fijas';
+            $medio = 'vallas_fijas';
         }elseif($id_medio == '3'){
-            $medio = 'Vallas moviles';
+            $medio = 'vallas_moviles';
         }
         $this->db->select('*');
         $this->db->from($medio);
@@ -149,10 +154,26 @@ class MediosModel extends CI_model
 
     }
 
-    function obtenerMediosPorId($medios_id){
+    public function obtenerDatosMedioporId($id){
+        $sql = $this->db->get_where("medios",array("id" => $id));
+        if($sql){
+            return $sql->result_array();
+        }
+    }
+
+    function obtenerMediosPorId($medios_id,$tabla){
+        if($tabla == "valla_fija"){
+            $tabla = "vallas_fijas";
+        }
+        if($tabla == "Espectacular"){
+            $tabla = "Espectaculares";
+        }
+        if($tabla == "valla_movil"){
+            $tabla = "vallas_moviles";
+        }
         $this->db->select('*');
-        $this->db->from('espectaculares');
-        $this->db->join('medios', 'medios.id = espectaculares.id_medio','inner');
+        $this->db->from($tabla);
+        $this->db->join('medios', 'medios.id ='. $tabla.'.id_medio','inner');
         $this->db->where('medios.id', $medios_id);
         $sql= $this->db->get();
         return $sql->result_array();

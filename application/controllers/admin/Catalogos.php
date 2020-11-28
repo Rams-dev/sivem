@@ -47,18 +47,19 @@ class Catalogos extends CI_Controller {
 			$id_estado = $this->input->post('estado');
 			$status = $this->input->post('status');
 			$tipo_medio = $this->input->post('tipomedio');
+			$municipio = $this->input->post("municipio");
 			//   echo json_encode(array($id_estado, $status,$tipo_medio));
 			//  exit;
 
 		
-			if($id_estado == "" && $status == "" && $tipo_medio == "" ){
+			if($id_estado == "" && $municipio == "" && $status == "" && $tipo_medio == "" ){
 				$espectaculares = $this->EspectacularesModel->obtenerEspectaculares();
 				$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
 				// var_dump($vallas_fijas);
 				$datos = array_merge($espectaculares,$vallas_fijas);
 			}
 			else{
-				if(!$datos = $this->MediosModel->getMediosHttp($id_estado,$status,$tipo_medio)){
+				if(!$datos = $this->MediosModel->getMediosHttp($id_estado,$municipio,$status,$tipo_medio)){
 					echo json_encode("error");
 					exit;
 				}else{

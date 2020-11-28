@@ -1,3 +1,4 @@
+<div class="main">
 <nav class="navbar-horizontal ">
         <a class="navbar-horizontal__logo" href="#">
             <img src="<?php echo base_url('assets/images/logosis.svg')?>" alt="Sivem logo" loading="lazy">
@@ -25,10 +26,10 @@
                     <a href="<?= base_url('admin/espectaculares')?>" id="espectacularesit" class="">Espectaculares</a>
                     <a href="<?= base_url('admin/ventas')?>" id="ventasit" class="">Ventas</a>
                     <a href="<?= base_url("admin/vallas_fijas")?>" id="vallasit" class="">Vallas fijas</a>
-                    <a href="<?= base_url("admin/vallas_moviles")?>" id="vallasmovilesit" class="">Vallas Moviles</a>
+                    <!-- <a href="<?= base_url("admin/vallas_moviles")?>" id="vallasmovilesit" class="">Vallas Moviles</a> -->
                 </ul>
-
                 <ul class="sidenav__ul user ">
+                    <hr class="bg-white">
                     <a href="<?= base_url('admin/perfil')?>" class="useron"><?= $this->session->userdata("nombre")?></a>
                     <a href="<?= base_url('login/logout')?>" class="username">Cerrar Sesión</a>
                 </ul>
