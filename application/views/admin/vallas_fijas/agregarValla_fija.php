@@ -1,7 +1,7 @@
 <h1 class="text-center" style="color:#ba0d0d;">Nueva Valla</h1>
     <hr>
 
-    <?php var_dump($periodos_pago) ?>
+    <!-- <?php var_dump($periodos_pago) ?> -->
     <div class="col-lg-12">
         <form method="POST" enctype="multipart/form-data" action="<?= base_url("admin/vallas_fijas/guardarVallaFija")?>" name="guardarVallaFija" id="guardarVallaFija">
                 <h6 class="text-center"> Datos de la valla </h6>

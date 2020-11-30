@@ -112,7 +112,6 @@ class Ventas extends CI_Controller {
     function guardarVenta(){
         if($this->session->userdata('is_logged')){
         $id_cliente = $this->input->post('cliente');
-        $tipoArte = $this->input->post('tipoDeArte');
         $fechaInicio = $this->input->post('fechaInicio');
         $fechaTermino = $this->input->post('fechaTermino');
         $noPagos = $this->input->post('pagos');
@@ -151,7 +150,7 @@ class Ventas extends CI_Controller {
         }
         //var_dump($sql);
         for($m = 0; $m < count($idsMedios); $m++){
-            if(!$query = $this->VentasModel->agregarVentaMedio($sql,$idsMedios[$m],$noPagos,$tipoPago,$fechaInicio,$fechaTermino,$tipoArte)){
+            if(!$query = $this->VentasModel->agregarVentaMedio($sql,$idsMedios[$m],$noPagos,$tipoPago,$fechaInicio,$fechaTermino)){
                 echo json_encode(array('error'=> 'error, intentalo mas tarde.'));
                 $this->VentasModel->eliminarVenta($sql);
             }else{

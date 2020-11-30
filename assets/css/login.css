@@ -1,4 +1,6 @@
 body{
+    /* background-image: url("../images/bg.jpg");
+    background-size: cover; */
     background-color: #364150;
 }
 
@@ -8,4 +10,16 @@ form{
 
 .responsive{
     width: 400px;
+}
+
+.foot>p{
+    font-size: 12px;
+    text-align: center;
+}
+
+@media (max-width: 450px) {
+    .foot>p{
+        font-size: 9px;
+        text-align: center;
+    }   
 }

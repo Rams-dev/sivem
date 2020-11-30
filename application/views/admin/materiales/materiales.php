@@ -8,13 +8,13 @@
         <a class="btn btn-info search " href="" role="button"><i class="fas fa-search"></i> <p> Buscar</p></a>&nbsp;
     </div>
     <div class="d-flex">
-        <button class="btn btn-warning add" data-toggle="modal" data-target="#agregarMaterial" type="button"> <i class="fas fa-plus"></i>
-<p> + Nuevo Material +</p></button>
+        <a class="btn btn-warning add" data-toggle="modal" data-target="#agregarMaterial" type="button"> <i class="fas fa-plus"></i>
+<p> + Nuevo Material +</p></a>
     </div>
 </div>
 <div class="table-responsive-md" id="espectacularesContainer">
     <table class="table table-hover">
-        <thead>
+        <thead class="thead-dark">
             <tr>
             <th scope="col">Id</th>
             <th scope="col">Nombre</th>

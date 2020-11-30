@@ -3,7 +3,7 @@
 <h1 class="text-center" style="color:#ba0d0d;">Editar <?=$valla['nocontrol']?> </h1>
     <hr>
 
-    <?php var_dump($vallas_fijas) ?>
+    <!-- <?php var_dump($vallas_fijas) ?> -->
     <div class="col-lg-12">
         <form method="POST" enctype="multipart/form-data" action="<?= base_url("admin/vallas_fijas/guardarVallaFijaEditada")?>" name="editarVallaFija" id="editarVallaFija">
                 <h6 class="text-center"> Datos de la valla </h6>

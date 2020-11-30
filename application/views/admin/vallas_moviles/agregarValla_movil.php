@@ -6,43 +6,35 @@
 
 <form action="<?=base_url("admin/vallas_moviles/guardarValla_movil")?>" id="guardarValla_movil" method="post">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="noControl">No control</label>
                 <input type="text" name="nocontrol" id="nocontrol" class="form-control">
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="marca">Marca</label>
                 <input type="text" name="marca" id="marca" class="form-control">
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="Modelo">Modelo</label>
                 <input type="text" name="modelo" id="modelo" class="form-control">
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="anio">Año</label>
                 <input type="text" name="anio" id="anio" class="form-control">
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="roadShow">Roadshow</label>
-                <select name="roadShow" id="roadShow" class="form-control">
-                <option value="no">No aplica</option>
-                <option value="si">Si aplica</option>
-            </select>
-            </div>
-        </div>
-        <div class="col-md-4">
+
+        <div class="col-md-2">
             <div class="form-group">
                 <label for="costo">Costo</label>
-                <input type="text" name="costo" id="costo" class="form-control">
+                <input type="text" name="costo" id="costo" value="$ 25000" class="form-control" readonly>
             </div>
         </div>
     </div>
@@ -111,37 +103,7 @@
                     </div>
                 </div>
             </div>
-
-        
-            <h5 class="text-center my-4">Escenario road</h5>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="anchoER">Ancho(m)</label>
-                        <input type="text" name="anchoER" id="anchoER" class="form-control form-control-sm">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="altoER">Alto(m)</label>
-                        <input type="text" name="altoER" id="altoER" class="form-control form-control-sm">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="materialER">Material</label>
-                        <select name="materialER" id="materialER" class="form-control form-control-sm">
-                        <option value="">Sel. Material</option>
-                                <?php foreach($materiales as $material):?>
-                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
-                                 <?php endforeach ?> 
-                        </select>
-                    </div>
-                </div>
-            </div>
         </div>
-
-
 
         <!------------------------------------------------------ leftSide -------------------------------------->
   
@@ -191,34 +153,6 @@
                     <div class="form-group">
                         <label for="materialFrente">Material</label>
                         <select name="materialFrente" id="materialFrente" class="form-control form-control-sm">
-                        <option value="">Sel. Material</option>
-                                <?php foreach($materiales as $material):?>
-                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
-                                 <?php endforeach ?> 
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-        
-            <h5 class="text-center my-4">Faldon road</h5>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="anchoFR">Ancho(m)</label>
-                        <input type="text" name="anchoFR" id="anchoFR" class="form-control form-control-sm">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="altoFR">Alto(m)</label>
-                        <input type="text" name="altoFR" id="altoFR" class="form-control form-control-sm">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="materialFR">Material</label>
-                        <select name="materialFR" id="materialFR" class="form-control form-control-sm">
                         <option value="">Sel. Material</option>
                                 <?php foreach($materiales as $material):?>
                                 <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>

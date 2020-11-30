@@ -1,10 +1,10 @@
 <div class="main">
-<nav class="navbar-horizontal ">
+<nav class="navbar-horizontal " id="nav-horizontal">
         <a class="navbar-horizontal__logo" href="#">
             <img src="<?php echo base_url('assets/images/logosis.svg')?>" alt="Sivem logo" loading="lazy">
         </a>
-        <ul class="navbar-horizontal_ul ml-auto" id=menu >
-            <li class="navbar-horizontal_li" > <a >MENU <i class="fas fa-bars"></i> </a></li>
+        <ul class="navbar-horizontal_ul ml-auto" >
+            <li class="navbar-horizontal_li" id=menu > <a >MENU <i class="fas fa-bars"></i> </a></li>
         </ul>
         <ul class="navbar-horizontal_ul ml-auto" id="user__nav_horizontal">
             <li class="navbar-horizontal_li"><a href="<?= base_url('admin/perfil')?>"><i class="fas fa-user"></i>  <?= $this->session->userdata("nombre")?> </a></li>
@@ -13,7 +13,7 @@
 </nav>
 <div class="col-lg-12">
     <div class="row">
-        <div class="col-lg-2 col-md-2"   >
+        <div class="col-lg-2 col-md-2 col-xl-1"   >
             <div class="sidenav">
                 <hr class="linea_oscura">
                 <hr class="linea_blanca">
@@ -21,7 +21,7 @@
                     <a href="<?php echo base_url('admin/dashboard') ?>" id="indexit" class="">Dashboard</a>
                     <a href="<?= base_url('admin/clientes')?>" id="clientesit" class="">  Clientes</a>
                     <a href="<?= base_url('admin/catalogos')?>" id="catalogosit" class="">Catálogos</a>
-                    <a href="<?= base_url('admin/empleados')?>"id="empleadosit" class="">Empleados</a>
+                    <!-- <a href="<?= base_url('admin/empleados')?>"id="empleadosit" class="">Empleados</a> -->
                     <a href="<?= base_url('admin/materiales')?>" id="materialesit" class="">Materiales</a>
                     <a href="<?= base_url('admin/espectaculares')?>" id="espectacularesit" class="">Espectaculares</a>
                     <a href="<?= base_url('admin/ventas')?>" id="ventasit" class="">Ventas</a>
@@ -36,7 +36,7 @@
             
             </div>
         </div>
-        <div class="col-lg-10 col-md-10">
+        <div class="col-lg-10 col-md-10 col-xl-11 mt-5">
         <!-- <nav class="navbar navbar-dark navbar-lg bg-dark">
                 <a class="navbar-brand" href="#">
                     <img src="<?php echo base_url('assets/images/logosis.svg')?>" width="100" height="30" class="d-inline-block align-top" alt="" loading="lazy">
@@ -46,11 +46,3 @@
                 </ul>
             </nav> -->
             <div class="container mt-4">
-
-
-            <script>
-                $("#menu").click(function(e){
-                    e.preventDefault();
-                    $(".sidenav").toggle("800")
-                })
-            </script>

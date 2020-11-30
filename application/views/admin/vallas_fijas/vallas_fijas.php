@@ -1,6 +1,18 @@
 <h1 class=" text-center">Vallas</h1>
                 <hr>
-                <?php var_dump($vallas_fijas);?>
+
+                <?php
+if(empty($vallas_fijas)){?>
+  <div class="no-data">
+    <img src="<?= base_url("assets/images/404.jpg")?>" alt="sin-archivos" class="no-data__image">
+    <div class="text-center">
+      <h3 class="text-center text-info">AÚN NO EXISTEN REGISTROS DE VALLAS FIJAS</h3>
+      <a class="btn btn-warning add" href="<?= base_url("admin/vallas_fijas/agregarVallaFija")?>" role="button"><i class="fas fa-plus"></i> <p>+ Agregar Valla +</p></a>
+
+    </div>
+  </div>
+<?php }else{
+?>
         <div class="d-flex justify-content-between my-4">
             <div class="d-flex">
                 <input type="text" class="form-control mr-2" id="buscadorValla" name="buscadorValla" value=""  placeholder="Buscar Valla">
@@ -73,7 +85,6 @@
 </div>
 </div>
 <script src="<?= base_url('assets/js/vallas_fijas.js')?>"></script>
-<script>vallasit.classList.add("selected");</script>
 
 <script>
 
@@ -123,3 +134,6 @@ function imagesEspecatulares(id){
 $('#monto').mask('000000');
 
 </script>
+
+<?php } ?>
+<script>vallasit.classList.add("selected");</script>

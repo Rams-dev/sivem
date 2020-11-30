@@ -22,22 +22,22 @@
 
 <body>
 
-<div class="container">
+<div class="container mt-2">
     <div class="mx-auto mt-5 align-items-center">
-        <div class="text-center">
-            <img src="<?= base_url('assets/images/logosis.svg')?>" alt="Logo sivem" class="responsive image">
+        <div class="d-flex justify-content-center">
+            <img src="<?= base_url('assets/images/logosis.svg')?>" alt="Logo sivem" class="responsive">
         </div>
-        <div class="col-md-5 mx-auto my-5">
+        <div class="col-md-6 col-lg-4 col-sm-8 mx-auto my-4">
             <form action="<?= base_url("login/validate")?>" id="loginForm" method="POST" class="p-4">
                 <h3 class="text-center mb-4" >Iniciar sesion</h3>
-                    <div class="col-md-10 mx-auto">
+                    <div class="col-md-12 mx-auto">
                             <div class="form-group" id="correo">
                                 <label for="correo">Correo electrónico</label>
                                 <input type="email" name="correo" class="form-control" id="correo" autofocus aria-describedby="emailHelp">
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="col-md-10 mx-auto">
+                    <div class="col-md-12 mx-auto">
                         <div class="form-group" id="contrasena">
                             <label for="exampleInputPassword1">Contraseña</label>
                             <input type="password" name="contrasena" id="contrasena" class="form-control">
@@ -45,8 +45,11 @@
                     </div>
                     
                     <div class="form-group mt-3">
-                        <button type="submit" class="btn btn-primary btn-block ">Login</button><br>
+                        <button type="submit" class="btn btn-primary btn-block ">Iniciar sesion</button><br>
                         <div id="alert"></div>
+                    </div>
+                    <div class="foot">
+                            <p>© 2019. TODOS LOS DERECHOS RESERVADOS.</p>
                     </div>                 
             </form> 
         </div>            

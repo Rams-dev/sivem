@@ -19,7 +19,7 @@
         <th>apellidos</th>
         <th>sexo</th>
         <th>correo</th>
-        <th>telefono</th>
+        <th>telÉfono</th>
         <th>puesto</th>
         <th>contraseña</th>
         <th>tipo</th>

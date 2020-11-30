@@ -105,5 +105,14 @@ class Catalogos extends CI_Controller {
 		}
 	}
 	
+
+	// function noControlExiste(){
+	// 	$NC = $this->input->post();
+	// 	if($data = $this->MediosModel->noControlExiste($NC['nc'])){
+	// 		if(count($data)>0){
+	// 			echo json_encode("error" => "El número de control ingresado ya existe")
+	// 		}
+	// 	}
+	// }
 	
 }

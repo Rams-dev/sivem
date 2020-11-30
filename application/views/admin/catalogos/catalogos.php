@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-center">CÁTALOGOS</h1>
+    <h1 class="text-center">CATÁLOGOS</h1>
 
     <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
         <h1 class="display-4 text-center">IMPORTANTE <i class="fas fa-exclamation"></i></h1>
@@ -70,9 +70,9 @@
               <th scope="col">#</th>
               <th scope="col">N* control</th>
               <th scope="col">Tipo</th>
-              <th scope="col">Ubicacion</th>
+              <th scope="col">Ubicación</th>
               <th scope="col">Precio</th>
-              <th scope="col">Estatus</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody id="mediosdata">
@@ -170,7 +170,7 @@ function rellenarTabla(data){
           console.log(data[i])
            mediosData.innerHTML += `
                 <tr>
-                    <td>1</td>
+                    <td>${i+1}</td>
                     <td>${data[i]["nocontrol"]}</td>
                     <td>${data[i]["tipo_medio"]}</td>
                     <td>${data[i]["calle"]} ${data[i]["municipio"]} ${data[i]["nombre_estado"]}</td>

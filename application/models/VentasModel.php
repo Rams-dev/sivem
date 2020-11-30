@@ -55,7 +55,7 @@ class VentasModel extends CI_model
 		}
 	}
 
-	public function agregarVentaMedio($idVenta, $medio,$noPagos,$tipoPago,$fechaInicio,$fechaTermino,$tipoArte){
+	public function agregarVentaMedio($idVenta, $medio,$noPagos,$tipoPago,$fechaInicio,$fechaTermino){
 		$data = array(
 			'id_medio' => $medio,
 			'id_venta' => $idVenta,
@@ -63,7 +63,6 @@ class VentasModel extends CI_model
 			'tipo_pago' => $tipoPago,
 			'fecha_inicio_contrato' => $fechaInicio,
 			'fecha_termino_contrato' => $fechaTermino,
-			'tipo_de_arte' => $tipoArte
 
 		);
 		$sql = $this->db->insert('venta_medios',$data);

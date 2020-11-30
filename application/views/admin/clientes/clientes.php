@@ -4,10 +4,10 @@
     <div class="d-flex justify-content-between my-4">
         <div class="d-flex">
             <input type="text" class="form-control mr-2" id="buscadorValla" name="buscadorValla" value=""  placeholder="Buscar Valla">
-            <a class="btn btn-info " href="Javascript:BuscaValla();" role="button">Buscar</a>&nbsp;
+            <a class="btn btn-info search " href="Javascript:BuscaValla();" role="button"><i class="fas fa-search"></i><p> Buscar</p></a>&nbsp;
         </div>
         <div class="d-flex">
-            <a class="btn btn-warning btn" href="<?= base_url('admin/clientes/agregarcliente')?>" role="button">+ Nuevo Cliente +</a>
+            <a class="btn btn-warning btn add" href="<?= base_url('admin/clientes/agregarcliente')?>" role="button"><i class="fas fa-plus"></i><p> + Nuevo Cliente +</p></a>
         </div>
     </div>
     <div class="table-responsive-lg" id="clientesContainer">
@@ -21,13 +21,12 @@
         <th>Colonia</th>
         <th>Población</th>
         <th>Estado</th>
-        <th>cp</th>
+        <th>Cp</th>
         <th>Encargado</th>
         <th>Puesto</th>
         <th>Teléfono</th>
-        <th>correo</th>
-        <th>editar</th>
-        <th>eliminar</th>
+        <th>Correo</th>
+        <th>Opciones</th>
         </tr>
     </thead>
     <tbody>
@@ -48,8 +47,9 @@
         <td><?=$cliente['puesto']?></td>
         <td><?=$cliente['telefono']?></td>
         <td><?=$cliente['correo']?></td>
-        <td><a href="<?= base_url('admin/clientes/editarCliente/'.$cliente['id'])?>" class="btn btn-warning">editar</button></td>
-        <td><button value ="<?= $cliente['id']?>" href="<?= base_url('admin/clientes/elimiarCliente/'.$cliente['id'])?>" class="btn btn-danger delete" >eliminar</button></td>
+        <td>
+        <a href="<?= base_url('admin/clientes/editarCliente/'.$cliente['id'])?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> </a>
+        <a value ="<?= $cliente['id']?>" href="<?= base_url('admin/clientes/elimiarCliente/'.$cliente['id'])?>" class="btn btn-danger btn-sm delete" ><i class="fas fa-trash"></i></a></td>
     </tr>
         <?php $i++;
          endforeach?>
