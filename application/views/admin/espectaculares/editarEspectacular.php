@@ -13,7 +13,6 @@
             <h6> Datos del espectacular: </h6>
             <hr>
             <div class="row">
-
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="numcontrol"> #Control: </label>
@@ -156,11 +155,12 @@
                         <label for="status"> Status: </label>
                         <select class="form-control" id="status" name="status" value="" >
                         <option value="<?= $espectacular['status']?>"><?= $espectacular['status']?> </option>
-                            <option value="Disponible">Disponible</option>
-                            <option value="Ocupado">Ocupado</option>
-                            <option value="Apartado">Apartado</option>
-                            <option value="Reparacion">Reparacion</option>
-                            <option value="Bloqueado">Bloqueado</option>
+                        <option value="">Sel. Status</option>
+                        <option value="DISPONIBLE">DISPONIBLE</option>
+                        <option value="OCUPADO">OCUPADO</option>
+                        <option value="APARTADO">APARTADO</option>
+                        <option value="REPARACIÓN">REPARACIÓN</option>
+                        <option value="BLOQUEADO">BLOQUEADO</option>
                         </select>
                     </div>
                 </div>

@@ -200,4 +200,20 @@ class MediosModel extends CI_model
             return false;
         }
     }
+
+    function cambiarStatusApartadoAOcupado($id_medio){
+        $data = array(
+            "status"=> "OCUPADO"
+        );
+        $this->db->where("id",$id_medio);
+        $this->db->update("medios", $data);
+    }
+
+    function cambiarStatusOcupadoADisponible($id_medio){
+        $data = array(
+            "status"=> "DISPOBIBLE"
+        );
+        $this->db->where("id",$id_medio);
+        $this->db->update("medios", $data);
+    }
 }

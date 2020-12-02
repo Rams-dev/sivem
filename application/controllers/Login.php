@@ -61,7 +61,6 @@ class Login extends CI_Controller {
 		$vars = array('id','tipo','nombre','apellidos','correo','is_logged');
 		$this->session->unset_userdata($vars);
 		$this->session->sess_destroy();
-
 		redirect('login');
 	}
 

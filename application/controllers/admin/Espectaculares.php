@@ -74,6 +74,8 @@ class Espectaculares extends CI_Controller {
 			 $folio = $this->input->post('folio');
 			 $tipopago = $this->input->post('tipopago');
 			 $periodopago = $this->input->post('periodopago');
+			 echo json_encode($status);
+			 exit;
 
 
 			$config['upload_path'] = "./assets/images/espectaculares";
@@ -86,27 +88,21 @@ class Espectaculares extends CI_Controller {
 				$imagen1 = $data['upload_data']['file_name'];
 			}else{
 				echo json_encode("no se subio la imagen1");
-
 			}
-				
 
 			if($this->upload->do_upload('imagen2')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
 				$imagen2 = $data['upload_data']['file_name'];
-
 			}else{
 				echo json_encode("no se subio la imagen2");
-
 			}
 
 			if($this->upload->do_upload('imagen3')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
 				$imagen3 = $data['upload_data']['file_name'];
-
 			}else{
-
 				echo json_encode("no se subio la imagen3");
 			}
 

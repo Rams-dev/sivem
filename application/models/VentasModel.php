@@ -82,4 +82,22 @@ class VentasModel extends CI_model
 			return false;
 		}
 	}
+
+	public function obtenerVenta_mediosPorFechaInicio($date){
+		$sql = $this->db->get_where("venta_medios",array("fecha_inicio_contrato" => $date));
+		if($sql){
+			return $sql->result_array();
+		}else{
+			return false;
+		}
+	}
+
+	public function obtenerVenta_mediosPorFechaTermino($date){
+		$sql = $this->db->get_where("venta_medios",array("fecha_inicio_contrato" => $date));
+		if($sql){
+			return $sql->result_array();
+		}else{
+			return false;
+		}
+	}
 }

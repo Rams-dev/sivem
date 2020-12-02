@@ -116,14 +116,14 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="ancho"> Ancho(m): </label>
+                        <label for="ancho"> Base(m): </label>
                         <input type="text" class="form-control" id="ancho" name="ancho"  step="any" onblur="CalculaPrecio();">
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="alto"> Alto(m): </label>
+                        <label for="alto"> Altura(m): </label>
                         <input type="text" class="form-control" id="alto" name="alto"  step="any" onblur="CalculaPrecio();">
                     </div>
                 </div>
@@ -149,15 +149,14 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="status"> Status: </label>
-                        <select class="form-control" id="status" name="status" value="" >
+                        <label for="stats"> Status: </label>
+                        <select name="status" id="status" class="form-control">
                             <option value="">Sel. Status</option>
-                            <option value="Disponible">Disponible</option>
-                            <option value="Ocupado">Ocupado</option>
-                            <option value="Apartado">Apartado</option>
-                            <option value="Reparacion">Reparacion</option>
-                            <option value="Bloqueado">Bloqueado</option>
-                            
+                            <option value="DISPONIBLE">DISPONIBLE</option>
+                            <option value="OCUPADO">OCUPADO</option>
+                            <option value="APARTADO">APARTADO</option>
+                            <option value="REPARACIÓN">REPARACIÓN</option>
+                            <option value="BLOQUEADO">BLOQUEADO</option>
                         </select>
                     </div>
                 </div>
@@ -287,3 +286,7 @@
 
 <script>espectacularesit.classList.add("selected");</script>
 <script src="<?=base_url('assets/js/espectaculares.js') ?>"></script>
+<script>
+const w = document.querySelector("#status");
+    w.addEventListener("change", ()=> console.log(this.value))
+</script>

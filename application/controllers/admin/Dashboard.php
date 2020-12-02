@@ -5,23 +5,35 @@ class Dashboard extends CI_Controller {
 
 	public function __Construct(){
 		parent::__Construct();
-//		$this->load->model('Menus');
+		$this->load->model('MediosModel');
+		$this->load->model('VentasModel');
 
 	}
 	public function index()
 	{
 		if($this->session->userdata('is_logged')){
+			$date = date("Y-m-d");
+			$apartados = $this->VentasModel->obtenerVenta_mediosPorFechaInicio($date);
 
-		// $this->load->view('template/__head');
-		$this->load->view('admin/templates/__head');
-		$this->load->view('admin/templates/__nav');
-		$this->load->view('admin/dashboard');
-		$this->load->view('admin/templates/__footer');
+			for($i=0; $i<count($apartados); $i++){
+				$this->MediosModel->cambiarStatusApartadoAOcupado($apartados[$i]["id_medio"]);		
+			}
 
-	//	$this->load->view('template/__footer');
+			$ocupados = $this->ventasModel->obtenerVenta_mediosPorFechaTermino($date);
+			for($o=0; $o<count($apartados); $o++){
+				$this->MediosModel->cambiarStatusOcupadoADisponible($ocupados[$o]["id_medio"]);		
+			}
+
+			var_dump($apartados);
+
+			$this->load->view('admin/templates/__head');
+			$this->load->view('admin/templates/__nav');
+			$this->load->view('admin/dashboard');
+			$this->load->view('admin/templates/__footer');
 		}else{
 			redirect('login');
 		}
 		
 	}
+
 }

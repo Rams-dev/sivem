@@ -13,7 +13,7 @@ $('#estadoselect').change(function(e){
 estadoSelect.addEventListener('change', function(e){
     e .preventDefault()
     let estado = this.value.split(',');
-    estado = estado[1]
+    estado = estado[1].replace(/[\u0300-\u036f]/g, "");
     console.log(estado)
     obtenerMunicipios(estado)
 })
@@ -49,7 +49,7 @@ function agregarMunicipiosSelect(municipios){
           type:$("#guardarespectacular").attr("method"),
           data: formdata,
           cache: false,
-          contentType: false,
+        //   contentType: false,
           processData: false,
       })
       .done(function(response){
@@ -128,7 +128,7 @@ $("#editarespectacular").submit(function(e){
               type: $("#editarespectacular").attr("method"),  
               data: formdata,
               cache: false,
-              contentType: false,
+            //   contentType: false,
               processData: false,
               })
               .done(function(response){

@@ -72,8 +72,8 @@ class Vallas_fijas extends CI_Controller {
             $propietario = $this->input->post("propietario");
             if($propietario == "nuevo"){
                 $nombreprop = $this->input->post("nombreprop");
-                $celular = intval(join("",implode("-",$this->input->post("celular"))));
-                $telefono = intval(join("",implode("-",$this->input->post("telefono"))));
+                $celular = intval(join("",explode("-",$this->input->post("celular"))));
+                $telefono = intval(join("",explode("-",$this->input->post("telefono"))));
             }else{
                 $propietarioReg = $this->input->post("propietarioReg");
                 $dataPropietario = $this->PropietariosModel->obtenerPropietarioPorId($propietarioReg);
@@ -178,11 +178,16 @@ class Vallas_fijas extends CI_Controller {
             $id_medio = $this->input->post();
             $vallas = $this->Vallas_fijasModel->obtenerVallasPorIdMedio($id_medio['id']);
             foreach($vallas as $va){
+                $id_prop = $va['id_propietario'];
                 unlink("assets/images/vallas_fijas/". $va['vista_corta']);
                 unlink("assets/images/vallas_fijas/". $va['vista_media']);
                 unlink("assets/images/vallas_fijas/". $va['vista_larga']);
             }
           
+            if(!$this->PropietariosModel->eliminarPropietario($id_prop)){
+                echo json_encode(array("error" => "no se pudo eliminar los datos del propietario"));
+                exit;
+            }
             if(!$res1 = $this->MediosModel->eliminarMedio($id_medio['id'])){    
                 echo json_encode(array("error" => "intenta mas tarde"));
                 exit;

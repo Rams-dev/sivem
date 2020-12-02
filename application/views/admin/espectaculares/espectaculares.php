@@ -33,6 +33,7 @@ if(empty($espectaculares)){?>
       <th>Municipio</th>
       <th>Localidad</th>
       <th>Precio</th>
+      <th>medidas</th>
       <th>Status</th>
       <th>Opciones</th>
       
@@ -50,6 +51,7 @@ if(empty($espectaculares)){?>
       <td><?= $espectacular['municipio']?></td>
       <td><?= $espectacular['localidad']?></td>
       <td><?= $espectacular['precio']?></td>
+      <td><?= $espectacular['ancho'] . "m x ". $espectacular['alto']."m"?></td>
       <td><?= $espectacular['status']?></td>
       <td><button class="btn btn-info btn-sm" onclick="imagesEspecatulares(<?=$espectacular['id']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>
       <a href="<?= base_url('admin/espectaculares/editarEspectacular/'.$espectacular['id'])?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>

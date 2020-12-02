@@ -1,7 +1,7 @@
 <h1 class=" text-center">Ventas</h1>
 <hr>
 
-<!-- <?php var_dump($ventas)?> -->
+ <?php var_dump($ventas)?> 
 <div class="d-flex justify-content-between my-4">
     <div class="d-flex">
         <input type="text" class="form-control mr-2" id="buscadorVentas" name="buscadorVentas" value=""
@@ -24,6 +24,7 @@
       <th scope="col">Telefono</th>
       <th scope="col">Vendido por</th>
       <th scope="col">Fecha de venta</th>
+      <th scope="col">Monto total</th>
       <!-- <th>editar</th>
       <th>eliminar</th> -->
     </tr>
@@ -41,6 +42,7 @@
       <td><?=$venta['telefono']?></td>
       <td><?=$venta['vendedor']?></td>
       <td><?=$venta['fecha_venta']?></td>
+      <td>$<?=$venta['monto_total']?></td>
 
       <!-- <td><a href="" class="btn btn-warning">editar</button></td>
       <td><button class="btn btn-danger" >eliminar</button></td> -->

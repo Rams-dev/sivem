@@ -8,6 +8,7 @@
     <li> CREAR, MODIFICAR, ELIMINAR CLIENTES</li>
     <li> REALIZAR VENTAS</li>
     <li> GENERAR CATALOGOS (espectaculares)</li>
+    <li> hola</li>
     </ul>
 
     <p>Es importante hacerme llegar sus comentarios, cosas que puedo agregar o igual que esteen demas</p>

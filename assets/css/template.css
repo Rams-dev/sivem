@@ -7,278 +7,285 @@
 input{
   text-transform: uppercase;
 }
+
 #menu {
-    display: none;
-  }
-  .fas{
-    margin: 0px 4px;
-  }
-  
-  
-  .icoMenu{
-    display: none!important;
-  }
-  
-  .navbar-horizontal{
-    
-    display: flex;
-    align-items: center;
-    background: #2B3643;
-    width: 100%;
-    height: 60px;
-    position: fixed; 
-    z-index: 100;
-  }
+  display: none;
+}
 
-  .navbar-horizontal__logo > img{
+.fas{
+  margin: 0px 4px;
+}
 
-    width: 150px;
-    height: 60px;
-  }
- 
-  .navbar-horizontal_ul{
-    display: flex;
-    list-style: none;
-    margin-top: auto;
-    margin-bottom: auto;
 
-  }
+.icoMenu{
+  display: none!important;
+}
 
-  .navbar-horizontal_li{
-    color: #fff;
-    margin: 0px 4px;
-    text-decoration: none!important;
+.navbar-horizontal{  
+  display: flex;
+  align-items: center;
+  background: #2B3643;
+  width: 100%;
+  height: 60px;
+  position: fixed; 
+  z-index: 100;
+}
 
-  }
+.navbar-horizontal__logo > img{
 
-  .navbar-horizontal_li > a{
-    padding: 6px 8px;
-    text-decoration: none;
-    color: #fff;
-    /* border: 1px solid #fff;  */
-    border-radius: 20px;
-    font-size: 15px;
-  }
+  width: 150px;
+  height: 60px;
+}
+
+.navbar-horizontal_ul{
+  display: flex;
+  list-style: none;
+  margin-top: auto;
+  margin-bottom: auto;
+
+}
+
+.navbar-horizontal_li{
+  color: #fff;
+  margin: 0px 4px;
+  text-decoration: none!important;
+
+}
+
+.navbar-horizontal_li > a{
+  padding: 6px 8px;
+  text-decoration: none;
+  color: #fff;
+  /* border: 1px solid #fff;  */
+  border-radius: 20px;
+  font-size: 15px;
+}
 
   /* .navbar-horizontal_li > a:hover{
     background-color: #dc0d0d;
   } */
 
-  .linea_oscura{
-    display: none;
-    background-color: black;
+.linea_oscura{
+  display: none;
+  background-color: black;
+
+}
+
+.linea_blanca{
+  display: none;
+  background-color: white;
+
+}
+
+.sidenav {
+  height: 100vh; /* Full-height: remove this if you want "auto" height */
+  width: 166.66666%; /* Set the width of the sidebar */
+  max-width: 16.666667%; 
+  position: fixed; 
+  top: 60px; 
+  left: 0;
+  background-color: #2B3643;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  font-family: "Lato", sans-serif;
 
   }
-
-  .linea_blanca{
-    display: none;
-    background-color: white;
-
-  }
-
-  .sidenav {
-    height: 100vh; /* Full-height: remove this if you want "auto" height */
-    width: 100%; /* Set the width of the sidebar */
-     max-width: 16.666667%; 
-    position: fixed; 
-    top: 60px; 
-    left: 0;
-    background-color: #2B3643;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    font-family: "Lato", sans-serif;
-
-    }
     
-    .sidenav__ul{
-      padding: 0px;
+.sidenav__ul{
+  padding: 0px;
 
-    }
-    .sidenav__ul a {
-      padding: 6px 8px 6px 16px;
-      text-decoration: none;
-      font-size: 15px;
-      color: #fff;
-      display: block;
-    }
+}
+.sidenav__ul a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #fff;
+  display: block;
+}
 
-    .table-responsive-md{
-      overflow-x: auto;
-    }
+.table-responsive-md{
+  overflow-x: auto;
+}
 /* ------------------------------------------- */
 
-    
-
-    .user{
-      display: none;
-    }
-    
-    .sidenav a:hover {
-      color: #b35555;
-    }
-
-
-    a.selected{
-      color: #dc0d0d;
-  }
-    
-  .selected{
-    border-bottom: #dc0d0d 3px solid;
-  }
   
-  .centrado {
-    display: flex;
-    justify-content: center;
-  }
+
+.user{
+  display: none;
+}
+
+.sidenav a:hover {
+  color: #b35555;
+}
+
+
+a.selected{
+  color: #dc0d0d;
+}
   
-  .textocentrado{
+.selected{
+  border-bottom: #dc0d0d 3px solid;
+}
+
+.centrado {
+  display: flex;
+  justify-content: center;
+}
+
+.textocentrado{
+  text-align: center;
+}
+
+.textomayus{
+  text-transform: uppercase;
+}
+
+.border-bottoms-c {
+  color: #243e8c;
+  font-size: 1em;
+  border-bottom: 1px solid #243e8c;
+}
+
+.negrita {
+  font-weight: bold;
+}
+
+.small-font-label{
+  font-size: 0.4em;
+}
+.search>i{
+  display: none;
+}
+.add>i{
+  display: none;  
+  color: white;
+}
+a > p{
+  display: flex;
+  margin-bottom: 0px!important;
+}
+
+.no-data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.no-data__image{
+  width: 55%;
+  height: 70vh;
+}
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media (max-width: 450px) {
+  #menu{
+    display: block;
+  }
+
+  #user__nav_horizontal{
+    display:none;
+  }
+
+  #menuico{
+    display: block;
+  }
+
+  .icoMenu{
+    display: flex!important;
+    justify-content: flex-end!important;
+    padding-right: 12px!important;
+  }
+
+  .sidenav{
+    padding: 0%;
+    margin:0px;
+    display: none; 
+    height: auto; /* Full-height: remove this if you want "auto" height */
+    width: 100%; /* Set the width of the sidebar */
+    max-width: 100%; 
+    padding-top: 5px;
+    background-color: #343a40;
+    font-family: "Lato", sans-serif;
+    position: relative;
+  }
+
+  .search>i{
+    display: block;
     text-align: center;
   }
-  
-  .textomayus{
-    text-transform: uppercase;
-  }
-  
-  .border-bottoms-c {
-    color: #243e8c;
-    font-size: 1em;
-    border-bottom: 1px solid #243e8c;
-  }
-  
-  .negrita {
-    font-weight: bold;
-  }
-  
-  .small-font-label{
-    font-size: 0.4em;
-  }
-  .search>i{
+
+  .x{
     display: none;
   }
+
   .add>i{
-    display: none;  
-    color: white;
-  }
-  a > p{
-    display: flex;
-    margin-bottom: 0px!important;
-  }
-
-  .no-data{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
-  .no-data__image{
-    width: 55%;
-    height: 70vh;
+    display: block;
   }
 
 
+  .search>p{
+  display: none;
 
-    /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-    @media (max-width: 450px) {
-      #menu{
-        display: block;
-      }
+  }
+  .add>p{
+    display: none;
 
-      #user__nav_horizontal{
-        display:none;
-      }
-  
-      #menuico{
-        display: block;
-      }
+  }
 
-      .icoMenu{
-        display: flex!important;
-        justify-content: flex-end!important;
-        padding-right: 12px!important;
-      }
-  
-      .sidenav{
-        padding: 0%;
-        display: none; 
-        height: auto; /* Full-height: remove this if you want "auto" height */
-        width: 100%; /* Set the width of the sidebar */
-        padding-top: 5px;
-        background-color: #343a40;
-        font-family: "Lato", sans-serif;
-        position: relative;
-      }
-
-      .search>i{
-        display: block;
-        text-align: center;
-      }
-
-      .x{
-        display: none;
-      }
-
-      .add>i{
-        display: block;
-      }
+  .user{
+    display: block;
+  }
 
 
-      .search>p{
-      display: none;
-
-      }
-      .add>p{
-        display: none;
-
-      }
-
-      .user{
-        display: block;
-      }
-
-
-    }
+}
   
     /* +++++++++++++++++++++++++++++++++++++++++++++++++++++ */
   
 
 
-    @media (min-width: 451px) and (max-width: 768px){
+@media (min-width: 451px) and (max-width: 768px){
 
-      #user__nav_horizontal{
-        display:none;
-      }
-  
-      .sidenav{
-        padding: 0%;
-        display: none; 
-        height: auto; /* Full-height: remove this if you want "auto" height */
-        width: 100%; /* Set the width of the sidebar */
-        padding-top: 5px;
-        background-color: #343a40;
-        font-family: "Lato", sans-serif;
-        position: relative;
-      }
-
-      #menu{
-        display: block;
-      }
- 
-    }
-
-  @media (min-width: 1200px){
-    .sidenav {
-      height: 100vh; /* Full-height: remove this if you want "auto" height */
-      width: 100%; /* Set the width of the sidebar */
-      max-width: 10.3333333%; 
-      position: fixed; 
-      top: 60px; 
-      left: 0;
-      background-color: #2B3643;
-      overflow-x: hidden; /* Disable horizontal scroll */
-      font-family: "Lato", sans-serif;
-      }
-
+  #user__nav_horizontal{
+    display:none;
   }
+
+  .sidenav{
+    padding: 0%;
+    display: none; 
+    height: auto; /* Full-height: remove this if you want "auto" height */
+    width: 100%; /* Set the width of the sidebar */
+    max-width: 100%; 
+    padding-top: 5px;
+    background-color: #343a40;
+    font-family: "Lato", sans-serif;
+    position: relative;
+  }
+
+  #menu{
+    display: block;
+  }
+
+}
+
+@media (min-width: 1200px){
+.sidenav {
+  height: 100vh; /* Full-height: remove this if you want "auto" height */
+  width: 100%; /* Set the width of the sidebar */
+  max-width: 10.3333333%; 
+  position: fixed; 
+  top: 60px; 
+  left: 0;
+  background-color: #2B3643;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  font-family: "Lato", sans-serif;
+  }
+
+
+
+
+}
   
   
   
