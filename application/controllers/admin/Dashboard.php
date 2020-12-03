@@ -14,17 +14,23 @@ class Dashboard extends CI_Controller {
 		if($this->session->userdata('is_logged')){
 			$date = date("Y-m-d");
 			$apartados = $this->VentasModel->obtenerVenta_mediosPorFechaInicio($date);
-
-			for($i=0; $i<count($apartados); $i++){
-				$this->MediosModel->cambiarStatusApartadoAOcupado($apartados[$i]["id_medio"]);		
+			if(count($apartados)>0){
+				for($i=0; $i<count($apartados); $i++){
+					$this->MediosModel->cambiarStatusApartadoAOcupado($apartados[$i]["id_medio"]);		
+				}
 			}
 
-			$ocupados = $this->ventasModel->obtenerVenta_mediosPorFechaTermino($date);
-			for($o=0; $o<count($apartados); $o++){
-				$this->MediosModel->cambiarStatusOcupadoADisponible($ocupados[$o]["id_medio"]);		
+			$ocupados = $this->VentasModel->obtenerVenta_mediosPorFechaTermino($date);
+			if(count($ocupados)>0){
+				for($o=0; $o<count($ocupados); $o++){
+					$this->MediosModel->cambiarStatusOcupadoADisponible($ocupados[$o]["id_medio"]);		
+				}
+
 			}
 
-			var_dump($apartados);
+
+
+			// var_dump($apartados);
 
 			$this->load->view('admin/templates/__head');
 			$this->load->view('admin/templates/__nav');

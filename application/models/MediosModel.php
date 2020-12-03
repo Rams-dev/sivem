@@ -95,7 +95,7 @@ class MediosModel extends CI_model
         $this->db->select('*');
         $this->db->from($medio);
         $this->db->join('medios','medios.id = '.$medio .'.id_medio');
-        $this->db->where("medios.status = 'Disponible'");
+        $this->db->where("medios.status = 'DISPONIBLE'");
         $sql = $this->db->get();
         if($sql){
             return $sql->result_array();
@@ -116,7 +116,7 @@ class MediosModel extends CI_model
         $this->db->select('*');
         $this->db->from($medio);
         $this->db->join('medios','medios.id = '.$medio .'.id_medio');
-        $this->db->where("medios.status = 'Apartado'");
+        $this->db->where("medios.status = 'APARTADO'");
         $sql = $this->db->get();
         if($sql){
             return $sql->result_array();
@@ -166,7 +166,7 @@ class MediosModel extends CI_model
             $tabla = "vallas_fijas";
         }
         if($tabla == "Espectacular"){
-            $tabla = "Espectaculares";
+            $tabla = "espectaculares";
         }
         if($tabla == "valla_movil"){
             $tabla = "vallas_moviles";
@@ -211,9 +211,11 @@ class MediosModel extends CI_model
 
     function cambiarStatusOcupadoADisponible($id_medio){
         $data = array(
-            "status"=> "DISPOBIBLE"
+            "status"=> "DISPONIBLE"
         );
         $this->db->where("id",$id_medio);
         $this->db->update("medios", $data);
     }
+
+
 }

@@ -288,5 +288,5 @@
 <script src="<?=base_url('assets/js/espectaculares.js') ?>"></script>
 <script>
 const w = document.querySelector("#status");
-    w.addEventListener("change", ()=> console.log(this.value))
+    w.addEventListener("change", (e)=> console.log(e.currentTarget.value))
 </script>

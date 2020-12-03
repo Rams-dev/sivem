@@ -154,7 +154,7 @@
                     <div class="form-group">
                         <label for="status"> Status: </label>
                         <select class="form-control" id="status" name="status" value="" >
-                        <option value="<?= $espectacular['status']?>"><?= $espectacular['status']?> </option>
+                        <option value="<?= $espectacular['status']?>"><?= $espectacular['status']?></option>
                         <option value="">Sel. Status</option>
                         <option value="DISPONIBLE">DISPONIBLE</option>
                         <option value="OCUPADO">OCUPADO</option>

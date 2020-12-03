@@ -49,19 +49,20 @@ function agregarMunicipiosSelect(municipios){
           type:$("#guardarespectacular").attr("method"),
           data: formdata,
           cache: false,
-        //   contentType: false,
+          contentType: false,
           processData: false,
       })
       .done(function(response){
         console.log(response)
         let res = JSON.parse(response)
-         if(res.success){
-             alertify.success(res.success)
-             $('#guardarespectacular')[0].reset();
-         }
-         if(res.error){
-           alertify.error(error)
-         }
+        console.log(res)
+          if(res.success){
+              alertify.success(res.success)
+              $('#guardarespectacular')[0].reset();
+          }
+          if(res.error){
+            alertify.error(error)
+          }
       })
       .fail(function(err){
         alertify.error(err)
@@ -128,7 +129,7 @@ $("#editarespectacular").submit(function(e){
               type: $("#editarespectacular").attr("method"),  
               data: formdata,
               cache: false,
-            //   contentType: false,
+               contentType: false,
               processData: false,
               })
               .done(function(response){

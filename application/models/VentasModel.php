@@ -93,7 +93,7 @@ class VentasModel extends CI_model
 	}
 
 	public function obtenerVenta_mediosPorFechaTermino($date){
-		$sql = $this->db->get_where("venta_medios",array("fecha_inicio_contrato" => $date));
+		$sql = $this->db->get_where("venta_medios",array("fecha_termino_contrato" => $date));
 		if($sql){
 			return $sql->result_array();
 		}else{

@@ -123,9 +123,9 @@ function imagesEspecatulares(id){
     }else{
       let resp = JSON.parse(response);
          resp.map(res =>{
-           $("#img1").attr('src',`<?= base_url()?>assets/images/vallas_fijas/${res.vista_corta}`);
-           $("#img2").attr('src',`<?= base_url()?>assets/images/vallas_fijas/${res.vista_media}`);
-           $("#img3").attr('src',`<?= base_url()?>assets/images/vallas_fijas/${res.vista_larga}`);
+           $("#img1").attr('src',`<?= base_url()?>assets/images/medios/${res.vista_corta}`);
+           $("#img2").attr('src',`<?= base_url()?>assets/images/medios/${res.vista_media}`);
+           $("#img3").attr('src',`<?= base_url()?>assets/images/medios/${res.vista_larga}`);
          })
     }
   })

@@ -165,7 +165,7 @@ $("#guardarVallaFija").submit(function(e){
         type: 'post',
         data: formdata,
         cache: false,
-        // contentType: false,
+        contentType: false,
         processData: false
     })
     .done(function(response){
@@ -241,7 +241,7 @@ $("#editarVallaFija").submit(function(e){
         url:"../guardarVallaFijaEditada",
         type:"post",
         data: formData,
-        // contentType:false,
+         contentType:false,
         cache:false,
         processData:false,
     })

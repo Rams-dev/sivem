@@ -93,7 +93,7 @@ class Vallas_fijas extends CI_Controller {
             // echo json_encode($precio);
             // exit;
 
-			$config['upload_path'] = "./assets/images/vallas_fijas";
+			$config['upload_path'] = "./assets/images/medios";
 			$config['allowed_types'] = "*";       	
 			$this->load->library('upload', $config);
 
@@ -179,9 +179,9 @@ class Vallas_fijas extends CI_Controller {
             $vallas = $this->Vallas_fijasModel->obtenerVallasPorIdMedio($id_medio['id']);
             foreach($vallas as $va){
                 $id_prop = $va['id_propietario'];
-                unlink("assets/images/vallas_fijas/". $va['vista_corta']);
-                unlink("assets/images/vallas_fijas/". $va['vista_media']);
-                unlink("assets/images/vallas_fijas/". $va['vista_larga']);
+                unlink("assets/images/medios/". $va['vista_corta']);
+                unlink("assets/images/medios/". $va['vista_media']);
+                unlink("assets/images/medios/". $va['vista_larga']);
             }
           
             if(!$this->PropietariosModel->eliminarPropietario($id_prop)){
@@ -265,7 +265,7 @@ class Vallas_fijas extends CI_Controller {
             //$folio = $this->input->post("folio");
            
 
-			$config['upload_path'] = "./assets/images/vallas_fijas";
+			$config['upload_path'] = "./assets/images/medios";
 			$config['allowed_types'] = "*";       	
 			$this->load->library('upload', $config);
 
@@ -312,18 +312,18 @@ class Vallas_fijas extends CI_Controller {
                 $id_propietario = $vallas['id_propietario']; 
 
 				if($imagen1 != ""){
-					if(file_exists("assets/images/vallas_fijas/". $vallas['vista_corta'])){
-						unlink("assets/images/vallas_fijas/". $vallas['vista_corta']);
+					if(file_exists("assets/images/medios/". $vallas['vista_corta'])){
+						unlink("assets/images/medios/". $vallas['vista_corta']);
 					}
 				}
 				if($imagen2 != ""){
-					if(file_exists("assets/images/vallas_fijas/". $vallas['vista_media'])){
-						unlink("assets/images/vallas_fijas/". $vallas['vista_media']);
+					if(file_exists("assets/images/medios/". $vallas['vista_media'])){
+						unlink("assets/images/medios/". $vallas['vista_media']);
 					}
 				}
 				if($imagen3 != ""){
-					if(file_exists("assets/images/vallas_fijas/". $vallas['vista_larga'])){
-						unlink("assets/images/vallas_fijas/". $vallas['vista_larga']);
+					if(file_exists("assets/images/medios/". $vallas['vista_larga'])){
+						unlink("assets/images/medios/". $vallas['vista_larga']);
 					}
 				}
             }

@@ -76,7 +76,7 @@ class Empleados extends CI_Controller {
 
 	function getEmpleadoPoId($id){
 		if($this->session->userdata('is_logged')){
-			if($data = $this->EmpleadosModel->getEmpleadoPoId($id)){
+			if($data = $this->EmpleadosModel->obtenerEmpleadoPoId($id)){
 				echo json_encode($data);
 			}else{
 				echo json_encode("Sin resultados");

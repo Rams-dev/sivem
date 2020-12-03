@@ -74,11 +74,12 @@ class Espectaculares extends CI_Controller {
 			 $folio = $this->input->post('folio');
 			 $tipopago = $this->input->post('tipopago');
 			 $periodopago = $this->input->post('periodopago');
-			 echo json_encode($status);
-			 exit;
+			//  $f = $this->input->post();
+			//  echo json_encode($status);
+			//  exit;
 
 
-			$config['upload_path'] = "./assets/images/espectaculares";
+			$config['upload_path'] = "./assets/images/medios";
 			$config['allowed_types'] = "*";       	
 			$this->load->library('upload', $config);
 
@@ -166,9 +167,9 @@ class Espectaculares extends CI_Controller {
 			 $idMedio = $this->input->post();
 			 $espectacular = $this->EspectacularesModel->obtenerEspectacularesPorIdMedio($idMedio['id']);
 			  foreach($espectacular as $esp){
-			 	 unlink("assets/images/espectaculares/". $esp['vista_corta']);
-			 	 unlink("assets/images/espectaculares/". $esp['vista_media']);
-			 	 unlink("assets/images/espectaculares/". $esp['vista_larga']);
+			 	 unlink("assets/images/medios/". $esp['vista_corta']);
+			 	 unlink("assets/images/medios/". $esp['vista_media']);
+			 	 unlink("assets/images/medios/". $esp['vista_larga']);
 				}
 				if(!$eP = $this->PropietariosModel->eliminarPropietario($esp["id_propietario"])){
 					 echo json_encode(array('error', 'lo siento no se pudo eliminar el especatular, intentalo mas tarde'));
@@ -243,7 +244,7 @@ class Espectaculares extends CI_Controller {
 			// $formData =$this->input->post();
 			//   echo json_encode($dataMaterial);
 			//    exit;
-    	    $config['upload_path'] = "./assets/images/espectaculares";
+    	    $config['upload_path'] = "./assets/images/medios";
 		    $config['allowed_types'] = "*";       	
 		    $this->load->library('upload', $config);
 
@@ -279,20 +280,20 @@ class Espectaculares extends CI_Controller {
 
 			foreach($espectaculardata as $datosDeEspectaculares){
 				if($imagen1 != ''){
-					if(file_exists("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta'])){
-						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_corta']);
+					if(file_exists("assets/images/medios/". $datosDeEspectaculares['vista_corta'])){
+						unlink("assets/images/medios/". $datosDeEspectaculares['vista_corta']);
 					}
 				 }
 				 if($imagen2 != ''){
-					if(file_exists("assets/images/espectaculares/". $datosDeEspectaculares['vista_media'])){
+					if(file_exists("assets/images/medios/". $datosDeEspectaculares['vista_media'])){
 
-						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_media']);
+						unlink("assets/images/medios/". $datosDeEspectaculares['vista_media']);
 					}
 				 }
 				 if($imagen3 != ''){
-					if(file_exists("assets/images/espectaculares/". $datosDeEspectaculares['vista_larga'])){
+					if(file_exists("assets/images/medios/". $datosDeEspectaculares['vista_larga'])){
 
-						unlink("assets/images/espectaculares/". $datosDeEspectaculares['vista_larga']);
+						unlink("assets/images/medios/". $datosDeEspectaculares['vista_larga']);
 					}
 				 }
 			}

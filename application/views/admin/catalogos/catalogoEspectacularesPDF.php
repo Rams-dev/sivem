@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo de Espectaculares</title>
+    <title>Catalogo</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="<?=base_url("assets/images/logosis.png")?>" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <style>
 
+        body{
+            font-family: 'Poppins', sans-serif;
 
+        }
         .contenedor{
             width:100%;
             height: 96%;
@@ -124,7 +130,7 @@
     </style>
 </head>
 <body>
-    <?php var_dump($medios)?>
+    <!-- <?php var_dump($medios)?> -->
     <div class="contenedor">
         <div class="centrado">
             <img src ="<?= BASEPATH.'../assets/images/logo_medios.jpg'?>" class="logo_medios_pg1" alt="">
@@ -135,22 +141,22 @@
     </div>
 
 
-<?php foreach($medios as $espectacular):?>
+<?php foreach($medios as $medio):?>
 
     <div class="contenedor">
 
         <img src="<?= BASEPATH.'../assets/images/logo_medios.jpg'?>" class="logo_medios" alt="">
         <div class="images">
             <div class="imagen-grande"> 
-                <img src="<?= BASEPATH.'../assets/images/espectaculares/'.$espectacular['vista_larga']?>" alt="" class="img-grande">
+                <img src="<?= BASEPATH.'../assets/images/medios/'.$medio['vista_larga']?>" alt="" class="img-grande">
             </div>
 
             <div class="images-pequenas">
                 <!-- <div class="image-pequena"> -->
-                     <img src="<?= BASEPATH.'../assets/images/espectaculares/'.$espectacular['vista_media']?>" class=" imagen-pequena" alt="">
+                     <img src="<?= BASEPATH.'../assets/images/medios/'.$medio['vista_media']?>" class=" imagen-pequena" alt="">
                 <!-- </div> -->
                 <!-- <div class="image-pequena"> -->
-                     <img src="<?= BASEPATH.'../assets/images/espectaculares/'.$espectacular['vista_corta']?>" class=" imagen-pequena" alt=""> 
+                     <img src="<?= BASEPATH.'../assets/images/medios/'.$medio['vista_corta']?>" class=" imagen-pequena" alt=""> 
                 <!-- </div>  -->
             </div>
         </div>
@@ -158,46 +164,46 @@
         <table class="table table-bordered table-sm">
             <tr>
                 <th>SITIO</th>
-                <th colspan=3 style="color:red;"><?=$espectacular['nocontrol']?></th>
+                <th colspan=3 style="color:red;"><?=$medio['nocontrol']?></th>
             </tr>
             <tr>
                 <th colspan=4 style="text-align: center;">UBICACION</th>
             </tr>
             <tr>
                 <th>CALLE</th>
-                <th colspan=3><?=$espectacular['calle'].", No ".$espectacular['numero']?></th>
+                <th colspan=3><?=$medio['calle'].", No ".$medio['numero']?></th>
             </tr>
             <tr>
                 <th colspan =2>LOCALIDAD</th>
                 <th>MUNICIPIO</th>
                 <th>ESTADO</th>
             </tr>
-                <td colspan=2><?=$espectacular['localidad']?> </t>
-                <td><?=$espectacular['municipio']?></td>
-                <td><?=$espectacular['nombre']?></td>
+                <td colspan=2><?=$medio['localidad']?> </t>
+                <td><?=$medio['municipio']?></td>
+                <td><?=$medio['nombre']?></td>
             </tr>
             </table>
             <!-- <div class="p">
-                <p>SITIO: <b style="color:red;"><?=$espectacular['nocontrol']?></b><p>
+                <p>SITIO: <b style="color:red;"><?=$medio['nocontrol']?></b><p>
                 
             </div>
             <div class="p">
                 <p>UBICACIÓN:</p> 
-                <b><?=$espectacular['calle']." No ".$espectacular['numero'].", ".$espectacular['localidad'].", ".$espectacular['municipio'].", ". $espectacular['nombre'] ?></b>
+                <b><?=$medio['calle']." No ".$medio['numero'].", ".$medio['localidad'].", ".$medio['municipio'].", ". $medio['nombre'] ?></b>
             </div>
             <div class="p">
                 <p>REFERENCIA</p>
-                <B><?=$espectacular['referencias']?></B>
+                <B><?=$medio['referencias']?></B>
             </div>
             <div class="p">
                 <p>MEDIDAS</p>
-                <b><?=$espectacular['alto'] .'mts x '. $espectacular['ancho']. ' mts'?></b>
+                <b><?=$medio['alto'] .'mts x '. $medio['ancho']. ' mts'?></b>
             </div> -->
         </div>
 
         <div class="localizacion">
             <img src="<?= BASEPATH.'../assets/images/location.png'?>" class="img-location" alt=""> <br>
-            <a href="https://www.google.com.mx/maps/<?= $espectacular['latitud'] . ',' .$espectacular['longitud']?>"> <?= $espectacular['latitud']. " - ".$espectacular['longitud']?></a> 
+            <a href="https://www.google.com.mx/maps/<?= $medio['latitud'] . ',' .$medio['longitud']?>"> <?= $medio['latitud']. " - ".$medio['longitud']?></a> 
         </div>
 
         <div class="foot">

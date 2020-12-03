@@ -43,7 +43,7 @@ class EmpleadosModel extends CI_model{
         }
     }
 
-    function getEmpleadoPoId($id){
+    function obtenerEmpleadoPoId($id){
         $sql = $this->db->get_where("usuarios", array("id" => $id));
         if($sql){
             return $sql->result_array();
@@ -66,6 +66,25 @@ class EmpleadosModel extends CI_model{
             'telefono' => $telefono,
         );
 
+        $this->db->where("id",$id);
+        $sql = $this->db->update("usuarios",$data);
+        if($sql){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+     function actualizarUsuario($id,$nombre,$apellidos,$contrasena,$correo,$puesto,$sexo,$telefono){
+        $data = array(
+            "nombre" =>$nombre,
+            "apellidos" =>$apellidos,
+            "correo" =>$correo,
+            "contrasena" =>$contrasena,
+            "puesto" =>$puesto,
+            "sexo" =>$sexo,
+            "telefono" =>$telefono
+        );
         $this->db->where("id",$id);
         $sql = $this->db->update("usuarios",$data);
         if($sql){
