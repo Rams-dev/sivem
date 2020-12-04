@@ -25,8 +25,23 @@ class Dashboard extends CI_Controller {
 				for($o=0; $o<count($ocupados); $o++){
 					$this->MediosModel->cambiarStatusOcupadoADisponible($ocupados[$o]["id_medio"]);		
 				}
-
 			}
+
+			$mediosOcupados = $this->MediosModel->obtenerMediosOcupadosSinFechadeInicio($date);
+			if(count($mediosOcupados)>0){
+				for($m=0; $m<count($mediosOcupados); $m++){
+					$this->MediosModel->CambiarOcupadoADisponible($mediosOcupados[$m]["id"]);
+				}
+			}
+			
+			$mediosApartados = $this->MediosModel->obtenerMediosApartadosSinVenta($date);
+			if(count($mediosApartados)>0){
+				for($mA=0; $mA<count($mediosApartados); $mA++){
+					$this->MediosModel->CambiarApartadoAOcupado($mediosApartados[$mA]["id"]);
+				}
+			}
+
+			var_dump($mediosOcupados);
 
 
 

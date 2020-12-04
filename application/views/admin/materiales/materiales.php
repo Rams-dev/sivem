@@ -19,6 +19,7 @@
             <th scope="col">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Precio</th>
+            <th scope="col">Unidad</th>
             <th scope="col">Descripción</th>
             <th scope="col">Opciones</th>
             </tr>
@@ -29,6 +30,7 @@
                     <th scope="row"><?=$material['id']?></th>
                     <td><?=$material['material']?></td>
                     <td><?=$material['precio']?></td>
+                    <td><?=$material['unidad']?></td>
                     <td><?=$material['observaciones']?></td>
                     <td><button class="btn btn-warning" data-toggle="modal" data-target="#editarMaterial" type="button"  onclick="obtenerMaterialPorId(<?= $material['id']?>)" ><i class="fas fa-edit"></i></button>
                     <button class="btn btn-danger" onclick="eliminarMaterial(<?= $material['id']?>)" ><i class="fas fa-trash"></i></button></td>
@@ -54,7 +56,7 @@
       <div class="modal-body">
         <form action="<?= base_url('admin/materiales/agregarMaterial')?>" method="POST" name="formguardarmaterial" id="formguardarmaterial">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="nombrematerial">Material </label>
                             <input type="text" class="form-control" id="nombrematerial" name="nombrematerial" required placeholder="Tipo de material">
@@ -65,6 +67,16 @@
                         <div class="form-group">
                             <label for="preciomaterial">Precio </label>
                             <input type="number" class="form-control" id="preciomaterial" name="preciomaterial" required >
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="unidadmaterial">Unidad </label>
+                            <select name="unidadmaterial" id="unidadmaterial" class="form-control">
+                                <option value="M²">M²</option>
+                                <option value="ML">ML</option>
+                            </select>
                         </div>
                     </div>
 
@@ -101,7 +113,7 @@
       <div class="modal-body">
         <form action="<?= base_url('admin/materiales/editarMaterial')?>" method="POST" name="frmEditarMaterial" id="frmEditarMaterial">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="nombre">Material </label>
                             <input type="text" class="form-control" id="nombre" name="nombre" value="" required placeholder="Tipo de material">
@@ -115,12 +127,24 @@
                         </div>
                     </div>
 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="preciomaterial">Unidad </label>
+                            <select name="unidad" id="unidad" value="" class="form-control">
+                                <option value="M²">M²</option>
+                                <option value="ML">ML</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="descripcion">Descripción</label>
                             <input type="text" class="form-control" id="descripcion" name="descripcion" value="" required placeholder="Descripción del material">
                         </div>
                     </div>
+
+                     <input type="hidden" class="form-control" name="id" id="id" value ="" >
                 </div>
             </div>
             <div class="modal-footer">

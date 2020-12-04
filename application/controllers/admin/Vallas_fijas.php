@@ -63,10 +63,22 @@ class Vallas_fijas extends CI_Controller {
             $ancho = $this->input->post("ancho");
             $alto = $this->input->post("alto");
             $material = $this->input->post("material");
+            $costoderenta = $this->input->post("costoderenta");
             $costoimpresion = substr($this->input->post("costodeimpresion"),2);
             $costoinstalacion = substr($this->input->post("costodeinstalacion"),2);
             $precio = substr($this->input->post("precio"),2);
             $status = $this->input->post("status");
+            $fechaInicioOcupacion ="";
+            $fechaTerminooOcupacion ="";
+
+            if($status == "APARTADO"){
+                $fechaInicioOcupacion = $this->input->post("inicioOcupacion");
+                $fechaTerminooOcupacion = $this->input->post("terminoOcupacion");
+            }elseif($status == "OCUPADO"){
+                $fechaTerminooOcupacion = $this->input->post("terminoOcupacion");
+            }
+            
+            
             $observaciones = $this->input->post("observaciones");
             $acabados = $this->input->post("acabados");
             $propietario = $this->input->post("propietario");
@@ -84,6 +96,7 @@ class Vallas_fijas extends CI_Controller {
                     $telefono = $prop['telefono'];
                 }
             }
+
             $iniciocontrato = $this->input->post("iniciocontrato");
             $fincontrato = $this->input->post("fincontrato");
             $tipopago = $this->input->post("tipopago");
@@ -128,7 +141,7 @@ class Vallas_fijas extends CI_Controller {
 
 
             // echo json_encode(array($status,$precio,$tipo_medio ="valla_fija"));
-            if(!$id_medio = $this->MediosModel->agregarMedio($status,$precio,$tipo_medio ="valla_fija")){
+            if(!$id_medio = $this->MediosModel->agregarMedio($status,$precio,$tipo_medio ="valla_fija",$fechaInicioOcupacion,$fechaTerminooOcupacion)){
                 echo json_encode(array("error" => "Intenta mas tarde"));
             }else{
                 if($propietario == "nuevo"){
@@ -141,7 +154,7 @@ class Vallas_fijas extends CI_Controller {
                     $id_prop = $idprop;
                 }
 
-                if($this->Vallas_fijasModel->agregarValla_fija($numcontrol,$costoimpresion,$costoinstalacion,$calle,$numero,$colonia,$localidad,$municipio,$estado,$latitud,$longitud,$referencias,$ancho,$alto,$material,$observaciones,$acabados,$imagen1,$imagen2,$imagen3,$id_prop,$id_medio,$iniciocontrato,$fincontrato,$tipopago,$periodo,$monto)){
+                if($this->Vallas_fijasModel->agregarValla_fija($numcontrol,$costoimpresion,$costoinstalacion,$calle,$numero,$colonia,$localidad,$municipio,$estado,$latitud,$longitud,$referencias,$ancho,$alto,$material,$costoderenta, $observaciones,$acabados,$imagen1,$imagen2,$imagen3,$id_prop,$id_medio,$iniciocontrato,$fincontrato,$tipopago,$periodo,$monto)){
                      echo json_encode(array("success" => "Valla agreagada con exito"));
                   }
             }
@@ -232,6 +245,7 @@ class Vallas_fijas extends CI_Controller {
             $ancho = $this->input->post("ancho");
             $alto = $this->input->post("alto");
             $material = $this->input->post("material");
+            $cRenta = $this->input->post("costoderenta");
             $costoimpresion = substr($this->input->post("costodeimpresion"),2);
             $costoInstalacion = substr($this->input->post("costodeinstalacion"),2);
             $precio = substr($this->input->post("precio"),2);

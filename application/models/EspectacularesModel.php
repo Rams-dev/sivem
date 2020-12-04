@@ -12,6 +12,7 @@ class EspectacularesModel extends CI_model{
         $this->db->select('medios.id, espectaculares.id as espectacular_id,nocontrol, costo_impresion,costo_instalacion, calle,
         numero,
         tipo_medio,
+        costo_renta,
         colonia,
         localidad,
         municipio,
@@ -64,6 +65,7 @@ class EspectacularesModel extends CI_model{
         $this->db->select('medios.id,espectaculares.id as espectacular_id,nocontrol, costo_impresion,costo_instalacion, calle,
         numero,
         colonia,
+        costo_renta,
         localidad,
         municipio,
         id_estado,
@@ -111,6 +113,7 @@ class EspectacularesModel extends CI_model{
     
     public function agregarEspectacular($id_medio,
     $ncontrol,
+    $cRenta,
     $cimpreso,
     $instalacion,
     $calle,
@@ -139,6 +142,7 @@ class EspectacularesModel extends CI_model{
     $imagen3){
 
         $data = array('nocontrol' => $ncontrol,
+        'costo_renta' => $cRenta,
         'costo_impresion' => $cimpreso,
         'costo_instalacion' => $instalacion,
         'calle' => $calle,
@@ -188,6 +192,7 @@ class EspectacularesModel extends CI_model{
     function editarEspectacular(
         $id,
         $ncontrol,
+        $cRenta,
         $cimpreso,
         $instalacion,
         $calle,
@@ -218,6 +223,7 @@ class EspectacularesModel extends CI_model{
 
         $data = array(
             'nocontrol' => $ncontrol,
+            'costo_renta' => $cRenta,
             'costo_impresion' => $cimpreso,
             'costo_instalacion' => $instalacion,
             'calle' => $calle,

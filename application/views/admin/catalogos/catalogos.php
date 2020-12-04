@@ -67,11 +67,13 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">N* control</th>
-              <th scope="col">Tipo</th>
+              <th scope="col">clave master</th>
+              <th scope="col">Medio</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Municipio</th>
               <th scope="col">Ubicación</th>
-              <th scope="col">Precio</th>
               <th scope="col">Medidas</th>
+              <th scope="col">Costo mensual</th>
               <th scope="col">Precio material</th>
               <th scope="col">Status</th>
             </tr>

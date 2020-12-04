@@ -30,7 +30,7 @@ if(empty($vallas_fijas)){?>
             <th>No control</th>
             <th>Estado</th>
             <th>Municipio</th>
-            <th>localidad</th>
+            <th>Localidad</th>
             <th>Precio</th>
             <th>Status</th>
             <th>Opciones</th>

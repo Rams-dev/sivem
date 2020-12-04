@@ -1,5 +1,5 @@
 <h1 class=" text-center">Espectaculares</h1>
-<!-- <?php var_dump($espectaculares)?> -->
+<?php var_dump($espectaculares)?>
 <hr>
 <?php
 if(empty($espectaculares)){?>
@@ -23,18 +23,22 @@ if(empty($espectaculares)){?>
         <a class="btn btn-warning add" href="<?php echo base_url('admin/espectaculares/agregarEspectacular')?>" role="button"><i class="fas fa-plus"></i> <p>+ Nuevo Espectacular +</p></a>
     </div>
 </div>
-<div class="table-responsive-lg" id="espectacularesContainer">
+<div class="table-responsive" id="espectacularesContainer">
 <table class="table" id="table">
   <thead class="thead-dark">
     <tr>
       <th>#</th>
-      <th>No control</th>
-      <th>Estado</th>
-      <th>Municipio</th>
+      <th>Clave master</th>
       <th>Localidad</th>
-      <th>Precio</th>
+      <th>Municipio</th>
+      <th>Estado</th>
       <th>medidas</th>
       <th>Status</th>
+      <th>Costo mensual</th>
+      <th>Costo impresión</th>
+      <th>Costo instalacion</th>
+      <th>Costo material</th>
+      <th>Costo total</th>
       <th>Opciones</th>
       
     </tr>
@@ -47,12 +51,16 @@ if(empty($espectaculares)){?>
     <tr>
       <th><?= $index?></th>
       <th><?= $espectacular['nocontrol']?></th>
-      <td><?= $espectacular['nombre_estado']?></td>
-      <td><?= $espectacular['municipio']?></td>
       <td><?= $espectacular['localidad']?></td>
-      <td><?= $espectacular['precio']?></td>
+      <td><?= $espectacular['municipio']?></td>
+      <td><?= $espectacular['nombre_estado']?></td>
       <td><?= $espectacular['ancho'] . "m x ". $espectacular['alto']."m"?></td>
       <td><?= $espectacular['status']?></td>
+      <td>$<?= $espectacular['costo_renta']?></td>
+      <td>$<?= $espectacular['costo_impresion']?></td>
+      <td>$<?= $espectacular['costo_instalacion']?></td>
+      <td>$<?= $espectacular['precio_material']?></td>
+      <td>$<?= $espectacular['precio']?></td>
       <td><button class="btn btn-info btn-sm" onclick="imagesEspecatulares(<?=$espectacular['id']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>
       <a href="<?= base_url('admin/espectaculares/editarEspectacular/'.$espectacular['id'])?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
       <button class="btn btn-danger btn-sm" onclick="eliminarEspectacular(<?=$espectacular['id']?>)" ><i class="fas fa-trash"></i></button></td>

@@ -13,33 +13,14 @@
             <h6> Datos del espectacular: </h6>
             <hr>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="numcontrol"> #Control: </label>
                             <input type="text" class="form-control" value="<?= $espectacular['nocontrol']?>" id="numcontrol" name="numcontrol" value="" >
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="costoimpreso"> Costo Impresión:</label>
-                        <input type="number" class="form-control" value="<?= $espectacular['costo_impresion']?>" id="costoimpreso" name="costoimpreso" value="0"  step="any" value="1" readonly>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="instalacion"> Costo de Instalación: </label>
-                        <input type="number" class="form-control" value="<?= $espectacular['costo_instalacion']?>" id="instalacion" name="instalacion" value="0"  step="any" value="0" readonly>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <h6> Domicilio y Ubicación</h6>
-                    <hr>
-                </div>
-
-                <div class="col-md-3">
+                <div class="col-md-7">
                     <div class="form-froup">
                         <label for="calle"> Calle: </label>
                         <input type="text" class="form-control" value="<?= $espectacular['calle']?>" id="calle" name="calle" >
@@ -47,21 +28,21 @@
                 </div>
 
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="numero"> Número: </label>
-                        <input type="text" class="form-control" value="<?= $espectacular['numero']?>" id="numero" name="numero" value="" >
+                        <input type="number" class="form-control" value="<?= $espectacular['numero']?>" id="numero" name="numero" value="" >
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="colonia"> Colonia: </label>
                         <input type="text" class="form-control" value="<?= $espectacular['colonia']?>" id="colonia" name="colonia" value="" >
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label for="localidad"> Localidad: </label>
                         <input type="text" class="form-control" value="<?= $espectacular['localidad']?>" id="localidad" name="localidad" value="" >
@@ -131,7 +112,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="material"> Material: </label>
                             <select class="form-control" id="material" name="material" value="<?= $espectacular['id_material']?>" onchange="CalculaPrecio();">
@@ -143,7 +124,29 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="costorenta"> Costo renta:</label>
+                        <input type="number" class="form-control" id="costorenta" name="costorenta" value="<?=$espectacular['costo_renta']?>" step="any" >
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="costoimpreso"> Costo Impresión:</label>
+                        <input type="number" class="form-control" value="<?= $espectacular['costo_impresion']?>" id="costoimpreso" name="costoimpreso" value="0"  step="any" value="1" readonly>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="instalacion"> Costo de Instalación: </label>
+                        <input type="number" class="form-control" value="<?= $espectacular['costo_instalacion']?>" id="instalacion" name="instalacion" value="0"  step="any" value="0" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="precio"> Precio: </label>
                         <input type="text" class="form-control" value="<?= $espectacular['precio']?>" id="precio" name="precio" readonly>
@@ -170,7 +173,7 @@
                     <input type="text" class="form-control" value="<?= $espectacular['observaciones']?>" id="observaciones" name="observaciones" value="" >
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-12 mb-3">
                     <div class="form-group">
                         <label for="acabados"> Acabados: </label>
                         <input type="text" class="form-control" value="<?= $espectacular['acabados']?>" id="acabados" name="acabados" value="" >
@@ -180,21 +183,21 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="imagen1"> Vista Corta : </label>
-                        <input type="file" class="dropify" value="<?= $espectacular['vista_corta']?>" data-allowed-file-extensions="jpg png jpeg" id="imagen1" name="imagen1" data-default-file="<?=base_url('assets/images/espectaculares/'.$espectacular['vista_corta'])?>" />
+                        <input type="file" class="dropify" value="<?= $espectacular['vista_corta']?>" data-allowed-file-extensions="jpg png jpeg" id="imagen1" name="imagen1" data-default-file="<?=base_url('assets/images/medios/'.$espectacular['vista_corta'])?>" />
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="imagen2"> Vista Media : </label>
-                        <input type="file" class="dropify" value="<?= $espectacular['vista_media']?>" data-allowed-file-extensions="jpg png jpeg" id="imagen2" name="imagen2"  data-default-file="<?=base_url('assets/images/espectaculares/'.$espectacular['vista_media'])?>"  />
+                        <input type="file" class="dropify" value="<?= $espectacular['vista_media']?>" data-allowed-file-extensions="jpg png jpeg" id="imagen2" name="imagen2"  data-default-file="<?=base_url('assets/images/medios/'.$espectacular['vista_media'])?>"  />
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="imagen3"> Vista Larga : </label>
-                        <input type="file" class="dropify" value="<?= $espectacular['vista_larga']?>" data-allowed-file-extensions="jpg png jpeg" id="imagen3" name="imagen3" data-default-file="<?=base_url('assets/images/espectaculares/'.$espectacular['vista_larga'])?>" />
+                        <input type="file" class="dropify" value="<?= $espectacular['vista_larga']?>" data-allowed-file-extensions="jpg png jpeg" id="imagen3" name="imagen3" data-default-file="<?=base_url('assets/images/medios/'.$espectacular['vista_larga'])?>" />
                     </div>
                 </div>
 

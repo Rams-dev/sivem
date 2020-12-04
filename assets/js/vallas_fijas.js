@@ -11,6 +11,26 @@
     const nombre = document.querySelector("#nombre");
     const telefono = document.querySelector("#telefonoDiv");
     const celular = document.querySelector("#celularDiv");
+    const selectStatus = document.querySelector("#status");
+    const inicioOcupacion = document.querySelector("#desdeDiv");
+    const terminoOcupacion = document.querySelector("#hastaDiv");
+
+
+    selectStatus.addEventListener("change", function(e){
+        e.preventDefault();
+        console.log(this.value)
+        if(this.value == "OCUPADO"){
+            terminoOcupacion.classList.remove("d-none");
+            inicioOcupacion.classList.add("d-none");
+
+        }else if(this.value == "APARTADO"){
+            inicioOcupacion.classList.remove("d-none");
+            terminoOcupacion.classList.remove("d-none");
+        }else{
+            inicioOcupacion.classList.add("d-none");
+            terminoOcupacion.classList.add("d-none");
+        }
+    })
 
     // selectUbicacion.addEventListener("change",function(e){
     //     e.preventDefault()
@@ -103,6 +123,7 @@ let area= 0;
 let CInstalacion = 0;
 let CImpresion = 0;
 let precioTotal = 0;
+let renta = 0;
 
 $("#ancho").change(function(e){
     e.preventDefault()
@@ -119,8 +140,13 @@ $("#alto").change(function(e){
 })
 
 
+window.costoderenta.addEventListener("change", function(e){
+    renta = parseFloat(this.value);
+    calcularArea();
+
+})
 function calcularArea(){
-    if(alto > 0 && alto > 0){
+    if(alto > 0 && alto > 0 && renta > 0){
         area = parseFloat(alto * ancho).toFixed(2);
         console.log(area);
         calcularCostoInstalacion()
@@ -143,9 +169,10 @@ function calcularCostoImpresion(){
 function calcularPrecio(){
     // CInstalacion = parseFloat(CInstalacion).toFixed(2);
     // console.log(typeof(CInstalacion))
-    precioTotal = parseFloat(parseFloat(CImpresion) + parseFloat(CInstalacion)).toFixed(2);
+    console.log(renta)
+    precioTotal = parseFloat(parseFloat(CImpresion) + parseFloat(CInstalacion) + renta).toFixed(2) ;
     console.log(precioTotal)
-    window.precio.value = '$ ' + precioTotal;
+    window.precio.value = '$ ' + parseFloat(precioTotal);
 
     
 }
@@ -249,6 +276,7 @@ $("#editarVallaFija").submit(function(e){
         let res= JSON.parse(response);
         if(res.success){
             alertify.success(res.success)
+            location.reload();
         }
         if(res.error){
             alertify.error(res.error)

@@ -79,9 +79,11 @@ function rellenarTabla(data){
                     <td>${i+1}</td>
                     <td>${data[i]["nocontrol"]}</td>
                     <td>${data[i]["tipo_medio"]}</td>
-                    <td>${data[i]["calle"]} ${data[i]["municipio"]} ${data[i]["nombre_estado"]}</td>
-                    <td>$ ${data[i]["precio"]}</td>
-                    <td>${data[i]["alto"]}m x ${data[i]["ancho"]}m</td>
+                    <td>${data[i]["nombre_estado"]}</td>
+                    <td>${data[i]["municipio"]}</td>
+                    <td>${data[i]["calle"]}</td>
+                    <td>${data[i]["ancho"]} " x " ${data[i]["alto"]}</td>
+                    <td>$ ${data[i]["costo_renta"]}</td>
                     <td>$${data[i]["tipo_medio"] === "valla_fija" ? "65" : data[i]["precio_material"]}</td>
                     <td>${data[i]["status"]}</td>
                 </tr>

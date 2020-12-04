@@ -90,21 +90,21 @@
                         <hr>
                     </div>
 
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-3 col-md-3">
                         <div class="form-group">
                             <label for="ancho" > Ancho(m): </label>
                                 <input type="number" class="form-control" id="ancho" name="ancho" value=""  step="any" required>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-3 col-md-3">
                         <div class="form-group">
                             <label for="alto" > Alto(m): </label>
                                 <input type="number" class="form-control" id="alto" name="alto" value=""  step="any" required>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-3 col-md-3">
                         <div class="form group">
                             <label for="material" > Material: </label>
                                     <input type="text" id="material" name="material" class="form-control" value="vinil" placeholder = "vinil - 65$"  readonly required>
@@ -112,28 +112,35 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4"> 
+                    <div class="col-lg-3 col-md-3"> 
+                        <div class="form-group">
+                            <label for="costoderenta" > Costo de renta: </label>
+                                <input type="number" class="form-control" id="costoderenta" name="costoderenta" value=""  step="any" required>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3"> 
                         <div class="form-group">
                             <label for="costodeimpresion" > Costo de impresion: </label>
                                 <input type="text" class="form-control" id="costodeimpresion" name="costodeimpresion" value=""  step="any" readonly required>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-3 col-md-3">
                         <div class="form-group">
                             <label for="costodeinstalacion" > Costo de instalacion: </label>
                                 <input type="text" class="form-control" id="costodeinstalacion" name="costodeinstalacion" value=""  step="any" readonly required>
                         </div>
                     </div>
                     
-                    <div class="col-sm-2 col-md-2">
+                    <div class="col-sm-3 col-md-3">
                         <div class="form-group">
-                            <label for="precio" > Precio: </label>
+                            <label for="precio" > Costo total: </label>
                             <input type="text" class="form-control" id="precio" name="precio"  step="any" readonly required>
                         </div>
                     </div>
 
-                    <div class="col-sm-2 col-md-2">
+                    <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                             <label for="status"> Status: </label>
                             <select name="status" id="status" class="form-control">
@@ -144,6 +151,20 @@
                                 <option value="REPARACIÓN">REPARACIÓN</option>
                                 <option value="BLOQUEADO">BLOQUEADO</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 d-none" id="desdeDiv">
+                        <div class="form-group">
+                            <label for="hasta" >Fecha inicio de ocupación </label>
+                            <input type="date" class="form-control" id="inicioOcupacion" name="inicioOcupacion">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 d-none" id="hastaDiv">
+                        <div class="form-group">
+                            <label for="hasta" > Fecha termino de ocupación: </label>
+                            <input type="date" class="form-control" id="terminoOcupacion" name="terminoOcupacion">
                         </div>
                     </div>
                     
@@ -209,48 +230,48 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-4" id="nombre">
+                    <div class="col-md-4" id="nombre">
                         <div class="form-group ">
                             <label for="nombreprop" > Nombre:</label>
                             <input type="text" class="form-control" id="nombreprop" name="nombreprop" value=""  required>
                         </div>
                     </div>
 
-                    <div class="col-lg-3" id="celularDiv">
+                    <div class="col-md-4" id="celularDiv">
                         <div class="form-group">
                             <label for="celular" > Celular: </label>
                             <input type="text" class="form-control" id="celular" name="celular" value=""  required>
                         </div>
                     </div>
 
-                    <div class="col-lg-3" id="telefonoDiv">
+                    <div class="col-md-4" id="telefonoDiv">
                         <div class="form-group">
                             <label for="telefono" > Teléfono: </label>
                             <input type="text" class="form-control" id="telefono" name="telefono" value=""  required>
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="monto" > Monto: </label>
                             <input type="text" class="form-control" id="monto" name="monto" value=""  required>
                         </div>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="iniciocontrato" > Inicio:</label>
+                            <label for="iniciocontrato" > Fecha de inicio:</label>
                             <input type="date" class="form-control" id="iniciocontrato" name="iniciocontrato" value=""  required>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="fincontrato" > Fin: </label>
+                            <label for="fincontrato" > Fecha de termino: </label>
                                 <input type="date" class="form-control" id="fincontrato" name="fincontrato" value=""  required>
                         </div>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="tipopago" > Tipo pago: </label>
                                 <select class="form-control" id="tipopago" name="tipopago" value="" >

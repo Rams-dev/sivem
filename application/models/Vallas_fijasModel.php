@@ -37,7 +37,7 @@ class Vallas_fijasModel extends CI_model
 
     }
     
-    public function agregarValla_fija($numcontrol,$costoimpresion,$costoInstalacion,$calle,$numero,$colonia,$localidad,$municipio,$estado,$latitud,$longitud,$referencias,$ancho,$alto,$material,$observaciones,$acabados,$imagen1,$imagen2,$imagen3,$id_prop,$id_medio,$iniciocontrato,$fincontrato,$tipopago,$periodo,$monto){
+    public function agregarValla_fija($numcontrol,$costoimpresion,$costoInstalacion,$calle,$numero,$colonia,$localidad,$municipio,$estado,$latitud,$longitud,$referencias,$ancho,$alto,$material,$renta,$observaciones,$acabados,$imagen1,$imagen2,$imagen3,$id_prop,$id_medio,$iniciocontrato,$fincontrato,$tipopago,$periodo,$monto){
 
         $data = array(
             'nocontrol'=>$numcontrol,
@@ -55,6 +55,7 @@ class Vallas_fijasModel extends CI_model
             'ancho'=>$ancho,
             'alto'=>$alto,
             'material'=>$material,
+            "costo_renta" => $renta,
             'observaciones'=>$observaciones,
             'acabados'=>$acabados,
             'vista_corta'=>$imagen1,

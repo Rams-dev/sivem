@@ -41,17 +41,47 @@ let id_material;
 
 function rellenarInputs(data){
     data.map(d => {
+        window.exampleModalLabel.value = `Editar ${d.material}`;
+
         id_material = d.id;
         window.nombre.value = d.material;
         window.precio.value = d.precio;
+        window.unidad.value = d.unidad;
         window.descripcion.value = d.observaciones;
+        window.id.value = d.id;
     })
 }
 
 
 $("#frmEditarMaterial").submit(function(e){
     e.preventDefault();
-    console.log("hola");
+    let formdata = new FormData($("#frmEditarMaterial")[0]);
+
+    $.ajax({
+        url:'materiales/editarMaterial',
+        type:'post',
+        data: formdata,
+        cache: false,
+        contentType: false,
+       processData: false,
+   })
+    .done(function(response){
+        let res =  JSON.parse(response);
+        console.log(res)
+        if(res.success){
+            alertify.success(res.success);
+            $("#editarMaterial").model("hidden")
+           location.reload();
+       }
+        if(res.error){
+            alertify.error(res.error);
+        }
+        console.log(res);
+     })
+    .fail(function(err){
+        console.log("error")
+    })
+
 })
 
 async function eliminarMaterial(id){

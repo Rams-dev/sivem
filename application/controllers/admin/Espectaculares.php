@@ -48,6 +48,7 @@ class Espectaculares extends CI_Controller {
 		if($this->session->userdata('is_logged')){
 
 			 $ncontrol = $this->input->post('numcontrol');
+			 $cRenta = $this->input->post('costorenta');
 			 $cimpreso = $this->input->post('costoimpreso');
 			 $instalacion = $this->input->post('instalacion');
 			 $calle= $this->input->post('calle');
@@ -66,6 +67,16 @@ class Espectaculares extends CI_Controller {
 			 $material = $dataMaterial[0];
 			 $precio = $this->input->post('precio');
 			 $status = $this->input->post('status');
+			 $fechaInicioOcupacion ="";
+			 $fechaTerminoOcupacion ="";
+ 
+			 if($status == "APARTADO"){
+				 $fechaInicioOcupacion = $this->input->post("inicioOcupacion");
+				 $fechaTerminoOcupacion = $this->input->post("terminoOcupacion");
+			 }elseif($status == "OCUPADO"){
+				 $fechaTerminoOcupacion = $this->input->post("terminoOcupacion");
+			 }
+
 			 $observaciones = $this->input->post('observaciones');
 			 $acabados = $this->input->post('acabados');
 			 $iniciocontrato = $this->input->post('iniciocontrato');
@@ -113,7 +124,7 @@ class Espectaculares extends CI_Controller {
 			$telefono = intval(join('', explode('-',$this->input->post('telefono'))));
 
 
-			if(!$id_medio= $this->MediosModel->agregarMedio($status,$precio,$tipo_medio = "Espectacular")){
+			if(!$id_medio= $this->MediosModel->agregarMedio($status,$precio,$tipo_medio = "Espectacular",$fechaInicioOcupacion,$fechaTerminoOcupacion)){
 				echo json_encode(array('error' => 'no se pudo registrar el medio.'));
 				exit;
 			}else{	
@@ -124,6 +135,7 @@ class Espectaculares extends CI_Controller {
 					if(!$sql = $this->EspectacularesModel->agregarEspectacular( 
 						$id_medio,
 						$ncontrol,
+						$cRenta,
 						$cimpreso,
 						$instalacion,
 						$calle,
@@ -214,7 +226,8 @@ class Espectaculares extends CI_Controller {
 	function guardarCambiosEspectacular(){
 		if($this->session->userdata('is_logged')){
 
-		 	$id_espectacular = $this->input->post('espectacular_id');
+			$id_espectacular = $this->input->post('espectacular_id');
+			$cRenta = $this->input->post('costorenta');
 		 	$ncontrol = $this->input->post('numcontrol');
 		 	$cimpreso = $this->input->post('costoimpreso');
 		 	$instalacion = $this->input->post('instalacion');
@@ -327,6 +340,7 @@ class Espectaculares extends CI_Controller {
 			if(!$sql = $this->EspectacularesModel->editarEspectacular( 
 				$id_espectacular,
 				$ncontrol,
+				$cRenta,
 				$cimpreso,
 				$instalacion,
 				$calle,

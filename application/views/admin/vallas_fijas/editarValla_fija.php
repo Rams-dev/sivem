@@ -1,9 +1,7 @@
 <?php foreach($vallas_fijas as $valla):?>
-
 <h1 class="text-center" style="color:#ba0d0d;">Editar <?=$valla['nocontrol']?> </h1>
     <hr>
 
-    <!-- <?php var_dump($vallas_fijas) ?> -->
     <div class="col-lg-12">
         <form method="POST" enctype="multipart/form-data" action="<?= base_url("admin/vallas_fijas/guardarVallaFijaEditada")?>" name="editarVallaFija" id="editarVallaFija">
                 <h6 class="text-center"> Datos de la valla </h6>
@@ -48,8 +46,8 @@
                     <div class="col-lg-4 col-md-4" id="estado">
                         <div class="form-group">
                             <label for="estado" > Estado: </label>
-                                <select name="estado" id="estadoselect" class="form-control">
-                                    <option value="<?=$valla['id_estado']?>"><?=$valla['nombre']?></option>
+                                <select name="estado" id="estadoselect" class="form-control" value="<?=$valla['id_estado']?>">
+                                    <!-- <option value="<?=$valla['id_estado']?>"><?=$valla['nombre']?></option> -->
                                     <?php foreach($estados as $estado):?>
                                         <option value="<?= $estado['id'] .",". $estado['nombre']?>"><?= $estado['nombre']?></option>
                                     <?php endforeach?>
@@ -92,21 +90,28 @@
                         <hr>
                     </div>
 
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-3 col-md-3">
                         <div class="form-group">
                             <label for="ancho" > Ancho(m): </label>
                                 <input type="number" required class="form-control" id="ancho" name="ancho" value="<?=$valla['ancho']?>"  step="any">
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-3 col-md-3">
                         <div class="form-group">
                             <label for="alto" > Alto(m): </label>
                                 <input type="number" required class="form-control" id="alto" name="alto" value="<?=$valla['alto']?>"  step="any">
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-3 col-md-3"> 
+                        <div class="form-group">
+                            <label for="costoderenta"> Costo de renta: </label>
+                                <input type="number" class="form-control" id="costoderenta" name="costoderenta" value="<?=$valla['costo_renta']?>"  step="any" required>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3">
                         <div class="form group">
                             <label for="material" > Material: </label>
                                     <input type="text" required id="material" name="material" class="form-control" value="<?=$valla['material']?>" placeholder = "vinil - 65$"  readonly>
@@ -114,14 +119,15 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4"> 
+
+                    <div class="col-lg-3 col-md-3"> 
                         <div class="form-group">
                             <label for="costodeimpresion" > Costo de impresion: </label>
                                 <input type="text" required class="form-control" id="costodeimpresion" name="costodeimpresion" value="$ <?=$valla['costo_impresion']?>"  readonly>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-3 col-md-3">
                         <div class="form-group">
                             <label for="costodeinstalacion" > Costo de instalacion: </label>
                                 <input type="text" required class="form-control" id="costodeinstalacion" name="costodeinstalacion" value="$ <?=$valla['costo_instalacion']?>"   readonly>
@@ -129,14 +135,14 @@
                         </div>
                     </div>
                     
-                    <div class="col-sm-2 col-md-2">
+                    <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                             <label for="precio" > Precio: </label>
                             <input type="text" required class="form-control" id="precio" name="precio" value="$ <?=$valla['precio']?>"  readonly>
                         </div>
                     </div>
 
-                    <div class="col-sm-2 col-md-2">
+                    <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                             <label for="status"> Status: </label>
                                 <select class="form-control" id="status" name="status" value="" >
@@ -166,23 +172,23 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="imagen1" > Vista Corta : </label>
-                                <input type="file" required class="dropify" data-allowed-file-extensions="jpg jpeg"
-                                    id="imagen1" name="imagen1"  data-default-file="<?=base_url('assets/images/vallas_fijas/'.$valla['vista_corta'])?>" />
+                                <input type="file"  class="dropify" data-allowed-file-extensions="jpg jpeg"
+                                    id="imagen1" name="imagen1"  data-default-file="<?=base_url('assets/images/medios/'.$valla['vista_corta'])?>" />
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="imagen1" > Vista Media : </label>
-                                <input type="file" required class="dropify" data-allowed-file-extensions="jpg jpeg"
-                                    id="imagen2" name="imagen2"  data-default-file="<?=base_url('assets/images/vallas_fijas/'.$valla['vista_media'])?>" />
+                                <input type="file"  class="dropify" data-allowed-file-extensions="jpg jpeg"
+                                    id="imagen2" name="imagen2"  data-default-file="<?=base_url('assets/images/medios/'.$valla['vista_media'])?>" />
                         </div>
                     </div>
                             
                     <div class="col-lg-4 col-md-4">
                         <div class="form-group">
                             <label for="imagen1" > Vista Larga : </label>
-                                <input type="file" required class="dropify" data-allowed-file-extensions="jpg jpeg"
-                                    id="imagen3" name="imagen3" data-default-file="<?=base_url('assets/images/vallas_fijas/'.$valla['vista_media'])?>" />
+                                <input type="file"  class="dropify" data-allowed-file-extensions="jpg jpeg"
+                                    id="imagen3" name="imagen3" data-default-file="<?=base_url('assets/images/medios/'.$valla['vista_media'])?>" />
                         </div>
                     </div>
                     <div class="col-lg-12 my-5">
@@ -212,52 +218,52 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-4" id="nombre">
+                    <div class="col-md-4" id="nombre">
                         <div class="form-group ">
                             <label for="nombreprop" > Nombre:</label>
                             <input type="text" required class="form-control" id="nombreprop" name="nombreprop" value="<?=$valla['nombre_propietario']?>" >
                         </div>
                     </div>
 
-                    <div class="col-lg-3" id="celularDiv">
+                    <div class="col-md-4" id="celularDiv">
                         <div class="form-group">
                             <label for="celular" > Celular: </label>
                             <input type="text" required class="form-control" id="celular" name="celular" value="<?=$valla['celular']?>" >
                         </div>
                     </div>
 
-                    <div class="col-lg-3" id="telefonoDiv">
+                    <div class="col-md-4" id="telefonoDiv">
                         <div class="form-group">
                             <label for="telefono" > Teléfono: </label>
                             <input type="text" required class="form-control" id="telefono" name="telefono" value="<?=$valla['telefono']?>" >
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="monto" > Monto: </label>
                             <input type="text" required class="form-control" id="monto" name="monto" value="<?=$valla['monto']?>" >
                         </div>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="iniciocontrato" > Inicio:</label>
+                            <label for="iniciocontrato" > Fecha de inicio:</label>
                             <input type="date" required class="form-control" id="iniciocontrato" name="iniciocontrato" value="<?=$valla['fecha_inicio']?>" >
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="fincontrato" > Fin: </label>
+                            <label for="fincontrato" > Fecha de termino: </label>
                                 <input type="date" required class="form-control" id="fincontrato" name="fincontrato" value="<?=$valla['fecha_termino']?>" >
                         </div>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="tipopago" > Tipo pago: </label>
                                 <select class="form-control" id="tipopago" name="tipopago" value="" >
-                                    <option value="<?=$valla['id_periodo_pago']?>"><?=$valla['nombre_pago']?></option>
+                                    <option value="<?=$valla['id_tipo_pago']?>"><?=$valla['nombre_pago']?></option>
                                     <?php foreach($tipos_pago as $tipo):?>
                                     <option value="<?= $tipo['id']?>"><?= $tipo['nombre']?></option>
                                     <?php endforeach ?>
@@ -265,7 +271,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-lg-4">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="pago" > Periodo de Pago: </label>
                                 <select class="form-control" id="periodopago" name="periodopago" value=""

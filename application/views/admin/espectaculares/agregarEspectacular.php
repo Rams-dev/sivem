@@ -10,33 +10,14 @@
             <hr>
             <div class="row">
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="numcontrol"> #Control: </label>
                             <input type="text" class="form-control" id="numcontrol" name="numcontrol" value="" >
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="costoimpreso"> Costo Impresión:</label>
-                        <input type="number" class="form-control" id="costoimpreso" name="costoimpreso" value="0"  step="any" value="1" readonly>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="instalacion"> Costo de Instalación: </label>
-                        <input type="number" class="form-control" id="instalacion" name="instalacion" value="0"  step="any" value="0" readonly>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <h6> Domicilio y Ubicación</h6>
-                    <hr>
-                </div>
-
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="form-froup">
                         <label for="calle"> Calle: </label>
                         <input type="text" class="form-control" id="calle" name="calle" value="" >
@@ -51,14 +32,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="colonia"> Colonia: </label>
                         <input type="text" class="form-control" id="colonia" name="colonia" value="" >
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label for="localidad"> Localidad: </label>
                         <input type="text" class="form-control" id="localidad" name="localidad" value="" >
@@ -128,7 +109,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="material"> Material: </label>
                             <select class="form-control" id="material" name="material"  onchange="CalculaPrecio();">
@@ -139,8 +120,29 @@
                             </select>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="costorenta"> Costo renta:</label>
+                        <input type="number" class="form-control" id="costorenta" name="costorenta" onchange="CalculaPrecio();" required >
+                    </div>
+                </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="costoimpreso"> Costo Impresión:</label>
+                        <input type="number" class="form-control" id="costoimpreso" name="costoimpreso" value="0"  step="any" value="1" readonly>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="instalacion"> Costo de Instalación: </label>
+                        <input type="number" class="form-control" id="instalacion" name="instalacion" value="0"  step="any" value="0" readonly>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="precio"> Precio: </label>
                         <input type="text" class="form-control" id="precio" name="precio"  step="any" readonly>
@@ -150,7 +152,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="stats"> Status: </label>
-                        <select name="status" id="status" class="form-control">
+                        <select name="status" id="status" class="form-control" require>
                             <option value="">Sel. Status</option>
                             <option value="DISPONIBLE">DISPONIBLE</option>
                             <option value="OCUPADO">OCUPADO</option>
@@ -160,6 +162,20 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-3 d-none" id="desdeDiv">
+                        <div class="form-group">
+                            <label for="hasta" >Fecha inicio de ocupación </label>
+                            <input type="date" class="form-control" id="inicioOcupacion" name="inicioOcupacion">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 d-none" id="hastaDiv">
+                        <div class="form-group">
+                            <label for="hasta" > Fecha termino de ocupación: </label>
+                            <input type="date" class="form-control" id="terminoOcupacion" name="terminoOcupacion">
+                        </div>
+                    </div>
 
                 <div class="col-md-12">
                     <label for="observaciones"> Observaciones </label>

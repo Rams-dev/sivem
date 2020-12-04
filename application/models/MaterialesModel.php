@@ -6,9 +6,10 @@ class MaterialesModel extends CI_model{
 		$this->load->database();
 	}
 
-	public function agregarMaterial($nombre, $precio,$observacion){
+	public function agregarMaterial($nombre, $precio, $unidad, $observacion){
 		$data = array('material' => $nombre,
 						'precio' => $precio,
+						'unidad' => $unidad,
 						'observaciones' => $observacion 
 				);
 		$sql = $this->db->insert('materiales',$data);
@@ -37,6 +38,22 @@ class MaterialesModel extends CI_model{
 		$sql = $this->db->get_where('materiales', array('id' => $id));
 		if($sql){
 			return $sql->result_array();
+		}else{
+			return false;
+		}
+	}
+
+	public function editarMaterial($id_material,$nombre,$precio,$unidad, $observacion){
+		$data = array(
+			"material" => $nombre,
+			" precio" => $precio,
+			"unidad" => $unidad,
+			"observaciones" => $observacion
+		);
+		$this->db->where("id",$id_material);
+		$sql= $this->db->update("materiales",$data);
+		if($sql){
+			return true;
 		}else{
 			return false;
 		}
