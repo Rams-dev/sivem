@@ -41,7 +41,7 @@ class Dashboard extends CI_Controller {
 				}
 			}
 
-			var_dump($mediosOcupados);
+			// var_dump($mediosOcupados);
 
 
 

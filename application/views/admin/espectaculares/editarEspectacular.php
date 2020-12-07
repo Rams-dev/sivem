@@ -1,5 +1,6 @@
 
 <?php
+var_dump($espectaculares);
  foreach($espectaculares as $espectacular){
     }?>
 
@@ -52,10 +53,12 @@
                     <div class="form-group">
                         <label for="estado"> Estado: </label>
                         <select name="estado" id="estadoselect" class="form-control" value="" >
-                          <option value="<?=$espectacular['id_estado']." ". $espectacular['nombre_estado']?>'" selected><?=$espectacular['nombre_estado']?></option>
-                            <?php foreach($estados as $estado):?>
-                            <option value="<?= $estado['id'].','. $estado['nombre']?>"> <?= $estado['nombre'] ?></option>
-                            <?php endforeach?>
+                            <?php foreach($estados as $estado){
+                                if($espectacular['id_estado'] == $estado['id']){?>
+                                    <option selected value="<?= $estado['id'].','. $estado['nombre']?>"> <?= $estado['nombre'] ?></option>
+                                <?php }else{   ?>
+                                    <option value="<?= $estado['id'].','. $estado['nombre']?>"> <?= $estado['nombre'] ?></option>
+                                <?php }}?>
                         </select>
 
                     </div>
@@ -116,10 +119,13 @@
                     <div class="form-group">
                         <label for="material"> Material: </label>
                             <select class="form-control" id="material" name="material" value="<?= $espectacular['id_material']?>" onchange="CalculaPrecio();">
-                                <option value="<?=$espectacular['id_material'] .','. $espectacular['precio_material']?>"><?= $espectacular['material'] ." $". $espectacular['precio_material']?></option>
-                                <?php foreach($materiales as $material):?>
-                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
-                                 <?php endforeach ?>       
+                                <?php foreach($materiales as $material){
+                                    if($espectacular['id_material'] == $material['id']){?>
+                                        <option selected value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio'] ." ".$material['unidad']?></option>
+                                    <?php }else{
+                                    ?>
+                                        <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio'] ." ".$material['unidad']?></option>
+                                    <?php }} ?>       
                             </select>
                     </div>
                 </div>
@@ -262,10 +268,13 @@
                     <div class="form-group">
                         <label for="tipopago"> Tipo pago: </label>
                         <select class="form-control" value="" id="tipopago" name="tipopago" value="">
-                            <option value="<?= $espectacular['id_tipo_pago']?>"><?= $espectacular['tipo_de_pago']?></option>
-                            <?php foreach($tipos_pago as $pagos):?>
-                            <option value="<?=$pagos['id']?>"><?=$pagos['nombre']?></option>
-                            <?php endforeach?>
+                            <?php foreach($tipos_pago as $pagos){
+                                if($espectacular['id_tipo_pago'] == $pagos['id']){?>
+                                    <option selected value="<?=$pagos['id']?>"><?=$pagos['nombre']?></option>
+                                <?php }else{
+                                ?>
+                                    <option value="<?=$pagos['id']?>"><?=$pagos['nombre']?></option>
+                                <?php }}?>
                             
                         </select>
                     </div>
@@ -275,10 +284,13 @@
                     <div class="form-group">
                         <label for="pago"> Pago: </label>
                         <select class="form-control" id="periodopago" name="periodopago" value="">
-                            <option value="<?= $espectacular['id_periodo_pago']?>"><?= $espectacular['periodo']?></option>
-                            <?php foreach($periodos_pago as $periodo_pago):?>
-                            <option value="<?= $periodo_pago['id']?>"><?= $periodo_pago['periodo']?></option>
-                            <?php endforeach?>
+                            <?php foreach($periodos_pago as $periodo_pago){
+                                if($espectacular['id_periodo_pago'] == $periodo_pago['id']){?>
+                                    <option selected value="<?= $periodo_pago['id']?>"><?= $periodo_pago['periodo']?></option>
+                                <?php }else{
+                                ?>
+                                    <option value="<?= $periodo_pago['id']?>"><?= $periodo_pago['periodo']?></option>
+                                <?php }}?>
                         </select>
                     </div>
                 </div>

@@ -50,6 +50,7 @@ function RellenarInputs(data){
         window.Ecorreo.value = d.correo;
         window.Etelefono.value = d.telefono;
         window.Epuesto.value = d.puesto;
+        window.Elicencia.value = d.licencia;
         window.Esexo.value = d.sexo;
         window.Eacceso.value = d.acceso;
         if(d.acceso == "si"){

@@ -50,6 +50,17 @@ class Vallas_moviles extends CI_Controller {
             $anio = $this->input->post('anio');
             $precio = $this->input->post('costo');
             $status = $this->input->post('status');
+
+            $fechaInicioOcupacion ="";
+            $fechaTerminoOcupacion ="";
+    
+            if($status == "APARTADO"){
+                $fechaInicioOcupacion = $this->input->post("inicioOcupacion");
+                $fechaTerminoOcupacion = $this->input->post("terminoOcupacion");
+            }elseif($status == "OCUPADO"){
+                $fechaTerminoOcupacion = $this->input->post("terminoOcupacion");
+            }
+
             $anchoLateral = $this->input->post('anchoLateral');
             $altoLateral = $this->input->post('altoLateral');
             $materialLateral = $this->input->post('materialLateral');
@@ -70,7 +81,7 @@ class Vallas_moviles extends CI_Controller {
             // echo json_encode(array($nocontrol,$marca,$modelo,$anio,$costo,$costo,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$observaciones,$acabados));
 
 
-            $config['upload_path'] = "./assets/images/vallas_moviles";
+            $config['upload_path'] = "./assets/images/medios";
 			$config['allowed_types'] = "*";       	
 			$this->load->library('upload', $config);
 
@@ -103,11 +114,11 @@ class Vallas_moviles extends CI_Controller {
 				echo json_encode("no se subio la imagen3");
             }
 
-            if(!$id_medio = $this->MediosModel->agregarMedio($status,$precio,$tipo_medio ="Vallas movil")){
+            if(!$id_medio = $this->MediosModel->agregarMedio($status,$precio,$tipo_medio ="Vallas movil",$fechaInicioOcupacion,$fechaTerminoOcupacion)){
                 echo json_encode(array("error" => "Error, no se pudo Agregar medio"));
-                unlink('assets/images/vallas_moviles'.$imagen1);
-                unlink('assets/images/vallas_moviles'.$imagen2);
-                unlink('assets/images/vallas_moviles'.$imagen3);
+                unlink('assets/images/medios'.$imagen1);
+                unlink('assets/images/medios'.$imagen2);
+                unlink('assets/images/medios'.$imagen3);
                 exit;
             }
             
@@ -178,6 +189,8 @@ class Vallas_moviles extends CI_Controller {
         $anio = $this->input->post('anio');
         $precio = $this->input->post('costo');
         $status = $this->input->post('status');
+       
+
         $anchoLateral = $this->input->post('anchoLateral');
         $altoLateral = $this->input->post('altoLateral');
         $materialLateral = $this->input->post('materialLateral');
@@ -192,9 +205,78 @@ class Vallas_moviles extends CI_Controller {
         $materialFrente = $this->input->post('materialFrente');
         $observaciones = $this->input->post('observaciones');
         $acabados = $this->input->post('acabados');
+
+        $config['upload_path'] = "./assets/images/medios";
+			$config['allowed_types'] = "*";       	
+			$this->load->library('upload', $config);
+
+			if($this->upload->do_upload('imagen1')) {
+				$data['uploadSuccess'] = $this->upload->data();
+				$data = array('upload_data' => $this->upload->data());
+				$imagen1 = $data['upload_data']['file_name'];
+			}else{
+				$imagen1 ="";
+
+			}	
+
+			if($this->upload->do_upload('imagen2')) {
+				$data['uploadSuccess'] = $this->upload->data();
+				$data = array('upload_data' => $this->upload->data());
+				$imagen2 = $data['upload_data']['file_name'];
+			}else{
+				$imagen2 ="";
+
+			}
+
+			if($this->upload->do_upload('imagen3')) {
+				$data['uploadSuccess'] = $this->upload->data();
+				$data = array('upload_data' => $this->upload->data());
+				$imagen3 = $data['upload_data']['file_name'];
+
+			}else{
+				$imagen3 ="";
+            }
+
+
+
+                        
+ /*-------------------------------------------------------- E L I M I N A R    F O T O S --------------------------------- */
+
+        $vallas_moviles = $this->Vallas_movilesModel->obtenerValla_movilPorId($id_medio);
+        //  var_dump($vallas_fijas);
+        //  exit;
+
+        foreach($vallas_moviles as $vallas){
+            if($imagen1 != ""){
+                if(file_exists("assets/images/medios/". $vallas['vista_corta'])){
+                    unlink("assets/images/medios/". $vallas['vista_corta']);
+                }
+            }
+            if($imagen2 != ""){
+                if(file_exists("assets/images/medios/". $vallas['vista_media'])){
+                    unlink("assets/images/medios/". $vallas['vista_media']);
+                }
+            }
+            if($imagen3 != ""){
+                if(file_exists("assets/images/medios/". $vallas['vista_larga'])){
+                    unlink("assets/images/medios/". $vallas['vista_larga']);
+                }
+            }
+        }
+
+
+        if(!$medioEditado = $this->MediosModel->guardarCambiosMedio($id_medio,$precio,$status)){
+            echo json_encode(array("error" => "Ha ocurrido un error al hacer cambios con el medio"));
+            exit;
+        }
+        if($VMEditado = $this->Vallas_movilesModel->guardarCambiosValla_movli($id_medio,$nocontrol,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$observaciones,$imagen1,$imagen2,$imagen3)){
+            echo json_encode(array("success" => "Cambios guardados correctamente"));
+        }else{
+            echo json_encode(array("error" => "Ha ocurrido un error al modificar la valla movil"));
+        }
  
-        $formData = $this->input->post();
-        echo json_encode($formData);
+        // $formData = $this->input->post();
+        // echo json_encode($formData);
     }
 
 }

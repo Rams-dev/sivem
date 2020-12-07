@@ -50,7 +50,7 @@ class EspectacularesModel extends CI_model{
         $this->db->join('periodo_pago', 'periodo_pago.id = espectaculares.id_periodo_pago','inner');
         $this->db->select('tipos_pago.nombre as tipo_de_pago');
         $this->db->join('tipos_pago', 'tipos_pago.id = espectaculares.id_tipo_pago','inner');
-        $this->db->select('material, materiales.precio as precio_material');
+        $this->db->select('material, materiales.precio as precio_material, materiales.unidad');
         $this->db->join('materiales', 'materiales.id = espectaculares.id_material','inner');
         $this->db->join('estados', 'estados.id = espectaculares.id_estado','inner');
         //$this->db->select('medios.monto as monto medios.id as id_medio');
@@ -99,7 +99,7 @@ class EspectacularesModel extends CI_model{
         $this->db->join('periodo_pago', 'periodo_pago.id = espectaculares.id_periodo_pago','left');
         $this->db->select('tipos_pago.nombre as tipo_de_pago');
         $this->db->join('tipos_pago', 'tipos_pago.id = espectaculares.id_tipo_pago','left');
-        $this->db->select('material, materiales.precio as precio_material');
+        $this->db->select('material, materiales.precio as precio_material, materiales.unidad');
         $this->db->join('materiales', 'materiales.id = espectaculares.id_material','left');
         $this->db->select('estados.nombre as nombre_estado');
         $this->db->join('estados', 'estados.id = espectaculares.id_estado','left');

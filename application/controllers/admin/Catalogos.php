@@ -7,6 +7,8 @@ class Catalogos extends CI_Controller {
 		parent::__Construct();
 		$this->load->model('Models');
 		$this->load->model('MediosModel');
+		$this->load->model('Vallas_movilesModel');
+		
 		$this->load->model('ClientesModel');
 		$this->load->model('EspectacularesModel');
 		$this->load->model('Vallas_fijasModel');
@@ -31,7 +33,10 @@ class Catalogos extends CI_Controller {
 		// $datos = $this->MediosModel->obtenerMedios();
 		$espectaculares = $this->EspectacularesModel->obtenerEspectaculares();
 		$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
-		$datos = array_merge($espectaculares,$vallas_fijas);
+		$vallas_moviles = $this->Vallas_movilesModel->obtenerVallas_moviles();
+		// $datos = $espectaculares = $vallas_moviles + $vallas_fijas;
+		$datos = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
+
 		echo json_encode($datos);
 	}   
 
@@ -55,8 +60,10 @@ class Catalogos extends CI_Controller {
 			if($id_estado == "" && $municipio == "" && $status == "" && $tipo_medio == "" ){
 				$espectaculares = $this->EspectacularesModel->obtenerEspectaculares();
 				$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
-				// var_dump($vallas_fijas);
-				$datos = array_merge($espectaculares,$vallas_fijas);
+				$vallas_moviles = $this->Vallas_movilesModel->obtenerVallas_moviles();
+				// var_dump($vallas_moviles);
+				// $datos = $espectaculares = $vallas_fijas + $vallas_moviles; 
+				$datos = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
 			}
 			else{
 				if(!$datos = $this->MediosModel->getMediosHttp($id_estado,$municipio,$status,$tipo_medio)){
@@ -86,8 +93,10 @@ class Catalogos extends CI_Controller {
 		if($estado == "" && $status == "" && $medio == ""){
 			$espectaculares = $this->EspectacularesModel->obtenerEspectaculares();
 				$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
+				$vallas_moviles = $this->Vallas_movilesModel->obtenerVallas_moviles();
+
 				// var_dump($vallas_fijas);
-				$data["medios"] = array_merge($espectaculares,$vallas_fijas);
+				$data["medios"] = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
 		}else{
 			if(!$datos = $this->MediosModel->getMediosHttp($estado,$status,$medio)){
 				echo json_encode("error");

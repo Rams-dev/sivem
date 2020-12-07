@@ -9,12 +9,17 @@ class Ventas extends CI_Controller {
 		$this->load->model('ClientesModel');
 		$this->load->model('VentasModel');
 		$this->load->model('MediosModel');
+		$this->load->model('EmpleadosModel');
 
 	}
 	public function index()
 	{
 		if($this->session->userdata('is_logged')){
-            $data['ventas'] = $this->VentasModel->obtenerVentas();
+            $espectaculares = $this->VentasModel->obtenerVentasEspectaculares();
+            $vallas_fijas = $this->VentasModel->obtenerVentasVallas_fijas();
+            $vallas_moviles = $this->VentasModel->obtenerVentasVallas_moviles();
+
+            $data["ventas"] = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
             $this->load->view('admin/templates/__head');
             $this->load->view('admin/templates/__nav');
             $this->load->view('admin/ventas/ventas',$data);
@@ -64,6 +69,40 @@ class Ventas extends CI_Controller {
             redirect('login');
         }
     }
+
+    public function obtenerVallasMovilesDisponibles(){
+        $h1 = $this->input->post("h1");
+        $h2 = $this->input->post("h2");
+        $f1 = $this->input->post("f1");
+        $f2 = $this->input->post("f2");
+        $id = $this->input->post("id");
+
+        $vallas_disponibles = $this->MediosModel->obtenerMediosDisponibles($id);
+        $vallas_apartadas_por_fecha = $this->MediosModel->obtenerMediosApartadosPorFecha($id,$f1,$f2);
+        $vallas_disponibles_porhorario= $this->MediosModel->obtenerMediosApartadosPorHorario($id,$f1,$f2,$h1,$h2);
+        $vallas = array_merge($vallas_disponibles,$vallas_apartadas_por_fecha);
+
+
+        echo json_encode($vallas);
+        
+    }
+
+    public function obtenerChoferesDisponibles(){
+        $h1 = $this->input->post("h1");
+        $h2 = $this->input->post("h2");
+        $f1 = $this->input->post("f1");
+        $f2 = $this->input->post("f2");
+
+        $choferes = $this->EmpleadosModel->obtenerChoferes();
+        echo json_encode($choferes);
+        exit;
+
+        if($data = $this->EmpleadosModel->obtenerChoferesDisponibles($h1,$h2,$f1,$f2)){
+            echo json_encode($data);
+        }
+        // echo json_encode($data);
+    }
+
 
     public function verificarDisponibilidad(){
         $data = $this->input->post();
@@ -118,14 +157,18 @@ class Ventas extends CI_Controller {
         $factura = $this->input->post('factura');
         $tipoPago = $this->input->post('tipoDePago');
         $id_tipoMedio = $this->input->post('tipoMedio');
-        // if($id_tipoMedio == '1'){
-        //     $tipoMedio = 'espectaculares';
-        // }elseif($id_tipoMedio == '2'){
-        //     $tipoMedio = 'vallas fijas';
-        // }else{
-        //     $tipoMedio = 'vallas moviles';
-        // }
-        // $medio = $this->input->post('medio');
+        $horai="";
+        $horaf="";
+        $id_chofer="";
+        if($id_tipoMedio == "3"){
+            $horai = $this->input->post("hinicio");
+            $horaf = $this->input->post("htermino");
+            $id_chofer = $this->input->post("chofer");
+        }else{
+            $horai="";
+            $horaf="";
+            $id_chofer="";
+        }
         $monto = $this->input->post('monto');
         $fecha_venta =  date('Y-m-d h:i:s');
         $idsMedios =explode(',',$this->input->post("idmedios")); 
@@ -150,7 +193,7 @@ class Ventas extends CI_Controller {
         }
         //var_dump($sql);
         for($m = 0; $m < count($idsMedios); $m++){
-            if(!$query = $this->VentasModel->agregarVentaMedio($sql,$idsMedios[$m],$noPagos,$tipoPago,$fechaInicio,$fechaTermino)){
+            if(!$query = $this->VentasModel->agregarVentaMedio($sql,$idsMedios[$m],$noPagos,$tipoPago,$fechaInicio,$fechaTermino,$horai,$horaf,$id_chofer)){
                 echo json_encode(array('error'=> 'error, intentalo mas tarde.'));
                 $this->VentasModel->eliminarVenta($sql);
             }else{

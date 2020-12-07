@@ -16,25 +16,28 @@
                             </select>
                     </div>
             </div>
-            <!-- <div class="col-md-6">
-                    <div class="form-group">
-                            <label for="tipoDeArte">Tipo de arte</label>
-                            <input type="text" class="form-control" name="tipoDeArte" id="tipoDeArte">
-                    </div>
-            </div> -->
-            <div class="col-md-5">
-            <div class="form-group">
+            <div class="col-md-3">
+                <div class="form-group">
+                        <label for="tipoDeVenta">Tipo de Venta</label>
+                        <select name="tipoVenta" id="tipoVenta" class="form-control">
+                                <option value="completa">Venta completa</option>
+                                <option value="renta">Solo renta</option>
+                        </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
                     <label for="fechaInicio">Fecha de inicio</label>
                     <input type="date" class="form-control" name="fechaInicio" id="fechaInicio">
+                 </div>
             </div>
-            </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
                     <div class="form-group">
                             <label for="fechaTermino">Fecha de termino</label>
                             <input type="date" class="form-control" name="fechaTermino" id="fechaTermino">
                     </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                     <div class="form-group">
                             <label for="pagos">No pagos</label>
                             <input type="number" class="form-control" name="pagos" id="pagos">
@@ -90,6 +93,31 @@
                     </div>
             </div>
 
+            <div class="col-md-4 d-none" id="horainicio">
+                    <div class="form-group">
+                        <label for="hinicio">Hora de inicio</label>
+                        <input type="time" class="form-control" name="hinicio" id="hinicio">
+                     </div>
+            </div>
+
+            <div class="col-md-4 d-none" id="horatermino">
+                    <div class="form-group">
+                        <label for="htermino">Hora de termino</label>
+                        <input type="time" class="form-control" name="htermino" id="htermino">
+                    </div>
+            </div>
+
+            
+            <div class="col-md-4 d-none" id="choferdiv">
+                <div class="form-group">
+                        <label for="descuentoCantidad">Chofer</label>
+                        <select name="chofer" id="chofer" class="form-control">
+                        <option value="">Select. Chofer</option>
+                        
+                        </select>
+                </div>
+            </div>
+
             <div class="col-md-12">
                     <div class="form-group">
                             <label for="medio">Medio</label>
@@ -108,28 +136,35 @@
             <th scope="col">#</th>
             <th scope="col">No de control</th>
             <th scope="col">Ubicación</th>
-            <th scope="col">Costo</th>
+            <th scope="col">Renta/m</th>
+            <th scope="col">Instalacion</th>
+            <th scope="col">Impresion</th>
+            <th scope="col">total</th>
             </tr>
         </thead>
         <tbody id="bodyTable">
         </tbody>
 
-        <tr class="d-none" id="iva">
-            <td colspan="3">Iva</td>
+        <tr class="d-none td" id="iva">
+            <td colspan="5"></td>
+            <td>Iva</td>
             <td> %16 </td>
         </tr>
          
         <tr >
-            <td colspan="3" >Total</td>
+            <td colspan="5"></td>
+            <td>Total</td>
             <td id="preciototal">$ 0</td>
         </tr>
         <tr>
-            <td colspan="3" >Descuento</td>
+            <td colspan="5"></td>
+            <td>Descuento</td>
             <td id="desc" class="text-danger">$ 0</td>
         </tr>
 
         <tr>
-            <td colspan="3" >precio final</td>
+            <td colspan="5"></td>
+            <td>precio final</td>
             <td id="precioConDescuento" class="text-success">$ 0</td>
         </tr>
         

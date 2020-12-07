@@ -6,7 +6,7 @@ foreach($vallas_moviles as $vallas):
 ?>
 
 <div class="my-5">
-<h3 class="text-center text-danger" >Agregar valla movil</h3>
+<h3 class="text-center text-danger" >Editar valla movil <?= $vallas['nocontrol']?></h3>
 <hr>
 </div>
 <form action="<?=base_url("admin/vallas_moviles/guardarValla_movilEditado")?>" id="editarValla_movil" method="post">
@@ -46,8 +46,8 @@ foreach($vallas_moviles as $vallas):
         <div class="col-md-3">
             <div class="form-group">
                 <label for="status">Status</label>
-                <select class="form-control" id="status" name="status" value="" >
-                    <option value="<?=$vallas['status']?>"><?=$vallas['status']?></option>
+                <select class="form-control" id="status" name="status" >
+                     <option value="<?=$vallas['status']?>"><?=$vallas['status']?></option>
                     <option value="DISPONIBLE">DISPONIBLE</option>
                     <option value="OCUPADO">OCUPADO</option>
                     <option value="APARTADO">APARTADO</option>
@@ -86,11 +86,15 @@ foreach($vallas_moviles as $vallas):
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="materialLateral">Material</label>
-                        <select name="materialLateral" id="materialLateral" class="form-control form-control-sm">
-                        <option value="">Sel. Material</option>
-                                <?php foreach($materiales as $material):?>
+                        <select name="materialLateral" id="materialLateral" class="form-control form-control-sm" >
+                        <!-- <option value="">Sel. Material</option> -->
+                                <?php foreach($materiales as $material){
+                                if($material["id"] == $vallas["lateral_id_material"]){?>
+                                <option selected value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                <?php }else{ ?>
+                                
                                 <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
-                                 <?php endforeach ?> 
+                                <?php } }?> 
                         </select>
                     </div>
                 </div>
@@ -114,10 +118,13 @@ foreach($vallas_moviles as $vallas):
                     <div class="form-group">
                         <label for="materialFaldon">Material</label>
                         <select name="materialFaldon" id="materialFaldon" class="form-control form-control-sm">
-                        <option value="">Sel. Material</option>
-                                <?php foreach($materiales as $material):?>
+                        <!-- <option value="">Sel. Material</option> -->
+                                <?php foreach($materiales as $material){
+                                if($material["id"] == $vallas["faldon_id_material"]){?>
+                                <option selected value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                <?php }else{ ?>
                                 <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
-                                 <?php endforeach ?> 
+                                <?php }} ?> 
                         </select>
                     </div>
                 </div>
@@ -145,10 +152,14 @@ foreach($vallas_moviles as $vallas):
                     <div class="form-group">
                         <label for="materialPuerta">Material</label>
                         <select name="materialPuerta" id="materialPuerta" class="form-control form-control-sm">
-                        <option value="">Sel. Material</option>
-                                <?php foreach($materiales as $material):?>
+                        <!-- <option value="">Sel. Material</option> -->
+                                <?php foreach($materiales as $material){
+                                if($material["id"] === $vallas["faldon_id_material"]){?>
+                                <option selected value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                
+                                <?php }else{ ?>
                                 <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
-                                 <?php endforeach ?> 
+                                <?php }} ?> 
                         </select>
                     </div>
                 </div>
@@ -173,9 +184,12 @@ foreach($vallas_moviles as $vallas):
                         <label for="materialFrente">Material</label>
                         <select name="materialFrente" id="materialFrente" class="form-control form-control-sm">
                         <option value="">Sel. Material</option>
-                                <?php foreach($materiales as $material):?>
+                                <?php foreach($materiales as $material){
+                                if($material["id"] == $vallas["frente_id_material"]){?>
+                                <option selected value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                <?php }else{ ?>
                                 <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
-                                 <?php endforeach ?> 
+                                <?php }} ?> 
                         </select>
                     </div>
                 </div>
@@ -202,21 +216,21 @@ foreach($vallas_moviles as $vallas):
         <div class="col-md-4">
             <div class="form-group">
                 <label for="imagen1"> Vista Corta </label>
-                <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen1" name="imagen1" data-default-file="<?=base_url('assets/images/vallas_moviles/'.$vallas['vista_corta'])?>"/>
+                <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen1" name="imagen1" data-default-file="<?=base_url('assets/images/medios/'.$vallas['vista_corta'])?>"/>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
                 <label for="imagen2"> Vista Media </label>
-                <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen2" name="imagen2" data-default-file="<?=base_url('assets/images/vallas_moviles/'.$vallas['vista_media'])?>"/>
+                <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen2" name="imagen2" data-default-file="<?=base_url('assets/images/medios/'.$vallas['vista_media'])?>"/>
             </div>
         </div>
             
         <div class="col-md-4">
             <div class="form-group">
                 <label for="imagen3"> Vista Larga </label>
-                <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen3" name="imagen3" data-default-file="<?=base_url('assets/images/vallas_moviles/'.$vallas['vista_larga'])?>"/>
+                <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen3" name="imagen3" data-default-file="<?=base_url('assets/images/medios/'.$vallas['vista_larga'])?>"/>
             </div>
         </div>
         <input type="hidden" value="<?=$vallas['id_medio']?>" name="id_medio">

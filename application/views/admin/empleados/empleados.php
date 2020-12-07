@@ -108,6 +108,13 @@
 
                 <div class="col-md-5">
                     <div class="form-group">
+                        <label for="">Licencia (solo si es chofer)</label>
+                        <input type="text" name="licencia" id="licencia" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
                         <label for="">Sexo</label>
                         <select name="sexo" id="sexo" class="form-control">
                             <option value="M"> Masculino</option>
@@ -218,6 +225,13 @@
                     <div class="form-group">
                         <label for="">Puesto</label>
                         <input type="text" name="Epuesto" id="Epuesto" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="">Licencia (solo si es chofer)</label>
+                        <input type="text" name="Elicencia" id="Elicencia" class="form-control">
                     </div>
                 </div>
 

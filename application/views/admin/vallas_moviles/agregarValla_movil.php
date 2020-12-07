@@ -49,6 +49,21 @@
                 </select>
             </div>
         </div>
+
+        <div class="col-lg-3 col-md-3 d-none" id="desdeDiv">
+            <div class="form-group">
+                <label for="hasta" >Fecha inicio de ocupación </label>
+                <input type="date" class="form-control" id="inicioOcupacion" name="inicioOcupacion">
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 d-none" id="hastaDiv">
+            <div class="form-group">
+                <label for="hasta" > Fecha termino de ocupación: </label>
+                <input type="date" class="form-control" id="terminoOcupacion" name="terminoOcupacion">
+            </div>
+        </div>
+
     </div>
 
 
@@ -82,7 +97,7 @@
                         <select name="materialLateral" id="materialLateral" class="form-control form-control-sm">
                         <option value="">Sel. Material</option>
                                 <?php foreach($materiales as $material):?>
-                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio'] . " ". $material['unidad']?></option>
                                  <?php endforeach ?> 
                         </select>
                     </div>
@@ -109,7 +124,7 @@
                         <select name="materialFaldon" id="materialFaldon" class="form-control form-control-sm">
                         <option value="">Sel. Material</option>
                                 <?php foreach($materiales as $material):?>
-                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']. " ". $material['unidad']?></option>
                                  <?php endforeach ?> 
                         </select>
                     </div>
@@ -140,7 +155,7 @@
                         <select name="materialPuerta" id="materialPuerta" class="form-control form-control-sm">
                         <option value="">Sel. Material</option>
                                 <?php foreach($materiales as $material):?>
-                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']. " ". $material['unidad']?></option>
                                  <?php endforeach ?> 
                         </select>
                     </div>
@@ -167,7 +182,7 @@
                         <select name="materialFrente" id="materialFrente" class="form-control form-control-sm">
                         <option value="">Sel. Material</option>
                                 <?php foreach($materiales as $material):?>
-                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']. " ". $material['unidad']?></option>
                                  <?php endforeach ?> 
                         </select>
                     </div>

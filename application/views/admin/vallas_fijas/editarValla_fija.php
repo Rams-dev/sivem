@@ -46,11 +46,14 @@
                     <div class="col-lg-4 col-md-4" id="estado">
                         <div class="form-group">
                             <label for="estado" > Estado: </label>
-                                <select name="estado" id="estadoselect" class="form-control" value="<?=$valla['id_estado']?>">
+                                <select name="estado" id="estadoselect" class="form-control">
                                     <!-- <option value="<?=$valla['id_estado']?>"><?=$valla['nombre']?></option> -->
-                                    <?php foreach($estados as $estado):?>
+                                    <?php foreach($estados as $estado){
+                                    if($valla['id_estado'] == $estado['id']){?>
+                                        <option selected value="<?= $estado['id'] .",". $estado['nombre']?>"><?= $estado['nombre']?></option>
+                                    <?php }else{   ?>
                                         <option value="<?= $estado['id'] .",". $estado['nombre']?>"><?= $estado['nombre']?></option>
-                                    <?php endforeach?>
+                                    <?php }}?>
                                 </select>
                         </div>
                     </div>
@@ -145,13 +148,13 @@
                     <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                             <label for="status"> Status: </label>
-                                <select class="form-control" id="status" name="status" value="" >
+                                <select class="form-control" id="status" name="status">
                                     <option value="<?=$valla['status']?>"><?=$valla['status']?></option>
-                                    <option value="Disponible">Disponible</option>
-                                    <option value="Ocupado">Ocupado</option>
-                                    <option value="Aparado">Aparado</option>
-                                    <option value="Reparacion">Reparacion</option>
-                                    <option value="Bloqueado">Bloqueado</option>
+                                    <option value="DISPONIBLE">DISPONIBLE</option>
+                                    <option value="OCUPADO">OCUPADO</option>
+                                    <option value="APARTADO">APARTADO</option>
+                                    <option value="REPARACION">Reparacion</option>
+                                    <option value="BLOQUEADO">BLOQUEADO</option>
                                 </select>
                         </div>
                     </div>
@@ -263,10 +266,13 @@
                         <div class="form-group">
                             <label for="tipopago" > Tipo pago: </label>
                                 <select class="form-control" id="tipopago" name="tipopago" value="" >
-                                    <option value="<?=$valla['id_tipo_pago']?>"><?=$valla['nombre_pago']?></option>
-                                    <?php foreach($tipos_pago as $tipo):?>
-                                    <option value="<?= $tipo['id']?>"><?= $tipo['nombre']?></option>
-                                    <?php endforeach ?>
+                                    <?php foreach($tipos_pago as $tipo){
+                                    if($valla['id_tipo_pago'] == $tipo['id']){?>
+                                        <option selected value="<?= $tipo['id']?>"><?= $tipo['nombre']?></option>
+                                    <?php }else{
+                                    ?>
+                                        <option value="<?= $tipo['id']?>"><?= $tipo['nombre']?></option>
+                                    <?php }} ?>
                                 </select>
                         </div>
                     </div>
@@ -276,10 +282,13 @@
                             <label for="pago" > Periodo de Pago: </label>
                                 <select class="form-control" id="periodopago" name="periodopago" value=""
                                     >
-                                    <option value="<?=$valla['id_periodo_pago']?>"><?=$valla['periodo']?></option>
-                                    <?php foreach($periodos_pago as $periodo):?>
-                                    <option value="<?= $periodo['id']?>"><?= $periodo['periodo']?></option>
-                                    <?php endforeach ?>
+                                    <?php foreach($periodos_pago as $periodo){
+                                    if($valla['id_periodo_pago'] == $periodo['id']){?>
+                                        <option selected value="<?= $periodo['id']?>"><?= $periodo['periodo']?></option>
+                                    <?php }else{
+                                    ?>
+                                        <option value="<?= $periodo['id']?>"><?= $periodo['periodo']?></option>
+                                    <?php }} ?>
                                 </select>
                         </div>
                     </div>

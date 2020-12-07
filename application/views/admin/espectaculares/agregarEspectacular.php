@@ -115,7 +115,7 @@
                             <select class="form-control" id="material" name="material"  onchange="CalculaPrecio();">
                                 <option value="">Sel. Material</option>
                                 <?php foreach($materiales as $material):?>
-                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio']?></option>
+                                <option value="<?=$material['id'] .','. $material['precio']?>"><?= $material['material'] ." $". $material['precio'] ." " . $material['unidad']?></option>
                                  <?php endforeach ?>       
                             </select>
                     </div>

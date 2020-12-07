@@ -1,3 +1,27 @@
+
+  const selectStatus = document.querySelector("#status");
+  const inicioOcupacion = document.querySelector("#desdeDiv");
+  const terminoOcupacion = document.querySelector("#hastaDiv");
+
+
+selectStatus.addEventListener("change", function(e){
+    e.preventDefault();
+    console.log(this.value)
+    if(this.value == "OCUPADO"){
+        terminoOcupacion.classList.remove("d-none");
+        inicioOcupacion.classList.add("d-none");
+
+    }else if(this.value == "APARTADO"){
+        inicioOcupacion.classList.remove("d-none");
+        terminoOcupacion.classList.remove("d-none");
+    }else{
+        inicioOcupacion.classList.add("d-none");
+        terminoOcupacion.classList.add("d-none");
+    }
+})
+
+
+
 $("#guardarValla_movil").submit(function(e){
     e.preventDefault();
 
@@ -7,7 +31,7 @@ $("#guardarValla_movil").submit(function(e){
         type:"post",
         data: formData,
         cache:false,
-        // contentType:false,
+        contentType:false,
         processData:false
     })
     .done(function(response){
@@ -66,7 +90,7 @@ $("#editarValla_movil").submit(function(e){
     })
     .done(function(response){
         let res = JSON.parse(response);
-        console.log(response)
+        console.log(res)
         respuesta(res)
     })
     .fail(function(err){

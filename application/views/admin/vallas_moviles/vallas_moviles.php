@@ -38,7 +38,7 @@
                     <td><?=$valla['marca']?></td>
                     <td><?=$valla['modelo']?></td>
                     <td><?=$valla['anio']?></td>
-                    <td><?=$valla['precio']?></td>
+                    <td>$ <?=$valla['precio']?></td>
                     <td><?=$valla['status']?></td>
                     <td>
                         <button class="btn btn-info btn-sm" onclick="imagesVallas(<?=$valla['id_medio']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>

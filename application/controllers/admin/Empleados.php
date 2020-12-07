@@ -31,6 +31,7 @@ class Empleados extends CI_Controller {
 			$apellidos = $this->input->post("apellidos");
 			$correo = $this->input->post("correo");
 			$puesto = $this->input->post("puesto");
+			$licencia = $this->input->post("licencia");
 			$sexo = $this->input->post("sexo");
 			$telefono = intval(join("",explode("-",$this->input->post("telefono"))));
 			$accesso = $this->input->post("acceso");
@@ -45,7 +46,7 @@ class Empleados extends CI_Controller {
 
 			// echo json_encode(array($nombre,$apellidos,$contrasenia,$correo,$puesto,$sexo,$telefono,$tipo,$accesso));
 			// exit;
-			if($this->EmpleadosModel->agregarEmpleado($nombre,$apellidos,$contrasenia,$correo,$puesto,$sexo,$telefono,$tipo,$accesso)){
+			if($this->EmpleadosModel->agregarEmpleado($nombre,$apellidos,$contrasenia,$correo,$puesto,$licencia,$sexo,$telefono,$tipo,$accesso)){
 				echo json_encode(array("success" => "Empleado agregado correctamente"));
 			}else{
 				echo json_encode(array("error" => "Ha ocurrido un error, intenta mas tarde"));
@@ -99,6 +100,7 @@ class Empleados extends CI_Controller {
 			$correo = $this->input->post("Ecorreo");
 			$puesto = $this->input->post("Epuesto");
 			$sexo = $this->input->post("Esexo");
+			$licencia = $this->input->post("Elicencia");
 			$telefono = intval(join("",explode("-",$this->input->post("Etelefono"))));
 			$accesso = $this->input->post("Eacceso");
 			if($accesso == "si"){
@@ -109,7 +111,7 @@ class Empleados extends CI_Controller {
 				$tipo = "";
 			}
 
-			if($this->EmpleadosModel->editarEmpleado($id,$nombre,$apellidos,$contrasenia,$correo,$puesto,$sexo,$telefono,$tipo,$accesso)){
+			if($this->EmpleadosModel->editarEmpleado($id,$nombre,$apellidos,$contrasenia,$correo,$puesto,$licencia,$sexo,$telefono,$tipo,$accesso)){
 				echo json_encode(array("success" => "Empleado editado correctamente"));
 			}else{
 				echo json_encode(array("error" => "Ha ocurrido un error, intenta mas tarde"));

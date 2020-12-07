@@ -21,12 +21,12 @@
                     <a href="<?php echo base_url('admin/dashboard') ?>" id="indexit" class="">Dashboard</a>
                     <a href="<?= base_url('admin/clientes')?>" id="clientesit" class="">  Clientes</a>
                     <a href="<?= base_url('admin/catalogos')?>" id="catalogosit" class="">Catálogos</a>
-                    <!-- <a href="<?= base_url('admin/empleados')?>"id="empleadosit" class="">Empleados</a> -->
+                    <a href="<?= base_url('admin/empleados')?>"id="empleadosit" class="">Empleados</a>
                     <a href="<?= base_url('admin/materiales')?>" id="materialesit" class="">Materiales</a>
                     <a href="<?= base_url('admin/espectaculares')?>" id="espectacularesit" class="">Espectaculares</a>
                     <a href="<?= base_url('admin/ventas')?>" id="ventasit" class="">Ventas</a>
                     <a href="<?= base_url("admin/vallas_fijas")?>" id="vallasit" class="">Vallas fijas</a>
-                    <!-- <a href="<?= base_url("admin/vallas_moviles")?>" id="vallasmovilesit" class="">Vallas Moviles</a> -->
+                    <a href="<?= base_url("admin/vallas_moviles")?>" id="vallasmovilesit" class="">Vallas Moviles</a>
                 </ul>
                 <ul class="sidenav__ul user ">
                     <hr class="bg-white">
