@@ -29,13 +29,6 @@
             </div>
         </div>
 
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="costo">Costo</label>
-                <input type="text" name="costo" id="costo" value="25000" class="form-control" readonly>
-            </div>
-        </div>
-
         <div class="col-md-3">
             <div class="form-group">
                 <label for="status">Status</label>
@@ -190,7 +183,35 @@
             </div>
         </div>
     </div>
+
     
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="costo">Costo renta/m</label>
+                <input type="text" name="renta" id="renta" value="$25000" class="form-control" readonly>
+            </div>
+        </div>    
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="costoImpresion">Costo impresión</label>
+                <input type="text" name="costoImpresion" id="costoImpresion" value="" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="costoImpresion">Costo total</label>
+                <input type="text" name="costoTotal" id="costoTotal" value="" class="form-control" readonly>
+            </div>
+        </div>
+        
+
+    </div>
+
+
     <div class="form-group mt-3">
         <label for="observaciones">Observaciones</label>
         <textarea name="observaciones"class="form-control form-control-sm" id="observaciones" rows="2"></textarea>

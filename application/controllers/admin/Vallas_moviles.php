@@ -48,7 +48,6 @@ class Vallas_moviles extends CI_Controller {
             $marca = $this->input->post('marca');
             $modelo = $this->input->post('modelo');
             $anio = $this->input->post('anio');
-            $precio = $this->input->post('costo');
             $status = $this->input->post('status');
 
             $fechaInicioOcupacion ="";
@@ -73,6 +72,10 @@ class Vallas_moviles extends CI_Controller {
             $anchoFrente = $this->input->post('anchoFrente');
             $altoFrente = $this->input->post('altoFrente');
             $materialFrente = $this->input->post('materialFrente');
+            $r = $this->input->post('renta');
+            $renta = trim(str_replace("$","",$r));
+            $costoImpresion = $this->input->post('costoImpresion');
+            $costoTotal = $this->input->post('costoTotal');
             $observaciones = $this->input->post('observaciones');
             $acabados = $this->input->post('acabados');
             // $l = $this->input->post();
@@ -114,7 +117,7 @@ class Vallas_moviles extends CI_Controller {
 				echo json_encode("no se subio la imagen3");
             }
 
-            if(!$id_medio = $this->MediosModel->agregarMedio($status,$precio,$tipo_medio ="Vallas movil",$fechaInicioOcupacion,$fechaTerminoOcupacion)){
+            if(!$id_medio = $this->MediosModel->agregarMedio($status,$costoTotal,$tipo_medio ="Vallas movil",$fechaInicioOcupacion,$fechaTerminoOcupacion)){
                 echo json_encode(array("error" => "Error, no se pudo Agregar medio"));
                 unlink('assets/images/medios'.$imagen1);
                 unlink('assets/images/medios'.$imagen2);
@@ -122,7 +125,7 @@ class Vallas_moviles extends CI_Controller {
                 exit;
             }
             
-            if($VM = $this->Vallas_movilesModel->agregar($nocontrol,$id_medio,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$observaciones,$imagen1,$imagen2,$imagen3)){
+            if($VM = $this->Vallas_movilesModel->agregar($nocontrol,$id_medio,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$costoImpresion,$renta,$observaciones,$imagen1,$imagen2,$imagen3)){
                 echo json_encode(array("success" => "Valla agregada correctamente"));
             }else{
                 echo json_encode(array("error" => "Ha ocurrido un error"));
@@ -187,7 +190,6 @@ class Vallas_moviles extends CI_Controller {
         $marca = $this->input->post('marca');
         $modelo = $this->input->post('modelo');
         $anio = $this->input->post('anio');
-        $precio = $this->input->post('costo');
         $status = $this->input->post('status');
        
 
@@ -203,8 +205,16 @@ class Vallas_moviles extends CI_Controller {
         $anchoFrente = $this->input->post('anchoFrente');
         $altoFrente = $this->input->post('altoFrente');
         $materialFrente = $this->input->post('materialFrente');
+        $r = $this->input->post('renta');
+        $renta = trim(str_replace("$","",$r));
+        $ci = $this->input->post('costoImpresion');
+        $costoImpresion = trim(str_replace("$","",$ci)); 
+        $ct = $this->input->post('costoTotal');
+        $costoTotal = trim(str_replace("$","",$ct));
         $observaciones = $this->input->post('observaciones');
         $acabados = $this->input->post('acabados');
+        // echo json_encode($costoImpresion);
+        // exit;
 
         $config['upload_path'] = "./assets/images/medios";
 			$config['allowed_types'] = "*";       	
@@ -265,11 +275,11 @@ class Vallas_moviles extends CI_Controller {
         }
 
 
-        if(!$medioEditado = $this->MediosModel->guardarCambiosMedio($id_medio,$precio,$status)){
+        if(!$medioEditado = $this->MediosModel->guardarCambiosMedio($id_medio,$costoTotal,$status)){
             echo json_encode(array("error" => "Ha ocurrido un error al hacer cambios con el medio"));
             exit;
         }
-        if($VMEditado = $this->Vallas_movilesModel->guardarCambiosValla_movli($id_medio,$nocontrol,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$observaciones,$imagen1,$imagen2,$imagen3)){
+        if($VMEditado = $this->Vallas_movilesModel->guardarCambiosValla_movli($id_medio,$nocontrol,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$costoImpresion,$renta,$observaciones,$imagen1,$imagen2,$imagen3)){
             echo json_encode(array("success" => "Cambios guardados correctamente"));
         }else{
             echo json_encode(array("error" => "Ha ocurrido un error al modificar la valla movil"));

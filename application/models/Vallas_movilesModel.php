@@ -7,7 +7,7 @@ class Vallas_movilesModel extends CI_model
 		$this->load->database();
     }
 
-    public function agregar($nocontrol,$id_medio,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$observaciones,$imagen1,$imagen2,$imagen3){
+    public function agregar($nocontrol,$id_medio,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$costoImpresion,$renta,$observaciones,$imagen1,$imagen2,$imagen3){
         $data = array(
             "id_medio" => $id_medio,
             "nocontrol" => $nocontrol,
@@ -26,6 +26,8 @@ class Vallas_movilesModel extends CI_model
             "frente_ancho" => $anchoFrente,
             "frente_alto" => $altoFrente,
             "frente_id_material" => $materialFrente,
+            "costo_impresion" => $costoImpresion,
+            "costo_renta" => $renta,
             "observaciones" => $observaciones,
             "acabados" => $acabados,
             "vista_corta" => $imagen1,
@@ -85,7 +87,7 @@ class Vallas_movilesModel extends CI_model
     }
 
 
-    public function guardarCambiosValla_movli($id_medio,$nocontrol,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$observaciones,$imagen1,$imagen2,$imagen3){
+    public function guardarCambiosValla_movli($id_medio,$nocontrol,$marca,$modelo,$anio,$acabados,$anchoLateral,$altoLateral,$materialLateral,$anchoFaldon,$altoFaldon,$materialFaldon,$anchoPuerta,$altoPuerta,$materialPuerta,$anchoFrente,$altoFrente,$materialFrente,$costoImpresion,$renta,$observaciones,$imagen1,$imagen2,$imagen3){
         $data = array(
             "nocontrol" => $nocontrol,
             "marca" => $marca,
@@ -103,6 +105,8 @@ class Vallas_movilesModel extends CI_model
             "frente_ancho" => $anchoFrente,
             "frente_alto" => $altoFrente,
             "frente_id_material" => $materialFrente,
+            "costo_impresion" => $costoImpresion,
+            "costo_renta" => $renta,
             "observaciones" => $observaciones,
             "acabados" => $acabados
         );

@@ -76,7 +76,7 @@ class Ventas extends CI_Controller {
         $vallas_disponibles = $this->MediosModel->obtenerMediosDisponibles($id);
         $vallas_apartadas_por_fecha = $this->MediosModel->obtenerMediosApartadosPorFecha($id,$f1,$f2);
         $vallas_disponibles_porhorario= $this->MediosModel->obtenerMediosApartadosPorHorario($id,$f1,$f2,$h1,$h2);
-        $vallas = array_merge($vallas_disponibles,$vallas_apartadas_por_fecha);
+        $vallas = array_merge($vallas_disponibles, $vallas_apartadas_por_fecha, $vallas_disponibles_porhorario);
 
 
         echo json_encode($vallas);
