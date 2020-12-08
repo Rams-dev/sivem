@@ -23,7 +23,7 @@ date_default_timezone_set('America/Mexico_City');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://192.168.1.77/s/';
+$config['base_url'] = 'http://localhost/sivem2.0/';
 
 /*
 |--------------------------------------------------------------------------

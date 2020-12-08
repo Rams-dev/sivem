@@ -44,26 +44,22 @@ class Ventas extends CI_Controller {
         }
     }
 
-    function obtenerMedios($id_medio){
+    public function obtenerMedios(){
         if($this->session->userdata('is_logged')){
+            $id = $this->input->post("medio");
+            $fi = $this->input->post("fechaInicio");
+            $ft = $this->input->post("fechaTermino"); 
+            // echo json_encode(array($id,$fi,$ft));
+            // exit; 
             
-                // $mediosDisponibles = $this->MediosModel->obtenerMediosDisponibles($data['medio'],$data['fechaInicio'],$data['fechaTermino']);
-                $mediosDisponibles = $this->MediosModel->obtenerMediosDisponibles($id_medio);
-                $mediosApartados = $this->MediosModel->obtenerMediosApartados($id_medio);
-                //$mediosReservados = $this->MediosModel->obtenerMediosReservados($data['medio'],$data['fechaInicio'],$data['fechaTermino']);
-                // $medios = array();
-                // for($i =0; $i<count($mediosDisponibles); $i++){
-                //     for($j =0; $j<count($mediosApartados); $j++){
-                //         if($mediosApartados[$j]['id_medio'] == $mediosDisponibles[$i]['id_medio']){
-                //             unset($mediosDisponibles[$j]['id_medio'])
-                //             array_push($medios)
-                //         }
-                //     }
-                // }
-                $medios = array_merge($mediosDisponibles, $mediosApartados);
+            $mediosDisponibles = $this->MediosModel->obtenerMediosDisponibles($id);
+            $mediosApartados = $this->MediosModel->obtenerMediosApartados($id, $fi, $ft);
+            $medios = array_merge($mediosDisponibles, $mediosApartados);
+            
+            
+            echo json_encode($medios);
+            
 
-                echo json_encode($medios);
-                //echo json_encode($mediosReservados);
 
         }else{
             redirect('login');
@@ -84,6 +80,7 @@ class Ventas extends CI_Controller {
 
 
         echo json_encode($vallas);
+        $vallas = [];
         
     }
 

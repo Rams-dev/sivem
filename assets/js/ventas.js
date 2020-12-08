@@ -96,86 +96,80 @@ function obtenerHora(h1,h2){
 }
 
 
-let datos;
+let datos = [];
 
 
 $('#tipoMedio').change(function(e){
+        e.preventDefault();
         $('#hinicio').val("");
         $('#htermino').val("");
         $("#medio option[value!='']").remove();
-
-        e.preventDefault();
-        datos="";
+        datos= [];
 
 })
 
-  $("#tipoMedio").change(function(e){
-     e.preventDefault();
-     medio = this.value
-     console.log(this.value)
-     let fInicio = $("#fechaInicio").val();
-     let fTermino = $("#fechaTermino").val();
-   
-     
-     if($("#fechaInicio").val() != "" && $("#fechaTermino").val() != ""){
-             if($("#fechaInicio").val() > $("#fechaTermino").val()){
-               alertify.error('Selecciona una fecha valida')
-               this.value = ""
-               validarFechas()
-               return 0;
-        }
-     
-      if(medio ==  "0" || medio ==  "2" ){
-           obtenerMedios(medio)
-           return 0;
-       }
-     
+$("#tipoMedio").change(function(e){
+        e.preventDefault();
+        medio = this.value
+        console.log(this.value)
 
-      
-        if(medio == "3"){
-                medio = "3";
-                horainicio.classList.remove("d-none")
-                horatermino.classList.remove("d-none")
-                choferdiv.classList.remove("d-none")
-                let hI ="";
-                let hT = "";
-                $("#hinicio").change(function(){
-                        $("#medio option[value!='']").remove();
-                                datos="";
-                        hI = this.value
-                        if(this.value != "" && $("#htermino").val() != ""){
-                                // obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);      
-                                obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);      
-                        }else{
-                                return 0;
-                        }
-                })
-                $("#htermino").change(function(){
-                        $("#medio option[value!='']").remove();
-                                datos="";
-                         hT = this.value 
-                         datos="";
-                        $("#medio option[value!='']").remove();
-                        if($("#hinicio").val() != "" && this.value != ""){
-                        //  obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);    
-                         obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);      
-                        }else{
-                                return 0;
-                        }
-                })
+        let fInicio = $("#fechaInicio").val();
+        let fTermino = $("#fechaTermino").val();
 
-                
+        
+        if($("#fechaInicio").val() != "" && $("#fechaTermino").val() != ""){
+                if($("#fechaInicio").val() > $("#fechaTermino").val()){
+                alertify.error('Selecciona una fecha valida')
+                this.value = ""
+                validarFechas()
+                return 0;
+                }
+        
+                if(medio ==  "1" || medio ==  "2" ){
+                        obtenerMedios(medio)
+                        // return 0;
+                }
+        
+
+        
+                if(medio == "3"){
+                        medio = "3";
+                        horainicio.classList.remove("d-none")
+                        horatermino.classList.remove("d-none")
+                        choferdiv.classList.remove("d-none")
+                        let hI ="";
+                        let hT = "";
+                        $("#hinicio").change(function(){
+                                // $("#medio option[value!='']").remove();
+                                //         datos="";
+                                hI = this.value
+                                if(this.value != "" && $("#htermino").val() != ""){
+                                        // obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);      
+                                        obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);      
+                                }
+                        })
+                        $("#htermino").change(function(){
+                                // $("#medio option[value!='']").remove();
+                                //         datos="";
+                                // $("#medio option[value!='']").remove();
+                                if($("#hinicio").val() != "" && this.value != ""){
+                                hT = this.value 
+                                //  obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);    
+                                        obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);      
+                                }
+                        })        
+                }else{
+                        horainicio.classList.add("d-none")
+                        horatermino.classList.add("d-none")
+                        choferdiv.classList.add("d-none")
+
+                }
         }else{
-                horainicio.classList.add("d-none")
-                horatermino.classList.add("d-none")
-                choferdiv.classList.add("d-none")
-
+                alertify.error('Primero selecciona una fecha')
+                this.value = ""
+                validarFechas();
         }
-}else{
-        alertify.error('Primero selecciona una fecha')
-        this.value = ""
-         validarFechas();
-}
+
 })
 
 
@@ -199,9 +193,10 @@ function obtenerVallasMovilesDisponibles(h1,h2,fInicio,fTermino,medio){
                 
         })
         .done(function(response){
-                datos = JSON.parse(response);
-                console.log(datos);
-                rellenarMedios(datos)
+                let res = JSON.parse(response);
+                console.log(res);
+                rellenarMedios(res)
+                res = "";
         })
         .fail(function(err){
                 alertify.error("ha ocurrido un error");
@@ -252,42 +247,30 @@ function rellenarChoferes(data){
 
 
 function obtenerMedios(val){
-
-        $.get('obtenerMedios/'+ val, function(response){
+        valores = {};
+        valores.medio = val; 
+        valores.fechaInicio = $("#fechaInicio").val(); 
+        valores.fechaTermino = $("#fechaTermino").val();
+        $.ajax({
+                url:"obtenerMedios",
+                type:'post',
+                data: valores 
+        })
+        .done(function(response){
                 if(response != ''){
-                        datos = JSON.parse(response)
-                        console.log(datos)
-                        rellenarMedios(datos);
+                        let res = JSON.parse(response)
+                        console.log(res)
+                        rellenarMedios(res)
+
                 }else{
                         return 0;
                 }
+
         })
-                //  datos = {};
-                //  datos.medio = this.value; 
-                //  datos.fechaInicio = $("#fechaInicio").val(); 
-                //  datos.fechaTermino = $("#fechaTermino").val();
-                //  console.log(datos) 
-                //   $.ajax({
-                //           url:"obtenerMediosDisponibles",
-                //           type:'post',
-                //           data: datos 
-                //  })
-                //   .done(function(response){
-                //         let res = JSON.parse(response)
-                //         if(response != ''){
-                //                 datos = JSON.parse(response)
-                //                 console.log(datos)
-                //                 rellenarMedios(datos)
-        
-                //         }else{
-                //                 return 0;
-                //         }
-        
-                //   })
-                //   .fail(function(err){
-                //          console.log(err)
-                //   })
-     
+        .fail(function(err){
+                console.log(err)
+        })
+
 }
 
 function rellenarMedios(data){
@@ -296,7 +279,11 @@ function rellenarMedios(data){
                 let option;
                 data.map(m =>{
                         option =  document.createElement('option')
-                        option.text = m.nocontrol+ " - "+ m.calle + " " + m.colonia +" "+m.municipio;
+                        if(m.tipo_medio == "Vallas movil"){
+                                 option.text = m.nocontrol+ " - "+ m.marca + " " + m.modelo +" "+m.anio;
+                         }else{
+                                option.text = m.nocontrol+ " - "+ m.calle + " " + m.colonia +" "+m.municipio;
+                         }
                         option.value = m.id_medio;
                         medio.appendChild(option)
                 })

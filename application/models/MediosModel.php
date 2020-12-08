@@ -87,7 +87,7 @@ class MediosModel extends CI_model
     }
     public function obtenerMediosDisponibles($id_medio){
         $medio="";
-        if($id_medio == '1'){
+        if($id_medio === '1'){
             $medio = 'espectaculares';
         }elseif($id_medio == '2'){
             $medio = 'vallas_fijas';
@@ -96,7 +96,7 @@ class MediosModel extends CI_model
         }
         $this->db->select('*');
         $this->db->from($medio);
-        $this->db->join('medios','medios.id = '.$medio .'.id_medio');
+        $this->db->join('medios','medios.id = '.$medio.'.id_medio');
         $this->db->where("medios.status = 'DISPONIBLE'");
         $sql = $this->db->get();
         if($sql){
@@ -105,6 +105,40 @@ class MediosModel extends CI_model
             return false;
         }
     }
+
+
+    public function obtenerMediosApartados($id_medio, $fi, $ft){
+        $medio = "";
+        // return $id_medio;
+        //  exit;
+        if($id_medio == '1'){
+            $medio = 'espectaculares';
+        }elseif($id_medio == '2'){
+            $medio = 'vallas_fijas';
+        }elseif($id_medio == '3'){
+            $medio = 'vallas_moviles';
+        }
+        // return $medio;
+        // exit;
+
+        $this->db->select('*');
+        $this->db->from($medio);
+        $this->db->join('medios','medios.id = '.$medio .'.id_medio');
+        $this->db->join('venta_medios','medios.id = venta_medios.id_medio');
+        $this->db->where("medios.status = 'APARTADO'");
+        $this->db->where("venta_medios.fecha_inicio_contrato >", $fi);
+        $this->db->where("venta_medios.fecha_inicio_contrato >", $ft);
+        $this->db->or_where("venta_medios.fecha_termino_contrato <", $fi);
+        $this->db->where("venta_medios.fecha_termino_contrato <", $ft);
+        $this->db->group_by('venta_medios.id_medio');
+        $sql = $this->db->get();
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+    }
+
 
     public function obtenerMediosApartadosPorFecha($id_medio,$f1,$f2){
         $medio="";
@@ -134,7 +168,7 @@ class MediosModel extends CI_model
     }
 
     // pendiente
-    public function obtenerMediosApartadosPorHorario($id,$f1,$f2,$h1,$h2){
+    public function obtenerMediosApartadosPorHorario($id_medio,$f1,$f2,$h1,$h2){
         $medio="";
         if($id_medio == '1'){
             $medio = 'espectaculares';
@@ -167,26 +201,7 @@ class MediosModel extends CI_model
 
   
 
-    public function obtenerMediosApartados($id_medio){
-        $medio="";
-        if($id_medio == '1'){
-            $medio = 'espectaculares';
-        }elseif($id_medio == '2'){
-            $medio = 'vallas_fijas';
-        }elseif($id_medio == '3'){
-            $medio = 'vallas_moviles';
-        }
-        $this->db->select('*');
-        $this->db->from($medio);
-        $this->db->join('medios','medios.id = '.$medio .'.id_medio');
-        $this->db->where("medios.status = 'APARTADO'");
-        $sql = $this->db->get();
-        if($sql){
-            return $sql->result_array();
-        }else{
-            return false;
-        }
-    }
+   
 
     public function obtenerMediosReservados($id_medio,$fecha_inicio,$fecha_termino){
         $medio="";

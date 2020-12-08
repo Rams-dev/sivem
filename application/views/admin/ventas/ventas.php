@@ -1,7 +1,7 @@
 <h1 class=" text-center">Ventas</h1>
 <hr>
 
- <?php var_dump($ventas)?> 
+ <!-- <?php var_dump($ventas)?>  -->
 <div class="d-flex justify-content-between my-4">
     <div class="d-flex">
         <input type="text" class="form-control mr-2" id="buscadorVentas" name="buscadorVentas" value=""
