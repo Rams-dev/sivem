@@ -3,16 +3,16 @@
 <!-- <?php var_dump($vallas_moviles)?> -->
 
 <div class="d-flex justify-content-between my-4">
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         <input type="text" class="form-control mr-2" id="buscadorVallaMovil" name="buscadorVallaMovil" value=""  placeholder="Buscar Valla Movil">
-        <a class="btn btn-info " href="Javascript:BuscaVallaMovil();" role="button">Buscar</a>&nbsp;
+        <a class="btn btn-info search" href="Javascript:BuscaVallaMovil();" role="button"><i class="fas fa-search"></i><span>Buscar</span></a>&nbsp;
     </div>
-    <div class="d-flex">
-        <a class="btn btn-warning btn" href="<?= base_url("admin/vallas_moviles/agregarValla_movil")?>" role="button">+ Nueva Valla Movil +</a>
+    <div class="d-flex align-items-center">
+        <a class="btn btn-warning add" href="<?= base_url("admin/vallas_moviles/agregarValla_movil")?>" role="button"><i class="fas fa-plus"></i><span>+ Nueva Valla Movil +</span></a>
     </div>
 </div>
 <div class="" id="clientesContainer">
-    <div class="table-responsive-md" id="espectacularesContainer">
+    <div class="table-responsive" id="espectacularesContainer">
         <table class="table" id="table">
         <thead class="thead-dark">
             <tr>

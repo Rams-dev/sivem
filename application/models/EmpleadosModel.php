@@ -129,5 +129,51 @@ class EmpleadosModel extends CI_model{
          
      }
 
+
+     public function obtenerChoferesApartadosPorFecha($f1,$f2){
+        $this->db->select('*');
+        $this->db->from("usuarios");
+        // $this->db->join('medios','medios.id = '.$medio .'.id_medio');
+        $this->db->join('venta_medios','venta_medios.id_chofer = usuarios.id');
+        $this->db->where("venta_medios.fecha_inicio_contrato >",$f1);
+        $this->db->where("venta_medios.fecha_inicio_contrato >",$f2);
+        $this->db->or_where("venta_medios.fecha_termino_contrato <",$f1);
+        $this->db->where("venta_medios.fecha_termino_contrato <",$f2);
+        $this->db->group_by('venta_medios.id_medio');
+        $sql = $this->db->get();
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+
+     }
+
+
+     public function obtenerChoferesApartadosPorHorario($f1,$f2,$h1,$h2){
+       
+        $this->db->select('*');
+        $this->db->from("usuarios");
+        // $this->db->join('medios','medios.id = '.$medio .'.id_medio');
+        $this->db->join('venta_medios','venta_medios.id_chofer = usuarios.id');
+        $this->db->where("venta_medios.fecha_inicio_contrato >=",$f1);
+        $this->db->where("venta_medios.fecha_inicio_contrato <=",$f1);
+        $this->db->or_where("venta_medios.fecha_termino_contrato <=",$f2);
+        $this->db->where("venta_medios.fecha_termino_contrato >=",$f2);
+        $this->db->where("venta_medios.hora_inicio >",$h1);
+        $this->db->where("venta_medios.hora_inicio >",$h2);
+        $this->db->or_where("venta_medios.hora_termino <",$h1);
+        $this->db->where("venta_medios.hora_termino <",$h2);
+        $this->db->group_by('venta_medios.id_medio');
+        $sql = $this->db->get();
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+
+
+
+    }
     
 }

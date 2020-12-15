@@ -1,6 +1,10 @@
+const p = location.href
+p2  = p.lastIndexOf("admin")
+let path = p.slice(0, p2)
+//  console.log(path)
+
 
 const estadoSelect =  document.getElementById('estadoselect');
-
 const selectStatus = document.querySelector("#status");
 const inicioOcupacion = document.querySelector("#desdeDiv");
 const terminoOcupacion = document.querySelector("#hastaDiv");
@@ -32,29 +36,38 @@ $('#estadoselect').change(function(e){
 estadoSelect.addEventListener('change', function(e){
     e .preventDefault()
     let estado = this.value.split(',');
-    estado = estado[1].replace(/[\u0300-\u036f]/g, "");
+    // estado = estado[1].replace(/[\u0300-\u036f]/g, "");
     console.log(estado)
-    obtenerMunicipios(estado)
+    obtenerMunicipiosSistema(estado[0])
+    // obtenerMunicipios(estado)
 })
 
-async function obtenerMunicipios(estado){
-    try{
-        const res = await fetch(`https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${estado}`)
-        const data = await res.json()
-        console.log(data.response.municipios)
-        agregarMunicipiosSelect(data.response.municipios)
-    }catch(err){
-    console.log(err)
-    }
+function obtenerMunicipiosSistema(id){
+     $.get(path +"admin/espectaculares/obtenerMunicipios/" + id,function(response){
+         let res= JSON.parse(response)
+         console.log(res);
+         agregarMunicipiosSelect(res)
+     })
 }
+
+// async function obtenerMunicipios(estado){
+//     try{
+//         const res = await fetch(`https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${estado}`)
+//         const data = await res.json()
+//         console.log(data.response.municipios)
+//         agregarMunicipiosSelect(data.response.municipios)
+//     }catch(err){
+//     console.log(err)
+//     }
+// }
 
 function agregarMunicipiosSelect(municipios){
     let municipioselect = document.querySelector('#municipioselect')
     let option;
     for(let i=0; i<municipios.length; i++){
         option =  document.createElement('option')
-        option.text =municipios[i]
-        option.value = municipios[i]
+        option.text =municipios[i]["nombre"]
+        option.value = municipios[i]["nombre"]
         municipioselect.appendChild(option)
     }
 }

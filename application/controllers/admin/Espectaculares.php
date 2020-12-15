@@ -10,6 +10,7 @@ class Espectaculares extends CI_Controller {
 		$this->load->model('EspectacularesModel');
 		$this->load->model('PropietariosModel');
 		$this->load->model('MediosModel');
+		$this->load->model('EstadosModel');
 
 	}
 	public function index()
@@ -385,5 +386,11 @@ class Espectaculares extends CI_Controller {
 			json_encode("error");
 		}
 
+	}
+
+	public function obtenerMunicipios($id){
+		// $f = $this->input->post();
+		$municipios = $this->EstadosModel->obtenerMunicipios($id);
+		echo json_encode($municipios);
 	}
 }

@@ -131,6 +131,20 @@ class VentasModel extends CI_model
 		}
 	}
 
+	public function obtenerVenta_mediosQueEstaranDisponiblesEnUnMes($unMes){
+        $this->db->select("*");
+        $this->db->from("medios");
+        $this->db->join("venta_medios","venta_medios.id_medio = medios.id");
+        $this->db->where("venta_medios.fecha_termino_contrato <",$unMes);
+        $this->db->where("medios.status","OCUPADO");
+        $sql = $this->db->get();
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+    }
+
 	public function obtenerVenta_mediosPorFechaTermino($date){
 		$sql = $this->db->get_where("venta_medios",array("fecha_termino_contrato" => $date));
 		if($sql){

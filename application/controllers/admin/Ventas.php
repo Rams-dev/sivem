@@ -90,14 +90,22 @@ class Ventas extends CI_Controller {
         $f1 = $this->input->post("f1");
         $f2 = $this->input->post("f2");
 
-        $choferes = $this->EmpleadosModel->obtenerChoferes();
-        echo json_encode($choferes);
-        exit;
-
-        if($data = $this->EmpleadosModel->obtenerChoferesDisponibles($h1,$h2,$f1,$f2)){
-            echo json_encode($data);
+        $choferesD = $this->EmpleadosModel->obtenerChoferes();
+        $choferes_apartados_por_fecha = $this->EmpleadosModel->obtenerChoferesApartadosPorFecha($f1,$f2);
+        $choferes_disponibles_porhorario= $this->EmpleadosModel->obtenerChoferesApartadosPorHorario($f1,$f2,$h1,$h2);
+        $choferesDisponibles = array();
+        for($i = 0; $i < count($choferesD); $i++){
+           for($j = 0; $j < count($choferes_disponibles_porhorario); $j++){
+               if($choferesD[$i]["id"] == $choferes_disponibles_porhorario[$j]["id_chofer"]){
+                   unset($choferesD[$i]);
+               }
+            //    else{
+            //        array_push($choferesDisponibles, $choferesD[$i] );
+            //    }
+           } 
         }
-        // echo json_encode($data);
+        $choferes = array_merge($choferesD, $choferes_apartados_por_fecha, $choferes_disponibles_porhorario);
+        echo json_encode($choferes);
     }
 
 

@@ -1,16 +1,16 @@
 <?php
-class Log_in extends CI_model{
+class EstadosModel extends CI_model{
 	
 	 function __construct()
 	{
 		$this->load->database();
 	}
 
-	public function validation($correo,$password){
-		$sql = $this->db->get_where('usuarios',array('correo' => $correo, 'contrasena' => $password),1);
-		if(!$sql->result()){
+	public function obtenerMunicipios($id_estado){
+		$sql = $this->db->get_where('municipios',array('estado_id' => $id_estado));
+		if(!$sql){
 			return false;
 		}else{
-		return $sql->row();
+		return $sql->result_array();
 	}}
 }

@@ -37,29 +37,24 @@ class MediosModel extends CI_model
         }
     }
 
-    // public function obtenerMedios(){
-    //     $this->db->select('*');
-    //     $this->db->from('medios');
-    //     $this->db->join('espectaculares', 'espectaculares.id_medio = medios.id');
-    //     $this->db->join('estados', 'espectaculares.id_estado = estados.id');
-    //     $sql = $this->db->get();
-    //     if($sql){
-    //         return $sql->result_array();
-    //     }else{
-    //         return false;
-    //     }
-    // }
 
     public function getMediosHttp($id_estado ="",$municipio ="",$status ="",$tipo_medio=""){
 
         // return array($id_estado,$status,$tipo_medio);
-        // exit;
-        $this->db->select("*");
-        $this->db->from('medios');
         if($tipo_medio !=""){
-            $this->db->join($tipo_medio,'medios.id = '.$tipo_medio.'.id_medio', "inner");
-            $this->db->select("estados.nombre as nombre_estado");
-            $this->db->join("estados", "estados.id = ".$tipo_medio.".id_estado", "inner");
+            // exit;
+            $this->db->select("*");
+            $this->db->from($tipo_medio);
+            $this->db->select("medios.id, medios.precio as costo_total");
+            $this->db->join('medios','medios.id = '.$tipo_medio.'.id_medio');
+            if($tipo_medio != "vallas_moviles"){
+                $this->db->select("estados.nombre as nombre_estado");
+                $this->db->join("estados", "estados.id = ".$tipo_medio.".id_estado");
+            }
+            if($tipo_medio == "espectaculares"){
+                $this->db->select("materiales.precio as precio_material, materiales.material, materiales.unidad as unidad");
+                $this->db->join("materiales", "materiales.id = ".$tipo_medio.".id_material");
+            }
             if($id_estado != "" || $id_estado != null){
                 $this->db->where($tipo_medio.'.id_estado', $id_estado);
             }
@@ -167,7 +162,7 @@ class MediosModel extends CI_model
         }
     }
 
-    // pendiente
+
     public function obtenerMediosApartadosPorHorario($id_medio,$f1,$f2,$h1,$h2){
         $medio="";
         if($id_medio == '1'){
@@ -201,6 +196,9 @@ class MediosModel extends CI_model
 
 
     }
+
+
+
 
 
   
@@ -293,7 +291,15 @@ class MediosModel extends CI_model
         $this->db->update("medios", $data);
     }
 
-    function cambiarStatusOcupadoADisponible($id_medio){
+    public function cambiarStatusOcupadoAProximo($id){
+        $data = array(
+            "status"=> "PROXIMO",
+        );
+        $this->db->where("id",$id);
+        $this->db->update("medios", $data);
+    }
+
+    function cambiarStatusProximoADisponible($id_medio){
         $data = array(
             "status"=> "DISPONIBLE"
         );
@@ -301,12 +307,22 @@ class MediosModel extends CI_model
         $this->db->update("medios", $data);
     }
 
+
     public function obtenerMediosOcupadosSinFechadeInicio($date){
         $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion" => $date, "status" => "OCUPADO"));
         return $sql->result_array();
     }
 
+    
+    public function obtenerMediosProximosSinFechadeInicio($date){
+        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion" => $date, "status" => "PROXIMO"));
+        return $sql->result_array();
+
+    }
+
     // esta funcion cambia el estatus de los medios que al momento de registrase los declararon como ocupados
+
+    
 
     public function CambiarOcupadoADisponible($id){
         $data = array(

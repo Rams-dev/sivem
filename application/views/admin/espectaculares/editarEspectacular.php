@@ -1,6 +1,6 @@
 
 <?php
-var_dump($espectaculares);
+// var_dump($espectaculares);
  foreach($espectaculares as $espectacular){
     }?>
 

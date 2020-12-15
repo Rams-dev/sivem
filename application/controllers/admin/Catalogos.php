@@ -69,12 +69,8 @@ class Catalogos extends CI_Controller {
 				if(!$datos = $this->MediosModel->getMediosHttp($id_estado,$municipio,$status,$tipo_medio)){
 					echo json_encode("error");
 					exit;
-				}else{
-				
 				}
-
 			}
-			
 			
 			echo json_encode($datos);
 		}else{
@@ -88,26 +84,31 @@ class Catalogos extends CI_Controller {
 
 		$estado = $this->input->post("estado");
 		$status = $this->input->post("status");
-		$medio = $this->input->post("tipomedio");
+		$medio = $this->input->post("tipoMedio");
+		$municipio = $this->input->post("municipio");
+		// var_dump($status,$estado,$medio,$municipio);
+		// exit;
 		
-		if($estado == "" && $status == "" && $medio == ""){
+		if($estado == "" && $status == "" && $medio == "" && $municipio == ""){
 			$espectaculares = $this->EspectacularesModel->obtenerEspectaculares();
-				$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
-				$vallas_moviles = $this->Vallas_movilesModel->obtenerVallas_moviles();
+			$vallas_fijas = $this->Vallas_fijasModel->obtenerVallas_fijas();
+			$vallas_moviles = $this->Vallas_movilesModel->obtenerVallas_moviles();
 
 				// var_dump($vallas_fijas);
-				$data["medios"] = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
+				$datos = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
+				$data['medios'] = $datos;
 		}else{
-			if(!$datos = $this->MediosModel->getMediosHttp($estado,$status,$medio)){
+			if(!$m = $this->MediosModel->getMediosHttp($estado,$municipio,$status,$medio)){
 				echo json_encode("error");
 				exit;
 			}else{
-				$data['medios'] = $datos;			
+				$data['medios'] = $m;
 			}
 		}
-			// echo json_encode($data);
+		// $data['medios'] = $datos;			
         $html=$this->load->view('admin/catalogos/catalogoespectacularesPDF',$data);
-		// echo $html;
+        //$this->load->view('admin/catalogos/catalogoespectacularesPDF',$data);
+		//echo $html;
 		$this->Models->generatePdf($html);
 		}else{
 			redirect('login');

@@ -15,11 +15,14 @@
 
         }
         .contenedor{
+            font-family: 'Poppins', sans-serif;
+
             width:100%;
-            height: 96%;
-            /* border: 1px solid #000; */
+            height: 94%;
+            max-height: 94%;
+            /* border: 1px solid #000;  */
             margin-left: 40px;
-            
+
         }
          .images{
             width: 95%;
@@ -51,11 +54,11 @@
 
          .imagen-pequena{
             width: 100%;
-            max-height: 27%;    
-            min-height: 27%;    
+            max-height: 27%;
+            min-height: 27%;
             /* border: 1px solid #000; */
             margin: 2.5px
-        } 
+        }
         .img-grande{
             width: 100%;
             min-height: 55%;
@@ -78,21 +81,23 @@
             margin-bottom:6px;
         }
         .info{
-            max-width: 58%;
-            /* display: flex; */
+            /* max-width: 58%; */
+             display: flex; 
             flex-wrap: wrap;
             line-height: 1.1;
+            margin-top: -10px;
+            /* position: relative; */
 
         }
-      
+
         .bandalateral{
-            position: absolute; 
+            position: absolute;
             left: 58%;
             top: 47%;
-            transform:rotate(270deg); 
-             width: 90%;
-            height: 70px; 
-           
+            transform:rotate(270deg);
+             width: 88%;
+            height: 60px;
+             opacity:.3
         }
         .centrado{
             text-align: center;
@@ -110,7 +115,7 @@
             left:80%;
             top:75%;
             text-align: center;
-            
+
         }
         .img-location{
             width: 65px;
@@ -120,12 +125,27 @@
 
         .foot{
             position: absolute;
-            left:70%;
+            left:65%;
             top:90%;
             line-height: 1;
-            margin-left: 1px solid #000;
+            /* border-left: 1px solid #000; */
 
         }
+        .tabla{
+            width:58%;
+            max-width: 50%;
+            display:flex;
+        }
+
+        th{
+            font-size: 14px;
+
+        }
+        tr, td{
+            font-size: 12px;
+        }
+
+
 
     </style>
 </head>
@@ -134,9 +154,9 @@
     <div class="contenedor">
         <div class="centrado">
             <img src ="<?= BASEPATH.'../assets/images/logo_medios.jpg'?>" class="logo_medios_pg1" alt="">
-            <h1 style="margin-top: 50px;">CATÁLOGO DE ESPECTACULARES <?= date("Y")?></h1>
+            <h1 style="margin-top: 50px;">CATÁLOGO DE MEDIOS <?= date("Y")?></h1>
             <h3 style="margin-top: 50px; color:red;">INCLUYE: </h3><h3>INSTALACIÓN Y RETIRO DE MATERIAL</h3>
-            <H3 style="color:red";>SUJETOS A: </H3>
+             <H3 style="color:red";>SUJETOS A: </H3>
         </div>
     </div>
 
@@ -147,7 +167,7 @@
 
         <img src="<?= BASEPATH.'../assets/images/logo_medios.jpg'?>" class="logo_medios" alt="">
         <div class="images">
-            <div class="imagen-grande"> 
+            <div class="imagen-grande">
                 <img src="<?= BASEPATH.'../assets/images/medios/'.$medio['vista_larga']?>" alt="" class="img-grande">
             </div>
 
@@ -156,54 +176,68 @@
                      <img src="<?= BASEPATH.'../assets/images/medios/'.$medio['vista_media']?>" class=" imagen-pequena" alt="">
                 <!-- </div> -->
                 <!-- <div class="image-pequena"> -->
-                     <img src="<?= BASEPATH.'../assets/images/medios/'.$medio['vista_corta']?>" class=" imagen-pequena" alt=""> 
+                     <img src="<?= BASEPATH.'../assets/images/medios/'.$medio['vista_corta']?>" class=" imagen-pequena" alt="">
                 <!-- </div>  -->
             </div>
         </div>
         <div class="info">
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th>SITIO</th>
-                <th colspan=3 style="color:red;"><?=$medio['nocontrol']?></th>
-            </tr>
-            <tr>
-                <th colspan=4 style="text-align: center;">UBICACION</th>
-            </tr>
-            <tr>
-                <th>CALLE</th>
-                <th colspan=3><?=$medio['calle'].", No ".$medio['numero']?></th>
-            </tr>
-            <tr>
-                <th colspan =2>LOCALIDAD</th>
-                <th>MUNICIPIO</th>
-                <th>ESTADO</th>
-            </tr>
-                <td colspan=2><?=$medio['localidad']?> </t>
-                <td><?=$medio['municipio']?></td>
-                <td><?=$medio['nombre']?></td>
-            </tr>
-            </table>
-            <!-- <div class="p">
-                <p>SITIO: <b style="color:red;"><?=$medio['nocontrol']?></b><p>
-                
-            </div>
-            <div class="p">
-                <p>UBICACIÓN:</p> 
-                <b><?=$medio['calle']." No ".$medio['numero'].", ".$medio['localidad'].", ".$medio['municipio'].", ". $medio['nombre'] ?></b>
-            </div>
-            <div class="p">
-                <p>REFERENCIA</p>
-                <B><?=$medio['referencias']?></B>
-            </div>
-            <div class="p">
-                <p>MEDIDAS</p>
-                <b><?=$medio['alto'] .'mts x '. $medio['ancho']. ' mts'?></b>
-            </div> -->
-        </div>
+        <div class="tabla">
+            <?php if($medio["tipo_medio"] == "Vallas movil"){?>
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th>SITIO</th>
+                        <th colspan=3 style="color:red;"><?=$medio['nocontrol']?></th>
+                    </tr>
 
-        <div class="localizacion">
-            <img src="<?= BASEPATH.'../assets/images/location.png'?>" class="img-location" alt=""> <br>
-            <a href="https://www.google.com.mx/maps/<?= $medio['latitud'] . ',' .$medio['longitud']?>"> <?= $medio['latitud']. " - ".$medio['longitud']?></a> 
+                    <tr>
+                        <th>Marca</th>
+                        <th><?=$medio['marca']?></th>
+                    </tr>
+                    <tr>
+                        <th>Modelo</th>
+                        <th><?=$medio['modelo']?></th>
+                    </tr>
+                    <tr>
+                        <th>Año</th>
+                        <th><?=$medio["anio"]?></th>
+                </table>
+
+            <?php }else{?>
+            <table class="table table-bordered table-sm">
+                <tr>
+                    <th>SITIO</th>
+                    <th colspan=3 style="color:red;"><?=$medio['nocontrol']?></th>
+                </tr>
+                <tr>
+                    <th colspan=4 style="text-align: center;">UBICACION</th>
+                </tr>
+                <tr>
+                    <th>CALLE</th>
+                    <td colspan=3><?=$medio['calle'].", No ".$medio['numero']?></td>
+                </tr>
+                <tr>
+                    <th colspan =2>LOCALIDAD</th>
+                    <th>MUNICIPIO</th>
+                    <th>ESTADO</th>
+                </tr>
+                <tr>
+                    <td colspan=2><?=$medio['localidad']?> </td>
+                    <td><?=$medio['municipio']?></td>
+                    <td><?=$medio['nombre']?></td>
+                </tr>
+                <tr>
+                    <th colspan=2>MEDIDAS </th>
+                    <th>STATUS</th>
+                    <th>COSTO</th>
+                </tr>
+                <tr>
+                    <td colspan=2><?=$medio['ancho'] . " x ". $medio['alto']. " METROS"?></td>
+                    <td><?=$medio['status']?></td>
+                    <td><?=$medio['costo_total']?></td>
+                </tr>
+                </table>
+            <?php }?>
+            </div>
         </div>
 
         <div class="foot">
@@ -212,8 +246,7 @@
                 Tel. (951) 5038220, publi.home@hotmail.com
             </small>
         </div>
-        <img src="<?= BASEPATH.'../assets/images/bandalateral.png'?>" alt="" class="bandalateral">   
-
+        <img src="<?= BASEPATH.'../assets/images/bandalateral.png'?>" alt="" class="bandalateral">
     </div>
     <?php endforeach?>
 </body>

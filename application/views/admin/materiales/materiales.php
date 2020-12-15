@@ -2,14 +2,14 @@
 <hr>
 
 <div class="d-flex justify-content-between my-4">
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         <input type="text" class="form-control mr-2" id="buscadorMateriales" name="buscadorMateriales" value=""
             placeholder="Busca material">
-        <a class="btn btn-info search " href="" role="button"><i class="fas fa-search"></i> <p> Buscar</p></a>&nbsp;
+        <a class="btn btn-info search " href="" role="button"><i class="fas fa-search"></i> <span> Buscar</span></a>&nbsp;
     </div>
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         <a class="btn btn-warning add" data-toggle="modal" data-target="#agregarMaterial" type="button"> <i class="fas fa-plus"></i>
-<p> + Nuevo Material +</p></a>
+<span> + Nuevo Material +</span></a>
     </div>
 </div>
 <div class="table-responsive-md" id="espectacularesContainer">

@@ -102,12 +102,17 @@ input{
   display: block;
 }
 
-.table-responsive-md{
+.table-responsive{
   overflow-x: auto;
 }
 /* ------------------------------------------- */
 
-  
+
+
+.proximamente{
+  width: 500px;
+  height: 500px;
+}  
 
 .user{
   display: none;
@@ -159,7 +164,7 @@ a.selected{
   display: none;  
   color: white;
 }
-a > p{
+a > span{
   display: flex;
   margin-bottom: 0px!important;
 }
@@ -225,11 +230,11 @@ a > p{
   }
 
 
-  .search>p{
+  .search>span{
   display: none;
 
   }
-  .add>p{
+  .add>span{
     display: none;
 
   }

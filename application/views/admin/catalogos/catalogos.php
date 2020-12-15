@@ -9,7 +9,7 @@
     </div>
     <hr>
     <h3>filtros</h3>
-    <form action="<?=base_url("admin/catalogos/catalogoPdf")?>" method="post">
+    <form action="<?=base_url("admin/catalogos/catalogoPdf")?>" method="post" id="ftmPdf">
     <div class="row mt-5">
         <div class="col-md-3">
             <div class="form-group">
@@ -17,8 +17,8 @@
                 <select name="tipoMedio" id="tipoMedio" class="form-control">
                     <option value="">Todos</option>
                     <option value="espectaculares">Espectacular</option>
-                    <option value="Vallas_fijas">Vallas fijas</option>
-                    <option value="Vallas_moviles">Vallas moviles</option>
+                    <option value="vallas_fijas">Vallas fijas</option>
+                    <option value="vallas_moviles">Vallas moviles</option>
                 </select>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <option value="">Todos</option>
                     <option value="Disponible">Disponible</option>
                     <option value="Ocupado">Ocupado</option>
-                    <option value="Proximamente">Proximamente</option>
+                    <option value="Proximo">Proximamente</option>
                 </select>
             </div>
         </div>

@@ -1,19 +1,23 @@
+const p = location.href
+p2  = p.lastIndexOf("admin")
+let path = p.slice(0, p2)
+//  console.log(path)
 
 
-    const selectUbicacion = document.getElementById("ubicacion");
-    const selectUbicaciones = document.querySelector("#ubicaciones");
-    const calle = document.querySelector("#calle");
-    const numero = document.querySelector("#numero");
-    const colonia = document.querySelector("#colonia");
-    const localidad = document.querySelector("#localidad");
-    const estado = document.querySelector("#estado");
-    const municipio = document.querySelector("#municipio");
-    const nombre = document.querySelector("#nombre");
-    const telefono = document.querySelector("#telefonoDiv");
-    const celular = document.querySelector("#celularDiv");
-    const selectStatus = document.querySelector("#status");
-    const inicioOcupacion = document.querySelector("#desdeDiv");
-    const terminoOcupacion = document.querySelector("#hastaDiv");
+const selectUbicacion = document.getElementById("ubicacion");
+const selectUbicaciones = document.querySelector("#ubicaciones");
+const calle = document.querySelector("#calle");
+const numero = document.querySelector("#numero");
+const colonia = document.querySelector("#colonia");
+const localidad = document.querySelector("#localidad");
+const estado = document.querySelector("#estado");
+const municipio = document.querySelector("#municipio");
+const nombre = document.querySelector("#nombre");
+const telefono = document.querySelector("#telefonoDiv");
+const celular = document.querySelector("#celularDiv");
+const selectStatus = document.querySelector("#status");
+const inicioOcupacion = document.querySelector("#desdeDiv");
+const terminoOcupacion = document.querySelector("#hastaDiv");
 
 
     selectStatus.addEventListener("change", function(e){
@@ -78,20 +82,17 @@
     window.estadoselect.addEventListener('change', function(e){
     e .preventDefault()
      let estado = this.value.split(',');
-     estado = estado[1].replace(/[\u0300-\u036f]/g, "")
      console.log(estado)
-     obtenerMunicipios(estado)
+     obtenerMunicipios(estado[0])
 })
 
-async function obtenerMunicipios(estado){
-    try{
-        const res = await fetch(`https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${estado}`)
-        const data = await res.json()
-        console.log(data.response.municipios)
-        agregarMunicipiosSelect(data.response.municipios)
-    }catch(err){
-    console.log(err)
-    }
+
+function obtenerMunicipios(id_estado){
+    $.get(path +"admin/espectaculares/obtenerMunicipios/" + id_estado,function(response){
+        let res= JSON.parse(response)
+        console.log(res);
+        agregarMunicipiosSelect(res)
+    })
 }
 
 function agregarMunicipiosSelect(municipios){
@@ -99,8 +100,8 @@ function agregarMunicipiosSelect(municipios){
     let option;
     for(let i=0; i<municipios.length; i++){
         option =  document.createElement('option')
-        option.text =municipios[i]
-        option.value = municipios[i]
+        option.text =municipios[i]["nombre"]
+        option.value = municipios[i]["nombre"]
         municipioselect.appendChild(option)
     }
 }

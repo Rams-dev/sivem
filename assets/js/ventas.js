@@ -24,8 +24,12 @@ $("#descuento").change(function(){
                 $("#descuentoinput").removeClass("d-none")
         }else{
                 $("#descuentoinput").addClass("d-none")
-                $("#descuentoinput").val("")
+                $("#descuentoCantidad").val("")
+                descuento = 0;
+                obtenerDesc()
+
         }
+
 
 })
 
@@ -144,7 +148,7 @@ $("#tipoMedio").change(function(e){
                                 //         datos="";
                                 hI = this.value
                                 if(this.value != "" && $("#htermino").val() != ""){
-                                        // obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);      
+                                        obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);      
                                         obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);      
                                 }
                         })
@@ -154,7 +158,7 @@ $("#tipoMedio").change(function(e){
                                 // $("#medio option[value!='']").remove();
                                 if($("#hinicio").val() != "" && this.value != ""){
                                 hT = this.value 
-                                //  obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);    
+                                        obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);    
                                         obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);      
                                 }
                         })        
@@ -215,7 +219,7 @@ function obtenerChoferesDisponibles(h1,h2,fInicio,fTermino){
                 data: {
                         h1: h1,
                         h2: h2,
-                        fi: fInicio,
+                        f1: fInicio,
                         f2: fTermino
                 }
                 
@@ -355,7 +359,7 @@ window.add.addEventListener('click', function(e){
         }
         if(dias == undefined || dias =="" || isNaN(dias) ){
                 alertify.error("Primero debes seleccionar la fecha");
-        validarFechas()
+                validarFechas()
                 return 0;
         }
         if(dias<0){
@@ -370,21 +374,17 @@ window.add.addEventListener('click', function(e){
         console.log(idMedios)
         // Table.innerHTML =""
 
-
-        if(tipoVenta.value == "renta"){
-
-                //   for(let i=0;i<datosMedio.length;i++){
-
+        if(window.tipoMedio.value == "3"){
                 datosMedio.map(medio =>{
                         console.log(medio.precio)
-                        let costototal = ((parseFloat(medio.costo_renta) + parseFloat(medio.costo_instalacion)) / 30) * dias;
+                        let costototal = ((parseFloat(medio.costo_renta) + parseFloat(medio.costo_impresion)) / 30) * dias;
                         Table.innerHTML += `<tr>
                         <td>#</td>
                         <td>${medio.nocontrol}</td>
-                        <td>${medio.localidad}</td>
+                        <td>-</td>
                         <td>$ ${medio.costo_renta} </td>
                         <td>-</td>
-                        <td>$ ${medio.costo_instalacion}</td>
+                        <td>$ ${medio.costo_impresion}</td>
                         <td>$ ${parseFloat(costototal).toFixed(2)}</td>
 
                         </tr>`;
@@ -394,29 +394,57 @@ window.add.addEventListener('click', function(e){
                 
                         calcularTotal()
                 })
-                // }
-
-
         }else{
-                datosMedio.map(medio =>{
-                        let ctotal = ((parseFloat(medio.costo_renta) + parseFloat(medio.costo_instalacion) + parseFloat(medio.costo_instalacion)) / 30) * dias;
-                        console.log(medio.precio)
-                        Table.innerHTML += `<tr>
-                        <td>${datosDeMedios.length + 1}</td>
-                        <td>${medio.nocontrol}</td>
-                        <td>${medio.localidad}</td>
-                        <td>$ ${medio.costo_renta}</td>
-                        <td>$ ${medio.costo_impresion}</td>
-                        <td>$ ${medio.costo_instalacion}</td>
-                        <td>$ ${ctotal}</td>
-                        </tr>`;
-                        //   return medio.precio;
-                        idMedios.push(medio.id)
-                        datosDeMedios.push(parseFloat(ctotal));
-                        console.log(datosDeMedios)
+
+                if(tipoVenta.value == "renta"){
+
+                        //   for(let i=0;i<datosMedio.length;i++){
+
+                        datosMedio.map(medio =>{
+                                console.log(medio.precio)
+                                let costototal = ((parseFloat(medio.costo_renta) + parseFloat(medio.costo_instalacion)) / 30) * dias;
+                                Table.innerHTML += `<tr>
+                                <td>#</td>
+                                <td>${medio.nocontrol}</td>
+                                <td>${medio.localidad}</td>
+                                <td>$ ${medio.costo_renta} </td>
+                                <td>$ ${medio.costo_instalacion}</td>
+                                <td>-</td>
+                                <td>$ ${parseFloat(costototal).toFixed(2)}</td>
+
+                                </tr>`;
+                                idMedios.push(medio.id)
+                                datosDeMedios.push(parseFloat(costototal));
+                                // console.log(datosDeMedios)
                         
-                        calcularTotal()
-                })
+                                calcularTotal()
+                        })
+                        // }
+
+
+                }else{
+                        datosMedio.map(medio =>{
+                                let ctotal = ((parseFloat(medio.costo_renta) + parseFloat(medio.costo_instalacion) + parseFloat(medio.costo_instalacion)) / 30) * dias;
+                                console.log(medio.precio)
+                        
+                                Table.innerHTML += `<tr>
+                                <td>${datosDeMedios.length + 1}</td>
+                                <td>${medio.nocontrol}</td>
+                                <td>${medio.localidad}</td>
+                                <td>$ ${medio.costo_renta}</td>
+                                
+                                <td>$ ${medio.costo_instalacion}</td>
+                                <td>$ ${medio.costo_impresion}</td>
+                                <td>$ ${ctotal}</td>
+                                </tr>`;
+                                //   return medio.precio;
+                                idMedios.push(medio.id)
+                                datosDeMedios.push(parseFloat(ctotal));
+                                console.log(datosDeMedios)
+                                
+                                calcularTotal()
+                        })
+                }
         }
  })
 
@@ -431,7 +459,7 @@ let preciofinal = 0;
 let precioIva = 0;
 let descuento = 0;
 
-        function calcularTotal(){
+function calcularTotal(){
         const preciototal = document.querySelector("#preciototal");
         console.log( datosMedio)
 //        const total = document.querySelector("#total");

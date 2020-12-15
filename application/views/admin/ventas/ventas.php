@@ -3,13 +3,13 @@
 
  <!-- <?php var_dump($ventas)?>  -->
 <div class="d-flex justify-content-between my-4">
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         <input type="text" class="form-control mr-2" id="buscadorVentas" name="buscadorVentas" value=""
             placeholder="Busca Venta">
-        <a class="btn btn-info search" href="" role="button"><i class="fas fa-search"></i><p> Buscar</p></a>&nbsp;
+        <a class="btn btn-info search" href="" role="button"><i class="fas fa-search"></i><span> Buscar</span></a>&nbsp;
     </div>
-    <div class="d-flex">
-        <a class="btn btn-warning add" href="<?php echo base_url('admin/ventas/agregarVenta')?>" role="button"> <i class="fas fa-plus"></i><p> + Nueva Venta + </p></a>
+    <div class="d-flex align-items-center">
+        <a class="btn btn-warning add" href="<?php echo base_url('admin/ventas/agregarVenta')?>" role="button"> <i class="fas fa-plus"></i><span> + Nueva Venta + </span></a>
     </div>
 </div>
 <div class="table-responsive" id="espectacularesContainer">

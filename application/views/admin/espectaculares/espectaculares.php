@@ -1,5 +1,5 @@
 <h1 class=" text-center">Espectaculares</h1>
-<?php var_dump($espectaculares)?>
+<!-- <?php var_dump($espectaculares)?> -->
 <hr>
 <?php
 if(empty($espectaculares)){?>
@@ -14,13 +14,13 @@ if(empty($espectaculares)){?>
 <?php }else{
 ?>
 <div class="d-flex justify-content-between my-4">
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         <input type="text" class="form-control mr-2" id="buscadorespactacular" name="buscadorespactacular" value=""
             placeholder="Busca espectacular">
-        <a class="btn btn-info search" href="Javascript:BuscaEspectacular();" role="button"><i class="fas fa-search"></i><p> Buscar</p></a>&nbsp;
+        <a class="btn btn-info search" href="Javascript:BuscaEspectacular();" role="button"><i class="fas fa-search"></i><span> Buscar</span></a>&nbsp;
     </div>
-    <div class="">
-        <a class="btn btn-warning add" href="<?php echo base_url('admin/espectaculares/agregarEspectacular')?>" role="button"><i class="fas fa-plus"></i> <p>+ Nuevo Espectacular +</p></a>
+    <div class="d-flex align-items-center">
+        <a class="btn btn-warning add" href="<?php echo base_url('admin/espectaculares/agregarEspectacular')?>" role="button"><i class="fas fa-plus"></i> <span>+ Nuevo Espectacular +</span></a>
     </div>
 </div>
 <div class="table-responsive" id="espectacularesContainer">
