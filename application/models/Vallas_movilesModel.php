@@ -1,7 +1,7 @@
 <?php
 class Vallas_movilesModel extends CI_model
 {
-	
+
 	 function __construct()
 	{
 		$this->load->database();
@@ -42,6 +42,21 @@ class Vallas_movilesModel extends CI_model
         }
     }
 
+
+    public function obtenerVallas_movilesPorIdMedio($id_medio){
+        $this->db->select("*");
+        $this->db->join("medios","medios.id=vallas_moviles.id_medio");
+        $this->db->where("vallas_moviles.id_medio",$id_medio);
+        $sql = $this->db->get("vallas_moviles");
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+
+    }
+
+
     public function obtenerVallas_moviles(){
         $this->db->select("*");
         $this->db->join("vallas_moviles","medios.id=vallas_moviles.id_medio");
@@ -52,7 +67,7 @@ class Vallas_movilesModel extends CI_model
         }else{
             return false;
         }
-    
+
     }
 
     public function obtenerImagenesVallasMovilesPorId($id){
@@ -122,7 +137,7 @@ class Vallas_movilesModel extends CI_model
             $data += ['vista_larga' => $imagen3];
 
         }
-        
+
         $this->db->where('id_medio', $id_medio);
         $sql = $this->db->update('vallas_moviles', $data);
         if($sql){

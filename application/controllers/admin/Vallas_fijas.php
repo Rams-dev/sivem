@@ -12,8 +12,7 @@ class Vallas_fijas extends CI_Controller {
 		$this->load->model('ClientesModel');
         $this->load->model('EspectacularesModel');
         $this->load->model('Vallas_fijasModel');
-        
-
+		$this->load->library('image_lib');
 	}
 	public function index()
 	{
@@ -108,12 +107,15 @@ class Vallas_fijas extends CI_Controller {
 
 			$config['upload_path'] = "./assets/images/medios";
 			$config['allowed_types'] = "*";       	
-			$this->load->library('upload', $config);
+            $this->load->library('upload', $config);
+			$imagenes = array();
 
 			if($this->upload->do_upload('imagen1')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
-				$imagen1 = $data['upload_data']['file_name'];
+                $imagen1 = $data['upload_data']['file_name'];
+				array_push($imagenes,$imagen1);
+                
 			}else{
 				echo json_encode("no se subio la imagen1");
 
@@ -123,6 +125,7 @@ class Vallas_fijas extends CI_Controller {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
 				$imagen2 = $data['upload_data']['file_name'];
+				array_push($imagenes,$imagen2);
 
 			}else{
 				echo json_encode("no se subio la imagen2");
@@ -133,11 +136,26 @@ class Vallas_fijas extends CI_Controller {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
 				$imagen3 = $data['upload_data']['file_name'];
+				array_push($imagenes,$imagen3);
 
 			}else{
 
 				echo json_encode("no se subio la imagen3");
-			}
+            }
+            
+            if(count($imagenes)>0){
+				for($imagen=0; $imagen < count($imagenes); $imagen++){
+					$config['image_library'] = 'gd2';
+					$config['create_thumb'] = false;
+					$config['maintain_ratio'] = false;
+					$config['width']         = 920;
+					$config['height']       = 600;
+					$config['source_image'] = './assets/images/medios/'. $imagenes[$imagen];
+					$this->image_lib->initialize($config);
+					$this->image_lib->resize();
+					$this->image_lib->clear();
+                }
+            }
 
 
             // echo json_encode(array($status,$precio,$tipo_medio ="valla_fija"));
@@ -281,12 +299,16 @@ class Vallas_fijas extends CI_Controller {
 
 			$config['upload_path'] = "./assets/images/medios";
 			$config['allowed_types'] = "*";       	
-			$this->load->library('upload', $config);
+            $this->load->library('upload', $config);
+            $this->load->library('upload', $config);
+			$imagenes = array();
 
 			if($this->upload->do_upload('imagen1')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
-				$imagen1 = $data['upload_data']['file_name'];
+                $imagen1 = $data['upload_data']['file_name'];
+				array_push($imagenes,$imagen1);
+                
 			}else{
 				$imagen1 ="";
 
@@ -295,7 +317,9 @@ class Vallas_fijas extends CI_Controller {
 			if($this->upload->do_upload('imagen2')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
-				$imagen2 = $data['upload_data']['file_name'];
+                $imagen2 = $data['upload_data']['file_name'];
+				array_push($imagenes,$imagen2);
+                
 			}else{
 				$imagen2 ="";
 
@@ -304,14 +328,26 @@ class Vallas_fijas extends CI_Controller {
 			if($this->upload->do_upload('imagen3')) {
 				$data['uploadSuccess'] = $this->upload->data();
 				$data = array('upload_data' => $this->upload->data());
-				$imagen3 = $data['upload_data']['file_name'];
+                $imagen3 = $data['upload_data']['file_name'];
+				array_push($imagenes,$imagen3);
 
 			}else{
 				$imagen3 ="";
             }
             
-            //  echo json_encode(array($imagen1,$imagen2,$imagen3));
-            //  exit;
+            if(count($imagenes)>0){
+				for($imagen=0; $imagen < count($imagenes); $imagen++){
+					$config['image_library'] = 'gd2';
+					$config['create_thumb'] = false;
+					$config['maintain_ratio'] = false;
+					$config['width']         = 920;
+					$config['height']       = 600;
+					$config['source_image'] = './assets/images/medios/'. $imagenes[$imagen];
+					$this->image_lib->initialize($config);
+					$this->image_lib->resize();
+					$this->image_lib->clear();
+				}
+			}
 
 
             

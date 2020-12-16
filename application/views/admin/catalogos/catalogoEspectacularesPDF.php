@@ -164,7 +164,6 @@
 <?php foreach($medios as $medio):?>
 
     <div class="contenedor">
-
         <img src="<?= BASEPATH.'../assets/images/logo_medios.jpg'?>" class="logo_medios" alt="">
         <div class="images">
             <div class="imagen-grande">
@@ -233,7 +232,7 @@
                 <tr>
                     <td colspan=2><?=$medio['ancho'] . " x ". $medio['alto']. " METROS"?></td>
                     <td><?=$medio['status']?></td>
-                    <td><?=$medio['costo_total']?></td>
+                    <td><?=$medio['precio']?></td>
                 </tr>
                 </table>
             <?php }?>

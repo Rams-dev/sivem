@@ -7,17 +7,21 @@ class Dashboard extends CI_Controller {
 		parent::__Construct();
 		$this->load->model('MediosModel');
 		$this->load->model('VentasModel');
+		$this->load->model('EspectacularesModel');
+		$this->load->model('Vallas_fijasModel');
 
 	}
 	public function index()
 	{
 		if($this->session->userdata('is_logged')){
-			$date = date("Y-m-d");
+			$mañana = mktime(0,0,0, date("m"), date("d")-1, date("Y"));
+			$date = date('Y/m/d', $mañana);
 			$dentroDeUnMes = mktime(0,0,0, date("m")+1, date("d"), date("Y"));
 			$UnMes = date('Y/m/d', $dentroDeUnMes);
-			
+			$hoy = date('Y/m/d');
+	
 			//obtiene los medios que estan apartados en una determinada fecha
-			$apartados = $this->VentasModel->obtenerVenta_mediosPorFechaInicio($date);
+			$apartados = $this->VentasModel->obtenerVenta_mediosPorFechaInicio($hoy);
 			if(count($apartados)>0){
 				for($i=0; $i<count($apartados); $i++){
 					//cambia el estado de los medios apartados a ocupados
@@ -46,7 +50,7 @@ class Dashboard extends CI_Controller {
 			 }
 
 			 //obtiene los medios que se registraron como apartados
-			$mediosApartados = $this->MediosModel->obtenerMediosApartadosSinVenta($date);
+			$mediosApartados = $this->MediosModel->obtenerMediosApartadosSinVenta($hoy);
 			if(count($mediosApartados)>0){
 				//modifica el estatus de los medios seleccionado a ocupado
 				for($mA=0; $mA<count($mediosApartados); $mA++){
@@ -56,6 +60,7 @@ class Dashboard extends CI_Controller {
 
 			 //obtiene los medios que se dieron de alta como ocupados
 			$mediosOcupados = $this->MediosModel->obtenerMediosOcupadosSinFechadeInicio($UnMes);
+
 			if(count($mediosOcupados)>0){
 				//modifica el estatus de ocupado a proximo
 				for($m=0; $m<count($mediosOcupados); $m++){
@@ -92,6 +97,18 @@ class Dashboard extends CI_Controller {
 			redirect('login');
 		}
 		
+	}
+
+	public function obtenerMediosQueVanATerminarContrato(){
+		$dentroDeUnMes = mktime(0,0,0, date("m")+1, date("d"), date("Y"));
+		$UnMes = date('Y/m/d', $dentroDeUnMes);
+		$espectaculares = $this->EspectacularesModel->espectacularesQueTerminaraSucontratoDentroDeUnMes($UnMes);
+		$vallas_fijas = $this->Vallas_fijasModel->vallasQueTerminaraSucontratoDentroDeUnMes($UnMes);
+		$medios = array_merge($espectaculares,$vallas_fijas);
+		if(count($medios)>0){
+			echo json_encode(array("medios"=> $medios, "total"=> count($medios)));
+			
+		}
 	}
 
 }

@@ -100,8 +100,8 @@ $('.owl-carousel').owlCarousel({
     loop:true,
     margin:0,
     responsiveClass:true,
-    center: true,
     nav: true,
+    center: true,
     responsive:{
         0:{
             items:1,
@@ -121,6 +121,15 @@ $('.owl-carousel').owlCarousel({
         }
     }
 })
+
+$('.owl-carousel').on('mousewheel', '.owl-stage', function (e) {
+    if (e.deltaY>0) {
+        owl.trigger('next.owl');
+    } else {
+        owl.trigger('prev.owl');
+    }
+    e.preventDefault();
+});
 
 function imagesEspecatulares(id){
   $.get('espectaculares/obtenerImagenesEspectacularPorId/'+id, function(response){

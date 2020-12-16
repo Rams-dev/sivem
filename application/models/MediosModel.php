@@ -243,6 +243,8 @@ class MediosModel extends CI_model
         }
     }
 
+
+
     function obtenerMediosPorId($medios_id,$tabla){
         if($tabla == "valla_fija"){
             $tabla = "vallas_fijas";
@@ -260,6 +262,7 @@ class MediosModel extends CI_model
         $sql= $this->db->get();
         return $sql->result_array();
     }
+
 
 
     function cambiarStatusMedio($id_medio){
@@ -309,7 +312,7 @@ class MediosModel extends CI_model
 
 
     public function obtenerMediosOcupadosSinFechadeInicio($date){
-        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion" => $date, "status" => "OCUPADO"));
+        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion <=" => $date, "status" => "OCUPADO"));
         return $sql->result_array();
     }
 
@@ -320,10 +323,16 @@ class MediosModel extends CI_model
 
     }
 
+    
+    public function obtenerMediosApartadosSinVenta($date){
+        $sql = $this->db->get_where("medios",array("fecha_inicio_ocupacion" => $date, "status" => "APARTADO"));
+        return $sql->result_array();
+
+    }
+
     // esta funcion cambia el estatus de los medios que al momento de registrase los declararon como ocupados
 
     
-
     public function CambiarOcupadoADisponible($id){
         $data = array(
             "status"=> "DISPONIBLE",
@@ -334,11 +343,6 @@ class MediosModel extends CI_model
         $this->db->update("medios", $data);
     }
 
-    public function obtenerMediosApartadosSinVenta($date){
-        $sql = $this->db->get_where("medios",array("fecha_inicio_ocupacion" => $date, "status" => "APARTADO"));
-        return $sql->result_array();
-
-    }
 
     public function CambiarApartadoAOcupado($id){
         $data = array(

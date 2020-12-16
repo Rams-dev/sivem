@@ -61,7 +61,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="municipio"> Municipio: </label>
-                        <select name="municipio" id="municipioselect" class="form-control">
+                        <select name="municipio" class="js-example-basic-single js-states form-control" id="municipioselect">
                             <option value="">selecciona un municipio</option>
                         </select>
                         <!-- <input type="text" class="form-control" id="municipio" name="municipio" value="" > -->
@@ -192,21 +192,21 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="imagen1"> Vista Corta : </label>
-                        <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen1" name="imagen1"  />
+                        <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg JPG PNG JPEG" id="imagen1" name="imagen1"/>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="imagen2"> Vista Media : </label>
-                        <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen2" name="imagen2"  />
+                        <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg JPG PNG JPEG" id="imagen2" name="imagen2"  />
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="imagen3"> Vista Larga : </label>
-                        <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg" id="imagen3" name="imagen3"  />
+                        <input type="file" class="dropify" data-allowed-file-extensions="jpg png jpeg JPG PNG JPEG" id="imagen3" name="imagen3"  />
                     </div>
                 </div>
 

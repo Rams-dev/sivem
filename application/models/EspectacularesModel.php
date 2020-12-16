@@ -260,10 +260,7 @@ class EspectacularesModel extends CI_model{
         }
         if($imagen3 != ""){
             $data += ['vista_larga' => $imagen3];
-
         }
-        
-        
        
         $this->db->where('id', $id);
         $sql = $this->db->update('espectaculares', $data);
@@ -283,7 +280,16 @@ class EspectacularesModel extends CI_model{
         }
     }
 
-    
-
-  
+    function espectacularesQueTerminaraSucontratoDentroDeUnMes($dentroDeUnMes){
+        $this->db->select("*");
+        $this->db->join("medios","espectaculares.id_medio = medios.id");
+        $this->db->join("propietarios", "espectaculares.id_propietario = propietarios.id");
+        $this->db->where('espectaculares.fecha_termino <=', $dentroDeUnMes);
+        $sql = $this->db->get("espectaculares");
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+    }
 }

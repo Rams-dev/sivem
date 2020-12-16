@@ -76,6 +76,7 @@ function agregarMunicipiosSelect(municipios){
   $('#guardarespectacular').submit(function(e){
       e.preventDefault()
       var formdata = new FormData($("#guardarespectacular")[0]);
+      $('.contentainer').html('<div class="loading"><img src="images/loader.gif" alt="loading" /><br/>Un momento, por favor...</div>');
       $.ajax({
           url:'guardarespectacular',
           type:$("#guardarespectacular").attr("method"),
