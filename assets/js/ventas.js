@@ -519,6 +519,7 @@ $("#guardarventa").submit(function(e){
                 alertify.success(res.success)
                 $("#guardarventa")[0].reset();
                 $("#precioConDescuento").html("");
+                $("#precioConDescuento").html("");
                 $("#desc").html("$ 0");
                 $("#preciototal").html("$ 0");
                 $("#bodyTable").html("$ 0");
@@ -528,6 +529,10 @@ $("#guardarventa").submit(function(e){
                 datosDeMedios = [];
                 idMedios = [];
                 dias =0;
+                $('#guardarespectacular')[0].reset();
+                    setTimeout(() => {
+                    location.reload();
+                }, 1500);
             }else{
                 alertify.error(res.error)
 

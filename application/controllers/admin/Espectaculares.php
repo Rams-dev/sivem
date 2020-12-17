@@ -276,6 +276,10 @@ class Espectaculares extends CI_Controller {
 		 	$folio = $this->input->post('folio');
 		 	$tipopago = $this->input->post('tipopago');
 			$periodopago = $this->input->post('periodopago');
+			/*----------------- datos de medio------------ */
+			$medio_id = $this->input->post('id_medio');
+			$precio = $this->input->post('precio');
+			$status = $this->input->post('status');
 
 			// $formData =$this->input->post();
 			//   echo json_encode($dataMaterial);
@@ -283,22 +287,13 @@ class Espectaculares extends CI_Controller {
     	    $config['upload_path'] = "./assets/images/medios";
 		    $config['allowed_types'] = "*";       	
 			$this->load->library('upload', $config);
-			$this->load->library('image_lib');
-			
+			$imagenes = array();
 
 		    if($this->upload->do_upload('imagen1')) {
 		 	   $data['uploadSuccess'] = $this->upload->data();
 			   $data = array('upload_data' => $this->upload->data());
 				$imagen1 = $data['upload_data']['file_name'];
-				$config['image_library'] = 'gd2';
-				$config['create_thumb'] = false;
-				$config['maintain_ratio'] = false;
-				$config['width']         = 920;
-				$config['height']       = 600;
-				$config['source_image'] = './assets/images/medios/'. $imagen1;
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				$this->image_lib->clear();
+				array_push($imagenes,$imagen1);
 				
 		    }else{
 				$imagen1  ='';
@@ -308,15 +303,7 @@ class Espectaculares extends CI_Controller {
 		 	   $data['uploadSuccess'] = $this->upload->data();
 		 	   $data = array('upload_data' => $this->upload->data());
 				$imagen2 = $data['upload_data']['file_name'];
-				$config['image_library'] = 'gd2';
-				$config['create_thumb'] = false;
-				$config['maintain_ratio'] = false;
-				$config['width']         = 920;
-				$config['height']       = 600;
-				$config['source_image'] = './assets/images/medios/'. $imagen2;
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				$this->image_lib->clear();
+				array_push($imagenes,$imagen2);
 				
 		    }else{
 				$imagen2 ="";
@@ -326,21 +313,15 @@ class Espectaculares extends CI_Controller {
 		 	   $data['uploadSuccess'] = $this->upload->data();
 		 	   $data = array('upload_data' => $this->upload->data());
 				$imagen3 = $data['upload_data']['file_name'];
-				$config['image_library'] = 'gd2';
-				$config['create_thumb'] = false;
-				$config['maintain_ratio'] = false;
-				$config['width']         = 920;
-				$config['height']       = 600;
-				$config['source_image'] = './assets/images/medios/'. $imagen3;
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				$this->image_lib->clear();
+				array_push($imagenes,$imagen3);
+				
 		    }else{
 				$imagen3 ="";
 			}
 
-			$espectaculardata = $this->EspectacularesModel->obtenerEspectaculares($id_espectacular);
+			
 
+			$espectaculardata = $this->EspectacularesModel->obtenerEspectacularesPorIdMedio($medio_id);
 
 			foreach($espectaculardata as $datosDeEspectaculares){
 				if($imagen1 != ''){
@@ -362,14 +343,19 @@ class Espectaculares extends CI_Controller {
 				 }
 			}
 
-
-
-			
-			/*----------------- datos de medio------------ */
-			$medio_id = $this->input->post('id_medio');
-			$precio = $this->input->post('precio');
-			$status = $this->input->post('status');
-
+			if(count($imagenes)>0){
+				for($imagen=0 ; $imagen < count($imagenes) ; $imagen++){
+					$config['image_library'] = 'gd2';
+					$config['create_thumb'] = false;
+					$config['maintain_ratio'] = false;
+					$config['width']         = 920;
+					$config['height']       = 600;
+					$config['source_image'] = './assets/images/medios/'. $imagenes[$imagen];
+					$this->image_lib->initialize($config);
+					$this->image_lib->resize();
+					$this->image_lib->clear();
+				}
+			}
 
 			 if(!$edMedio = $this->MediosModel->guardarCambiosMedio($medio_id,$precio,$status)){
 			 	echo json_encode(array('error'=>' no se pudeo editar el medio'));

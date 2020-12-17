@@ -1,4 +1,6 @@
 
+<div class="loader"></div>
+
 <?php
 // var_dump($espectaculares);
  foreach($espectaculares as $espectacular){
@@ -6,6 +8,7 @@
 
 <h1 class="text-center" style="color:#ba0d0d;">Editar Espectacular</h1>
 <hr>
+
 <div class="col-md-12">
     <form method="POST" enctype="multipart/form-data" action="<?= base_url('admin/espectaculares/guardarCambiosEspectacular')?>" name="editarespectacular"
         id="editarespectacular">

@@ -1,4 +1,7 @@
-
+const p = location.href
+p2  = p.lastIndexOf("admin")
+let path = p.slice(0, p2)
+// console.log(path)
   const selectStatus = document.querySelector("#status");
   const inicioOcupacion = document.querySelector("#desdeDiv");
   const terminoOcupacion = document.querySelector("#hastaDiv");
@@ -228,6 +231,8 @@ $("#guardarValla_movil").submit(function(e){
     e.preventDefault();
 
     let formData = new FormData($("#guardarValla_movil")[0]);
+    $('.loader').html('<div class="contenedor-loader"><div class="loading"><img src="'+ path +'assets/images/loader.gif" alt="loading" /><br/><p>Un momento, Estamos comprimiendo las imagenes</p></div></div>');
+
     $.ajax({
         url:"guardarValla_movil",
         type:"post",
@@ -237,11 +242,14 @@ $("#guardarValla_movil").submit(function(e){
         processData:false
     })
     .done(function(response){
+        $('.loader').hide();
         let res = JSON.parse(response);
         console.log(res);
         respuesta(res)        
     })
     .fail(function(err){
+        $('.loader').hide();
+
         alertify.error("Error, intenta mas tarde");
     })
 
@@ -251,7 +259,9 @@ $("#guardarValla_movil").submit(function(e){
 function respuesta(res){
     if(res.success){
         alertify.success(res.success);
-        location.reload();
+        setTimeout(() => {
+            location.reload();
+        }, 1500);
     }
     if(res.error){
         alertify.error(res.error);
@@ -281,6 +291,7 @@ function eliminarValla(id_medio){
 $("#editarValla_movil").submit(function(e){
     e.preventDefault();
     let formData = new FormData($("#editarValla_movil")[0]);
+    $('.loader').html('<div class="contenedor-loader"><div class="loading"><img src="'+ path +'assets/images/loader.gif" alt="loading" /><br/><p>Un momento, Estamos comprimiendo las imagenes</p></div></div>');
 
     $.ajax({
         url:'../guardarValla_movilEditado',
@@ -291,12 +302,15 @@ $("#editarValla_movil").submit(function(e){
         processData:false
     })
     .done(function(response){
+        $('.loader').hide();
         let res = JSON.parse(response);
         console.log(res)
         respuesta(res)
     })
     .fail(function(err){
+        $('.loader').hide();
         console.log("Error, intenta más tarde");
+
     })
 
 })

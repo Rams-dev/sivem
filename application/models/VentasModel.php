@@ -17,6 +17,8 @@ class VentasModel extends CI_model
 		$this->db->join("estados", "espectaculares.id_estado = estados.id");
 		$this->db->select("clientes.id as cliente_id, clientes.nombre as comprador, clientes.nombre_encargado, clientes.correo as correo_comprador, clientes.telefono");
 		$this->db->join("clientes", "ventas.id_comprador = clientes.id");
+		$this->db->group_by("ventas.id_venta");
+		$this->db->order_by("ventas.fecha_venta","ASC");
 		$sql = $this->db->get();
 		if($sql){
 			return $sql->result_array();

@@ -1,6 +1,8 @@
 <?php foreach($vallas_fijas as $valla):?>
 <h1 class="text-center" style="color:#ba0d0d;">Editar <?=$valla['nocontrol']?> </h1>
     <hr>
+<div class="loader"></div>
+
 
     <div class="col-lg-12">
         <form method="POST" enctype="multipart/form-data" action="<?= base_url("admin/vallas_fijas/guardarVallaFijaEditada")?>" name="editarVallaFija" id="editarVallaFija">

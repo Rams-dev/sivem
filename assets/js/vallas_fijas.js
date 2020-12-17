@@ -187,6 +187,7 @@ function calcularPrecio(){
 $("#guardarVallaFija").submit(function(e){
     e. preventDefault();
     var formdata = new FormData($("#guardarVallaFija")[0]);
+    $('.loader').html('<div class="contenedor-loader"><div class="loading"><img src="'+ path +'assets/images/loader.gif" alt="loading" /><br/><p>Un momento, Estamos comprimiendo las imagenes</p></div></div>');
 
     $.ajax({
         url: 'guardarVallaFija',
@@ -202,6 +203,9 @@ $("#guardarVallaFija").submit(function(e){
         if(res.success){
             alertify.success(res.success);
             $("#guardarVallaFija")[0].reset();
+            setTimeout(() => {
+                location.reload();
+            }, 1500);
             
         }
         
@@ -213,7 +217,7 @@ $("#guardarVallaFija").submit(function(e){
         console.log(err)
     })
     .always(function(alwais){
-
+        $('.loader').hide();
     })
 })
 
@@ -228,6 +232,7 @@ function eliminarValla_fija(id){
         data: {id:id},
     })
     .done(function(response){
+        
         let res = JSON.parse(response);
         console.log(res)
         if(res.success){
@@ -265,6 +270,8 @@ $(document).ready(function(){
 $("#editarVallaFija").submit(function(e){
     e.preventDefault();
     let formData = new FormData($("#editarVallaFija")[0])
+    $('.loader').html('<div class="contenedor-loader"><div class="loading"><img src="'+ path +'assets/images/loader.gif" alt="loading" /><br/><p>Un momento, Estamos comprimiendo las imagenes</p></div></div>');
+
     $.ajax({
         url:"../guardarVallaFijaEditada",
         type:"post",
@@ -276,8 +283,12 @@ $("#editarVallaFija").submit(function(e){
     .done(function(response){
         let res= JSON.parse(response);
         if(res.success){
+        $('.loader').hide();
+
             alertify.success(res.success)
-            location.reload();
+            setTimeout(() => {
+                location.reload();
+            }, 1500);
         }
         if(res.error){
             alertify.error(res.error)
@@ -286,8 +297,10 @@ $("#editarVallaFija").submit(function(e){
 
     })
     .fail(function(err){
+        $('.loader').hide();
         console.log("error");
         alertify.error("Error al enviar los datos");
+
     })
 })
 

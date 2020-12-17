@@ -1,7 +1,7 @@
-<?php var_dump($vallas_moviles);
+<div class="loader"></div>
 
+<?php
 var_dump($vallas_moviles);
-
 foreach($vallas_moviles as $vallas):
 ?>
 

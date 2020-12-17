@@ -280,24 +280,6 @@ class Vallas_moviles extends CI_Controller {
 				$imagen3 ="";
             }
 
-            
-            if(count($imagenes)>0){
-				for($imagen=0; $imagen < count($imagenes); $imagen++){
-					$config['image_library'] = 'gd2';
-					$config['create_thumb'] = false;
-					$config['maintain_ratio'] = false;
-					$config['width']         = 920;
-					$config['height']       = 600;
-					$config['source_image'] = './assets/images/medios/'. $imagenes[$imagen];
-					$this->image_lib->initialize($config);
-					$this->image_lib->resize();
-					$this->image_lib->clear();
-                }
-            }
-
-
-
-                        
  /*-------------------------------------------------------- E L I M I N A R    F O T O S --------------------------------- */
 
         $vallas_moviles = $this->Vallas_movilesModel->obtenerValla_movilPorId($id_medio);
@@ -319,6 +301,20 @@ class Vallas_moviles extends CI_Controller {
                 if(file_exists("assets/images/medios/". $vallas['vista_larga'])){
                     unlink("assets/images/medios/". $vallas['vista_larga']);
                 }
+            }
+        }
+
+        if(count($imagenes)>0){
+            for($imagen=0; $imagen < count($imagenes); $imagen++){
+                $config['image_library'] = 'gd2';
+                $config['create_thumb'] = false;
+                $config['maintain_ratio'] = false;
+                $config['width']         = 920;
+                $config['height']       = 600;
+                $config['source_image'] = './assets/images/medios/'. $imagenes[$imagen];
+                $this->image_lib->initialize($config);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
             }
         }
 

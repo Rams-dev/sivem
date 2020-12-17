@@ -201,6 +201,28 @@ a > span{
 }
 
 
+.contenedor-loader{
+  position: fixed;
+  display: flex;
+  top: 0%;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+  background-color: #fff;
+  
+}
+.loading{
+  text-align: center;
+  margin: auto;
+  z-index: 2;
+}
+
+.loading>p{
+  text-align: center;
+  margin: 20px 0px;
+  font-size: 20px;
+}
+
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 @media (max-width: 450px) {

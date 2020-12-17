@@ -1,6 +1,7 @@
 
 <h1 class="text-center" style="color:#ba0d0d;">Nuevo Espectacular</h1>
 <hr>
+<div class="loader"></div>
 <div class="col-md-12">
     <form method="POST" enctype="multipart/form-data" action="<?= base_url('admin/espectaculares/guardarEspectacular')?>" name="guardarespectacular"
         id="guardarespectacular">

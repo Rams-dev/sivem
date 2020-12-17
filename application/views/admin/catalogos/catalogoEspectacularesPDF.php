@@ -232,7 +232,7 @@
                 <tr>
                     <td colspan=2><?=$medio['ancho'] . " x ". $medio['alto']. " METROS"?></td>
                     <td><?=$medio['status']?></td>
-                    <td><?=$medio['precio']?></td>
+                    <td>$ <?=$medio['precio']?></td>
                 </tr>
                 </table>
             <?php }?>

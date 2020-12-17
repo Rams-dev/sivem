@@ -75,8 +75,8 @@ function agregarMunicipiosSelect(municipios){
 
   $('#guardarespectacular').submit(function(e){
       e.preventDefault()
-      var formdata = new FormData($("#guardarespectacular")[0]);
-      $('.contentainer').html('<div class="loading"><img src="images/loader.gif" alt="loading" /><br/>Un momento, por favor...</div>');
+     var formdata = new FormData($("#guardarespectacular")[0]);
+    $('.loader').html('<div class="contenedor-loader"><div class="loading"><img src="'+ path +'assets/images/loader.gif" alt="loading" /><br/><p>Un momento, Estamos comprimiendo las imagenes</p></div></div>');
       $.ajax({
           url:'guardarespectacular',
           type:$("#guardarespectacular").attr("method"),
@@ -90,17 +90,21 @@ function agregarMunicipiosSelect(municipios){
         let res = JSON.parse(response)
         console.log(res)
           if(res.success){
-              alertify.success(res.success)
-              $('#guardarespectacular')[0].reset();
-              setTimeout(() => {
-                  location.reload();
-              }, 1500);
+                $('.loader').hide();
+
+                alertify.success(res.success)
+                $('#guardarespectacular')[0].reset();
+                    setTimeout(() => {
+                    location.reload();
+                }, 1500);
           }
           if(res.error){
             alertify.error(error)
           }
       })
       .fail(function(err){
+        $('.loader').hide();
+
         alertify.error(err)
 
 
@@ -164,6 +168,8 @@ let material = document.getElementById('material').value;
 $("#editarespectacular").submit(function(e){
     e.preventDefault();
     var formdata = new FormData($("#editarespectacular")[0]);
+    $('.loader').html('<div class="contenedor-loader"><div class="loading"><img src="'+ path +'assets/images/loader.gif" alt="loading" /><br/><p>Un momento, Estamos comprimiendo las imagenes</p></div></div>');
+
           $.ajax({
               url:'../guardarCambiosEspectacular',
               type: $("#editarespectacular").attr("method"),  
@@ -173,6 +179,7 @@ $("#editarespectacular").submit(function(e){
               processData: false,
               })
               .done(function(response){
+                  $('.loader').hide();
                   let res = JSON.parse(response);
                   if(res.success){
                       alertify.success(res.success);
@@ -182,7 +189,9 @@ $("#editarespectacular").submit(function(e){
                   }
               })
               .fail(function(err){
-                  alertify.error(err);
+                alertify.error(err);
+                $('.loader').hide();
+
               })
     })
 
