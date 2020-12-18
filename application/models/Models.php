@@ -63,7 +63,27 @@ class Models extends CI_model
 		// Output the generated PDF (1 = download and 0 = preview)
 		$this->dompdf->stream("olv.pdf", array("Attachment"=>0));
 	
-		}
+	}
+
+	public function generateOrdenCompra($html){
+
+		// Get output html
+		$html = $this->output->get_output();
+		// Load pdf library
+		$this->load->library('pdf');
+		// Load HTML content
+		$this->dompdf->loadHtml($html);
+	
+		// (Optional) Setup the paper size and orientation
+		$this->dompdf->setPaper('A4', 'portrait');
+	
+		// Render the HTML as PDF
+		$this->dompdf->render();
+	
+		// Output the generated PDF (1 = download and 0 = preview)
+		$this->dompdf->stream("olv.pdf", array("Attachment"=>0));
+	
+	}
 
 	
 

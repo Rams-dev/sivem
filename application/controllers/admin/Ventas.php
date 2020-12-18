@@ -10,6 +10,7 @@ class Ventas extends CI_Controller {
 		$this->load->model('VentasModel');
 		$this->load->model('MediosModel');
 		$this->load->model('EmpleadosModel');
+		$this->load->model('Models');
 
 	}
 	public function index()
@@ -217,5 +218,13 @@ class Ventas extends CI_Controller {
     }else{
         redirect('login');
     }
+    }
+
+    public function generarOrdenDeCompra(){
+        $html=$this->load->view('admin/ventas/ordenDeCompra');
+        //$this->load->view('admin/catalogos/catalogoespectacularesPDF',$data);
+		//echo $html;
+		$this->Models->generateOrdenCompra($html);
+
     }
 }

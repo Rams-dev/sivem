@@ -19,7 +19,7 @@
             <th>#</th>
             <th>No control</th>
             <th>Marca</th>
-            <th>modelo</th>
+            <th>Modelo</th>
             <th>Año</th>
             <th>Precio</th>
             <th>Status</th>

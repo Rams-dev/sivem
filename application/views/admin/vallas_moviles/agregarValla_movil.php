@@ -34,7 +34,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="status">Status</label>
-                <select class="form-control" id="status" name="status" value="" >
+                <select class="form-control" id="status" name="status" value="" required>
                     <option value="">Sel. Status</option>
                     <option value="DISPONIBLE">DISPONIBLE</option>
                     <option value="OCUPADO">OCUPADO</option>

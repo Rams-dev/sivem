@@ -145,7 +145,7 @@
                     <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                             <label for="status"> Status: </label>
-                            <select name="status" id="status" class="form-control">
+                            <select name="status" id="status" class="form-control" required>
                                 <option value="">Sel. Status</option>
                                 <option value="DISPONIBLE">DISPONIBLE</option>
                                 <option value="OCUPADO">OCUPADO</option>

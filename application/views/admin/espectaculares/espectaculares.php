@@ -36,7 +36,7 @@ if(empty($espectaculares)){?>
       <th>Status</th>
       <th>Costo mensual</th>
       <th>Costo impresión</th>
-      <th>Costo instalacion</th>
+      <th>Costo instalación</th>
       <th>Costo material</th>
       <th>Costo total</th>
       <th>Opciones</th>

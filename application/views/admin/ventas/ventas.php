@@ -21,7 +21,7 @@
       <th scope="col">Cliente</th>
       <th scope="col">Rfc</th>
       <th scope="col">Encargado</th>
-      <th scope="col">Telefono</th>
+      <th scope="col">Teléfono</th>
       <th scope="col">Vendido por</th>
       <th scope="col">Fecha de venta</th>
       <th scope="col">Monto total</th>
