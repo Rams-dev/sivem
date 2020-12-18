@@ -57,10 +57,7 @@ class Ventas extends CI_Controller {
             $mediosApartados = $this->MediosModel->obtenerMediosApartados($id, $fi, $ft);
             $medios = array_merge($mediosDisponibles, $mediosApartados);
             
-            
             echo json_encode($medios);
-            
-
 
         }else{
             redirect('login');
@@ -125,12 +122,6 @@ class Ventas extends CI_Controller {
 
             
         }
-    //     $data = $this->input->post();
-    //     if($data['medio'] == '1'){
-    //         $espectacular = $this->EspectacularesModel->
-            
-    //     }
-    //     $mediosReservados = $this->MediosModel->verificarDisponibilidad($data['medio'],$data['fechaInicio'],$data['fechaTermino']);
      }
 
     function obtenerMedioPorId($id_medio){
@@ -181,18 +172,8 @@ class Ventas extends CI_Controller {
         $descuentoPocentaje = $this->input->post('descuentoCantidad');
         $descuentoPrecio = $this->input->post('descuento');
         $precio_final= $this->input->post('precio_final');
-//         echo json_encode(array('success'=>' venta exitosa'));
-// exit;
-
-        //  $formData=$this->input->post();
-        //  echo json_encode(array($id_cliente,$tipoArte,$fechaInicio,$fechaTermino,$noPagos,$factura,$tipoPago,$id_tipoMedio,$monto,$fecha_venta,$idsMedios,$descuentoPocentaje,$descuentoPrecio,$precio_final));
-        //  exit;
-        // for($m = 0; $m < count($idsMedios); $m++){
-            //  echo json_encode($fecha_venta);
-        // }
-        //     echo json_encode($formData);
-        // echo json_encode(array('error'=>' venta exitosa'));
-            // exit;
+        $formdata = $this->input->post();
+    
 
         if(!$sql = $this->VentasModel->agregarVenta($id_cliente,$monto,$descuentoPocentaje, $descuentoPrecio, $precio_final,$fecha_venta,$factura)){
             echo json_encode(array('error' => 'error, intentalo mas tarde.'));

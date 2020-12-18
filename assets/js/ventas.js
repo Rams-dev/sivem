@@ -1,5 +1,4 @@
 ventasit.classList.add("selected");
-
 const horainicio = document.querySelector("#horainicio")
 const horatermino = document.querySelector("#horatermino")
 const choferdiv = document.querySelector("#choferdiv")
@@ -27,12 +26,8 @@ $("#descuento").change(function(){
                 $("#descuentoCantidad").val("")
                 descuento = 0;
                 obtenerDesc()
-
         }
-
-
 })
-
 
 let fechaInicio = {};
 let fechaTermino = {};
@@ -81,24 +76,11 @@ function obtenerDias(){
                 $("#fechaInicio").removeClass("is-invalid");
                 $("#fechaTermino").removeClass("is-invalid");
                 console.log(dias);
-                return dias; 
+                return dias;
         }else{
                 return 0;
         }
 }
-
-
-function obtenerHora(h1,h2){
-        if(h1 != "" && h2 != ""){
-                if(h1>h2){
-                        alertify.error("la fecha de termino no puede ser menor a la fecha de inicio")
-                }
-                $("#hinicio").addClass("is-invalid");
-                $("#htermino").addClass("is-invalid");
-        }
-
-}
-
 
 let datos = [];
 
@@ -120,7 +102,7 @@ $("#tipoMedio").change(function(e){
         let fInicio = $("#fechaInicio").val();
         let fTermino = $("#fechaTermino").val();
 
-        
+
         if($("#fechaInicio").val() != "" && $("#fechaTermino").val() != ""){
                 if($("#fechaInicio").val() > $("#fechaTermino").val()){
                 alertify.error('Selecciona una fecha valida')
@@ -128,14 +110,13 @@ $("#tipoMedio").change(function(e){
                 validarFechas()
                 return 0;
                 }
-        
+
                 if(medio ==  "1" || medio ==  "2" ){
                         obtenerMedios(medio)
-                        // return 0;
                 }
-        
 
-        
+
+
                 if(medio == "3"){
                         medio = "3";
                         horainicio.classList.remove("d-none")
@@ -144,24 +125,24 @@ $("#tipoMedio").change(function(e){
                         let hI ="";
                         let hT = "";
                         $("#hinicio").change(function(){
-                                // $("#medio option[value!='']").remove();
+                                $("#medio option[value!='']").remove();
                                 //         datos="";
                                 hI = this.value
                                 if(this.value != "" && $("#htermino").val() != ""){
-                                        obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);      
-                                        obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);      
+                                        obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);
+                                        obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);
                                 }
                         })
                         $("#htermino").change(function(){
-                                // $("#medio option[value!='']").remove();
+                                 $("#medio option[value!='']").remove();
                                 //         datos="";
                                 // $("#medio option[value!='']").remove();
                                 if($("#hinicio").val() != "" && this.value != ""){
-                                hT = this.value 
-                                        obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);    
-                                        obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);      
+                                hT = this.value
+                                        obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);
+                                        obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);
                                 }
-                        })        
+                        })
                 }else{
                         horainicio.classList.add("d-none")
                         horatermino.classList.add("d-none")
@@ -179,7 +160,6 @@ $("#tipoMedio").change(function(e){
 
 $("#chofer").change(function(e){
         e.preventDefault();
-
 })
 
 function obtenerVallasMovilesDisponibles(h1,h2,fInicio,fTermino,medio){
@@ -194,7 +174,7 @@ function obtenerVallasMovilesDisponibles(h1,h2,fInicio,fTermino,medio){
                         f2: fTermino,
                         id: medio
                 }
-                
+
         })
         .done(function(response){
                 let res = JSON.parse(response);
@@ -211,7 +191,8 @@ function obtenerVallasMovilesDisponibles(h1,h2,fInicio,fTermino,medio){
 
 
 function obtenerChoferesDisponibles(h1,h2,fInicio,fTermino){
-     
+
+
         $.ajax({
                 url: "obtenerChoferesDisponibles",
                 type: "post",
@@ -222,7 +203,7 @@ function obtenerChoferesDisponibles(h1,h2,fInicio,fTermino){
                         f1: fInicio,
                         f2: fTermino
                 }
-                
+
         })
         .done(function(response){
                 let res = JSON.parse(response);
@@ -252,18 +233,17 @@ function rellenarChoferes(data){
 
 function obtenerMedios(val){
         valores = {};
-        valores.medio = val; 
-        valores.fechaInicio = $("#fechaInicio").val(); 
+        valores.medio = val;
+        valores.fechaInicio = $("#fechaInicio").val();
         valores.fechaTermino = $("#fechaTermino").val();
         $.ajax({
                 url:"obtenerMedios",
                 type:'post',
-                data: valores 
+                data: valores
         })
         .done(function(response){
                 if(response != ''){
                         let res = JSON.parse(response)
-                        console.log(res)
                         rellenarMedios(res)
 
                 }else{
@@ -281,6 +261,15 @@ function rellenarMedios(data){
         if(data != ''){
                 const medio =  document.querySelector('#medio')
                 let option;
+
+                if(arrayMedios != ""){
+                        for(let x = 0; x<arrayMedios.length; x++){
+                                for(let y = 0; y<arrayMedios[x].length; y++){
+                                         console.log(arrayMedios[x][y].id_medio)
+                                       data = data.filter(me => me.id_medio != arrayMedios[x][y].id_medio)
+                        }}
+                }
+                console.log(data)
                 data.map(m =>{
                         option =  document.createElement('option')
                         if(m.tipo_medio == "Vallas movil"){
@@ -295,55 +284,25 @@ function rellenarMedios(data){
         }else{
                 return 0;
         }
-  }
+}
 
+let arrayMedios = [];
 
 $('#medio').change(function(e){
         e.preventDefault();
         console.log(this.value)
-        datos = {};
-         datos.medio = this.value; 
-         datos.fechaInicio = $("#fechaInicio").val(); 
-         datos.fechaTermino = $("#fechaTermino").val();
-         console.log(datos) 
-          $.ajax({
-                  url:"verificarDisponibilidad",
-                  type:'post',
-                  data: datos 
-         })
-          .done(function(response){
-                if(response ==""){
-                        $("#error").html("");
-                        $("#medio").removeClass("is-invalid")
-                }else{
-                
-                        let res = JSON.parse(response)
-                        console.log(res)
-                        if(res.error){
-                                $("#error").html(res.error);
-                                $("#medio").addClass("is-invalid")
-                                // rellenarMedios(datos)
-                                return 0;
-                        }
-                }
-
-          })
-          .fail(function(err){
-                 console.log(err)
-          })
-
         $.get('obtenerMedioPorId/'+ this.value, function(response){
           if(response != ''){
                 datosMedio = JSON.parse(response)
                 // datosMedio.push(res);
                 console.log(datosMedio)
-                 return datosMedio;
+                arrayMedios.push(datosMedio);
           }else{
                   return 0;
           }
         })
 })
-//  let datosMedio = [];
+
 let datosDeMedios = [];
 let idMedios = [];
 
@@ -354,6 +313,7 @@ function validarFechas(){
 
 window.add.addEventListener('click', function(e){
         e.preventDefault();
+        $("#medio option[value!='']").remove();
         if(datosMedio == ''){
                 return 0;
         }
@@ -366,93 +326,107 @@ window.add.addEventListener('click', function(e){
                 alertify.error("las fecha de termino no puede ser menor a la de inicio");
                 return 0;
         }
+        rellenarTabla()
+
+ })
+
+
+ function EliminarMedioDeLaTabla(medio_id){
+        console.log(medio_id);
+        arrayMedios.splice(medio_id,1)
+        console.log(arrayMedios)
+        rellenarTabla()
+}
+
+ function rellenarTabla(){
         let Table = document.querySelector("#bodyTable");
         let tipoVenta = document.querySelector("#tipoVenta");
         //console.log(datosMedio)
-
-        // console.log(datosDeMedios)
         console.log(idMedios)
-        // Table.innerHTML =""
+        Table.innerHTML =""
 
-        if(window.tipoMedio.value == "3"){
-                datosMedio.map(medio =>{
-                        console.log(medio.precio)
-                        let costototal = ((parseFloat(medio.costo_renta) + parseFloat(medio.costo_impresion)) / 30) * dias;
-                        Table.innerHTML += `<tr>
-                        <td>#</td>
-                        <td>${medio.nocontrol}</td>
-                        <td>-</td>
-                        <td>$ ${medio.costo_renta} </td>
-                        <td>-</td>
-                        <td>$ ${medio.costo_impresion}</td>
-                        <td>$ ${parseFloat(costototal).toFixed(2)}</td>
-
-                        </tr>`;
-                        idMedios.push(medio.id)
-                        datosDeMedios.push(parseFloat(costototal));
-                        // console.log(datosDeMedios)
-                
-                        calcularTotal()
-                })
-        }else{
-
-                if(tipoVenta.value == "renta"){
-
-                        //   for(let i=0;i<datosMedio.length;i++){
-
-                        datosMedio.map(medio =>{
+        for(let medios=0; medios < arrayMedios.length; medios++){
+                if(window.tipoMedio.value == "3"){
+                        arrayMedios[medios].map(medio =>{
                                 console.log(medio.precio)
-                                let costototal = ((parseFloat(medio.costo_renta) + parseFloat(medio.costo_instalacion)) / 30) * dias;
+                                medio["costototal"] = parseFloat(parseFloat((medio.costo_renta / 30) * dias) + parseFloat(medio.costo_impresion)).toFixed(2);
                                 Table.innerHTML += `<tr>
-                                <td>#</td>
+                                <td><button class="btn btn-danger btn-sm" type="button" onclick="EliminarMedioDeLaTabla(${medios})">-</button></td>
+                                <td>${medios + 1}</td>
                                 <td>${medio.nocontrol}</td>
-                                <td>${medio.localidad}</td>
-                                <td>$ ${medio.costo_renta} </td>
-                                <td>$ ${medio.costo_instalacion}</td>
                                 <td>-</td>
-                                <td>$ ${parseFloat(costototal).toFixed(2)}</td>
-
-                                </tr>`;
-                                idMedios.push(medio.id)
-                                datosDeMedios.push(parseFloat(costototal));
-                                // console.log(datosDeMedios)
-                        
-                                calcularTotal()
-                        })
-                        // }
-
-
-                }else{
-                        datosMedio.map(medio =>{
-                                let ctotal = ((parseFloat(medio.costo_renta) + parseFloat(medio.costo_instalacion) + parseFloat(medio.costo_instalacion)) / 30) * dias;
-                                console.log(medio.precio)
-                        
-                                Table.innerHTML += `<tr>
-                                <td>${datosDeMedios.length + 1}</td>
-                                <td>${medio.nocontrol}</td>
-                                <td>${medio.localidad}</td>
-                                <td>$ ${medio.costo_renta}</td>
-                                
-                                <td>$ ${medio.costo_instalacion}</td>
+                                <td>$ ${medio.costo_renta} </td>
+                                <td>-</td>
                                 <td>$ ${medio.costo_impresion}</td>
-                                <td>$ ${ctotal}</td>
+                                <td>$${medio.costototal} </td>
+
                                 </tr>`;
-                                //   return medio.precio;
-                                idMedios.push(medio.id)
-                                datosDeMedios.push(parseFloat(ctotal));
-                                console.log(datosDeMedios)
-                                
+
                                 calcularTotal()
                         })
+                }else{
+
+                        if(tipoVenta.value == "renta"){
+
+                                //   for(let i=0;i<datosMedio.length;i++){
+
+                                arrayMedios[medios].map(medio =>{
+                                        console.log(medio.precio)
+                                        medio["costototal"] = parseFloat(parseFloat((medio.costo_renta / 30) * dias) + parseFloat(medio.costo_instalacion)).toFixed(2);
+                                        Table.innerHTML += `<tr>
+                                        <td><button class="btn btn-danger btn-sm" type="button" onclick="EliminarMedioDeLaTabla(${medios})">-</button></td>
+                                        <td>${medios + 1}</td>
+                                        <td>${medio.nocontrol}</td>
+                                        <td>${medio.localidad}</td>
+                                        <td>$ ${medio.costo_renta} </td>
+                                        <td>$ ${medio.costo_instalacion}</td>
+                                        <td>-</td>
+                                        <td>$${medio.costototal} </td>
+
+                                        </tr>`;
+                                        // idMedios.push(medio.id)
+                                        // datosDeMedios.push(parseFloat(costototal));
+                                        // console.log(datosDeMedios)
+
+                                        // calcularTotal()
+                                })
+                                // }
+
+
+                        }else{
+                                arrayMedios[medios].map(medio =>{
+                                        medio["costototal"] = parseFloat(parseFloat((medio.costo_renta / 30) * dias) + parseFloat(medio.costo_instalacion) + parseFloat(medio.costo_impresion)).toFixed(2);
+                                        console.log(medio.precio)
+
+                                        Table.innerHTML += `<tr>
+                                        <td><button class="btn btn-danger btn-sm" type="button" onclick="EliminarMedioDeLaTabla(${medios})">-</button></td>
+                                        <td>${medios + 1}</td>
+                                        <td>${medio.nocontrol}</td>
+                                        <td>${medio.localidad}</td>
+                                        <td>$ ${medio.costo_renta}</td>
+
+                                        <td>$ ${medio.costo_instalacion}</td>
+                                        <td>$ ${medio.costo_impresion}</td>
+                                        <td>$ ${medio.costototal}</td>
+                                        </tr>`;
+                                        //   return medio.precio;
+                                        // idMedios.push(medio.id)
+                                        // datosDeMedios.push(parseFloat(ctotal));
+                                        // console.log(datosDeMedios)
+
+                                })
+                        }
                 }
         }
- })
+        calcularTotal()
+ }
+
 
  $("#descuentoCantidad").change(function(e){
          descuento = isNaN(parseFloat(this.value)) ? 0 : parseFloat(this.value);
          console.log(descuento);
          obtenerDesc()
-         
+
 })
 
 let preciofinal = 0;
@@ -460,22 +434,36 @@ let precioIva = 0;
 let descuento = 0;
 
 function calcularTotal(){
+
+
         const preciototal = document.querySelector("#preciototal");
-        console.log( datosMedio)
-//        const total = document.querySelector("#total");
-         preciofinal = datosDeMedios.reduce((arr,el) => arr + el)
-        // preciofinal = preciofinal ;
-        // preciofinal = parseFloat(preciofinal + parseFloat(medio));
-        
+        console.log(arrayMedios)
+        //        const total = document.querySelector("#total");
+        // arrayMedios.reduce((arr,el) => console.log(arr))
+        let costototal =0.0;
+        for(let val of arrayMedios){
+                for(let id of val){
+                       costototal += parseFloat(id.costototal);
+                }
+        }
+        preciofinal = costototal;
+        console.log(preciofinal)
+
+
+         preciofinal = preciofinal ;
+         preciofinal = parseFloat(preciofinal + parseFloat(medio));
+
         if($('#factura').val() == "si"){
                 let iva = parseFloat(preciofinal * .16);
                 preciofinal += iva;
         }
         preciototal.innerHTML = '$ '+ parseFloat(preciofinal).toFixed(2);
         $("#monto").val(preciofinal);
+        $("#medio").val("");
+        $("#tipoMedio").val("");
         console.log(preciofinal)
         obtenerDesc()
-        
+
 
 }
 
@@ -499,6 +487,11 @@ function obtenerPrecioTotal(){
 
 $("#guardarventa").submit(function(e){
     e.preventDefault();
+        for(let x = 0; x<arrayMedios.length; x++){
+                for(let y = 0; y<arrayMedios[x].length; y++){
+                        // console.log(y.id)
+                        idMedios.push(arrayMedios[x][y].id_medio)
+        }}
 
     let formData = new FormData($("#guardarventa")[0]);
     formData.set('idmedios',idMedios);
@@ -529,7 +522,6 @@ $("#guardarventa").submit(function(e){
                 datosDeMedios = [];
                 idMedios = [];
                 dias =0;
-                $('#guardarespectacular')[0].reset();
                     setTimeout(() => {
                     location.reload();
                 }, 1500);
