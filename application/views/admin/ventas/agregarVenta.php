@@ -88,7 +88,7 @@
                                     <option value="">Seleccione un Tipo de medio</option>
                                     <option value="1">Espectaculares</option>
                                     <option value="2">Vallas fijas</option>
-                                    <option value="3"> Vallas Moviles</option>
+                                    <option value="3" id="VM"> Vallas Moviles</option>
                             </select>
                     </div>
             </div>
