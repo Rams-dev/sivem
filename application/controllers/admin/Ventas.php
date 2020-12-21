@@ -72,12 +72,20 @@ class Ventas extends CI_Controller {
         $id = $this->input->post("id");
 
         $vallas_disponibles = $this->MediosModel->obtenerMediosDisponibles($id);
-        $vallas_apartadas_por_fecha = $this->MediosModel->obtenerMediosApartadosPorFecha($id,$f1,$f2);
+        $vallas_apartadas_por_fecha = $this->MediosModel->obtenerMediosApartados($id,$f1,$f2);
         $vallas_disponibles_porhorario= $this->MediosModel->obtenerMediosApartadosPorHorario($id,$f1,$f2,$h1,$h2);
-        $vallas = array_merge($vallas_disponibles, $vallas_apartadas_por_fecha, $vallas_disponibles_porhorario);
+        // for($v = 0; $v<count($vallas_apartadas_por_fecha); $v++){
+        //      for($v2 = 0; $v2<count($vallas_disponibles_porhorario); $v2++){
+        //         if($vallas_apartadas_por_fecha[$v]["id_medio"] == $vallas_disponibles_porhorario[$v2]["id_medio"]){
+        //             unset($vallas_disponibles_porhorario[$v2]);
+        //         }
+        //      }
+        // }
+        // $vallas = array_merge($vallas_disponibles, $vallas_apartadas_por_fecha, $vallas_disponibles_porhorario);
 
+        
 
-        echo json_encode($vallas);
+        echo json_encode($vallas_apartadas_por_fecha);
         $vallas = [];
         
     }
@@ -103,7 +111,7 @@ class Ventas extends CI_Controller {
            } 
         }
         $choferes = array_merge($choferesD, $choferes_apartados_por_fecha, $choferes_disponibles_porhorario);
-        echo json_encode($choferes);
+        echo json_encode($choferes_disponibles_porhorario);
     }
 
 
@@ -153,38 +161,26 @@ class Ventas extends CI_Controller {
         $noPagos = $this->input->post('pagos');
         $factura = $this->input->post('factura');
         $tipoPago = $this->input->post('tipoDePago');
-        $id_tipoMedio = $this->input->post('tipoMedio');
-        $horai="";
-        $horaf="";
-        $id_chofer="";
-        if($id_tipoMedio == "3"){
-            $horai = $this->input->post("hinicio");
-            $horaf = $this->input->post("htermino");
-            $id_chofer = $this->input->post("chofer");
-        }else{
-            $horai="";
-            $horaf="";
-            $id_chofer="";
-        }
         $monto = $this->input->post('monto');
         $fecha_venta =  date('Y-m-d h:i:s');
         $idsMedios =explode(',',$this->input->post("idmedios")); 
         $descuentoPocentaje = $this->input->post('descuentoCantidad');
         $descuentoPrecio = $this->input->post('descuento');
         $precio_final= $this->input->post('precio_final');
-        $formdata = $this->input->post();
-    
+        $medios = json_decode($this->input->post("medios"));
 
-        if(!$sql = $this->VentasModel->agregarVenta($id_cliente,$monto,$descuentoPocentaje, $descuentoPrecio, $precio_final,$fecha_venta,$factura)){
+        if(!$sql = $this->VentasModel->agregarVenta($id_cliente,$monto,$descuentoPocentaje, $descuentoPrecio, $precio_final,$fecha_venta,$factura,$noPagos,$tipoPago)){
             echo json_encode(array('error' => 'error, intentalo mas tarde.'));
         }
-        //var_dump($sql);
-        for($m = 0; $m < count($idsMedios); $m++){
-            if(!$query = $this->VentasModel->agregarVentaMedio($sql,$idsMedios[$m],$noPagos,$tipoPago,$fechaInicio,$fechaTermino,$horai,$horaf,$id_chofer)){
+        foreach ($medios as $medio) {
+            $horai = isset($medio[0]->hInicio) ? $medio[0]->hInicio : ""; 
+            $horaf = isset($medio[0]->hTermino) ? $medio[0]->hTermino : ""; 
+            $id_chofer = isset($medio[0]->idChofer) ? $medio[0]->idChofer : ""; 
+            if(!$query = $this->VentasModel->agregarVentaMedio($sql,$medio[0]->id_medio,$fechaInicio,$fechaTermino,$horai,$horaf,$id_chofer)){
                 echo json_encode(array('error'=> 'error, intentalo mas tarde.'));
                 $this->VentasModel->eliminarVenta($sql);
             }else{
-                $medioG = $this->MediosModel->cambiarStatusMedio($idsMedios[$m]);
+                $medioG = $this->MediosModel->cambiarStatusMedio($medio[0]->id_medio);
             }
         }
         if($medioG){

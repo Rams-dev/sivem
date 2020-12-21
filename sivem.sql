@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2020 a las 00:44:40
+-- Tiempo de generación: 21-12-2020 a las 17:10:26
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -47,8 +47,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nombre`, `rfc`, `domicilio`, `colonia`, `poblacion`, `id_estado`, `cp`, `nombre_encargado`, `puesto`, `telefono`, `correo`) VALUES
-(1, 'empresa aburrida', 'asda020202sda', 'algun domiciolo', 'alguna colonia', 'alguna poblacion', 20, 71200, 'rams', 'algun puesto', '9516246485', 'hi@gmail.com'),
-(2, 'otra empresa', 'dasd251211das', 'otro domicilio', 'otra colonia', 'alguna poblacion', 20, 70200, 'armando altamirano', 'marcketing', '1216510041', 'armando@gmail.com');
+(10, 'dasdasdas', 'sdas', 'sdasdas', 'asdasdas', 'sadasdasdas', 12, 71202, 'sdasdasdas', 'sdasdasdas', '951612321', 'asdas@gmal.com');
 
 -- --------------------------------------------------------
 
@@ -61,6 +60,7 @@ CREATE TABLE `espectaculares` (
   `nocontrol` varchar(10) NOT NULL,
   `costo_impresion` decimal(10,2) NOT NULL,
   `costo_instalacion` decimal(10,2) NOT NULL,
+  `costo_renta` decimal(10,0) NOT NULL,
   `calle` varchar(100) NOT NULL,
   `numero` int(5) NOT NULL,
   `colonia` varchar(50) NOT NULL,
@@ -70,8 +70,8 @@ CREATE TABLE `espectaculares` (
   `latitud` decimal(10,2) NOT NULL,
   `longitud` decimal(10,2) NOT NULL,
   `referencias` text NOT NULL,
-  `ancho` decimal(3,3) NOT NULL,
-  `alto` decimal(3,3) NOT NULL,
+  `ancho` decimal(10,2) NOT NULL,
+  `alto` decimal(10,2) NOT NULL,
   `id_material` int(3) NOT NULL,
   `observaciones` text NOT NULL,
   `acabados` text NOT NULL,
@@ -84,16 +84,18 @@ CREATE TABLE `espectaculares` (
   `fecha_termino` date NOT NULL,
   `folio` varchar(10) NOT NULL,
   `id_tipo_pago` int(2) NOT NULL,
-  `id_periodo_pago` int(11) NOT NULL
+  `id_periodo_pago` int(11) NOT NULL,
+  `monto` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `espectaculares`
 --
 
-INSERT INTO `espectaculares` (`id`, `nocontrol`, `costo_impresion`, `costo_instalacion`, `calle`, `numero`, `colonia`, `localidad`, `municipio`, `id_estado`, `latitud`, `longitud`, `referencias`, `ancho`, `alto`, `id_material`, `observaciones`, `acabados`, `vista_corta`, `vista_media`, `vista_larga`, `id_propietario`, `id_medio`, `fecha_inicio`, `fecha_termino`, `folio`, `id_tipo_pago`, `id_periodo_pago`) VALUES
-(4, 'dfasdfds', '1080.00', '800.00', 'sdasd', 423, 'asd', 'sdasdasd', 'San Francisco de los', 1, '23423432.00', '3423423.00', 'sasdasdasdasdasd', '0.999', '0.999', 3, 'asdasdasdasd', 'dasdasdasd', '144.jpg', '22.jpg', '32.jpg', 59, 214, '0000-00-00', '0000-00-00', '', 0, 0),
-(5, 'dfasdfds', '1080.00', '800.00', 'sdasd', 423, 'asd', 'sdasdasd', 'San Francisco de los', 1, '23423432.00', '3423423.00', 'sasdasdasdasdasd', '0.999', '0.999', 3, 'asdasdasdasd', 'dasdasdasd', '146.jpg', '24.jpg', '34.jpg', 60, 215, '2020-11-14', '2020-11-28', 'dasd4', 1, 3);
+INSERT INTO `espectaculares` (`id`, `nocontrol`, `costo_impresion`, `costo_instalacion`, `costo_renta`, `calle`, `numero`, `colonia`, `localidad`, `municipio`, `id_estado`, `latitud`, `longitud`, `referencias`, `ancho`, `alto`, `id_material`, `observaciones`, `acabados`, `vista_corta`, `vista_media`, `vista_larga`, `id_propietario`, `id_medio`, `fecha_inicio`, `fecha_termino`, `folio`, `id_tipo_pago`, `id_periodo_pago`, `monto`) VALUES
+(69, 'sasd', '2400.00', '800.00', '5000', 'asdasd', 12, 'asdasd', 'fadsfa', 'Mexicali', 2, '13.00', '1.11', 'dsghfgfsj', '4.00', '5.00', 3, 'asdasdasdasd', 'sagdfh', 'SAY1_-_EC.JPG', 'CDS2_-_EC.JPG', 'SST1_-_EC.JPG', 160, 112, '2020-12-24', '2020-12-30', 'sdf', 4, 11, '11.00'),
+(70, 'asdasd', '2520.00', '800.00', '5000', 'asdasd', 23, 'shgf', 'fadsfa', 'Cuencamé', 10, '1.00', '1.10', 'dsghfgfsj', '5.00', '7.20', 5, 'asdasdasdasd', 'sagdfh', 'SMI1_-_EC.JPG', 'CAR_1_-_EC.JPG', 'CVB1_-_EC1.JPG', 161, 113, '2020-12-18', '2021-01-09', 'sdf', 5, 11, '11.00'),
+(71, 'sasd', '1200.00', '800.00', '5000', 'dsfdas', 12, 'dfdsh', 'fdhadfg', '', 0, '1.00', '1.00', 'dsghfgfsj', '4.00', '5.00', 2, 'asdasdasdasd', 'ghgfhgfh', 'AVP2_-_MURO1.jpeg', 'CDN2_-_EC.JPG', 'CVB1_-_EC.JPG', 164, 116, '2020-12-18', '2021-01-09', 'sdf', 6, 12, '12.00');
 
 -- --------------------------------------------------------
 
@@ -156,19 +158,20 @@ CREATE TABLE `materiales` (
   `id` int(10) UNSIGNED NOT NULL,
   `material` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `precio` double(8,2) NOT NULL,
-  `observaciones` varchar(250) COLLATE utf8_unicode_ci NOT NULL
+  `observaciones` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `unidad` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `materiales`
 --
 
-INSERT INTO `materiales` (`id`, `material`, `precio`, `observaciones`) VALUES
-(1, 'Lona', 50.00, 'Precio en gran formato'),
-(2, 'Vinil', 60.00, 'Precio en gran formato'),
-(3, 'Vinil HD', 120.00, 'Precio en impresion HD'),
-(4, 'Lona HD', 100.00, 'Precio en impresion HD'),
-(5, 'lona Mesh', 70.00, 'Precio en gran formato');
+INSERT INTO `materiales` (`id`, `material`, `precio`, `observaciones`, `unidad`) VALUES
+(2, 'Vinil', 60.00, 'Precio en gran formato', ''),
+(3, 'Vinil HD', 120.00, 'Precio en impresion HD', ''),
+(4, 'Lona HD', 100.00, 'Precio en impresion HD', ''),
+(5, 'lona Mesh', 70.00, 'Precio en gran formato', ''),
+(16, 'fadff', 23.00, 'fdsfasdf', 'ML');
 
 -- --------------------------------------------------------
 
@@ -177,20 +180,30 @@ INSERT INTO `materiales` (`id`, `material`, `precio`, `observaciones`) VALUES
 --
 
 CREATE TABLE `medios` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `tipo_medio` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `status` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `monto` decimal(7,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(10) NOT NULL,
+  `tipo_medio` varchar(20) NOT NULL,
+  `status` varchar(15) NOT NULL,
+  `precio` decimal(7,2) NOT NULL,
+  `fecha_inicio_ocupacion` date NOT NULL,
+  `fecha_termino_ocupacion` date NOT NULL,
+  `eliminado` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `medios`
 --
 
-INSERT INTO `medios` (`id`, `tipo_medio`, `status`, `monto`) VALUES
-(213, 'Espectacular', 'Disponible', '3300.00'),
-(214, 'Espectacular', 'Ocupado', '1880.00'),
-(215, 'Espectacular', 'Ocupado', '1880.00');
+INSERT INTO `medios` (`id`, `tipo_medio`, `status`, `precio`, `fecha_inicio_ocupacion`, `fecha_termino_ocupacion`, `eliminado`) VALUES
+(104, 'Espectacular', '', '0.00', '0000-00-00', '0000-00-00', 0),
+(110, 'Espectacular', 'DISPONIBLE', '0.00', '0000-00-00', '0000-00-00', 0),
+(111, 'Espectacular', 'DISPONIBLE', '0.00', '0000-00-00', '0000-00-00', 0),
+(112, 'Espectacular', '', '8200.00', '0000-00-00', '0000-00-00', 0),
+(113, 'Espectacular', 'Apartado', '8320.00', '0000-00-00', '0000-00-00', 0),
+(114, 'valla_fija', 'Apartado', '12000.00', '0000-00-00', '0000-00-00', 0),
+(115, 'valla_fija', 'DISPONIBLE', '3000.00', '0000-00-00', '0000-00-00', 0),
+(116, 'Espectacular', 'Apartado', '7000.00', '0000-00-00', '0000-00-00', 0),
+(117, 'Vallas movil', 'Apartado', '36200.00', '0000-00-00', '0000-00-00', 0),
+(118, 'Vallas movil', 'DISPONIBLE', '41800.00', '0000-00-00', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -2690,7 +2703,15 @@ INSERT INTO `periodo_pago` (`id`, `periodo`) VALUES
 (1, '1 mes'),
 (2, '2 meses'),
 (3, '3 meses'),
-(4, '4 meses');
+(4, '4 meses'),
+(5, '5 meses'),
+(6, '6 meses'),
+(7, '7 meses'),
+(8, '8 meses'),
+(9, '9 meses'),
+(10, '10 meses'),
+(11, '11 meses'),
+(12, '12 meses');
 
 -- --------------------------------------------------------
 
@@ -2710,30 +2731,24 @@ CREATE TABLE `propietarios` (
 --
 
 INSERT INTO `propietarios` (`id`, `nombre`, `telefono`, `celular`) VALUES
-(58, 'ramiro', '9513667929', '9512316351'),
-(59, 'rams', '0', '1956165146'),
-(60, 'rams', '1315313155', '1956165146');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `status`
---
-
-CREATE TABLE `status` (
-  `id` int(11) NOT NULL,
-  `status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `status`
---
-
-INSERT INTO `status` (`id`, `status`) VALUES
-(1, 'Disponible'),
-(2, 'Ocupado'),
-(3, 'Reparacion'),
-(4, 'Bloqueado');
+(116, 'gsdfg', '9513667929', '2342343242'),
+(118, 'sdas', '951366792', '2342343242'),
+(119, 'gsdfg', '2342343242', '3243243242'),
+(123, '', '0', '0'),
+(134, '', '0', '0'),
+(143, 'gsdfg', '9513667929', '2342343242'),
+(144, 'gsdfg', '9513667929', '2342343242'),
+(145, 'gsdfg', '9513667929', '2342343242'),
+(146, 'gsdfg', '9513667929', '2342343242'),
+(147, 'gsdfg', '3243243242', '2342343242'),
+(153, '', '0', '0'),
+(158, '', '0', '0'),
+(159, '', '0', '0'),
+(160, 'gsdfg', '3243243242', '2342343242'),
+(161, 'gsdfg', '9513667929', '2342343242'),
+(162, 'gsdfg', '2342343242', '9513667929'),
+(163, 'gsdfg', '9513667929', '9513667929'),
+(164, 'gsdfg', '3243243242', '2342343242');
 
 -- --------------------------------------------------------
 
@@ -2771,15 +2786,111 @@ CREATE TABLE `usuarios` (
   `apellidos` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `contrasena` varchar(100) NOT NULL,
-  `tipo` int(2) NOT NULL
+  `tipo` int(2) NOT NULL,
+  `acceso` varchar(2) NOT NULL,
+  `puesto` varchar(30) NOT NULL,
+  `sexo` varchar(3) NOT NULL,
+  `telefono` varchar(10) NOT NULL,
+  `licencia` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `correo`, `contrasena`, `tipo`) VALUES
-(1, 'root', 'superuser', 'publi@gmail.com', '123456', 1);
+INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `correo`, `contrasena`, `tipo`, `acceso`, `puesto`, `sexo`, `telefono`, `licencia`) VALUES
+(1, 'root', 'superuser', 'publi@gmail.com', '123456', 1, '', '', 'M', '', ''),
+(16, 'sdasd', 'sadasd', 'asdasd@gmail.com', '', 0, 'no', 'chofer', 'M', '9512132123', ''),
+(17, 'dasd', 'asdasd', 'd@gmail.com', '123', 0, '', '', 'm', '9516235689', 'fha4q54qh'),
+(18, 'ramiro', 'sadasd', '123456@gmail.com', '', 0, 'no', 'chofer', 'M', '9514512312', '1215sa111');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vallas_fijas`
+--
+
+CREATE TABLE `vallas_fijas` (
+  `id` int(10) NOT NULL,
+  `nocontrol` varchar(10) NOT NULL,
+  `costo_impresion` decimal(10,2) NOT NULL,
+  `costo_instalacion` decimal(10,2) NOT NULL,
+  `calle` varchar(100) NOT NULL,
+  `numero` int(5) NOT NULL,
+  `colonia` varchar(50) NOT NULL,
+  `localidad` varchar(50) NOT NULL,
+  `municipio` varchar(20) NOT NULL,
+  `id_estado` int(3) NOT NULL,
+  `latitud` decimal(10,2) NOT NULL,
+  `longitud` decimal(10,2) NOT NULL,
+  `referencias` text NOT NULL,
+  `ancho` decimal(10,2) NOT NULL,
+  `alto` decimal(10,2) NOT NULL,
+  `material` varchar(10) NOT NULL,
+  `costo_renta` decimal(10,2) NOT NULL,
+  `observaciones` text NOT NULL,
+  `acabados` text NOT NULL,
+  `vista_corta` varchar(50) NOT NULL,
+  `vista_media` varchar(50) NOT NULL,
+  `vista_larga` varchar(50) NOT NULL,
+  `id_propietario` int(10) NOT NULL,
+  `id_medio` int(10) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_termino` date NOT NULL,
+  `id_tipo_pago` int(2) NOT NULL,
+  `id_periodo_pago` int(11) NOT NULL,
+  `monto` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `vallas_fijas`
+--
+
+INSERT INTO `vallas_fijas` (`id`, `nocontrol`, `costo_impresion`, `costo_instalacion`, `calle`, `numero`, `colonia`, `localidad`, `municipio`, `id_estado`, `latitud`, `longitud`, `referencias`, `ancho`, `alto`, `material`, `costo_renta`, `observaciones`, `acabados`, `vista_corta`, `vista_media`, `vista_larga`, `id_propietario`, `id_medio`, `fecha_inicio`, `fecha_termino`, `id_tipo_pago`, `id_periodo_pago`, `monto`) VALUES
+(24, 'sdasd', '1300.00', '700.00', 'asdasd', 23, 'sddgfh', 'dasdas', 'Arteaga', 5, '1.00', '1.00', 'sfdgasdgadsg', '5.00', '4.00', 'vinil', '10000.00', 'asfhsghjgfjh', 'dfgsdfgsdfhdfsh', 'LFS1_-_EC.JPG', 'CBN1_-_EC.JPG', 'BEV1_-_EC1.JPG', 162, 114, '2020-12-30', '2020-12-29', 4, 11, '3400.00'),
+(25, 'sasd', '1300.00', '700.00', 'dsfdas', 23, 'dfdsh', 'fadsfa', 'Aguascalientes', 1, '1.00', '1.10', 'dsghfgfsj', '4.00', '5.00', 'vinil', '1000.00', 'dsfdasf', 'dsfdsafadsf', 'AVP2_-_MURO.jpeg', 'BEV1_-_EC2.JPG', 'SST1_-_EC1.JPG', 163, 115, '2020-12-25', '2021-01-09', 5, 12, '3400.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vallas_moviles`
+--
+
+CREATE TABLE `vallas_moviles` (
+  `id` int(10) NOT NULL,
+  `id_medio` int(10) NOT NULL,
+  `nocontrol` varchar(10) NOT NULL,
+  `marca` varchar(30) NOT NULL,
+  `modelo` varchar(30) NOT NULL,
+  `anio` int(4) NOT NULL,
+  `lateral_ancho` decimal(10,2) NOT NULL,
+  `lateral_alto` decimal(10,2) NOT NULL,
+  `lateral_id_material` int(10) NOT NULL,
+  `faldon_ancho` decimal(10,2) NOT NULL,
+  `faldon_alto` decimal(10,2) NOT NULL,
+  `faldon_id_material` int(10) NOT NULL,
+  `puerta_ancho` decimal(10,2) NOT NULL,
+  `puerta_alto` decimal(10,2) NOT NULL,
+  `puerta_id_material` int(10) NOT NULL,
+  `frente_ancho` decimal(10,2) NOT NULL,
+  `frente_alto` decimal(10,2) NOT NULL,
+  `frente_id_material` int(10) NOT NULL,
+  `costo_impresion` decimal(10,0) NOT NULL,
+  `costo_renta` decimal(10,0) NOT NULL,
+  `observaciones` text NOT NULL,
+  `acabados` text NOT NULL,
+  `vista_corta` varchar(100) NOT NULL,
+  `vista_media` varchar(100) NOT NULL,
+  `vista_larga` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `vallas_moviles`
+--
+
+INSERT INTO `vallas_moviles` (`id`, `id_medio`, `nocontrol`, `marca`, `modelo`, `anio`, `lateral_ancho`, `lateral_alto`, `lateral_id_material`, `faldon_ancho`, `faldon_alto`, `faldon_id_material`, `puerta_ancho`, `puerta_alto`, `puerta_id_material`, `frente_ancho`, `frente_alto`, `frente_id_material`, `costo_impresion`, `costo_renta`, `observaciones`, `acabados`, `vista_corta`, `vista_media`, `vista_larga`) VALUES
+(16, 117, 'sdasd', 'asdasd', 'asdasd', 2323, '5.00', '5.00', 2, '3.00', '6.00', 4, '5.00', '4.00', 4, '1.00', '5.00', 2, '11200', '25000', 'kfkdsnfkdnskdnsfkldns', 'dsklnfdklsnfkldsnfkldsfdkls', 'DSC_0019.JPG', 'IMG_0080.jpeg', 'KKNA6979.jpeg'),
+(17, 118, 'fdasfads', 'dasfdsf', 'dsfdasf', 2222, '5.00', '5.00', 3, '4.00', '5.00', 2, '5.00', '3.00', 3, '4.00', '5.00', 3, '16800', '25000', 'dsfdsf', 'dfdsfds', 'DSC_0024.JPG', 'ZY-Photo-2020-09-18-00000038.jpeg', 'ZY-Photo-2020-09-21-00000071.jpeg');
 
 -- --------------------------------------------------------
 
@@ -2792,26 +2903,24 @@ CREATE TABLE `ventas` (
   `id_vendedor` int(10) NOT NULL,
   `id_comprador` int(10) NOT NULL,
   `monto` decimal(7,2) NOT NULL,
+  `descuento_porcentaje` decimal(2,2) NOT NULL,
+  `descuento` decimal(10,2) NOT NULL,
+  `monto_total` decimal(10,2) NOT NULL,
   `factura` varchar(3) NOT NULL,
-  `fecha_venta` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fecha_venta` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `noPagos` int(10) NOT NULL,
+  `tipoPago` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id_venta`, `id_vendedor`, `id_comprador`, `monto`, `factura`, `fecha_venta`) VALUES
-(10, 1, 0, '1880.00', 'no', '2020-11-06 17:47:07'),
-(11, 1, 0, '1880.00', 'no', '2020-11-06 17:47:38'),
-(12, 1, 0, '3760.00', 'no', '2020-11-06 17:57:26'),
-(13, 1, 0, '1880.00', 'no', '2020-11-06 17:58:23'),
-(14, 1, 1, '2180.80', 'si', '2020-11-07 18:02:22'),
-(15, 1, 1, '2180.80', 'si', '2020-11-07 18:07:42'),
-(16, 1, 0, '0.00', 'no', '2020-11-07 18:22:21'),
-(17, 1, 0, '0.00', 'no', '2020-11-07 18:22:27'),
-(18, 1, 0, '0.00', 'no', '2020-11-07 18:22:48'),
-(19, 1, 0, '0.00', 'no', '2020-11-07 18:23:24'),
-(20, 1, 0, '0.00', 'no', '2020-11-07 18:23:55');
+INSERT INTO `ventas` (`id_venta`, `id_vendedor`, `id_comprador`, `monto`, `descuento_porcentaje`, `descuento`, `monto_total`, `factura`, `fecha_venta`, `noPagos`, `tipoPago`) VALUES
+(48, 1, 10, '9867.73', '0.00', '0.00', '9867.73', 'si', '2020-12-17 16:55:45', 0, ''),
+(49, 1, 10, '5009.67', '0.00', '0.00', '5009.67', 'no', '2020-12-17 17:05:13', 0, ''),
+(50, 1, 10, '9654.34', '0.00', '0.00', '9654.34', 'no', '2020-12-18 11:00:29', 0, ''),
+(51, 1, 10, '18018.67', '0.00', '0.00', '18018.67', 'si', '2020-12-21 07:43:25', 5, 'Trasnferencia');
 
 -- --------------------------------------------------------
 
@@ -2823,30 +2932,26 @@ CREATE TABLE `venta_medios` (
   `id` int(10) NOT NULL,
   `id_medio` int(11) NOT NULL,
   `id_venta` int(10) NOT NULL,
-  `no_pagos` int(10) NOT NULL,
-  `tipo_pago` varchar(20) NOT NULL,
   `fecha_inicio_contrato` date NOT NULL,
   `fecha_termino_contrato` date NOT NULL,
-  `tipo_de_arte` varchar(50) NOT NULL
+  `hora_inicio` time NOT NULL,
+  `hora_termino` time NOT NULL,
+  `id_chofer` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `venta_medios`
 --
 
-INSERT INTO `venta_medios` (`id`, `id_medio`, `id_venta`, `no_pagos`, `tipo_pago`, `fecha_inicio_contrato`, `fecha_termino_contrato`, `tipo_de_arte`) VALUES
-(10, 4, 10, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(11, 4, 11, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(12, 4, 12, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(13, 4, 12, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(14, 5, 13, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(15, 5, 14, 3, 'Trasnferencia', '2020-11-10', '2020-11-27', 'dasdasd'),
-(16, 215, 15, 3, 'Trasnferencia', '2020-11-12', '2020-11-23', 'sadasd'),
-(17, 0, 16, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(18, 0, 17, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(19, 0, 18, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(20, 0, 19, 0, 'efectivo', '0000-00-00', '0000-00-00', ''),
-(21, 0, 20, 0, 'efectivo', '0000-00-00', '0000-00-00', '');
+INSERT INTO `venta_medios` (`id`, `id_medio`, `id_venta`, `fecha_inicio_contrato`, `fecha_termino_contrato`, `hora_inicio`, `hora_termino`, `id_chofer`) VALUES
+(60, 113, 50, '2020-12-18', '2020-12-30', '00:00:00', '00:00:00', 0),
+(61, 116, 50, '2020-12-18', '2020-12-30', '00:00:00', '00:00:00', 0),
+(62, 113, 50, '2020-12-18', '2020-12-30', '00:00:00', '00:00:00', 0),
+(63, 116, 50, '2020-12-18', '2020-12-30', '00:00:00', '00:00:00', 0),
+(64, 113, 50, '2020-12-18', '2020-12-30', '00:00:00', '00:00:00', 0),
+(65, 116, 50, '2020-12-18', '2020-12-30', '00:00:00', '00:00:00', 0),
+(66, 117, 51, '2020-12-21', '2020-12-22', '13:00:00', '17:00:00', 17),
+(67, 114, 51, '2020-12-21', '2020-12-22', '00:00:00', '00:00:00', 0);
 
 --
 -- Índices para tablas volcadas
@@ -2903,12 +3008,6 @@ ALTER TABLE `propietarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `status`
---
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `tipos_pago`
 --
 ALTER TABLE `tipos_pago`
@@ -2918,6 +3017,18 @@ ALTER TABLE `tipos_pago`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `vallas_fijas`
+--
+ALTER TABLE `vallas_fijas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `vallas_moviles`
+--
+ALTER TABLE `vallas_moviles`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2940,13 +3051,13 @@ ALTER TABLE `venta_medios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `espectaculares`
 --
 ALTER TABLE `espectaculares`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -2958,13 +3069,13 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT de la tabla `materiales`
 --
 ALTER TABLE `materiales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `medios`
 --
 ALTER TABLE `medios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT de la tabla `municipios`
@@ -2976,19 +3087,13 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT de la tabla `periodo_pago`
 --
 ALTER TABLE `periodo_pago`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `propietarios`
 --
 ALTER TABLE `propietarios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
---
--- AUTO_INCREMENT de la tabla `status`
---
-ALTER TABLE `status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_pago`
@@ -3000,19 +3105,31 @@ ALTER TABLE `tipos_pago`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `vallas_fijas`
+--
+ALTER TABLE `vallas_fijas`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `vallas_moviles`
+--
+ALTER TABLE `vallas_moviles`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id_venta` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_venta` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_medios`
 --
 ALTER TABLE `venta_medios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- Restricciones para tablas volcadas

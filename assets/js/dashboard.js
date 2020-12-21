@@ -24,7 +24,7 @@ const divMensaje = document.querySelector("#mensajesDemediosPorTerminarContrato"
 
 function enviarNotificacion(numero){
     divMensaje.innerHTML = ` <div class="alert alert-warning alert-dismissible fade show text-center text-dark" role="alert">
-        Este mes vencerá el contrato de ${numero} Medios, echa un vistazo de cuales son.
+        Este mes vencerá el contrato de ${numero} Medios, echa un vistazo para saber cuales son.
         <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#MediosPorVencerContrato">Echar un vistazo</button>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>

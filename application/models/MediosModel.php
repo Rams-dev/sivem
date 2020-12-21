@@ -197,14 +197,6 @@ class MediosModel extends CI_model
 
     }
 
-
-
-
-
-  
-
-   
-
     public function obtenerMediosReservados($id_medio,$fecha_inicio,$fecha_termino){
         $medio="";
         if($id_medio == '1'){

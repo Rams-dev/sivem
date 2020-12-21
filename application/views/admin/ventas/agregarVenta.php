@@ -136,6 +136,7 @@
             <th scope="col"></th>
             <th scope="col">#</th>
             <th scope="col">No de control</th>
+            <th scope="col">Tipo de medio</th>
             <th scope="col">Ubicación</th>
             <th scope="col">Renta/m</th>
             <th scope="col">Instalacion</th>
@@ -147,24 +148,24 @@
         </tbody>
 
         <tr class="d-none td" id="iva">
-            <td colspan="6"></td>
+            <td colspan="7"></td>
             <td>Iva</td>
             <td> %16 </td>
         </tr>
          
         <tr >
-            <td colspan="6"></td>
+            <td colspan="7"></td>
             <td>Total</td>
             <td id="preciototal">$ 0</td>
         </tr>
         <tr>
-            <td colspan="6"></td>
+            <td colspan="7"></td>
             <td>Descuento</td>
             <td id="desc" class="text-danger">$ 0</td>
         </tr>
 
         <tr>
-            <td colspan="6"></td>
+            <td colspan="7"></td>
             <td>precio final</td>
             <td id="precioConDescuento" class="text-success">$ 0</td>
         </tr>

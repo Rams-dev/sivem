@@ -73,7 +73,7 @@ class VentasModel extends CI_model
 
 	}
 
-	public function agregarVenta($id_cliente,$monto,$descuentoPocentaje, $descuentoPrecio, $precio_final,$fecha_venta,$factura){
+	public function agregarVenta($id_cliente,$monto,$descuentoPocentaje,$descuentoPrecio,$precio_final,$fecha_venta,$factura,$noPagos,$tipoPago){
 		$data= array(
 			'id_vendedor' => $this->session->userdata('id'),
 			'id_comprador' => $id_cliente,
@@ -83,6 +83,8 @@ class VentasModel extends CI_model
 			'monto_total' => $precio_final,
 			'fecha_venta' => $fecha_venta,
 			'factura' => $factura,
+			'noPagos' => $noPagos,
+			'tipoPago' => $tipoPago
 		);
 
 		$sql = $this->db->insert('ventas',$data);
@@ -93,12 +95,10 @@ class VentasModel extends CI_model
 		}
 	}
 
-	public function agregarVentaMedio($idVenta, $medio,$noPagos,$tipoPago,$fechaInicio,$fechaTermino,$horai,$horaf,$id_chofer){
+	public function agregarVentaMedio($idVenta, $medio,$fechaInicio,$fechaTermino,$horai,$horaf,$id_chofer){
 		$data = array(
 			'id_medio' => $medio,
 			'id_venta' => $idVenta,
-			'no_pagos' => $noPagos,
-			'tipo_pago' => $tipoPago,
 			'fecha_inicio_contrato' => $fechaInicio,
 			'fecha_termino_contrato' => $fechaTermino,
 			'hora_inicio' => $horai,

@@ -100,18 +100,13 @@ function obtenerDias(){
                 return 0;
         }
 }
-
-let datos = [];
-
-
+let medio = "";
 $("#tipoMedio").change(function(e){
         e.preventDefault();
         medio = this.value
         console.log(this.value)
         datos= [];
-
-        let fInicio = $("#fechaInicio").val();
-        let fTermino = $("#fechaTermino").val();
+  
 
 
         if($("#fechaInicio").val() != "" && $("#fechaTermino").val() != ""){
@@ -130,31 +125,10 @@ $("#tipoMedio").change(function(e){
                 }
 
                 if(medio == "3"){
-                        medio = "3";
                         horainicio.classList.remove("d-none")
                         horatermino.classList.remove("d-none")
                         choferdiv.classList.remove("d-none")
-                        let hI ="";
-                        let hT = "";
-                        $("#hinicio").change(function(e){
-                                $("#medio option[value!='']").remove();
-                                $("#chofer option[value!='']").remove();
-                                hI = this.value
-                                if(hI != "" && hT != ""){
-                                        obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);
-                                        obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);
-                                }
-                        })
-                        $("#htermino").change(function(e){
-
-                                 $("#medio option[value!='']").remove();
-                                 $("#chofer option[value!='']").remove();
-                                 hT = this.value
-                                if(hI != "" && hT != ""){
-                                        obtenerChoferesDisponibles(hI,hT,fInicio,fTermino);
-                                        obtenerVallasMovilesDisponibles(hI,hT,fInicio,fTermino,medio);
-                                }
-                        })
+             
                 }else{
                         horainicio.classList.add("d-none")
                         horatermino.classList.add("d-none")
@@ -168,19 +142,43 @@ $("#tipoMedio").change(function(e){
 
 })
 
+let fInicio = $("#fechaInicio").val();
+let fTermino = $("#fechaTermino").val();
+let hI="";
+let hT ="";
+
+horainicio.addEventListener("change",function(e){
+        hI = e.target.value
+        $("#medio option[value!='']").remove();
+        $("#chofer option[value!='']").remove();
+        obtenerChoferesDisponibles();
+        obtenerVallasMovilesDisponibles();
+
+})
+
+horatermino.addEventListener("change",function(e){
+        hT = e.target.value
+         $("#medio option[value!='']").remove();
+         $("#chofer option[value!='']").remove();
+        obtenerChoferesDisponibles();
+        obtenerVallasMovilesDisponibles();
+})
+
+
 window.chofer.addEventListener("change", function(e){
         e.preventDefault();
         idChofer = e.target.value;
 })
 
 
-function obtenerVallasMovilesDisponibles(h1,h2,fInicio,fTermino,medio){
+function obtenerVallasMovilesDisponibles(){
+     if(validarHora()){
         $.ajax({
                 url: "obtenerVallasMovilesDisponibles",
                 type: "post",
                 data: {
-                        h1: h1,
-                        h2: h2,
+                        h1: hI,
+                        h2: hT,
                         f1: fInicio,
                         f2: fTermino,
                         id: medio
@@ -195,32 +193,43 @@ function obtenerVallasMovilesDisponibles(h1,h2,fInicio,fTermino,medio){
         .fail(function(err){
                 alertify.error("ha ocurrido un error");
         })
+     }
 
 
 }
 
+function validarHora(){
+        console.log()
+        if($("#hinicio").val() != "" && $("#htermino").val() != ""){
+                return true;
+        }else{
+                return false;
+        }
+}
 
-function obtenerChoferesDisponibles(h1,h2,fInicio,fTermino){
-        $.ajax({
-                url: "obtenerChoferesDisponibles",
-                type: "post",
-                data: {
-                        h1: h1,
-                        h2: h2,
-                        f1: fInicio,
-                        f2: fTermino
-                }
-
-        })
-        .done(function(response){
-                let res = JSON.parse(response);
-                // console.log(response);
-                rellenarChoferes(res);
-                res = ""
-        })
-        .fail(function(err){
-                alertify.error("ha ocurrido un error");
-        })
+function obtenerChoferesDisponibles(){
+        if(validarHora()){
+                $.ajax({
+                        url: "obtenerChoferesDisponibles",
+                        type: "post",
+                        data: {
+                                h1: hI,
+                                h2: hT,
+                                f1: fInicio,
+                                f2: fTermino
+                        }
+        
+                })
+                .done(function(response){
+                        let res = JSON.parse(response);
+                        // console.log(response);
+                        rellenarChoferes(res);
+                        res = ""
+                })
+                .fail(function(err){
+                        alertify.error("ha ocurrido un error");
+                })
+        }
 }
 
 function rellenarChoferes(data){
@@ -312,7 +321,13 @@ $('#medio').change(function(e){
                 datosMedio = JSON.parse(response)
                 // datosMedio.push(res);
                 console.log(datosMedio)
+                datosMedio[0]["idChofer"] = idChofer;
+                datosMedio[0]["hInicio"] = hI;
+                datosMedio[0]["hTermino"] = hT;
                 arrayMedios.push(datosMedio);
+                hI ="";
+                hT="";
+                idChofer ="";
           }else{
                   return 0;
           }
@@ -331,8 +346,9 @@ function validarFechas(){
 }
 
 window.add.addEventListener('click', function(e){
+        
         e.preventDefault();
-        if(arrayMedios == ""){
+        if(arrayMedios == "" || $("#medio").val() == ""){
                 alertify.error("Agregar primero un medio");
                 $("#medio").addClass("is-invalid");
                 return 0;
@@ -380,12 +396,13 @@ window.add.addEventListener('click', function(e){
                 arrayMedios[medios].map(medio =>{
                         if(medio.tipo_medio == "Vallas movil"){
                                 console.log(medio.precio)
-                                medio["idChofer"] = idChofer;
+                                
                                 medio["costototal"] = parseFloat(parseFloat((medio.costo_renta / 30) * dias) + parseFloat(medio.costo_impresion)).toFixed(2);
                                 Table.innerHTML += `<tr>
                                 <td><button class="btn btn-danger btn-sm" type="button" onclick="EliminarMedioDeLaTabla(${medios})">-</button></td>
                                 <td>${medios + 1}</td>
                                 <td>${medio.nocontrol}</td>
+                                <td>${medio.tipo_medio}</td>
                                 <td>-</td>
                                 <td>$ ${medio.costo_renta} </td>
                                 <td>-</td>
@@ -401,6 +418,8 @@ window.add.addEventListener('click', function(e){
                                 <td><button class="btn btn-danger btn-sm" type="button" onclick="EliminarMedioDeLaTabla(${medios})">-</button></td>
                                 <td>${medios + 1}</td>
                                 <td>${medio.nocontrol}</td>
+                                <td>${medio.tipo_medio}</td>
+
                                 <td>${medio.localidad}</td>
                                 <td>$ ${medio.costo_renta} </td>
                                 <td>$ ${medio.costo_instalacion}</td>
@@ -416,6 +435,8 @@ window.add.addEventListener('click', function(e){
                                 <td><button class="btn btn-danger btn-sm" type="button" onclick="EliminarMedioDeLaTabla(${medios})">-</button></td>
                                 <td>${medios + 1}</td>
                                 <td>${medio.nocontrol}</td>
+                                <td>${medio.tipo_medio}</td>
+
                                 <td>${medio.localidad}</td>
                                 <td>$ ${medio.costo_renta}</td>
 
@@ -430,6 +451,8 @@ window.add.addEventListener('click', function(e){
                 })
                
         }
+        hI="";
+        hT="";
         console.log(arrayMedios)
         calcularTotal()
  }
@@ -455,9 +478,8 @@ function calcularTotal(){
         preciofinal = costototal;
         console.log(preciofinal)
 
-
-         preciofinal = preciofinal ;
-         preciofinal = parseFloat(preciofinal + parseFloat(medio));
+        //  preciofinal = preciofinal ;
+        //  preciofinal = parseFloat(preciofinal + parseFloat(medio));
 
         if($('#factura').val() == "si"){
                 let iva = parseFloat(preciofinal * .16);
@@ -506,6 +528,7 @@ $("#guardarventa").submit(function(e){
     formData.set('idmedios',idMedios);
     formData.set("descuento",descuentot);
     formData.set("precio_final",precio_total);
+    formData.set("medios",JSON.stringify(arrayMedios));
     $.ajax({
             url:'guardarVenta',
             type:'post',
