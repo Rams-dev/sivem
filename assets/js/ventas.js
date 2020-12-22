@@ -142,8 +142,7 @@ $("#tipoMedio").change(function(e){
 
 })
 
-let fInicio = $("#fechaInicio").val();
-let fTermino = $("#fechaTermino").val();
+
 let hI="";
 let hT ="";
 
@@ -172,7 +171,10 @@ window.chofer.addEventListener("change", function(e){
 
 
 function obtenerVallasMovilesDisponibles(){
+        fInicio = $("#fechaInicio").val();
+        fTermino = $("#fechaTermino").val();
      if(validarHora()){
+             console.log(fInicio)
         $.ajax({
                 url: "obtenerVallasMovilesDisponibles",
                 type: "post",
@@ -208,6 +210,8 @@ function validarHora(){
 }
 
 function obtenerChoferesDisponibles(){
+        fInicio = $("#fechaInicio").val();
+        fTermino = $("#fechaTermino").val();
         if(validarHora()){
                 $.ajax({
                         url: "obtenerChoferesDisponibles",
@@ -261,6 +265,7 @@ function obtenerMedios(val){
         valores.medio = val;
         valores.fechaInicio = $("#fechaInicio").val();
         valores.fechaTermino = $("#fechaTermino").val();
+        console.log(valores.fechaInicio)
         $.ajax({
                 url:"obtenerMedios",
                 type:'post',

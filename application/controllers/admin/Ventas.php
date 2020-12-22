@@ -50,12 +50,10 @@ class Ventas extends CI_Controller {
             $id = $this->input->post("medio");
             $fi = $this->input->post("fechaInicio");
             $ft = $this->input->post("fechaTermino"); 
-            // echo json_encode(array($id,$fi,$ft));
-            // exit; 
-            
+            $mediosConFechaDeOcupacion = $this->MediosModel->obtenerMediosConFechaDeOcupacion($id,$fi, $ft);
             $mediosDisponibles = $this->MediosModel->obtenerMediosDisponibles($id);
-            $mediosApartados = $this->MediosModel->obtenerMediosApartados($id, $fi, $ft);
-            $medios = array_merge($mediosDisponibles, $mediosApartados);
+            $mediosApartadosYOcupados = $this->MediosModel->obtenerMediosApartados($id, $fi, $ft);
+            $medios = array_merge($mediosDisponibles, $mediosApartadosYOcupados, $mediosConFechaDeOcupacion);
             
             echo json_encode($medios);
 
@@ -70,6 +68,8 @@ class Ventas extends CI_Controller {
         $f1 = $this->input->post("f1");
         $f2 = $this->input->post("f2");
         $id = $this->input->post("id");
+        //  echo json_encode(array($h1,$h2,$f1,$f2,$id));
+        //  exit;
 
         $vallas_disponibles = $this->MediosModel->obtenerMediosDisponibles($id);
         $vallas_apartadas_por_fecha = $this->MediosModel->obtenerMediosApartados($id,$f1,$f2);
@@ -81,7 +81,7 @@ class Ventas extends CI_Controller {
         //         }
         //      }
         // }
-        // $vallas = array_merge($vallas_disponibles, $vallas_apartadas_por_fecha, $vallas_disponibles_porhorario);
+         $vallas = array_merge($vallas_disponibles, $vallas_apartadas_por_fecha, $vallas_disponibles_porhorario);
 
         
 
@@ -96,22 +96,23 @@ class Ventas extends CI_Controller {
         $f1 = $this->input->post("f1");
         $f2 = $this->input->post("f2");
 
-        $choferesD = $this->EmpleadosModel->obtenerChoferes();
+        $choferesD = $this->EmpleadosModel->obtenerChoferesDis();
         $choferes_apartados_por_fecha = $this->EmpleadosModel->obtenerChoferesApartadosPorFecha($f1,$f2);
         $choferes_disponibles_porhorario= $this->EmpleadosModel->obtenerChoferesApartadosPorHorario($f1,$f2,$h1,$h2);
-        $choferesDisponibles = array();
-        for($i = 0; $i < count($choferesD); $i++){
-           for($j = 0; $j < count($choferes_disponibles_porhorario); $j++){
-               if($choferesD[$i]["id"] == $choferes_disponibles_porhorario[$j]["id_chofer"]){
-                   unset($choferesD[$i]);
-               }
-            //    else{
-            //        array_push($choferesDisponibles, $choferesD[$i] );
-            //    }
-           } 
-        }
-        $choferes = array_merge($choferesD, $choferes_apartados_por_fecha, $choferes_disponibles_porhorario);
-        echo json_encode($choferes_disponibles_porhorario);
+        $choferes_apartados = array_merge($choferes_apartados_por_fecha,$choferes_disponibles_porhorario);
+        //  for($i = 0; $i < count($choferesD); $i++){
+        //      for($j = 0; $j < count($choferes_apartados); $j++){
+        //          if($choferesD[$i]["id"] == $choferes_apartados[$j]["id_chofer"]){
+        //              unset($choferesD[$i]);
+        //          }
+        //          //  else{
+        //          //      array_push($choferesDisponibles, $choferesD[$i] );
+        //          //  }
+        //      } 
+        //  }
+        $choferes = array_merge($choferes_apartados_por_fecha,$choferes_disponibles_porhorario,$choferesD);
+        // var_dump($choferesD);
+        echo json_encode($choferes);
     }
 
 

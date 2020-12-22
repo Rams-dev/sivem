@@ -80,6 +80,33 @@ class MediosModel extends CI_model
         }
 
     }
+    // public function obtenerMedios($id_medio,$fi, $ft){
+    //     $medio="";
+    //     if($id_medio === '1'){
+    //         $medio = 'espectaculares';
+    //     }elseif($id_medio == '2'){
+    //         $medio = 'vallas_fijas';
+    //     }elseif($id_medio == '3'){
+    //         $medio = 'vallas_moviles';
+    //     }
+    //     $this->db->select('*');
+    //     $this->db->from($medio);
+    //     $this->db->join('venta_medios','venta_medios.id_medio = '.$medio.'.id_medio');
+    //     $this->db->where("venta_medios.fecha_inicio_contrato >", $fi);
+    //     $this->db->where("venta_medios.fecha_inicio_contrato >", $ft);
+    //     $this->db->or_where("venta_medios.fecha_termino_contrato <", $fi);
+    //     $this->db->where("venta_medios.fecha_termino_contrato <", $ft);
+    //     $this->db->group_by($medio.'.id_medio');
+    //     $sql = $this->db->get();
+    //     if($sql){
+    //         return $sql->result_array();
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+
+
     public function obtenerMediosDisponibles($id_medio){
         $medio="";
         if($id_medio === '1'){
@@ -101,11 +128,9 @@ class MediosModel extends CI_model
         }
     }
 
-
+    //obtiene todos los medios que estan apartados, ocupados y/o proximos que se pueden vender
     public function obtenerMediosApartados($id_medio, $fi, $ft){
         $medio = "";
-        // return $id_medio;
-        //  exit;
         if($id_medio == '1'){
             $medio = 'espectaculares';
         }elseif($id_medio == '2'){
@@ -113,19 +138,16 @@ class MediosModel extends CI_model
         }elseif($id_medio == '3'){
             $medio = 'vallas_moviles';
         }
-        // return $medio;
-        // exit;
 
         $this->db->select('*');
         $this->db->from($medio);
         $this->db->join('medios','medios.id = '.$medio .'.id_medio');
         $this->db->join('venta_medios','medios.id = venta_medios.id_medio');
-        $this->db->where("medios.status = 'APARTADO'");
         $this->db->where("venta_medios.fecha_inicio_contrato >", $fi);
         $this->db->where("venta_medios.fecha_inicio_contrato >", $ft);
         $this->db->or_where("venta_medios.fecha_termino_contrato <", $fi);
         $this->db->where("venta_medios.fecha_termino_contrato <", $ft);
-        $this->db->group_by('venta_medios.id_medio');
+        $this->db->group_by($medio.'.id');
         $sql = $this->db->get();
         if($sql){
             return $sql->result_array();
@@ -135,7 +157,35 @@ class MediosModel extends CI_model
     }
 
 
-    public function obtenerMediosApartadosPorFecha($id_medio,$f1,$f2){
+    // public function obtenerMediosApartadosPorFecha($id_medio,$f1,$f2){
+    //     $medio="";
+    //     if($id_medio == '1'){
+    //         $medio = 'espectaculares';
+    //     }elseif($id_medio == '2'){
+    //         $medio = 'vallas_fijas';
+    //     }elseif($id_medio == '3'){
+    //         $medio = 'vallas_moviles';
+    //     }
+    //     $this->db->select('*');
+    //     $this->db->from($medio);
+    //     $this->db->join('medios','medios.id = '.$medio .'.id_medio');
+    //     $this->db->join('venta_medios','venta_medios.id_medio = medios.id');
+    //     $this->db->where("venta_medios.fecha_inicio_contrato >",$f1);
+    //     $this->db->where("venta_medios.fecha_inicio_contrato >",$f2);
+    //     $this->db->or_where("venta_medios.fecha_termino_contrato <",$f1);
+    //     $this->db->where("venta_medios.fecha_termino_contrato <",$f2);
+    //     $this->db->group_by('medios.id');
+    //     $sql = $this->db->get();
+    //     if($sql){
+    //         return $sql->result_array();
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+
+    //funcion que trae los medios que tengan una fecha diferente a la de la compra
+    public function obtenerMediosConFechaDeOcupacion($id_medio,$f1,$f2){
         $medio="";
         if($id_medio == '1'){
             $medio = 'espectaculares';
@@ -147,19 +197,22 @@ class MediosModel extends CI_model
         $this->db->select('*');
         $this->db->from($medio);
         $this->db->join('medios','medios.id = '.$medio .'.id_medio');
-        $this->db->join('venta_medios','venta_medios.id_medio = medios.id');
-        $this->db->where("medios.status = 'APARTADO'");
-        $this->db->where("venta_medios.fecha_inicio_contrato >",$f1);
-        $this->db->where("venta_medios.fecha_inicio_contrato >",$f2);
-        $this->db->or_where("venta_medios.fecha_termino_contrato <",$f1);
-        $this->db->where("venta_medios.fecha_termino_contrato <",$f2);
-        $this->db->group_by('venta_medios.id_medio');
+        $this->db->where("medios.fecha_inicio_ocupacion >",$f1);
+        $this->db->where("medios.fecha_inicio_ocupacion >",$f2);
+        $this->db->or_where("medios.fecha_termino_ocupacion <",$f1);
+        $this->db->where("medios.fecha_termino_ocupacion <",$f2);
+        $this->db->where("medios.fecha_termino_ocupacion !=","");
+        $this->db->where("medios.fecha_termino_ocupacion !=","");
+        $this->db->group_by('medios.id');
         $sql = $this->db->get();
         if($sql){
             return $sql->result_array();
         }else{
             return false;
         }
+
+
+
     }
 
 
@@ -176,16 +229,15 @@ class MediosModel extends CI_model
         $this->db->from($medio);
         $this->db->join('medios','medios.id = '.$medio .'.id_medio');
         $this->db->join('venta_medios','venta_medios.id_medio = medios.id');
-        $this->db->where("medios.status = 'APARTADO'");
         $this->db->where("venta_medios.fecha_inicio_contrato >=",$f1);
         $this->db->where("venta_medios.fecha_inicio_contrato <=",$f1);
-        $this->db->or_where("venta_medios.fecha_termino_contrato <=",$f2);
+        $this->db->where("venta_medios.fecha_termino_contrato <=",$f2);
         $this->db->where("venta_medios.fecha_termino_contrato >=",$f2);
         $this->db->where("venta_medios.hora_inicio >",$h1);
         $this->db->where("venta_medios.hora_inicio >",$h2);
         $this->db->or_where("venta_medios.hora_termino <",$h1);
         $this->db->where("venta_medios.hora_termino <",$h2);
-        $this->db->group_by('venta_medios.id_medio');
+        $this->db->group_by('medios.id');
         $sql = $this->db->get();
         if($sql){
             return $sql->result_array();
@@ -197,34 +249,34 @@ class MediosModel extends CI_model
 
     }
 
-    public function obtenerMediosReservados($id_medio,$fecha_inicio,$fecha_termino){
-        $medio="";
-        if($id_medio == '1'){
-            $medio = 'espectaculares';
-        }elseif($id_medio == '2'){
-            $medio = 'Vallas fijas';
-        }elseif($id_medio == '3'){
-            $medio = 'Vallas moviles';
-        }
-        $this->db->select('*');
-        $this->db->from('medios');
-        $this->db->join('venta_medios','venta_medios.id_medio = medios.id');
-        $this->db->join($medio,'medios.id = '.$medio.'.id_medio');
+    // public function obtenerMediosReservados($id_medio,$fecha_inicio,$fecha_termino){
+    //     $medio="";
+    //     if($id_medio == '1'){
+    //         $medio = 'espectaculares';
+    //     }elseif($id_medio == '2'){
+    //         $medio = 'Vallas fijas';
+    //     }elseif($id_medio == '3'){
+    //         $medio = 'Vallas moviles';
+    //     }
+    //     $this->db->select('*');
+    //     $this->db->from('medios');
+    //     $this->db->join('venta_medios','venta_medios.id_medio = medios.id');
+    //     $this->db->join($medio,'medios.id = '.$medio.'.id_medio');
 
-         $this->db->where("fecha_inicio_contrato >",$fecha_inicio );
-         $this->db->where("fecha_inicio_contrato >",$fecha_termino );
-         $this->db->or_where("fecha_termino_contrato <",$fecha_inicio );
-         $this->db->where("fecha_termino_contrato <",$fecha_termino );
-        $this->db->group_by('venta_medios.id_medio');
+    //      $this->db->where("fecha_inicio_contrato >",$fecha_inicio );
+    //      $this->db->where("fecha_inicio_contrato >",$fecha_termino );
+    //      $this->db->or_where("fecha_termino_contrato <",$fecha_inicio );
+    //      $this->db->where("fecha_termino_contrato <",$fecha_termino );
+    //     $this->db->group_by('venta_medios.id_medio');
 
-        $sql = $this->db->get();
-        if($sql){
-            return $sql->result_array();
-        }else{
-            return false;
-        }
+    //     $sql = $this->db->get();
+    //     if($sql){
+    //         return $sql->result_array();
+    //     }else{
+    //         return false;
+    //     }
 
-    }
+    // }
 
     
 
