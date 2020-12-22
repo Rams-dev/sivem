@@ -10,43 +10,81 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <style>
 
-    body{
+     body{
+        position: relative;
         width: 100%;
         height: 50%;
-        max-height: 50%;
+        /* max-height: 50%; */
         border: 1px solid #000;
+        font-size: 12px;
 
-    }
-    /* .contenedor{
-        width: 100%;
-        height: ;
-        max-height: 50%;
-        border: 1px solid #000;
-    } */
+    } 
+
 
     .encabezado1{
+        width: 69%;
+        float: left;
     }
     .encabezado1-texto{
-        width: 60%;
+        width: 70%;
+        margin: auto;
         text-align: center;
-
         font-size: 12px;
     }
     .datos{
-        width: 60%;
+        width: 100%;
     }
     .border-botom{
         font-size: 13px;
         border-bottom: solid 2px #000;
+        margin-bottom: 3px;
     }
     .caja{
-        border: 2px solid #000;
-        border-radius: 12px;
+        border: 1px solid #000;
+        margin-bottom: 3px;
+        border-radius: 50%;
+        width: 50%;
+        
     }
+
+    .cajav{
+        border: 1px solid #000;
+        margin-bottom: 3px;
+        border-radius: 50%;
+        width: 49.5%;
+        float: right;
+        position: absolute;
+        top: 148px;
+        left:40.4%;
+        
+    }
+
+
+    .encabezado2{
+        width: 30%;
+        float: right;
+    }
+    .folio{
+        border: 1px solid #000;
+        border-radius: 40px;
+    }
+
+    .informacion{
+        border: 1px solid #000;
+        border-radius: 20px;
+        height: 150px;
+
+    }
+
+     .tabla{
+        position: relative;
+        display: block;
+
+    } 
+    
     </style>
 </head>
 <body>
-<div class="contenedor">
     <div class="encabezado1">
         <div class="encabezado1-texto">
             <p>impresión en HD y DF de lona | vinil | Tela | Microperforado | Laser | Offset | Serigrafia | Recorte de vinil | Rotulacion vehicular</p>
@@ -56,14 +94,49 @@
             <p class="border-bottom">Telefono</p>
             <p class="caja">Fecha:</p>
             <p class="caja">Impresor:</p>
-            <p class="caja">Vendedor:</p>
+            <p class="cajav">Vendedor:</p>
         </div>
 
     </div>
-    <div class="encabezado1">
+    <div class="encabezado2">
+        <div class="folio">N</div>
+        <div class="informacion">
+            <p>La Soledad No. 115</p>
 
+        </div>
     </div>
-</div>
+    <div class="tabla">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                </tr>
+                <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                </tr>
+                <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 
     
 </body>
