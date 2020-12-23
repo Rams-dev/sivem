@@ -157,6 +157,22 @@ class MediosModel extends CI_model
     }
 
 
+    public function obtenerMediosDisponiblesQueEstanEnVenta($hoy){
+        $this->db->select("*");
+        $this->db->from("medios");
+        $this->db->join("venta_medios","venta_medios.id_medio = medios.id");
+        $this->db->where("medios.status","DISPONIBLE");
+        $this->db->where("venta_medios.fecha_inicio_contrato >",$hoy);
+        $sql = $this->db->get();
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+
+    }
+
+
     // public function obtenerMediosApartadosPorFecha($id_medio,$f1,$f2){
     //     $medio="";
     //     if($id_medio == '1'){
@@ -310,7 +326,7 @@ class MediosModel extends CI_model
 
 
     function cambiarStatusMedio($id_medio){
-        $apartado = 'Apartado';
+        $apartado = 'APARTADO';
         $this->db->set('status',$apartado);
         $this->db->where('id', $id_medio);
         $sql = $this->db->update('medios');
@@ -321,6 +337,19 @@ class MediosModel extends CI_model
         }
     }
 
+    public function cambiarStatusABloqueado($id_medio){
+        $bloqueado = 'BLOQUEADO';
+        $this->db->set('status',$bloqueado);
+        $this->db->where('id', $id_medio);
+        $sql = $this->db->update('medios');
+        if($sql){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+   
     function eliminarMedio($id_medio){
         $sql = $this->db->delete('medios',array('id' => $id_medio));
         if($sql){

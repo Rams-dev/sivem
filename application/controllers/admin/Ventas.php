@@ -16,11 +16,13 @@ class Ventas extends CI_Controller {
 	public function index()
 	{
 		if($this->session->userdata('is_logged')){
-            $espectaculares = $this->VentasModel->obtenerVentasEspectaculares();
-            $vallas_fijas = $this->VentasModel->obtenerVentasVallas_fijas();
-            $vallas_moviles = $this->VentasModel->obtenerVentasVallas_moviles();
+            // $espectaculares = $this->VentasModel->obtenerVentasEspectaculares();
+            // $vallas_fijas = $this->VentasModel->obtenerVentasVallas_fijas();
+            // $vallas_moviles = $this->VentasModel->obtenerVentasVallas_moviles();
 
-            $data["ventas"] = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
+            // $data["ventas"] = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
+            $data["ventas"] = $this->VentasModel->obtenerVentas();
+
             $this->load->view('admin/templates/__head');
             $this->load->view('admin/templates/__nav');
             $this->load->view('admin/ventas/ventas',$data);
@@ -196,6 +198,36 @@ class Ventas extends CI_Controller {
     }else{
         redirect('login');
     }
+    }
+
+    public function detalles($id){
+        if($this->session->userdata("is_logged")){
+
+            $espectaculares = $this->VentasModel->obtenerVentasEspectaculares($id);
+            $vallas_fijas = $this->VentasModel->obtenerVentasVallas_fijas($id);
+            $vallas_moviles = $this->VentasModel->obtenerVentasVallas_moviles($id);
+            $medios = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
+            $ventas = $this->VentasModel->obtenerVentaPorId($id); 
+            var_dump($vallas_moviles);
+            exit;
+
+
+            for($v = 0; $v <  count($ventas); $v++){
+                for($m = 0; $m <  count($medios); $m++){
+                    if($medios[$m]["id_medio"] == $ventas[$v]["id_medio"] ){
+                        $ventas[$v]["id_medio"] = $medios[$m];
+                    }
+                }
+            }
+            $data["ventas"] = $ventas;
+            $this->load->view('admin/templates/__head');
+            $this->load->view('admin/templates/__nav');
+            $this->load->view('admin/ventas/detalles',$data);
+            $this->load->view('admin/templates/__footer');
+
+        }else{
+            redirect("login");
+        }
     }
 
     public function generarOrdenDeCompra(){

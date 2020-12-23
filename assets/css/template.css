@@ -216,6 +216,10 @@ a > span{
   margin: auto;
   z-index: 2;
 }
+i{
+  color: white;
+
+}
 
 .loading>p{
   text-align: center;

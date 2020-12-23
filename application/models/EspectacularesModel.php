@@ -292,4 +292,15 @@ class EspectacularesModel extends CI_model{
             return false;
         }
     }
+    //obtiene los Espectaculares cuya fecha de termino sea hoy 
+
+    public function obtenerEspectacularesTerminoRenta($hoy){
+        $sql = $this->db->get_where("espectaculares",array("fecha_termino" => $hoy));
+        if($sql){
+            return $sql ->result_array();
+        }else{
+            return false;
+        }
+    }
+
 }

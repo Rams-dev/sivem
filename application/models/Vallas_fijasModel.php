@@ -149,4 +149,16 @@ class Vallas_fijasModel extends CI_model
             return false;
         }
     }
+
+    //obtiene las vallas_fijas cuya fecha de termino sea hoy 
+    public function obtenerVallasTerminoRenta($hoy){
+        $sql = $this->db->get_where("vallas_fijas",array("fecha_termino" => $hoy));
+        if($sql){
+            return $sql ->result_array();
+        }else{
+            return false;
+        }
+    }
+
+
 }
