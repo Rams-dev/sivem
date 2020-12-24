@@ -130,6 +130,7 @@ class MediosModel extends CI_model
 
     //obtiene todos los medios que estan apartados, ocupados y/o proximos que se pueden vender
     public function obtenerMediosApartados($id_medio, $fi, $ft){
+        $hoy = date("Y:m:d");
         $medio = "";
         if($id_medio == '1'){
             $medio = 'espectaculares';
@@ -147,7 +148,8 @@ class MediosModel extends CI_model
         $this->db->where("venta_medios.fecha_inicio_contrato >", $ft);
         $this->db->or_where("venta_medios.fecha_termino_contrato <", $fi);
         $this->db->where("venta_medios.fecha_termino_contrato <", $ft);
-        $this->db->group_by($medio.'.id');
+        $this->db->where("venta_medios.fecha_termino_contrato >", $hoy);
+        $this->db->group_by('medios.id');
         $sql = $this->db->get();
         if($sql){
             return $sql->result_array();
@@ -226,13 +228,10 @@ class MediosModel extends CI_model
         }else{
             return false;
         }
-
-
-
     }
 
 
-    public function obtenerMediosApartadosPorHorario($id_medio,$f1,$f2,$h1,$h2){
+    public function obtenerMediosOcupadosPorFecha($id_medio,$f1,$f2){
         $medio="";
         if($id_medio == '1'){
             $medio = 'espectaculares';
@@ -246,13 +245,12 @@ class MediosModel extends CI_model
         $this->db->join('medios','medios.id = '.$medio .'.id_medio');
         $this->db->join('venta_medios','venta_medios.id_medio = medios.id');
         $this->db->where("venta_medios.fecha_inicio_contrato >=",$f1);
-        $this->db->where("venta_medios.fecha_inicio_contrato <=",$f1);
+        $this->db->where("venta_medios.fecha_inicio_contrato <=",$f2);
+        $this->db->or_where("venta_medios.fecha_termino_contrato >=",$f1);
         $this->db->where("venta_medios.fecha_termino_contrato <=",$f2);
-        $this->db->where("venta_medios.fecha_termino_contrato >=",$f2);
-        $this->db->where("venta_medios.hora_inicio >",$h1);
-        $this->db->where("venta_medios.hora_inicio >",$h2);
-        $this->db->or_where("venta_medios.hora_termino <",$h1);
-        $this->db->where("venta_medios.hora_termino <",$h2);
+        $this->db->or_where("venta_medios.fecha_termino_contrato <=",$f1);
+        $this->db->where("venta_medios.fecha_inicio_contrato >=",$f1);
+        $this->db->where("venta_medios.fecha_termino_contrato <=",$f2);
         $this->db->group_by('medios.id');
         $sql = $this->db->get();
         if($sql){
@@ -377,7 +375,9 @@ class MediosModel extends CI_model
 
     function cambiarStatusProximoADisponible($id_medio){
         $data = array(
-            "status"=> "DISPONIBLE"
+            "status"=> "DISPONIBLE",
+            "fecha_inicio_ocupacion" => "",
+            "fecha_termino_ocupacion" => ""
         );
         $this->db->where("id",$id_medio);
         $this->db->update("medios", $data);
@@ -385,20 +385,20 @@ class MediosModel extends CI_model
 
 
     public function obtenerMediosOcupadosSinFechadeInicio($date){
-        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion <=" => $date, "status" => "OCUPADO"));
+        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion <=" => $date));
         return $sql->result_array();
     }
 
     
     public function obtenerMediosProximosSinFechadeInicio($date){
-        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion" => $date, "status" => "PROXIMO"));
+        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion" => $date));
         return $sql->result_array();
 
     }
 
     
     public function obtenerMediosApartadosSinVenta($date){
-        $sql = $this->db->get_where("medios",array("fecha_inicio_ocupacion" => $date, "status" => "APARTADO"));
+        $sql = $this->db->get_where("medios",array("fecha_inicio_ocupacion" => $date));
         return $sql->result_array();
 
     }
@@ -406,17 +406,6 @@ class MediosModel extends CI_model
     // esta funcion cambia el estatus de los medios que al momento de registrase los declararon como ocupados
 
     
-    public function CambiarOcupadoADisponible($id){
-        $data = array(
-            "status"=> "DISPONIBLE",
-            "fecha_termino_ocupacion" => "",
-            "fecha_termino_ocupacion" => ""
-        );
-        $this->db->where("id",$id);
-        $this->db->update("medios", $data);
-    }
-
-
     public function CambiarApartadoAOcupado($id){
         $data = array(
             "status"=> "OCUPADO",

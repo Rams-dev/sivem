@@ -57,7 +57,7 @@ class Ventas extends CI_Controller {
             $mediosApartadosYOcupados = $this->MediosModel->obtenerMediosApartados($id, $fi, $ft);
             $medios = array_merge($mediosDisponibles, $mediosApartadosYOcupados, $mediosConFechaDeOcupacion);
             
-            echo json_encode($medios);
+            echo json_encode($mediosConFechaDeOcupacion);
 
         }else{
             redirect('login');
@@ -72,22 +72,31 @@ class Ventas extends CI_Controller {
         $id = $this->input->post("id");
         //  echo json_encode(array($h1,$h2,$f1,$f2,$id));
         //  exit;
-
+        $vallasDisponiblesPorHorario = array();
+        $vallasOcupadas = $this->MediosModel->obtenerMediosOcupadosPorFecha($id,$f1,$f2);
         $vallas_disponibles = $this->MediosModel->obtenerMediosDisponibles($id);
         $vallas_apartadas_por_fecha = $this->MediosModel->obtenerMediosApartados($id,$f1,$f2);
-        $vallas_disponibles_porhorario= $this->MediosModel->obtenerMediosApartadosPorHorario($id,$f1,$f2,$h1,$h2);
-        // for($v = 0; $v<count($vallas_apartadas_por_fecha); $v++){
-        //      for($v2 = 0; $v2<count($vallas_disponibles_porhorario); $v2++){
-        //         if($vallas_apartadas_por_fecha[$v]["id_medio"] == $vallas_disponibles_porhorario[$v2]["id_medio"]){
-        //             unset($vallas_disponibles_porhorario[$v2]);
-        //         }
-        //      }
-        // }
-         $vallas = array_merge($vallas_disponibles, $vallas_apartadas_por_fecha, $vallas_disponibles_porhorario);
 
-        
+        for ($v=0; $v < count($vallasOcupadas) ; $v++) { 
+            # code...
+            if($vallasOcupadas[$v]["hora_inicio"] > $h1 && $vallasOcupadas[$v]["hora_inicio"] > $h2 || $vallasOcupadas[$v]["hora_termino"] < $h1 && $vallasOcupadas[$v]["hora_termino"] < $h2){
+                array_push($vallasDisponiblesPorHorario, $vallasOcupadas[$v]);
+            }
+        }
 
-        echo json_encode($vallas_apartadas_por_fecha);
+        if(count($vallasOcupadas)>0 && count($vallas_apartadas_por_fecha)>0){
+            for ($VO=0; $VO < count($vallasOcupadas) ; $VO++) { 
+                for ($VA=0; $VA < count($vallas_apartadas_por_fecha) ; $VA++) { 
+                    # code...
+                    if($vallas_apartadas_por_fecha[$VA]["id_medio"] == $vallasOcupadas[$VO]["id_medio"]){
+                        unset($vallasOcupadas[$VO]);
+                        unset($vallas_apartadas_por_fecha[$VA]);
+                    }
+                }
+           }
+        }
+        $vallas = array_merge($vallas_disponibles, $vallas_apartadas_por_fecha, $vallasDisponiblesPorHorario);
+        echo json_encode($vallas);
         $vallas = [];
         
     }
@@ -98,42 +107,30 @@ class Ventas extends CI_Controller {
         $f1 = $this->input->post("f1");
         $f2 = $this->input->post("f2");
 
-        $choferesD = $this->EmpleadosModel->obtenerChoferesDis();
+        $choferesOcupados = $this->EmpleadosModel->obtenerChoferOcupadoPorFecha($f1,$f2);
+        $choferesDisponiblesPorHorario = array();
+        for($c = 0; $c< count($choferesOcupados); $c++){
+            if($choferesOcupados[$c]["hora_inicio"] > $h1 && $choferesOcupados[$c]["hora_inicio"] > $h2 || $choferesOcupados[$c]["hora_termino"] < $h1 && $choferesOcupados[$c]["hora_termino"] < $h2){
+                array_push($choferesDisponiblesPorHorario, $choferesOcupados[$c]);
+            }
+        }
+
         $choferes_apartados_por_fecha = $this->EmpleadosModel->obtenerChoferesApartadosPorFecha($f1,$f2);
-        $choferes_disponibles_porhorario= $this->EmpleadosModel->obtenerChoferesApartadosPorHorario($f1,$f2,$h1,$h2);
-        $choferes_apartados = array_merge($choferes_apartados_por_fecha,$choferes_disponibles_porhorario);
-        //  for($i = 0; $i < count($choferesD); $i++){
-        //      for($j = 0; $j < count($choferes_apartados); $j++){
-        //          if($choferesD[$i]["id"] == $choferes_apartados[$j]["id_chofer"]){
-        //              unset($choferesD[$i]);
-        //          }
-        //          //  else{
-        //          //      array_push($choferesDisponibles, $choferesD[$i] );
-        //          //  }
-        //      } 
-        //  }
-        $choferes = array_merge($choferes_apartados_por_fecha,$choferes_disponibles_porhorario,$choferesD);
-        // var_dump($choferesD);
+        $choferesD = $this->EmpleadosModel->obtenerChoferesDis();
+        if(count($choferesOcupados)>0 && count($choferes_apartados_por_fecha)>0){
+             for ($CO=0; $CO < count($choferesOcupados) ; $CO++) { 
+                 for ($CA=0; $CA < count($choferes_apartados_por_fecha) ; $CA++) { 
+                     # code...
+                     if($choferes_apartados_por_fecha[$CA]["id"] == $choferesOcupados[$CO]["id"]){
+                         unset($choferesOcupados[$CO]);
+                         unset($choferes_apartados_por_fecha[$CA]);
+                     }
+                 }
+            }
+        }
+        $choferes = array_merge($choferes_apartados_por_fecha,$choferesDisponiblesPorHorario,$choferesD);
         echo json_encode($choferes);
     }
-
-
-    public function verificarDisponibilidad(){
-        $data = $this->input->post();
-        $ventasMedios = $this->VentasModel->obtenerVentasPorIdMedio($data['medio']);
-        // var_dump(count($ventasMedios));
-        $fi = $data['fechaInicio']; 
-        $ft = $data['fechaTermino']; 
-        for($i = 0; $i<count($ventasMedios); $i++){
-            if($ventasMedios[$i]['fecha_inicio_contrato'] > $fi and $ventasMedios[$i]['fecha_inicio_contrato'] > $ft or $ventasMedios[$i]['fecha_termino_contrato'] <$fi and $ventasMedios[$i]['fecha_termino_contrato'] < $ft ){
-            }else{
-                echo json_encode(array("error" => "Este medio estará ocupado durante fechas seleccionadas" ));
-                exit;
-            }
-
-            
-        }
-     }
 
     function obtenerMedioPorId($id_medio){
         if($this->session->userdata('is_logged')){
@@ -190,7 +187,6 @@ class Ventas extends CI_Controller {
             echo json_encode(array('success'=>' venta exitosa'));
         }else{
             echo json_encode(array('error'=>'no se pudo realizar la venta, intenta mas tarde'));
-
 
         }
         // echo json_encode(array($id_cliente,$tipoArte,$fechaInicio,$fechaTermino,$noPagos,$factura,$tipoPago,$tipoMedio,$medio,$fecha_venta, $monto));

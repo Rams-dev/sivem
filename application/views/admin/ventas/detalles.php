@@ -1,5 +1,5 @@
 <?php 
- var_dump($ventas);
+//  var_dump($ventas);
 ?>
 
 <h1 class="text-center">Detalles de venta</h1>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-12-2020 a las 17:10:26
+-- Tiempo de generación: 24-12-2020 a las 16:57:20
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -93,9 +93,12 @@ CREATE TABLE `espectaculares` (
 --
 
 INSERT INTO `espectaculares` (`id`, `nocontrol`, `costo_impresion`, `costo_instalacion`, `costo_renta`, `calle`, `numero`, `colonia`, `localidad`, `municipio`, `id_estado`, `latitud`, `longitud`, `referencias`, `ancho`, `alto`, `id_material`, `observaciones`, `acabados`, `vista_corta`, `vista_media`, `vista_larga`, `id_propietario`, `id_medio`, `fecha_inicio`, `fecha_termino`, `folio`, `id_tipo_pago`, `id_periodo_pago`, `monto`) VALUES
-(69, 'sasd', '2400.00', '800.00', '5000', 'asdasd', 12, 'asdasd', 'fadsfa', 'Mexicali', 2, '13.00', '1.11', 'dsghfgfsj', '4.00', '5.00', 3, 'asdasdasdasd', 'sagdfh', 'SAY1_-_EC.JPG', 'CDS2_-_EC.JPG', 'SST1_-_EC.JPG', 160, 112, '2020-12-24', '2020-12-30', 'sdf', 4, 11, '11.00'),
+(69, 'sasd', '2400.00', '800.00', '5000', 'asdasd', 12, 'asdasd', 'fadsfa', 'Mexicali', 2, '13.00', '1.11', 'dsghfgfsj', '4.00', '5.00', 3, 'asdasdasdasd', 'sagdfh', 'SAY1_-_EC.JPG', 'CDS2_-_EC.JPG', 'SST1_-_EC.JPG', 160, 112, '2020-12-17', '2020-12-22', 'sdf', 4, 11, '11.00'),
 (70, 'asdasd', '2520.00', '800.00', '5000', 'asdasd', 23, 'shgf', 'fadsfa', 'Cuencamé', 10, '1.00', '1.10', 'dsghfgfsj', '5.00', '7.20', 5, 'asdasdasdasd', 'sagdfh', 'SMI1_-_EC.JPG', 'CAR_1_-_EC.JPG', 'CVB1_-_EC1.JPG', 161, 113, '2020-12-18', '2021-01-09', 'sdf', 5, 11, '11.00'),
-(71, 'sasd', '1200.00', '800.00', '5000', 'dsfdas', 12, 'dfdsh', 'fdhadfg', '', 0, '1.00', '1.00', 'dsghfgfsj', '4.00', '5.00', 2, 'asdasdasdasd', 'ghgfhgfh', 'AVP2_-_MURO1.jpeg', 'CDN2_-_EC.JPG', 'CVB1_-_EC.JPG', 164, 116, '2020-12-18', '2021-01-09', 'sdf', 6, 12, '12.00');
+(71, 'sasd', '1200.00', '800.00', '5000', 'dsfdas', 12, 'dfdsh', 'fdhadfg', '', 0, '1.00', '1.00', 'dsghfgfsj', '4.00', '5.00', 2, 'asdasdasdasd', 'ghgfhgfh', 'AVP2_-_MURO1.jpeg', 'CDN2_-_EC.JPG', 'CVB1_-_EC.JPG', 164, 116, '2020-12-18', '2021-01-09', 'sdf', 6, 12, '12.00'),
+(72, 'asdasd', '2000.00', '800.00', '5800', 'asdasdasd', 12, 'dfdsh', 'fdhadfg', 'Berriozábal', 7, '1.00', '1.10', 'dsghfgfsj', '4.00', '5.00', 4, 'asdasdasdasd', 'sagdfh', 'DSC_0005.JPG', 'IMG_00221.jpeg', 'ZY-Photo-2020-09-18-00000052.jpeg', 167, 121, '2020-12-21', '2021-02-19', 'sdf', 5, 11, '11.00'),
+(73, 'asdasd', '1400.00', '800.00', '4800', 'afdha', 23, 'sdaasd', 'fhsdfh', 'Tláhuac', 9, '1.00', '1.10', 'sdasdasdasd', '4.00', '5.00', 5, 'asdasdasdasd', 'sagdfh', 'IMG_00311.jpeg', 'IMG_00801.jpeg', 'ZY-Photo-2020-09-21-000000711.jpeg', 168, 122, '2021-01-01', '2021-01-30', 'sdf', 4, 12, '12.00'),
+(74, 'sasd', '2400.00', '800.00', '5000', 'dsfdas', 12, 'asdasd', 'fdhadfg', 'Acuña', 5, '13.00', '1.00', 'dsghfgfsj', '4.00', '5.00', 3, 'asdasdasdasd', 'ghgfhgfh', 'DSC_00041.JPG', 'IMG_00802.jpeg', 'ZY-Photo-2020-09-21-000000791.jpeg', 169, 123, '2020-12-21', '2021-02-06', '', 3, 12, '12.00');
 
 -- --------------------------------------------------------
 
@@ -194,16 +197,21 @@ CREATE TABLE `medios` (
 --
 
 INSERT INTO `medios` (`id`, `tipo_medio`, `status`, `precio`, `fecha_inicio_ocupacion`, `fecha_termino_ocupacion`, `eliminado`) VALUES
-(104, 'Espectacular', '', '0.00', '0000-00-00', '0000-00-00', 0),
-(110, 'Espectacular', 'DISPONIBLE', '0.00', '0000-00-00', '0000-00-00', 0),
-(111, 'Espectacular', 'DISPONIBLE', '0.00', '0000-00-00', '0000-00-00', 0),
-(112, 'Espectacular', '', '8200.00', '0000-00-00', '0000-00-00', 0),
-(113, 'Espectacular', 'Apartado', '8320.00', '0000-00-00', '0000-00-00', 0),
-(114, 'valla_fija', 'Apartado', '12000.00', '0000-00-00', '0000-00-00', 0),
-(115, 'valla_fija', 'DISPONIBLE', '3000.00', '0000-00-00', '0000-00-00', 0),
-(116, 'Espectacular', 'Apartado', '7000.00', '0000-00-00', '0000-00-00', 0),
-(117, 'Vallas movil', 'Apartado', '36200.00', '0000-00-00', '0000-00-00', 0),
-(118, 'Vallas movil', 'DISPONIBLE', '41800.00', '0000-00-00', '0000-00-00', 0);
+(104, 'Espectacular', 'PROXIMO', '0.00', '0000-00-00', '0000-00-00', 0),
+(110, 'Espectacular', 'PROXIMO', '0.00', '0000-00-00', '0000-00-00', 0),
+(111, 'Espectacular', 'PROXIMO', '0.00', '0000-00-00', '0000-00-00', 0),
+(112, 'Espectacular', 'PROXIMO', '8200.00', '0000-00-00', '0000-00-00', 0),
+(113, 'Espectacular', 'PROXIMO', '8320.00', '0000-00-00', '0000-00-00', 0),
+(114, 'valla_fija', 'PROXIMO', '12000.00', '0000-00-00', '0000-00-00', 0),
+(115, 'valla_fija', 'PROXIMO', '3000.00', '0000-00-00', '0000-00-00', 0),
+(116, 'Espectacular', 'PROXIMO', '7000.00', '0000-00-00', '0000-00-00', 0),
+(117, 'Vallas movil', 'PROXIMO', '36200.00', '0000-00-00', '0000-00-00', 0),
+(118, 'Vallas movil', 'PROXIMO', '41800.00', '0000-00-00', '0000-00-00', 0),
+(119, 'valla_fija', 'PROXIMO', '8600.00', '0000-00-00', '0000-00-00', 0),
+(120, 'valla_fija', 'PROXIMO', '7600.00', '0000-00-00', '0000-00-00', 0),
+(121, 'Espectacular', 'PROXIMO', '8600.00', '0000-00-00', '2020-12-24', 0),
+(122, 'Espectacular', 'PROXIMO', '7000.00', '2020-12-23', '2020-12-27', 0),
+(123, 'Espectacular', 'PROXIMO', '8200.00', '0000-00-00', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -2748,7 +2756,12 @@ INSERT INTO `propietarios` (`id`, `nombre`, `telefono`, `celular`) VALUES
 (161, 'gsdfg', '9513667929', '2342343242'),
 (162, 'gsdfg', '2342343242', '9513667929'),
 (163, 'gsdfg', '9513667929', '9513667929'),
-(164, 'gsdfg', '3243243242', '2342343242');
+(164, 'gsdfg', '3243243242', '2342343242'),
+(165, 'gsdfg', '2342343242', '9513667929'),
+(166, 'gsdfg', '2342343242', '9513667929'),
+(167, 'gsdfg', '9513667929', '2342343242'),
+(168, 'gsdfg', '9513667929', '2342343242'),
+(169, 'gsdfg', '9513667929', '2342343242');
 
 -- --------------------------------------------------------
 
@@ -2848,7 +2861,9 @@ CREATE TABLE `vallas_fijas` (
 
 INSERT INTO `vallas_fijas` (`id`, `nocontrol`, `costo_impresion`, `costo_instalacion`, `calle`, `numero`, `colonia`, `localidad`, `municipio`, `id_estado`, `latitud`, `longitud`, `referencias`, `ancho`, `alto`, `material`, `costo_renta`, `observaciones`, `acabados`, `vista_corta`, `vista_media`, `vista_larga`, `id_propietario`, `id_medio`, `fecha_inicio`, `fecha_termino`, `id_tipo_pago`, `id_periodo_pago`, `monto`) VALUES
 (24, 'sdasd', '1300.00', '700.00', 'asdasd', 23, 'sddgfh', 'dasdas', 'Arteaga', 5, '1.00', '1.00', 'sfdgasdgadsg', '5.00', '4.00', 'vinil', '10000.00', 'asfhsghjgfjh', 'dfgsdfgsdfhdfsh', 'LFS1_-_EC.JPG', 'CBN1_-_EC.JPG', 'BEV1_-_EC1.JPG', 162, 114, '2020-12-30', '2020-12-29', 4, 11, '3400.00'),
-(25, 'sasd', '1300.00', '700.00', 'dsfdas', 23, 'dfdsh', 'fadsfa', 'Aguascalientes', 1, '1.00', '1.10', 'dsghfgfsj', '4.00', '5.00', 'vinil', '1000.00', 'dsfdasf', 'dsfdsafadsf', 'AVP2_-_MURO.jpeg', 'BEV1_-_EC2.JPG', 'SST1_-_EC1.JPG', 163, 115, '2020-12-25', '2021-01-09', 5, 12, '3400.00');
+(25, 'sasd', '1300.00', '700.00', 'dsfdas', 23, 'dfdsh', 'fadsfa', 'Aguascalientes', 1, '1.00', '1.10', 'dsghfgfsj', '4.00', '5.00', 'vinil', '1000.00', 'dsfdasf', 'dsfdsafadsf', 'AVP2_-_MURO.jpeg', 'BEV1_-_EC2.JPG', 'SST1_-_EC1.JPG', 163, 115, '2020-12-12', '2020-12-22', 5, 12, '3400.00'),
+(26, 'sasd', '2340.00', '1260.00', 'dsfdas', 23, 'asdasd', 'fdhadfg', 'Cosío', 1, '1.00', '1.10', 'dfadsfa', '5.00', '7.20', 'vinil', '5000.00', 'no', 'no', 'ZY-Photo-2020-09-18-00000040.jpeg', 'IMG_0022.jpeg', 'DSC_00241.JPG', 165, 119, '2020-12-22', '2021-02-06', 6, 12, '3400.00'),
+(27, 'sasd', '1040.00', '560.00', 'dsfdas', 23, 'dfdsh', 'fadsfa', 'Francisco I. Madero', 5, '1.00', '1.00', 'dfadsfa', '4.00', '4.00', 'vinil', '6000.00', '123456', 'mklnkln', 'DSC_0004.JPG', 'IMG_0031.jpeg', 'ZY-Photo-2020-09-21-00000079.jpeg', 166, 120, '2020-12-22', '2021-03-03', 1, 12, '3400.00');
 
 -- --------------------------------------------------------
 
@@ -2920,7 +2935,9 @@ INSERT INTO `ventas` (`id_venta`, `id_vendedor`, `id_comprador`, `monto`, `descu
 (48, 1, 10, '9867.73', '0.00', '0.00', '9867.73', 'si', '2020-12-17 16:55:45', 0, ''),
 (49, 1, 10, '5009.67', '0.00', '0.00', '5009.67', 'no', '2020-12-17 17:05:13', 0, ''),
 (50, 1, 10, '9654.34', '0.00', '0.00', '9654.34', 'no', '2020-12-18 11:00:29', 0, ''),
-(51, 1, 10, '18018.67', '0.00', '0.00', '18018.67', 'si', '2020-12-21 07:43:25', 5, 'Trasnferencia');
+(51, 1, 10, '18018.67', '0.00', '0.00', '18018.67', 'si', '2020-12-21 07:43:25', 5, 'Trasnferencia'),
+(52, 1, 10, '15533.34', '0.00', '0.00', '15533.34', 'no', '2020-12-22 08:59:40', 0, 'efectivo'),
+(53, 1, 10, '14366.66', '0.00', '0.00', '14366.66', 'no', '2020-12-23 11:00:06', 0, 'efectivo');
 
 -- --------------------------------------------------------
 
@@ -2951,7 +2968,11 @@ INSERT INTO `venta_medios` (`id`, `id_medio`, `id_venta`, `fecha_inicio_contrato
 (64, 113, 50, '2020-12-18', '2020-12-30', '00:00:00', '00:00:00', 0),
 (65, 116, 50, '2020-12-18', '2020-12-30', '00:00:00', '00:00:00', 0),
 (66, 117, 51, '2020-12-21', '2020-12-22', '13:00:00', '17:00:00', 17),
-(67, 114, 51, '2020-12-21', '2020-12-22', '00:00:00', '00:00:00', 0);
+(67, 114, 51, '2020-12-21', '2020-12-22', '00:00:00', '00:00:00', 0),
+(68, 114, 52, '2020-12-24', '2020-12-25', '00:00:00', '00:00:00', 0),
+(69, 117, 52, '2020-12-24', '2020-12-25', '08:00:00', '13:00:00', 17),
+(70, 117, 53, '2020-12-26', '2020-12-26', '15:00:00', '17:00:00', 17),
+(71, 114, 53, '2020-12-26', '2020-12-26', '00:00:00', '00:00:00', 0);
 
 --
 -- Índices para tablas volcadas
@@ -3057,7 +3078,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `espectaculares`
 --
 ALTER TABLE `espectaculares`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -3075,7 +3096,7 @@ ALTER TABLE `materiales`
 -- AUTO_INCREMENT de la tabla `medios`
 --
 ALTER TABLE `medios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT de la tabla `municipios`
@@ -3093,7 +3114,7 @@ ALTER TABLE `periodo_pago`
 -- AUTO_INCREMENT de la tabla `propietarios`
 --
 ALTER TABLE `propietarios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_pago`
@@ -3111,7 +3132,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `vallas_fijas`
 --
 ALTER TABLE `vallas_fijas`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `vallas_moviles`
@@ -3123,13 +3144,13 @@ ALTER TABLE `vallas_moviles`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id_venta` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_venta` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `venta_medios`
 --
 ALTER TABLE `venta_medios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Restricciones para tablas volcadas
