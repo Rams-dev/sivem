@@ -147,5 +147,17 @@ class Vallas_movilesModel extends CI_model
         }
     }
 
+    public function obtenerVentas(){
+        $this->db->select("*");
+        $this->db->join("medios","medios.id = vallas_moviles.id_medio");
+        $this->db->join("venta_medios","venta_medios.id_medio = medios.id");
+        $sql = $this->db->get("vallas_moviles");
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+    }
+
 
 }

@@ -25,14 +25,13 @@ class VentasModel extends CI_model
 		$this->db->select("*");
 		$this->db->from("ventas");
 		$this->db->join("venta_medios", "ventas.id_venta = venta_medios.id_venta");
-		$this->db->select("usuarios.id as id_vendedor, usuarios.nombre as chofer");
-		$this->db->join("usuarios", "ventas.id_vendedor = usuarios.id");
-		$this->db->join("espectaculares", "venta_medios.id_medio = espectaculares.id_medio");
+		$this->db->join("medios", "venta_medios.id_medio = medios.id");
+		$this->db->join("espectaculares", "medios.id = espectaculares.id_medio");
 		$this->db->select("estados.nombre as nombre_estado");
 		$this->db->join("estados", "espectaculares.id_estado = estados.id");
 		$this->db->select("clientes.id as cliente_id, clientes.nombre as comprador, clientes.nombre_encargado, clientes.correo as correo_comprador, clientes.telefono");
 		$this->db->join("clientes", "ventas.id_comprador = clientes.id");
-		$this->db->join("medios", "venta_medios.id_medio = medios.id");
+
 		$this->db->where("ventas.id_venta",$id_venta);
 		$sql = $this->db->get();
 		if($sql){
@@ -46,15 +45,12 @@ class VentasModel extends CI_model
 		$this->db->select("*");
 		$this->db->from("ventas");
 		$this->db->join("venta_medios", "ventas.id_venta = venta_medios.id_venta");
-		$this->db->select("usuarios.id as id_vendedor, usuarios.nombre as chofer");
-		$this->db->join("usuarios", "ventas.id_vendedor = usuarios.id");
-		$this->db->join("vallas_fijas", "venta_medios.id_medio = vallas_fijas.id_medio");
+		$this->db->join("medios", "venta_medios.id_medio = medios.id");
+		$this->db->join("vallas_fijas", "medios.id = vallas_fijas.id_medio");
 		$this->db->select("estados.nombre as nombre_estado");
 		$this->db->join("estados", "vallas_fijas.id_estado = estados.id");
 		$this->db->select("clientes.id as cliente_id, clientes.nombre as comprador, clientes.nombre_encargado, clientes.correo as correo_comprador, clientes.telefono");
 		$this->db->join("clientes", "ventas.id_comprador = clientes.id");
-		$this->db->join("medios", "venta_medios.id_medio = medios.id");
-
 		$this->db->where("ventas.id_venta",$id_venta);
 		$sql = $this->db->get();
 		if($sql){
@@ -67,16 +63,15 @@ class VentasModel extends CI_model
 
 	function obtenerVentasVallas_moviles($id_venta){
 		$this->db->select("*");
-		$this->db->join("ventas", "ventas.id_venta = venta_medios.id_venta");
-		// $this->db->select("usuarios.id as id_vendedor, usuarios.nombre as chofer");
-		// $this->db->join("usuarios", "venta_medios.id_chofer = usuarios.id");
-		$this->db->join("vallas_moviles", "venta_medios.id_medio = vallas_moviles.id_medio");
+		$this->db->join("venta_medios", "ventas.id_venta = venta_medios.id_venta");
+		$this->db->join("medios", "venta_medios.id_medio = medios.id");
+		$this->db->select("usuarios.id as id_vendedor, usuarios.nombre as chofer");
+		$this->db->join("usuarios", "venta_medios.id_chofer = usuarios.id");
+		$this->db->join("vallas_moviles", "medios.id = vallas_moviles.id_medio");
 		$this->db->select("clientes.id as cliente_id, clientes.nombre as comprador, clientes.nombre_encargado, clientes.correo as correo_comprador, clientes.telefono");
 		$this->db->join("clientes", "ventas.id_comprador = clientes.id");
-		$this->db->join("medios", "venta_medios.id_medio = medios.id");
 		$this->db->where("ventas.id_venta",$id_venta);
-		//$this->db->group_by("ventas.id_venta");
-		$sql = $this->db->get("venta_medios");
+		$sql = $this->db->get("ventas");
 		if($sql){
 			return $sql->result_array();
 		}else{
@@ -163,8 +158,8 @@ class VentasModel extends CI_model
 		}
 	}
 
-	public function obtenerVenta_mediosPorFechaInicio($date){
-		$sql = $this->db->get_where("venta_medios",array("fecha_inicio_contrato" => $date));
+	public function obtenerVenta_mediosPorFechaInicio($hoy){
+		$sql = $this->db->get_where("venta_medios",array("fecha_inicio_contrato" => $hoy));
 		if($sql){
 			return $sql->result_array();
 		}else{
@@ -177,7 +172,6 @@ class VentasModel extends CI_model
         $this->db->from("medios");
         $this->db->join("venta_medios","venta_medios.id_medio = medios.id");
         $this->db->where("venta_medios.fecha_termino_contrato <",$unMes);
-        $this->db->where("medios.status","OCUPADO");
         $sql = $this->db->get();
         if($sql){
             return $sql->result_array();
@@ -186,8 +180,11 @@ class VentasModel extends CI_model
         }
     }
 
-	public function obtenerVenta_mediosPorFechaTermino($date){
-		$sql = $this->db->get_where("venta_medios",array("fecha_termino_contrato" => $date));
+	public function obtenerVenta_mediosPorFechaTermino($ayer){
+		$this->db->select("*");
+		$this->db->join("medios", "medios.id = venta_medios.id_medio");
+		$this->db->where("venta_medios.fecha_termino_contrato <=", $ayer);
+		$sql = $this->db->get("venta_medios");
 		if($sql){
 			return $sql->result_array();
 		}else{

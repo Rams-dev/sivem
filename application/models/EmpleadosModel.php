@@ -108,27 +108,17 @@ class EmpleadosModel extends CI_model{
         }
     }
 
-    //  public function obtenerChoferesDisponibles($h1,$h2,$f1,$f2){
-    //      $this->db->select("*");
-    //      $this->db->venta_medios("venta_medios", "usuarios.id = venta_medios.id_chofer");
-    //      $this->db->where("venta_medios.fecha_inicio_contrato <", $f1);
-    //      $this->db->where("venta_medios.fecha_inicio_contrato <", $f2);
-    //      $this->db->where("venta_medios.fecha_termino_contrato >", $f1);
-    //      $this->db->where("venta_medios.fecha_termino_contrato >", $f2);
-    //      $this->db->where("venta_medios.hora_inico <", $h1);
-    //      $this->db->where("venta_medios.hora_inicio <", $h2);
-    //      $this->db->where("venta_medios.hora_inico >", $h1);
-    //      $this->db->where("venta_medios.hora_inicio >", $h2);
-
-    //      $sql = $this->db->get("usuarios");
-
-    //      if($sql){
-    //          return $sql->result_array();
-    //      }else{
-    //          false;
-    //      }
+    public function obtenerChoferesDisponibles(){
+          $sql = $this->db->get_where("usuarios", array("licencia !=" => ""));
+          if($sql){
+              return $sql->result_array();
+          }else{
+              false;
+          }
          
-    //  }
+      }
+
+
     public function obtenerChoferOcupadoPorFecha($f1,$f2){
         $this->db->select('usuarios.id, usuarios.nombre, usuarios.apellidos, venta_medios.fecha_inicio_contrato, venta_medios.fecha_termino_contrato, venta_medios.hora_inicio, venta_medios.hora_termino');
         $this->db->join('usuarios',' usuarios.id = venta_medios.id_chofer ');

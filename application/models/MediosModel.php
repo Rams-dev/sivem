@@ -148,7 +148,7 @@ class MediosModel extends CI_model
         $this->db->where("venta_medios.fecha_inicio_contrato >", $ft);
         $this->db->or_where("venta_medios.fecha_termino_contrato <", $fi);
         $this->db->where("venta_medios.fecha_termino_contrato <", $ft);
-        $this->db->where("venta_medios.fecha_termino_contrato >", $hoy);
+        // $this->db->where("venta_medios.fecha_termino_contrato >", $hoy);
         $this->db->group_by('medios.id');
         $sql = $this->db->get();
         if($sql){
@@ -174,6 +174,26 @@ class MediosModel extends CI_model
 
     }
 
+
+    /*
+    *Esta fucntion regresa un array de los medios disponibles muy generalmente
+    *Para cambiarles el estado a APARTADO
+    */
+    public function obtenerMediosGeneralesDisponibles(){
+        $hoy = Date("Y:m:d");
+        $this->db->select("*");
+        $this->db->join("venta_medios","venta_medios.id_medio = medios.id");
+        $this->db->where("fecha_inicio_contrato >",$hoy);
+        $this->db->where("medios.status","DISPONIBLE");
+        $sql = $this->db->get("medios");
+
+        if($sql){
+            return $sql->result_array();
+        }else{
+            return false;
+        }
+
+    }
 
     // public function obtenerMediosApartadosPorFecha($id_medio,$f1,$f2){
     //     $medio="";
@@ -219,7 +239,6 @@ class MediosModel extends CI_model
         $this->db->where("medios.fecha_inicio_ocupacion >",$f2);
         $this->db->or_where("medios.fecha_termino_ocupacion <",$f1);
         $this->db->where("medios.fecha_termino_ocupacion <",$f2);
-        $this->db->where("medios.fecha_termino_ocupacion !=","");
         $this->db->where("medios.fecha_termino_ocupacion !=","");
         $this->db->group_by('medios.id');
         $sql = $this->db->get();
@@ -384,23 +403,28 @@ class MediosModel extends CI_model
     }
 
 
-    public function obtenerMediosOcupadosSinFechadeInicio($date){
-        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion <=" => $date));
+    public function obtenerMediosOcupadosSinFechadeInicio($unmes){
+        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion <=" => $unmes));
         return $sql->result_array();
     }
 
     
-    public function obtenerMediosProximosSinFechadeInicio($date){
-        $sql = $this->db->get_where("medios",array("fecha_termino_ocupacion" => $date));
+    public function obtenerMediosProximosSinFechadeInicio($ayer){
+        $this->db->where("fecha_termino_ocupacion <=", $ayer);
+        $this->db->where("fecha_termino_ocupacion !=", "");
+        $sql = $this->db->get("medios");
         return $sql->result_array();
-
     }
 
     
-    public function obtenerMediosApartadosSinVenta($date){
-        $sql = $this->db->get_where("medios",array("fecha_inicio_ocupacion" => $date));
+    public function obtenerMediosApartadosSinVenta($hoy){
+        $this->db->where("fecha_inicio_ocupacion <=", $hoy);
+        $this->db->where("fecha_termino_ocupacion >", $hoy);
+        $this->db->where("fecha_inicio_ocupacion !=", "0000-00-00");
+        $this->db->where("status", "APARTADO");
+        $this->db->or_where("status", "APARTADO");
+        $sql = $this->db->get("medios");
         return $sql->result_array();
-
     }
 
     // esta funcion cambia el estatus de los medios que al momento de registrase los declararon como ocupados

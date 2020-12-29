@@ -38,4 +38,4 @@
         </div>
         <div class="col-lg-10 col-md-10 col-xl-11 mt-5">
         
-            <div class="container mt-4">
+            <div class="container-fluid mt-4 mx-2">

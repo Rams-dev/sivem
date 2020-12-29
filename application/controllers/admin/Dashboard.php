@@ -9,6 +9,9 @@ class Dashboard extends CI_Controller {
 		$this->load->model('VentasModel');
 		$this->load->model('EspectacularesModel');
 		$this->load->model('Vallas_fijasModel');
+		$this->load->model('Vallas_movilesModel');
+		// $this->load->model('DashboardModel');
+		
 
 	}
 	public function index()
@@ -32,8 +35,6 @@ class Dashboard extends CI_Controller {
 
 			//medios vendidos por en el sistema y que estaran disponibles dentro de un mes
 			$disponiblesProximos = $this->VentasModel->obtenerVenta_mediosQueEstaranDisponiblesEnUnMes($UnMes);
-				// var_dump($disponiblesProximos);
-			
 			if(count($disponiblesProximos)>0){
 				//modifica el estatus de los medios que estaran disponibles dentro de un mes	
 				for($dP=0; $dP < count($disponiblesProximos); $dP++){
@@ -43,6 +44,7 @@ class Dashboard extends CI_Controller {
 
 			 // Obtiene los Medios que tienen como fecha de termino la fecha de ayer
 			$proximos = $this->VentasModel->obtenerVenta_mediosPorFechaTermino($ayer);
+			// var_dump($proximos);
 			if(count($proximos)>0){
 			 	for($o=0; $o<count($proximos); $o++){
 					 //cambia el estado del medio a disponible
@@ -50,42 +52,50 @@ class Dashboard extends CI_Controller {
 			 	}
 			 }
 
-			 //obtiene los medios que se registraron como apartados
-			$mediosApartados = $this->MediosModel->obtenerMediosApartadosSinVenta($hoy);
-			if(count($mediosApartados)>0){
-				//modifica el estatus de los medios seleccionado a ocupado
-				for($mA=0; $mA<count($mediosApartados); $mA++){
-					$this->MediosModel->CambiarApartadoAOcupado($mediosApartados[$mA]["id"]);
-				}
-			}
+			 $mediosDisponibles = $this->MediosModel->obtenerMediosGeneralesDisponibles();
+			 if(count($mediosDisponibles)>0){
+				 for ($md=0; $md < count($mediosDisponibles); $md++) {
+					 	$this->MediosModel->cambiarStatusMedio($mediosDisponibles[$md]["id_medio"]);
+					 # code...
+				 }
+			 }
+
+			// obtiene los medios que se registraron como apartados
+			// $mediosApartados = $this->MediosModel->obtenerMediosApartadosSinVenta($hoy);
+			// if(count($mediosApartados)>0){
+			// 	//modifica el estatus de los medios seleccionado a ocupado
+			// 	for($mA=0; $mA<count($mediosApartados); $mA++){
+			// 		$this->MediosModel->CambiarApartadoAOcupado($mediosApartados[$mA]["id"]);
+			// 	}
+			// }
 
 			 //obtiene los medios que se dieron de alta como ocupados y terminan dentro de un mes
-			$mediosOcupados = $this->MediosModel->obtenerMediosOcupadosSinFechadeInicio($UnMes);
-			if(count($mediosOcupados)>0){
-				//modifica el estatus de ocupado a proximo
-				for($m=0; $m<count($mediosOcupados); $m++){
-					$this->MediosModel->cambiarStatusOcupadoAProximo($mediosOcupados[$m]["id"]);
-				}
-			}
+			// $mediosOcupados = $this->MediosModel->obtenerMediosOcupadosSinFechadeInicio($UnMes);
+			// if(count($mediosOcupados)>0){
+			// 	//modifica el estatus de ocupado a proximo
+			// 	for($m=0; $m<count($mediosOcupados); $m++){
+			// 		$this->MediosModel->cambiarStatusOcupadoAProximo($mediosOcupados[$m]["id"]);
+			// 	}
+			// }
 			
 			$mediosProximos = $this->MediosModel->obtenerMediosProximosSinFechadeInicio($ayer);
-			if(count($mediosProximos)>0){
-				//modifica el estatus de proximo a Disponible
-				for($m=0; $m<count($mediosProximos); $m++){
-					$this->MediosModel->cambiarStatusProximoADisponible($mediosProximos[$m]["id"]);
-				}
-			}
+			 if(count($mediosProximos)>0){
+			 	//modifica el estatus de proximo a Disponible
+			 	for($m=0; $m<count($mediosProximos); $m++){
+			 		$this->MediosModel->cambiarStatusProximoADisponible($mediosProximos[$m]["id"]);
+			 	}
+			 }
 
 			/*
 			*Esta funcion obtiene los medios que estan en venta, pero cambian a disponibles por una venta antes terminada
 			*/
-			$mediosDisponibles = $this->MediosModel->obtenerMediosDisponiblesQueEstanEnVenta($hoy);
-			 if(count($mediosDisponibles)>0){
-			 	for ($MD=0; $MD < count($mediosDisponibles); $MD++) { 
-					//cambia el estatus del medio a APARTADO
-			 		$this->MediosModel->cambiarStatusMedio($mediosDisponibles[$MD]["id_medio"]);
-			 	}
-			 }
+			// $mediosDisponibles = $this->MediosModel->obtenerMediosGeneralesDisponiblesQueEstanEnVenta($hoy);
+			//  if(count($mediosDisponibles)>0){
+			//  	for ($MD=0; $MD < count($mediosDisponibles); $MD++) { 
+			// 		//cambia el estatus del medio a APARTADO
+			//  		$this->MediosModel->cambiarStatusMedio($mediosDisponibles[$MD]["id_medio"]);
+			//  	}
+			//  }
 
 			 //obtiene los medios que terminaron su contrato de arrendamiento
 			$espectacularesTermino = $this->EspectacularesModel->obtenerEspectacularesTerminoRenta($ayer);
@@ -118,6 +128,12 @@ class Dashboard extends CI_Controller {
 			echo json_encode(array("medios"=> $medios, "total"=> count($medios)));
 			
 		}
+	}
+
+	public function obtenerVentasPorMes(){
+		$VM = $this->Vallas_movilesModel->obtenerVentas();
+		echo json_encode($VM);
+		
 	}
 
 }

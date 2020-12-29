@@ -1,12 +1,17 @@
 
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<div class="mx-auto">
-  <div id="mensajesDemediosPorTerminarContrato" class="col-md-12"></div>
-  <div class="col-lg-12 proximamente">
-    <img src="<?= base_url("assets/images/proximamente.png")?>" alt="">
-  </div>
-</div>
+<div id="mensajesDemediosPorTerminarContrato" class="col-md-12"></div>
 
+
+  <div class="mx-auto">
+   <div class="col-lg-12 proximamente">
+     <img src="<?= base_url("assets/images/proximamente.png")?>" alt="">
+   </div>
+ </div> 
+
+
+<!-- <div class="ventasPorMes"></div> -->
 
 
 <!-- Modal Medios Por vencer contrato -->
@@ -26,3 +31,4 @@
 </div>
 <script>indexit.classList.add("selected");</script>
 <script src="<?= base_url('assets/js/dashboard.js')?>"></script>
+<script src="<?= base_url('assets/js/chart.js')?>"></script>

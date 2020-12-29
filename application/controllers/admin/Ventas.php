@@ -55,9 +55,19 @@ class Ventas extends CI_Controller {
             $mediosConFechaDeOcupacion = $this->MediosModel->obtenerMediosConFechaDeOcupacion($id,$fi, $ft);
             $mediosDisponibles = $this->MediosModel->obtenerMediosDisponibles($id);
             $mediosApartadosYOcupados = $this->MediosModel->obtenerMediosApartados($id, $fi, $ft);
+
+             for ($mf=0; $mf <count($mediosConFechaDeOcupacion) ; $mf++) { 
+                 for ($mo=0; $mo <count($mediosApartadosYOcupados) ; $mo++) { 
+                     # code...
+                     if($mediosApartadosYOcupados[$mo]["id_medio"] == $mediosConFechaDeOcupacion[$mf]["id_medio"]){
+                         unset($mediosApartadosYOcupados[$mo]);
+                     }
+                 }
+             }
+
             $medios = array_merge($mediosDisponibles, $mediosApartadosYOcupados, $mediosConFechaDeOcupacion);
-            
-            echo json_encode($mediosConFechaDeOcupacion);
+
+            echo json_encode($medios);
 
         }else{
             redirect('login');
@@ -116,7 +126,6 @@ class Ventas extends CI_Controller {
         }
 
         $choferes_apartados_por_fecha = $this->EmpleadosModel->obtenerChoferesApartadosPorFecha($f1,$f2);
-        $choferesD = $this->EmpleadosModel->obtenerChoferesDis();
         if(count($choferesOcupados)>0 && count($choferes_apartados_por_fecha)>0){
              for ($CO=0; $CO < count($choferesOcupados) ; $CO++) { 
                  for ($CA=0; $CA < count($choferes_apartados_por_fecha) ; $CA++) { 
@@ -128,7 +137,14 @@ class Ventas extends CI_Controller {
                  }
             }
         }
-        $choferes = array_merge($choferes_apartados_por_fecha,$choferesDisponiblesPorHorario,$choferesD);
+        if(empty($this->EmpleadosModel->obtenerChoferesDis())){
+            $choferesDisponibles = $this->EmpleadosModel->obtenerChoferesDisponibles();
+        }else{
+            $choferesDisponibles = $this->EmpleadosModel->obtenerChoferesDis();
+        }
+
+        $choferes = array_merge($choferesDisponibles, $choferes_apartados_por_fecha,$choferesDisponiblesPorHorario);
+       
         echo json_encode($choferes);
     }
 
@@ -204,9 +220,6 @@ class Ventas extends CI_Controller {
             $vallas_moviles = $this->VentasModel->obtenerVentasVallas_moviles($id);
             $medios = array_merge($espectaculares,$vallas_fijas,$vallas_moviles);
             $ventas = $this->VentasModel->obtenerVentaPorId($id); 
-            var_dump($vallas_moviles);
-            exit;
-
 
             for($v = 0; $v <  count($ventas); $v++){
                 for($m = 0; $m <  count($medios); $m++){

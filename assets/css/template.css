@@ -79,8 +79,6 @@ input{
 
 .sidenav {
   height: 100vh; /* Full-height: remove this if you want "auto" height */
-  width: 166.66666%; /* Set the width of the sidebar */
-  max-width: 16.666667%; 
   position: fixed; 
   top: 60px; 
   left: 0;
@@ -320,16 +318,16 @@ i{
 }
 
 @media (min-width: 1200px){
-.sidenav {
-  height: 100vh; /* Full-height: remove this if you want "auto" height */
-  width: 100%; /* Set the width of the sidebar */
-  max-width: 10.3333333%; 
-  position: fixed; 
-  top: 60px; 
-  left: 0;
-  background-color: #2B3643;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  font-family: "Lato", sans-serif;
+  .sidenav {
+    height: 100vh; /* Full-height: remove this if you want "auto" height */
+    width: 100%; /* Set the width of the sidebar */
+    max-width: 10.3333333%; 
+    position: fixed; 
+    top: 60px; 
+    left: 0;
+    background-color: #2B3643;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    font-family: "Lato", sans-serif;
   }
 
 

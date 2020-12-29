@@ -13,7 +13,7 @@ const divMensaje = document.querySelector("#mensajesDemediosPorTerminarContrato"
 
     $.get(path+"admin/dashboard/obtenerMediosQueVanATerminarContrato", function(response){
         let res = JSON.parse(response);
-        console.log(res.medios);
+        // console.log(res.medios);
         enviarNotificacion(res.total);
         mostrarMediosPorTerminarContrato(res.medios)
     })
@@ -37,7 +37,7 @@ function enviarNotificacion(numero){
 function mostrarMediosPorTerminarContrato(medios){
     const contenedorModal = document.querySelector(".modal-body");
     medios.map(medio =>{
-        console.log(medio)
+        // console.log(medio)
         contenedorModal.innerHTML += `
         <div class="card my-2">
            <div class="card-header">

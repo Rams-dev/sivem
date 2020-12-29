@@ -2,7 +2,7 @@
 //  var_dump($ventas);
 ?>
 
-<h1 class="text-center">Detalles de venta</h1>
+<h1 class="text-center my-2">Detalles de venta</h1>
 
 
 <?php
@@ -11,7 +11,7 @@
     }
 ?>
 
-
+<div class="table-responsive mb-5 text-sm">
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -88,13 +88,15 @@
             <td><?=$medios["id_medio"]["fecha_termino_contrato"]?></td>
             <td><?=$medios["id_medio"]["hora_inicio"]?></td>
             <td><?=$medios["id_medio"]["hora_termino"]?></td>
-            <td><?=$medios["id_medio"]["chofer"]?></td>
+            <td><?=isset($medios["id_medio"]["chofer"]) ? $medios["id_medio"]["chofer"]: "No aplica" ?></td>
         </tr>
        <?php endforeach?>
 
   </tbody>
 </table>
 
+
+</div>
 
 
 <script>ventasit.classList.add("selected");</script>
