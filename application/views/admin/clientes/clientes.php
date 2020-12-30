@@ -1,17 +1,17 @@
 
 <h1 class="text-center">Clientes</h1>
     <hr>
-    <div class="d-flex justify-content-between my-4">
+    <div class="d-flex justify-content-between my-4 ">
         <div class="d-flex align-items-center">
-            <input type="text" class="form-control mr-2" id="buscadorValla" name="buscadorValla" value=""  placeholder="Buscar Valla">
+            <input type="text" class="form-control mr-2" id="buscadorValla" name="buscadorValla" value=""  placeholder="Buscar cliente">
             <a class="btn btn-info search " href="Javascript:BuscaValla();" role="button"><i class="fas fa-search"></i><span> Buscar</span></a>&nbsp;
         </div>
         <div class="d-flex align-items-center">
             <a class="btn btn-warning btn add" href="<?= base_url('admin/clientes/agregarcliente')?>" role="button"><i class="fas fa-plus"></i><span> + Nuevo Cliente +</span></a>
         </div>
     </div>
-    <div class="table-responsive-lg" id="clientesContainer">
-    <table class="table table-responsive" id="table">
+    <div class="table-responsive" id="clientesContainer">
+    <table class="table " id="table">
     <thead class="thead-dark">
         <tr>
         <th>#</th>

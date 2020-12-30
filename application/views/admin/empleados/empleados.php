@@ -10,7 +10,7 @@
         <a class="btn btn-warning add" role="button" data-toggle="modal" data-target="#modalAgregar"><i class="fas fa-plus"></i><span> + Nuevo Empleado +</span></a>
     </div>
 </div>
-<div class="table-responsive-md" id="espectacularesContainer">
+<div class="table-responsive" id="espectacularesContainer">
     <table class="table" id="table">
     <thead class="thead-dark">
         <tr>

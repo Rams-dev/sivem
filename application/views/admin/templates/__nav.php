@@ -36,6 +36,7 @@
             
             </div>
         </div>
-        <div class="col-lg-10 col-md-10 col-xl-11 mt-5">
+        <div class="col-lg-10 col-md-10 col-xl-11 col-sm-12 mt-5">
         
-            <div class="container-fluid mt-4 mx-2">
+            <div class="container-fluid mt-4">
+                <div class="mx-5">

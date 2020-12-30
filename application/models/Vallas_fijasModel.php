@@ -138,10 +138,13 @@ class Vallas_fijasModel extends CI_model
 
 
     function vallasQueTerminaraSucontratoDentroDeUnMes($dentroDeUnMes){
+        $hoy= Date("Y:m:d");
         $this->db->select("*");
         $this->db->join("medios","vallas_fijas.id_medio = medios.id");
         $this->db->join("propietarios", "vallas_fijas.id_propietario = propietarios.id");
         $this->db->where('vallas_fijas.fecha_termino <=', $dentroDeUnMes);
+        $this->db->where('vallas_fijas.fecha_termino >', $hoy);
+        
         $sql = $this->db->get("vallas_fijas");
         if($sql){
             return $sql->result_array();

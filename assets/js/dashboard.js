@@ -5,15 +5,8 @@ console.log(path);
 const divMensaje = document.querySelector("#mensajesDemediosPorTerminarContrato");
 
 (function obtenerMediosPorTerminarContrato(){
-    //  fetch(path+"admin/dashboard/obtenerMediosQueVanATerminarContrato")
-    //  .then(medios => medios.json())
-    //  .then(datos => console.log(datos))
-    // const data = await JSON.parse(medios)
-    // console.log(medios);
-
     $.get(path+"admin/dashboard/obtenerMediosQueVanATerminarContrato", function(response){
         let res = JSON.parse(response);
-        // console.log(res.medios);
         enviarNotificacion(res.total);
         mostrarMediosPorTerminarContrato(res.medios)
     })
@@ -52,12 +45,12 @@ function mostrarMediosPorTerminarContrato(medios){
             </div>
             <div class="card-body modalBody">
             <div class="row justify-content-between">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-3">
                 <img src="${path}assets/images/medios/${medio.vista_media}" class="imagen-modal" alt="">
                 </div>
                 <div class="col-md-9">
                     <div class="d-flex ">
-                        <div class="col-md-6 modalp">
+                        <div class="col-md-6 col-sm-6 modalp">
                             <p><b>Propietario: </b><span>${medio.nombre} <span></p>
                             <p><b>Telefono: </b><span>${medio.telefono} <span></p>
                             <p><b>Celular: </b><span>${medio.celular} <span></p>

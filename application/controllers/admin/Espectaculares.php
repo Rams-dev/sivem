@@ -88,10 +88,6 @@ class Espectaculares extends CI_Controller {
 			 $folio = $this->input->post('folio');
 			 $tipopago = $this->input->post('tipopago');
 			 $periodopago = $this->input->post('periodopago');
-			//  $f = $this->input->post();
-			//  echo json_encode($status);
-			//  exit;
-
 
 			$config['upload_path'] = "./assets/images/medios";
 			$config['allowed_types'] = "*";       	
@@ -155,7 +151,7 @@ class Espectaculares extends CI_Controller {
 					echo json_encode(array('error', 'Fallo al agregar el espectacular'));
 				}else{
 					
-					if(!$sql = $this->EspectacularesModel->agregarEspectacular( 
+					if(!$sql = $this->EspectacularesModel->agregarEspectacular(
 						$id_medio,
 						$ncontrol,
 						$cRenta,
@@ -430,3 +426,4 @@ class Espectaculares extends CI_Controller {
 		echo json_encode($municipios);
 	}
 }
+?>

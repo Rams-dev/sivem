@@ -281,10 +281,12 @@ class EspectacularesModel extends CI_model{
     }
 
     function espectacularesQueTerminaraSucontratoDentroDeUnMes($dentroDeUnMes){
+        $hoy = Date("Y:m:d");
         $this->db->select("*");
         $this->db->join("medios","espectaculares.id_medio = medios.id");
         $this->db->join("propietarios", "espectaculares.id_propietario = propietarios.id");
         $this->db->where('espectaculares.fecha_termino <=', $dentroDeUnMes);
+        $this->db->where('espectaculares.fecha_termino >', $hoy);
         $sql = $this->db->get("espectaculares");
         if($sql){
             return $sql->result_array();

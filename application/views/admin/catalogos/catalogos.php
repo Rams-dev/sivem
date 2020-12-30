@@ -1,12 +1,5 @@
 <div class="container">
     <h1 class="text-center">CATÁLOGOS</h1>
-    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-        <h1 class="display-4 text-center">IMPORTANTE <i class="fas fa-exclamation"></i></h1>
-            <p class="lead">Los archivos PDF tardan un poco en generarse.</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
     <hr>
     <h3>filtros</h3>
     <form action="<?=base_url("admin/catalogos/catalogoPdf")?>" method="post" id="ftmPdf">
