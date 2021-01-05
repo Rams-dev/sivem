@@ -11,7 +11,7 @@
     <style>
 
      body{
-        position: relative;
+        /* position: relative; */
         width: 100%;
         height: 50%;
         /* max-height: 50%; */
@@ -19,7 +19,11 @@
         font-size: 12px;
 
     } 
-
+    .encabezados{
+        display: block;
+        border: solid 1px #000;
+        height: 200px
+    }
 
     .encabezado1{
         width: 69%;
@@ -78,25 +82,26 @@
 
      .tabla{
         position: relative;
-        display: block;
+        display: none;
 
     } 
     
     </style>
 </head>
 <body>
+<div class="encabezados">
+
     <div class="encabezado1">
         <div class="encabezado1-texto">
             <p>impresión en HD y DF de lona | vinil | Tela | Microperforado | Laser | Offset | Serigrafia | Recorte de vinil | Rotulacion vehicular</p>
         </div>
         <div class="datos">
-            <p class="border-bottom">Cliente</p>
-            <p class="border-bottom">Telefono</p>
+            <p class="border-bottom">Cliente:</p>
+            <p class="border-bottom">Telefono:</p>
             <p class="caja">Fecha:</p>
             <p class="caja">Impresor:</p>
             <p class="cajav">Vendedor:</p>
         </div>
-
     </div>
     <div class="encabezado2">
         <div class="folio">N</div>
@@ -104,6 +109,7 @@
             <p>La Soledad No. 115</p>
 
         </div>
+    </div>
     </div>
     <div class="tabla">
         <table class="table table-bordered">

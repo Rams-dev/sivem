@@ -38,19 +38,19 @@
         </tr>  
         <tr>
             <td colspan="5">
-                <p>Razon social: <span><?= $venta["razon_social"]?></span></p> 
-                <p>RFC: <span><?= $venta["rfc"]?></span></p> 
-                <p>Domicilio: <span><?= $venta["domicilio"]?></span></p> 
-                <p>Colonia: <span><?= $venta["colonia"]?></span></p> 
-                <p>Poblacion: <span><?= $venta["poblacion"]?></span></p> 
-                <p>Estado: <span><?= $venta["nombre_estado"]?></span></p> 
+                <p><b>Razon social:</b> <span><?= $venta["razon_social"]?></span></p> 
+                <p><b>RFC:</b> <span><?= $venta["rfc"]?></span></p> 
+                <p><b>Domicilio:</b> <span><?= $venta["domicilio"]?></span></p> 
+                <p><b>Colonia:</b> <span><?= $venta["colonia"]?></span></p> 
+                <p><b>Poblacion:</b> <span><?= $venta["poblacion"]?></span></p> 
+                <p><b>Estado:</b> <span><?= $venta["nombre_estado"]?></span></p> 
             
             </td>
             <td colspan="5">
-                <p>Nombre: <span><?= $venta["nombre_encargado"]?></span></p>
-                <p>Puesto: <span><?= $venta["puesto"]?></span></p>
-                <p>Teléfono: <span><?= $venta["telefono"]?></span></p>
-                <p>Correo: <span><?= $venta["correo"]?></span></p>
+                <p><b>Nombre:</b> <span><?= $venta["nombre_encargado"]?></span></p>
+                <p><b>Puesto:</b> <span><?= $venta["puesto"]?></span></p>
+                <p><b>Teléfono:</b> <span><?= $venta["telefono"]?></span></p>
+                <p><b>Correo:</b> <span><?= $venta["correo"]?></span></p>
             </td>
           
         

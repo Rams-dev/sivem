@@ -61,7 +61,7 @@ class Models extends CI_model
 		$this->dompdf->render();
 	
 		// Output the generated PDF (1 = download and 0 = preview)
-		$this->dompdf->stream("olv.pdf", array("Attachment"=>0));
+		$this->dompdf->stream("Catalogo.pdf", array("Attachment"=>0));
 	
 	}
 
