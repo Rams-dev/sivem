@@ -85,6 +85,8 @@ $("#frmEditarMaterial").submit(function(e){
 })
 
 async function eliminarMaterial(id){
+    alertify.confirm("Espera","¿Esta seguro que desea eliminar este material?",
+  function(){
     
         $.ajax({
              url:'materiales/eliminarMaterial',
@@ -105,6 +107,10 @@ async function eliminarMaterial(id){
          .fail(function(err){
              console.log("error")
          })
+    },
+    function(){
+    //   alertify.error('Cancel');
+    });
 }
 
 $("#preciomaterial").mask("0000.00")

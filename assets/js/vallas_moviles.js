@@ -271,20 +271,25 @@ function respuesta(res){
 
 
 function eliminarValla(id_medio){
-    console.log(id_medio)
-    $.ajax({
-        url:"vallas_moviles/eliminarValla",
-        type:"post",
-        data:{id_medio:id_medio},
-    })
-    .done(function(response){
-        let res = JSON.parse(response);
-        console.log(res);
-        respuesta(res);
-    })
-    .fail(function(err){
-        alertify.error("ocurrio un error");
-    })
+    alertify.confirm("Espera","¿Esta seguro que desea eliminar esta valla?",
+    function(){
+        $.ajax({
+            url:"vallas_moviles/eliminarValla",
+            type:"post",
+            data:{id_medio:id_medio},
+        })
+        .done(function(response){
+            let res = JSON.parse(response);
+            console.log(res);
+            respuesta(res);
+        })
+        .fail(function(err){
+            alertify.error("ocurrio un error");
+        })
+    },
+    function(){
+    //   alertify.error('Cancel');
+    });
 }
 
 

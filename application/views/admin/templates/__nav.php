@@ -1,4 +1,6 @@
 <div class="main">
+<div class="loader"></div>
+
 <nav class="navbar-horizontal " id="nav-horizontal">
     <a class="navbar-horizontal__logo" href="#">
         <img src="<?php echo base_url('assets/images/logosis.svg')?>" alt="Sivem logo" loading="lazy">

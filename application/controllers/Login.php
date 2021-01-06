@@ -42,14 +42,9 @@ class Login extends CI_Controller {
 				'tipo' => $datos->tipo,
 				'is_logged' => TRUE,
 			);
-			if($data['tipo'] == '0'){
-			$this->session->set_userdata($data);
-			$this->session->set_flashdata('mensaje', 'Bienvenido a mi fondita ' . $data['nombre']);
-			echo json_encode(array("url" => base_url('users/productos')));
-			}elseif($data['tipo'] == '1'){
+			if($data['tipo'] == '1' || $data['tipo'] == '0' ){
 				$this->session->set_userdata($data);
-			$this->session->set_flashdata('mensaje', 'Bienvenido a mi fondita ' . $data['nombre']);
-			echo json_encode(array("url" => base_url('admin/dashboard')));
+				echo json_encode(array("url" => base_url('admin/dashboard')));
 			}
 
 		}

@@ -72,11 +72,10 @@ function agregarMunicipiosSelect(municipios){
     }
 }
 
-
-  $('#guardarespectacular').submit(function(e){
-      e.preventDefault()
-     var formdata = new FormData($("#guardarespectacular")[0]);
+$('#guardarespectacular').submit(function(e){
+    e.preventDefault()
     $('.loader').html('<div class="contenedor-loader"><div class="loading"><img src="'+ path +'assets/images/loader.gif" alt="loading" /><br/><p>Un momento, Estamos comprimiendo las imagenes</p></div></div>');
+     var formdata = new FormData($("#guardarespectacular")[0]);
       $.ajax({
           url:'guardarespectacular',
           type:$("#guardarespectacular").attr("method"),
@@ -198,7 +197,8 @@ $("#editarespectacular").submit(function(e){
 /*---------------- E L I M I N A R   E S P E C T A C U L A R------------------------ */
 
 function eliminarEspectacular(id){
-   console.log(id);
+   alertify.confirm("Espera","¿Esta seguro que desea eliminar este Espectacular?",
+  function(){
        $.ajax({
         url: 'espectaculares/eliminarEspectacular',
          dataType: 'json',
@@ -212,6 +212,10 @@ function eliminarEspectacular(id){
       .fail(function(err){
          console.log("error")
        })
+    },
+    function(){
+    //   alertify.error('Cancel');
+    });
 
 }
 

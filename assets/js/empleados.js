@@ -13,15 +13,7 @@ $("#frmAgregar").submit(function(e){
     })
     .done(function(response){
         let res = JSON.parse(response)
-        if(res.success){
-            alertify.success(res.success);
-            $("#frmAgregar")[0].reset();
-            location.reload();
-        }
-        if(res.error){
-            alertify.error(res.error);
-        }
-        console.log(res)
+        doneFunction(response)
     })
     .fail(function(err){
         console.log("error")
@@ -79,14 +71,7 @@ $("#frmEditar").submit(function(e){
         processData:false
     })
     .done(function(response){
-        let res = JSON.parse(response)
-        console.log(res)
-         if(res.success){
-             location.reload();
-         }
-         if(res.error){
-             alertify.error(res.error);
-         }
+       doneFunction(response);
 
     })
     .fail(function(err){
@@ -100,7 +85,7 @@ $("#frmEditar").submit(function(e){
 
 function eliminarEmpleado(id){
     
-alertify.confirm("Espera","Esta seguro que desea eliminar este empleado",
+alertify.confirm("Espera","¿Esta seguro que desea eliminar este empleado?",
   function(){
       
     $.ajax({
@@ -109,13 +94,7 @@ alertify.confirm("Espera","Esta seguro que desea eliminar este empleado",
         data:{id:id}
     })
     .done(function(response){
-        let res = JSON.parse(response)
-        if(res.error){
-            alertify.error(res.error)
-        }else{
-            location.reload();
-        }
-        console.log(res);
+        doneFunction(response)
     })
     .fail(function(err){
         console.log("ha ocurrido un error")
@@ -126,6 +105,21 @@ function(){
 });
 }
 
+
+
+
+
+function doneFunction(response){
+    let res = JSON.parse(response)
+     if(res.success){
+         setTimeout(() => {
+             location.reload();
+         },1500)
+     }
+     if(res.error){
+         alertify.error(res.error);
+     }
+}
 
 
 

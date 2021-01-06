@@ -225,31 +225,36 @@ $("#guardarVallaFija").submit(function(e){
 
 
 function eliminarValla_fija(id){
-    console.log(id)
-    $.ajax({
-        url: 'vallas_fijas/eliminarVallaFija',
-        type: 'post',
-        data: {id:id},
-    })
-    .done(function(response){
-        
-        let res = JSON.parse(response);
-        console.log(res)
-        if(res.success){
-            alertify.success(res.success);
-        }
-        if(res.error){
-            alertify.error(res.error);
-        }
-    })
-    .fail(function(err){
-        console.log(err)
-        alertify.error("error intenta mas tarde");
-    })
-    .always(function(ok){
-        window.location.reload();
+    alertify.confirm("Espera","¿Esta seguro que desea eliminar esta valla?",
+    function(){
+        $.ajax({
+            url: 'vallas_fijas/eliminarVallaFija',
+            type: 'post',
+            data: {id:id},
+        })
+        .done(function(response){
+            
+            let res = JSON.parse(response);
+            console.log(res)
+            if(res.success){
+                alertify.success(res.success);
+            }
+            if(res.error){
+                alertify.error(res.error);
+            }
+        })
+        .fail(function(err){
+            console.log(err)
+            alertify.error("error intenta mas tarde");
+        })
+        .always(function(ok){
+            window.location.reload();
 
-    })
+        })
+    },
+    function(){
+    //   alertify.error('Cancel');
+    });
 }
 
 

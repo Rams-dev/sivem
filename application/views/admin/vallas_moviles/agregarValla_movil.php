@@ -1,7 +1,6 @@
 <div class="my-5">
 <h3 class="text-center text-danger" >Agregar valla movil</h3>
 <hr>
-<div class="loader"></div>
 
 </div>
 <form action="<?=base_url("admin/vallas_moviles/guardarValla_movil")?>" id="guardarValla_movil" method="post">
