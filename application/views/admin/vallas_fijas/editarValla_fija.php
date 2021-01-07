@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-lg-2 col-md-2">
                         <div class="form-group">
-                            <label for="numcontrol"> No Control: </label>
+                            <label for="numcontrol">clave master </label>
                             <input type="text" required class="form-control" id="numcontrol" name="numcontrol" value="<?=$valla['nocontrol']?>"  onchange="VerificarEspectacularDuplicado(this.value);">
                         </div>
                     </div>

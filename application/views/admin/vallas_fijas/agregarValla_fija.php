@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-2 col-md-2">
                         <div class="form-group">
-                            <label for="numcontrol"> No Control: </label>
+                            <label for="numcontrol"> Clave master: </label>
                             <input type="text" class="form-control" id="numcontrol" name="numcontrol" value=""  onchange="VerificarEspectacularDuplicado(this.value);" required>
                         </div>
                     </div>

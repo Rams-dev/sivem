@@ -17,7 +17,7 @@
         <thead class="thead-dark">
             <tr>
             <th>#</th>
-            <th>No control</th>
+            <th>clave master</th>
             <th>Marca</th>
             <th>Modelo</th>
             <th>Año</th>

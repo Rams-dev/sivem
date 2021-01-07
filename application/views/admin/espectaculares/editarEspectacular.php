@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="numcontrol"> #Control: </label>
+                        <label for="numcontrol">Clave master </label>
                             <input type="text" class="form-control" value="<?= $espectacular['nocontrol']?>" id="numcontrol" name="numcontrol" value="" >
                     </div>
                 </div>

@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
-                <label for="noControl">No control</label>
+                <label for="noControl">clave master</label>
                 <input type="text" name="nocontrol" id="nocontrol" class="form-control">
             </div>
         </div>

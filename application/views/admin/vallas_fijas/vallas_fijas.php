@@ -27,7 +27,7 @@ if(empty($vallas_fijas)){?>
         <thead class="thead-dark">
             <tr>
             <th>#</th>
-            <th>No control</th>
+            <th>clave master</th>
             <th>Estado</th>
             <th>Municipio</th>
             <th>Localidad</th>

@@ -12,7 +12,7 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="numcontrol"> #Control: </label>
+                        <label for="numcontrol"> clave master: </label>
                             <input type="text" class="form-control" id="numcontrol" name="numcontrol" value="" >
                     </div>
                 </div>
@@ -45,6 +45,7 @@
                         <input type="text" class="form-control" id="localidad" name="localidad" value="" >
                     </div>
                 </div>
+
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="estado"> Estado: </label>
@@ -64,7 +65,6 @@
                         <select name="municipio" class="js-example-basic-single js-states form-control" id="municipioselect">
                             <option value="">selecciona un municipio</option>
                         </select>
-                        <!-- <input type="text" class="form-control" id="municipio" name="municipio" value="" > -->
                     </div>
                 </div>
                 
@@ -302,7 +302,3 @@
 
 <script>espectacularesit.classList.add("selected");</script>
 <script src="<?=base_url('assets/js/espectaculares.js') ?>"></script>
-<script>
-const w = document.querySelector("#status");
-    w.addEventListener("change", (e)=> console.log(e.currentTarget.value))
-</script>
