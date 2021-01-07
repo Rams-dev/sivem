@@ -42,7 +42,7 @@ class Login extends CI_Controller {
 				'tipo' => $datos->tipo,
 				'is_logged' => TRUE,
 			);
-			if($data['tipo'] == '1' || $data['tipo'] == '0' ){
+			if($data['tipo'] == '1' || $data['tipo'] == '2' ){
 				$this->session->set_userdata($data);
 				echo json_encode(array("url" => base_url('admin/dashboard')));
 			}

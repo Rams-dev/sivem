@@ -4,6 +4,8 @@ ventasit.classList.add("selected");
 const horainicio = document.querySelector("#horainicio")
 const horatermino = document.querySelector("#horatermino")
 const choferdiv = document.querySelector("#choferdiv")
+const descuentoCantidadvendedor = document.querySelector(".descuentoCantidadvendedor")
+
 let fechaInicio = {};
 let fechaTermino = {};
 let FI;
@@ -43,6 +45,21 @@ $("#descuento").change(function(){
                 obtenerDesc()
         }
 })
+
+descuentoCantidadvendedor.addEventListener("keyup", function(e){
+        e.preventDefault();
+        if(esMayorA20(e.target.value)){
+                this.value = 20
+        }
+})
+
+function esMayorA20(number){
+        if(number>20){
+                return true;
+        }else{
+                return false;
+        }
+}
 
 window.tipoVenta.addEventListener("change", function(e){
         e.preventDefault()
@@ -571,7 +588,6 @@ $("#guardarventa").submit(function(e){
             console.log("algo salio mal");
     })
 })
-
 
 
 /* ---------------------------------------- M A S K--------------------------------- */

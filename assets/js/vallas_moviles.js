@@ -156,7 +156,6 @@ function calcularPrecioLateral(){
 }
 
 
-
 function calcularPrecioFaldon(){
     if(anchoFaldon != "" &&  altoFaldon != "" && materialFaldon != ""){
         let p = anchoFaldon * altoFaldon;

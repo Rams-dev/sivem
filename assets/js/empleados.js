@@ -94,7 +94,8 @@ alertify.confirm("Espera","¿Esta seguro que desea eliminar este empleado?",
         data:{id:id}
     })
     .done(function(response){
-        doneFunction(response)
+        alertify.success("Eliminado")
+        location.reload();
     })
     .fail(function(err){
         console.log("ha ocurrido un error")
@@ -112,6 +113,8 @@ function(){
 function doneFunction(response){
     let res = JSON.parse(response)
      if(res.success){
+         $("#modalEditar").modal("hide");
+         alertify.success(res.success)
          setTimeout(() => {
              location.reload();
          },1500)

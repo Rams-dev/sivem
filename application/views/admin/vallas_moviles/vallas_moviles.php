@@ -43,7 +43,9 @@
                     <td>
                         <button class="btn btn-info btn-sm" onclick="imagesVallas(<?=$valla['id_medio']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>
                         <a href="<?= base_url('admin/vallas_moviles/editarValla_movil/'.$valla['id_medio'])?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
+                        <?php if($this->session->userdata("tipo") == 1){?>                        
                         <button class="btn btn-danger btn-sm" onclick="eliminarValla(<?=$valla['id_medio']?>)" ><i class="fas fa-trash"></i></button>
+                        <?php }?>
                     </td>
                 </tr>
 

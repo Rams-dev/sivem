@@ -15,7 +15,7 @@
 </nav>
 <div class="col-lg-12 col-md-12 col-xl-12">
     <div class="row">
-        <div class=" col-lg-2 col-md-2 col-xl-1"   >
+        <div class=" col-lg-2 col-md-2 col-xl-1" >
             <div class="sidenav">
                 <hr class="linea_oscura">
                 <hr class="linea_blanca">
@@ -23,7 +23,9 @@
                     <a href="<?php echo base_url('admin/dashboard') ?>" id="indexit" class="">Dashboard</a>
                     <a href="<?= base_url('admin/clientes')?>" id="clientesit" class="">  Clientes</a>
                     <a href="<?= base_url('admin/catalogos')?>" id="catalogosit" class="">Catálogos</a>
+                    <?php if($this->session->userdata("tipo") == 1){?>
                     <a href="<?= base_url('admin/empleados')?>"id="empleadosit" class="">Empleados</a>
+                    <?php }?>
                     <a href="<?= base_url('admin/materiales')?>" id="materialesit" class="">Materiales</a>
                     <a href="<?= base_url('admin/espectaculares')?>" id="espectacularesit" class="">Espectaculares</a>
                     <a href="<?= base_url('admin/ventas')?>" id="ventasit" class="">Ventas</a>

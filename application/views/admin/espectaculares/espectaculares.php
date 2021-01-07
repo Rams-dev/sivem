@@ -63,7 +63,9 @@ if(empty($espectaculares)){?>
       <td>$<?= $espectacular['precio']?></td>
       <td><button class="btn btn-info btn-sm" onclick="imagesEspecatulares(<?=$espectacular['id']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>
       <a href="<?= base_url('admin/espectaculares/editarEspectacular/'.$espectacular['id'])?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
+      <?php if($this->session->userdata("tipo") == 1){?>
       <button class="btn btn-danger btn-sm" onclick="eliminarEspectacular(<?=$espectacular['id']?>)" ><i class="fas fa-trash"></i></button></td>
+      <?php }?>
     </tr>
     <?php
     $index++;

@@ -35,12 +35,15 @@ class Empleados extends CI_Controller {
 			$sexo = $this->input->post("sexo");
 			$telefono = intval(join("",explode("-",$this->input->post("telefono"))));
 			$accesso = $this->input->post("acceso");
+			$tipo;
 			if($accesso == "si"){
 				$contrasenia = $this->input->post("contrasenia");
 				$tipo = $this->input->post("tipo");
 			}else{
 				$contrasenia = "";
-				$tipo = "";
+				$tipo = " ";
+				$accesso = "no";
+
 			}
 
 

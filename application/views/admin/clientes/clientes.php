@@ -49,7 +49,9 @@
         <td><?=$cliente['correo']?></td>
         <td>
         <a href="<?= base_url('admin/clientes/editarCliente/'.$cliente['id'])?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> </a>
+        <?php if($this->session->userdata("tipo") == 1){?>
         <a value ="<?= $cliente['id']?>" href="<?= base_url('admin/clientes/elimiarCliente/'.$cliente['id'])?>" class="btn btn-danger btn-sm delete" ><i class="fas fa-trash"></i></a></td>
+        <?php } ?>
     </tr>
         <?php $i++;
          endforeach?>

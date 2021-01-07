@@ -52,7 +52,9 @@ if(empty($vallas_fijas)){?>
             <td><?= $valla['status']?></td>
             <td><button class="btn btn-info btn-sm" onclick="imagesEspecatulares(<?=$valla['id_medio']?>)" data-toggle="modal" data-target="#imagenes"><i class="fas fa-eye"></i></button>
             <a href="<?= base_url('admin/vallas_fijas/editarValla_fija/'.$valla['id_medio'])?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
+            <?php if($this->session->userdata("tipo") == 1){?>
             <button class="btn btn-danger btn-sm" onclick="eliminarValla_fija(<?=$valla['id_medio']?>)" ><i class="fas fa-trash"></i></button></td>
+            <?php }?>
             </tr>
             <?php
             $index++;

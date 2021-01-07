@@ -77,7 +77,11 @@
             <div class="col-md-2 d-none" id="descuentoinput">
                     <div class="form-group">
                         <label for="descuentoCantidad">Cantidad %</label>
-                        <input type="text" class="form-control" maxlength= 3  name="descuentoCantidad" id="descuentoCantidad" placeholder="%">
+                        <?php if($this->session->userdata("tipo") == 1){?>
+                        <input type="text" class="form-control" maxlength= 2  name="descuentoCantidad" id="descuentoCantidad" placeholder="%">
+                        <?php }else{?>
+                        <input type="text" class="form-control descuentoCantidadvendedor" name="descuentoCantidad" id="descuentoCantidad" placeholder="%">
+                        <?php }?>
                 </div>
             </div>
 
